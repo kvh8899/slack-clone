@@ -1,5 +1,5 @@
 import "./message.css";
-import { useState, useEffect, useRef} from "react";
+import { useState, useEffect, useRef } from "react";
 import io from "socket.io-client";
 
 // must use http here
@@ -11,7 +11,7 @@ function Message() {
   const [message, setMessage] = useState("");
   const dummyDiv = useRef(null)
   useEffect(() => {
-     getMessages();
+    getMessages();
   }, [messages.length]);
 
   const getMessages = () => {
@@ -34,27 +34,27 @@ function Message() {
   };
   return (
 
-      <div className="messageArea">
-        <div className="title">
-          <h2>Title</h2>
-        </div>
-        <div className="messages">
-          <div>
+    <div className="messageArea">
+      <div className="title">
+        <h2>Title</h2>
+      </div>
+      <div className="messages">
+        <div>
           {messages.map((msg) => {
             return <p>{msg}</p>;
           })}
           <p ref={dummyDiv}></p>
-          </div>
-        </div>
-        <div className="inputMessages">
-          <form onSubmit={(e) => {
-              e.preventDefault();
-              onClick();
-          }}>
-            <input value={message} onChange={(e) => onChange(e)} placeholder={"Message"}></input>
-          </form>
         </div>
       </div>
+      <div className="inputMessages">
+        <form onSubmit={(e) => {
+          e.preventDefault();
+          onClick();
+        }}>
+          <input value={message} onChange={(e) => onChange(e)} placeholder={"Message"}></input>
+        </form>
+      </div>
+    </div>
   );
 }
 
