@@ -12,6 +12,9 @@ psycopg2-binary = "*"
 flask-sqlalchemy = "*"
 sqlalchemy = "*"
 rope = "*"
+pycodestyle = "*"
+alembic = "*"
+python-dotenv = "*"
 
 [dev-packages]
 
