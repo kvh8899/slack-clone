@@ -1,5 +1,5 @@
 from flask import Flask
-from app.models import db ,User,DmChannel
+from app.models import db
 from app.config import Configuration
 from flask_migrate import Migrate
 from flask_socketio import SocketIO, send
