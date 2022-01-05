@@ -1,0 +1,12 @@
+.messageBar{
+    background-color:rgb(29, 22, 87);
+    border-right: 1px solid rgb(85, 85, 85);
+    color:lightgrey;
+    width:fit-content;
+    overflow:scroll;
+    height:100%;
+    width:350px;
+}
+.messageBar > div > div{
+    padding-left:10px;
+}

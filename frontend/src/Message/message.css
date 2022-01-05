@@ -1,0 +1,42 @@
+.messageArea{
+    display:flex;
+    flex-direction: column;
+    justify-content:flex-start;
+    background-color:rgb(57, 52, 97);
+    color:lightgrey;
+    width:100%;
+    height:100%;
+}
+
+.inputMessages{
+    background-color: rgb(57, 52, 97);
+    display:flex;
+    bottom:0px;
+    width:100%;
+    height:50px;
+}
+.inputMessages input{
+    margin:10px;
+    width:100%;
+    height:25px;
+    border-radius:5px;
+}
+.inputMessages form{
+    width:95%;
+    height:50px;
+}
+.messages{
+    overflow:scroll;
+    position:relative;
+    width:100%;
+    height:100px;
+    flex: 1 1 auto;
+}
+
+.messages p{
+    margin: none;
+    width: 100%;
+}
+.messages div{
+    margin-left:10px;
+}

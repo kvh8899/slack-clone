@@ -1,0 +1,60 @@
+.content{
+    display:flex;
+    flex-direction:column;
+    height:100%;
+    width:100%;
+    position:fixed;
+    overflow:hidden;
+}
+.midContent{
+    display:flex;
+    align-items:flex-start;
+    height:100%;
+}
+.topBar{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background-color: rgb(33, 31, 51);
+    width:100%;
+    border-bottom: 1px solid rgb(85, 85, 85);
+}
+.topBar > input{
+    background-color:rgb(117, 114, 131);
+    color:rgb(212, 212, 212);
+    padding: 5px;
+    margin: 5px;
+    width:45%;
+    border-radius:10px;
+}
+::placeholder{
+    color:rgb(212, 212, 212);
+}
+input{
+    border-color:transparent;
+}
+input:focus{
+    outline:transparent;
+}
+.topBar div{
+    display:flex;
+    color:rgb(212, 212, 212);
+    justify-content:flex-end;
+    padding-right:15px;
+    flex-grow:1;
+}
+
+.title{
+    border-bottom:1px solid rgb(85, 85, 85);
+    display:flex;
+    align-items:center;
+}
+.title h2{
+    margin:10px;
+}
+.title div{
+    display:flex;
+    justify-content: flex-end;
+    margin-right:20px;
+    flex-grow:1;
+}
