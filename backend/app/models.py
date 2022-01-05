@@ -3,8 +3,6 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
-# Through tables go here (groups,members)
-# for many to many relationships
 
 class User(db.Model, UserMixin):
     __tablename__ = "users"
@@ -19,6 +17,8 @@ class User(db.Model, UserMixin):
     messages = db.relationship("Message", back_populates="owners", cascade='all, delete')
     organization = db.relationship("Organization", back_populates="owner", cascade='all, delete')
     direct_messages = db.relationship('DirectMessage', back_populates='owner', cascade='all, delete')
+    members = db.relationship('Organization', secondary='members', back_populates='users', cascade='all, delete')
+
 
     @property
     def password(self):
@@ -39,10 +39,10 @@ class Organization(db.Model):
     name = db.Column(db.String(50), nullable=False)
     owner_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
-    owner = db.relationship("User", back_populates="organization")
-    channels = db.relationship("Channel", back_populates="organizations")
-    direct_messages = db.relationship(
-        'DirectMessage', back_populates='organizations')
+    owner = db.relationship("User", back_populates="organization", cascade='all, delete')
+    channels = db.relationship("Channel", back_populates="organizations", cascade='all, delete')
+    direct_messages = db.relationship('DirectMessage', back_populates='organizations', cascade='all, delete')
+    members = db.relationship('User', secondary='members', back_populates='organization', cascade='all, delete')
 
 
 class Channel(db.Model):
@@ -77,3 +77,9 @@ class Message(db.Model):
     user_channels = db.relationship("Channel", back_populates="channel_messages")
 
 
+class Member(db.Model):
+    __tablename__ = 'members'
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    org_id = db.Column(db.Integer, db.ForeignKey('organizations.id'), nullable=False)
