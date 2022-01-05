@@ -17,7 +17,7 @@ class Users(db.Model):
     profilePicture = db.Column(db.Text)
     status = db.Column(db.String(200))
 
-    messages = db.relationship("Messages", back_populates="user")
+    messages = db.relationship("Messages", back_populates="owners")
     organization = db.relationship("Organizations", back_populates="owner")
     direct_messages = db.relationship('DirectMessages', back_populates='owner')
 
