@@ -18,7 +18,7 @@ class User(db.Model, UserMixin):
     organization = db.relationship("Organization", back_populates="owner", cascade='all, delete')
     direct_messages = db.relationship('DirectMessage', back_populates='owner', cascade='all, delete')
     members = db.relationship('Organization', secondary='members', back_populates='users', cascade='all, delete')
-
+    groups = db.relationship('Channel', secondary='groups', back_populates='users', cascade='all, delete')
 
     @property
     def password(self):
@@ -53,17 +53,25 @@ class Channel(db.Model):
 
     organizations = db.relationship("Organization", back_populates="channels")
     channel_messages = db.relationship('Message', back_populates='user_channels')
+    groups = db.relationship('User',secondary='groups',back_populates="channels")
 
+class DmChannel(db.Model):
+    __tablename__ = "dmchannels"
+    id = db.Column(db.Integer,primary_key=True)
+    firstUser_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    secondUser_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+
+    direct_messages = db.relationship('DirectMessage',back_populates="dm_channels")
 
 class DirectMessage(db.Model):
     __tablename__ = "directmessages"
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(500), nullable=False)
     owner_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    org_id = db.Column(db.Integer, db.ForeignKey('organizations.id'), nullable=False)
+    dm_channel_id = db.Column(db.Integer, db.ForeignKey('dmchannels.id'), nullable=False)
 
     owner = db.relationship("User", back_populates="direct_messages")
-    organizations = db.relationship("Organization", back_populates="direct_messages")
+    dm_channels = db.relationship("DmChannel",back_populates="direct_messages")
 
 
 class Message(db.Model):
@@ -83,3 +91,11 @@ class Member(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     org_id = db.Column(db.Integer, db.ForeignKey('organizations.id'), nullable=False)
+
+
+class Group(db.Model):
+    __tablename__ = "groups"
+
+    id = db.Column(db.Integer,primary_key=True)
+    channel_id = db.Column(db.Integer,db.ForeignKey('channels.id'),nullable=False)
+    user_id = db.Column(db.Integer,db.ForeignKey('users.id'),nullable=False)

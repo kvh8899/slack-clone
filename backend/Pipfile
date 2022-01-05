@@ -12,9 +12,10 @@ psycopg2-binary = "*"
 flask-sqlalchemy = "*"
 sqlalchemy = "*"
 rope = "*"
-pycodestyle = "*"
 alembic = "*"
 python-dotenv = "*"
+werkzeug = "*"
+flask-login = "*"
 
 [dev-packages]
 
