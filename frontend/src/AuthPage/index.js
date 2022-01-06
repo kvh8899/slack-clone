@@ -1,6 +1,6 @@
 import "./authpage.css";
 import React, { useState } from "react";
-import * as sessionActions from '../store/session'
+import { login } from '../store/session'
 import { useDispatch } from 'react-redux'
 import { Link } from "react-router-dom"
 
@@ -13,18 +13,16 @@ function AuthPage() {
 
   const demoLogin = (e) => {
     e.preventDefault();
-    return dispatch(sessionActions.login({ email: 'demo@aa.io', hashedPassword: 'password' }))
+    return dispatch(login({ email: 'demo@aa.io', hashedPassword: 'password' }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors([]);
-    return dispatch(sessionActions.login({ email, password })).catch(
-      async (res) => {
-        const data = await res.json();
-        if (data && data.errors) setErrors(data.errors);
-      }
-    );
+    const data = await dispatch(login(email, password));
+    if (data) {
+      setErrors(data);
+    }
   };
 
 

@@ -24,11 +24,6 @@ login = LoginManager(app)
 login.login_view = 'auth.unauthorized'
 
 
-@app.route("/")
-def index():
-    return ""
-
-
 app.config.from_object(Configuration)
 app.cli.add_command(seed_commands)
 app.register_blueprint(user_routes, url_prefix='/api/users')
@@ -39,6 +34,11 @@ Migrate(app, db)
 socketIo = SocketIO(app=app, cors_allowed_origins='*')
 
 CORS(app)
+
+
+@app.route("/")
+def index():
+    return ""
 
 
 @app.before_request
