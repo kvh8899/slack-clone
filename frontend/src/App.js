@@ -8,13 +8,11 @@ function App() {
   // organization page:
   //<Route path="/channel" element={<Orgmainchat />}></Route>
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Splash />}></Route>
-        <Route path="/login" element={<AuthPage />}></Route>
-        <Route path="/signup" element={<SignUp />}></Route>
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Splash />}></Route>
+      <Route path="/login" element={<AuthPage />}></Route>
+      <Route path="/signup" element={<SignUp />}></Route>
+    </Routes>
   );
 }
 

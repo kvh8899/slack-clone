@@ -6,7 +6,7 @@
 }
 .auth form{
     display:flex;
-    flex-direction:column; 
+    flex-direction:column;
 }
 .auth form > input{
     border:1px solid black;
@@ -27,6 +27,7 @@
     transition-property:opacity;
     transition-duration:0.5s;
     padding:10px;
+    margin-top: 10px;
 }
 .auth form > button:hover{
     opacity:0.8;
