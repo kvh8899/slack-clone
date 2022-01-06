@@ -17,8 +17,8 @@ class User(db.Model, UserMixin):
     messages = db.relationship("Message", back_populates="owners", cascade='all, delete')
     organization = db.relationship("Organization", back_populates="owner", cascade='all, delete')
     direct_messages = db.relationship('DirectMessage', back_populates='owner', cascade='all, delete')
-    members = db.relationship('Organization', secondary='members', back_populates='users', cascade='all, delete')
-    groups = db.relationship('Channel', secondary='groups', back_populates='users', cascade='all, delete')
+    members = db.relationship('Organization', secondary='members', back_populates='members', cascade='all, delete')
+    channels = db.relationship('Channel', secondary='groups', back_populates='users', cascade='all, delete')
 
     @property
     def password(self):
@@ -41,7 +41,6 @@ class Organization(db.Model):
 
     owner = db.relationship("User", back_populates="organization", cascade='all, delete')
     channels = db.relationship("Channel", back_populates="organizations", cascade='all, delete')
-    direct_messages = db.relationship('DirectMessage', back_populates='organizations', cascade='all, delete')
     members = db.relationship('User', secondary='members', back_populates='organization', cascade='all, delete')
 
 
@@ -53,7 +52,7 @@ class Channel(db.Model):
 
     organizations = db.relationship("Organization", back_populates="channels")
     channel_messages = db.relationship('Message', back_populates='user_channels')
-    groups = db.relationship('User',secondary='groups',back_populates="channels")
+    users = db.relationship('User',secondary='groups',back_populates="channels")
 
 class DmChannel(db.Model):
     __tablename__ = "dmchannels"
