@@ -29,7 +29,7 @@ export const authenticate = () => async (dispatch) => {
   }
 }
 
-export const login = (email, password) => async (dispatch) => {
+export const login = (email, hashedPassword) => async (dispatch) => {
   const response = await fetch('/api/auth/login', {
     method: 'POST',
     headers: {
@@ -37,7 +37,7 @@ export const login = (email, password) => async (dispatch) => {
     },
     body: JSON.stringify({
       email,
-      password
+      hashedPassword
     })
   });
 
@@ -48,6 +48,7 @@ export const login = (email, password) => async (dispatch) => {
     return null;
   } else if (response.status < 500) {
     const data = await response.json();
+    console.log(data)
     if (data.errors) {
       return data.errors;
     }
