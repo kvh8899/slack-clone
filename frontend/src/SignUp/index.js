@@ -3,9 +3,11 @@ import { Link } from "react-router-dom"
 import React, { useState } from "react";
 import { useDispatch, } from "react-redux";
 import * as sessionActions from '../store/session'
+import {useNavigate} from "react-router-dom"
 
 function SignUp() {
   const dispatch = useDispatch();
+  const hist = useNavigate();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -17,17 +19,22 @@ function SignUp() {
     return dispatch(sessionActions.login({ email: 'demo@aa.io', hashedPassword: 'password' }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     if (password === confirmPassword) {
       setErrors([]);
-      return dispatch(sessionActions.signUp({ username, email, password }))
+      await dispatch(sessionActions.signUp({ username, email, password }))
         .catch(async (res) => {
           const data = await res.json();
           if (data && data.errors) setErrors(data.errors);
         });
+    }else if(password !== confirmPassword){
+      setErrors(['Confirm Password field must be the same as the Password field']);
     }
-    return setErrors(['Confirm Password field must be the same as the Password field']);
+    if(!errors.length){
+      // redirect to organization page
+    }
+    
   };
 
 
@@ -46,6 +53,7 @@ function SignUp() {
         <form onSubmit={handleSubmit}>
           <input
             type="text"
+            name="username"
             placeholder={"Username"}
             required
             value={username}
@@ -53,6 +61,7 @@ function SignUp() {
           />
           <input
             type="text"
+            name="email"
             placeholder={"Email"}
             required
             value={email}
@@ -61,6 +70,7 @@ function SignUp() {
           />
           <input
             type="password"
+            name="password"
             placeholder={"Password"} required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -73,7 +83,7 @@ function SignUp() {
             onChange={(e) => setConfirmPassword(e.target.value)}
 
           />
-          <button>Continue</button>
+          <button type='submit'>Continue</button>
           <button onClick={demoLogin}>Demo User</button>
         </form>
       </div>
