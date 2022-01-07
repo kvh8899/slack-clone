@@ -2,7 +2,7 @@ import "./authpage.css";
 import React, { useState } from "react";
 import { login } from '../store/session'
 import { useDispatch } from 'react-redux'
-import { Link, Navigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 
 function AuthPage() {
@@ -24,7 +24,8 @@ function AuthPage() {
       setErrors(data);
     }
     if (!errors.length) {
-      return <Navigate to='/channel' />;
+      console.log('hiiiii')
+      return < Navigate to='/channel' />;
     }
   };
   return (
