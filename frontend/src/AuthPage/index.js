@@ -2,8 +2,8 @@ import "./authpage.css";
 import React, { useState } from "react";
 import { login } from '../store/session'
 import { useDispatch } from 'react-redux'
-import { Link } from "react-router-dom"
-import Redirect from 'react'
+import { Link, Navigate } from "react-router-dom"
+
 
 function AuthPage() {
   const dispatch = useDispatch()
@@ -22,10 +22,9 @@ function AuthPage() {
     const data = await dispatch(login(email, password));
     if (data) {
       setErrors(data);
-      console.log(data)
     }
     if (!errors.length) {
-      return <Redirect to='/channel' />;
+      return <Navigate to='/channel' />;
     }
   };
   return (

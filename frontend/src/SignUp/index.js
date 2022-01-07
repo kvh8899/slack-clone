@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import * as sessionActions from "../store/session";
-import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 function SignUp() {
   const dispatch = useDispatch();
@@ -26,19 +26,18 @@ function SignUp() {
     setErrors([]);
     if (password === confirmPassword) {
       setErrors([]);
-      await dispatch(
-        sessionActions.signUp(username, email, password )
-      ).catch(async (res) => {
-        const data = await res.json();
-        if (data && data.errors) setErrors(data.errors);
-      });
+      const data = await dispatch(sessionActions.signUp(username, email, password));
+      if (data) {
+        setErrors(data);
+      }
     } else if (password !== confirmPassword) {
       setErrors([
-        "Confirm Password field must be the same as the Password field",
+        "Passwords need to match!",
       ]);
     }
     if (!errors.length) {
-      // redirect to organization page
+      console.log('hiiiii')
+      return < Navigate to='/channel' />;
     }
   };
 
@@ -58,15 +57,10 @@ function SignUp() {
             </li>
           ))}
         </ul>
-        <Link to="/login">Already have an account?</Link>
         <form onSubmit={handleSubmit}>
-          <div>
-            {errors.map((error, ind) => (
-              <div key={ind}>{error}</div>
-            ))}
-          </div>
           <input
             type='text'
+            required
             name='username'
             placeholder="Username"
             value={username}
@@ -74,6 +68,7 @@ function SignUp() {
           />
           <input
             type='text'
+            required
             name='email'
             placeholder={"Email"}
             value={email}
@@ -81,6 +76,7 @@ function SignUp() {
           />
           <input
             type='password'
+            required
             name='password'
             placeholder={"Password"}
             value={password}
@@ -88,6 +84,7 @@ function SignUp() {
           />
           <input
             type='password'
+            required
             name='repeat_password'
             placeholder={'Confirm Password'}
             value={confirmPassword}
