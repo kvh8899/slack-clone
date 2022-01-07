@@ -9,7 +9,7 @@ function App() {
   //<Route path="/channel" element={<Orgmainchat />}></Route>
   return (
     <Routes>
-      <Route path="/" element={<Splash />}></Route>
+      <Route path="/" element={<Splash />} exact={true}></Route>
       <Route path="/login" element={<AuthPage />}></Route>
       <Route path="/signup" element={<SignUp />}></Route>
     </Routes>

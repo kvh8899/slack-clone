@@ -29,7 +29,7 @@ export const authenticate = () => async (dispatch) => {
   }
 }
 
-export const login = (email, hashedPassword) => async (dispatch) => {
+export const login = (email, password) => async (dispatch) => {
   const response = await fetch('/api/auth/login', {
     method: 'POST',
     headers: {
@@ -37,7 +37,7 @@ export const login = (email, hashedPassword) => async (dispatch) => {
     },
     body: JSON.stringify({
       email,
-      hashedPassword
+      password
     })
   });
 
