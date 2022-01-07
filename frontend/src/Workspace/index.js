@@ -1,6 +1,8 @@
 import "./workspace.css";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import WorkspaceList from "../WorkspaceList"
 function Workspace() {
+  const hist = useNavigate();
   return (
     <div className="workspace-wrapper">
       <nav>
@@ -22,23 +24,7 @@ function Workspace() {
           ></img>
           Welcome Back!
         </h2>
-        {/*"here for testing visuals. Change to component"*/}
-        <div>
-          <div className="workSpace-wrap">
-            <h3>Workspaces for {"example@gmail.com"}</h3>
-            <div className="orgData">
-              <img
-                src="https://avatars.slack-edge.com/2015-03-13/4045125376_172ec0a9d33356de3571_88.jpg"
-                alt="logo"
-              ></img>
-              <div>
-                <h3>App Academy</h3>
-                <p>5299 Members</p>
-              </div>
-              <button>LAUNCH ZING</button>
-            </div>
-          </div>
-        </div>
+        <WorkspaceList />
         <div className="createOrg">
           <img src="/laptopPerson.png" alt="person"></img>
           <span></span>
@@ -47,7 +33,10 @@ function Workspace() {
             <button>Create a New Workspace</button>
           </div>
         </div>
-        <div className="logins">Not Seeing your workspace?{<Link to="/login">Try using a different Email →</Link>}</div>
+        <div className="logins">
+          Not Seeing your workspace?
+          {<Link to="/login">Try using a different Email →</Link>}
+        </div>
       </div>
     </div>
   );

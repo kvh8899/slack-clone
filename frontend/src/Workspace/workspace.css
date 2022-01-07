@@ -73,7 +73,7 @@
     height: 2px;
     background-color: rgb(120, 202, 202);
     transform: translate3d(-101%, 0, 0);
-    transition: transform 0.3s ease;
+    transition: transform 0.4s ease;
   }
   .logins a:hover::after{
     background-color: rgb(120, 202, 202);
