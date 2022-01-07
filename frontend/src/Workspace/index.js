@@ -47,7 +47,7 @@ function Workspace() {
             <button>Create a New Workspace</button>
           </div>
         </div>
-        <p>Not Seeing your workspace?{<Link to="/login">Try using a different Email</Link>}</p>
+        <div className="logins">Not Seeing your workspace?{<Link to="/login">Try using a different Email →</Link>}</div>
       </div>
     </div>
   );
