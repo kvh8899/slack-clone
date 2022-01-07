@@ -23,6 +23,7 @@ app = Flask(__name__)
 login = LoginManager(app)
 login.login_view = 'auth.unauthorized'
 
+# app.config['SECRET_KEY'] = Configuration.SECRET_KEY
 
 app.config.from_object(Configuration)
 app.cli.add_command(seed_commands)

@@ -2,8 +2,9 @@ import "./signup.css"
 import { Link } from "react-router-dom"
 import React, { useState } from "react";
 import { useDispatch, } from "react-redux";
-import * as sessionActions from '../store/session'
-import {useNavigate} from "react-router-dom"
+import { signUp, login } from '../store/session'
+import { useNavigate } from "react-router-dom"
+import Redirect from 'react'
 
 function SignUp() {
   const dispatch = useDispatch();
@@ -16,25 +17,24 @@ function SignUp() {
 
   const demoLogin = (e) => {
     e.preventDefault();
-    return dispatch(sessionActions.login({ email: 'demo@aa.io', hashedPassword: 'password' }))
+    return dispatch(login({ email: 'demo@aa.io', hashedPassword: 'password' }))
   }
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setErrors([]);
     if (password === confirmPassword) {
-      setErrors([]);
-      await dispatch(sessionActions.signUp({ username, email, password }))
-        .catch(async (res) => {
-          const data = await res.json();
-          if (data && data.errors) setErrors(data.errors);
-        });
-    }else if(password !== confirmPassword){
-      setErrors(['Confirm Password field must be the same as the Password field']);
+      const data = await dispatch(signUp(username, email, password));
+      if (data) {
+        setErrors(data)
+      }
+    } else if (password !== confirmPassword) {
+      setErrors(['Passwords need to match!']);
     }
-    if(!errors.length){
-      // redirect to organization page
+    if (!errors.length) {
+      return <Redirect to='/channel' />;
     }
-    
+
   };
 
 
@@ -46,11 +46,11 @@ function SignUp() {
           <h2>Zing</h2>
         </div>
         <p>Create an Account</p>
+        <Link to="/login">Already have an account?</Link>
         <ul>
           {errors.map((error, idx) => <li className='errors' key={idx}>{error}</li>)}
         </ul>
-        <Link to="/login">Already have an account?</Link>
-        <form onSubmit={handleSubmit}>
+        <form className='loginform' onSubmit={handleSubmit}>
           <input
             type="text"
             name="username"
