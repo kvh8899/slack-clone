@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { login } from '../store/session'
 import { useDispatch } from 'react-redux'
 import { Link } from "react-router-dom"
-
+import Redirect from 'react'
 
 function AuthPage() {
   const dispatch = useDispatch()
@@ -23,8 +23,10 @@ function AuthPage() {
     if (data) {
       setErrors(data);
     }
+    if (!errors.length) {
+      return <Redirect to='/channel' />;
+    }
   };
-
 
   return (
     <div className="wrapper authwrapper">
@@ -35,12 +37,12 @@ function AuthPage() {
         </div>
         <p> Sign in to your workspace.</p>
         <Link to="/signup">Don't have an account?</Link>
-        <ul>
+        <ul className="errors-container">
           {errors.map((error, idx) => (
             <li className='errors' key={idx}>{error}</li>
           ))}
         </ul>
-        <form onSubmit={handleSubmit}>
+        <form className='loginform' onSubmit={handleSubmit}>
           <input
             type="text"
             placeholder={"Email"}

@@ -23,6 +23,7 @@ function SignUp() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setErrors([]);
     if (password === confirmPassword) {
       setErrors([]);
       await dispatch(
@@ -49,6 +50,7 @@ function SignUp() {
           <h2>Zing</h2>
         </div>
         <p>Create an Account</p>
+        <Link to="/login">Already have an account?</Link>
         <ul>
           {errors.map((error, idx) => (
             <li className="errors" key={idx}>
