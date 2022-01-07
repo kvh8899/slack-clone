@@ -1,5 +1,6 @@
 .workspace-wrapper{
     position:fixed;
+    overflow: scroll;
     height:100%;
     width:100%;
     background-color:#4a154b;
@@ -37,6 +38,11 @@
 .midContent > h2 > img{
     width:50px;
     margin-bottom:5px;
+}
+.midContent > p{
+    text-align:center;
+    margin-top:40px;
+    margin-bottom:40px;
 }
 .workSpace-wrap > h3{
     margin:0px;
@@ -81,4 +87,43 @@
     margin:0px;
     color:rgb(90, 90, 90);
     font-size:13px;
+}
+
+.createOrg{
+    display:flex;
+    align-items:center;
+}
+.createOrg img{
+    align-self:flex-start;
+    height:125px;
+    width:200px;
+}
+.createOrg{
+    position:relative;
+    margin-top:50px;
+    height:93px;
+}
+.createOrg div{
+    display:flex;
+    margin-left:30px;
+    width:100%;
+    justify-content:space-between;
+}
+.createOrg div button{
+    color:#4a154b;
+    border: 1px solid #4a154b;
+    background-color: transparent;
+    font-weight:bold;
+    border-radius:5px;
+    padding:15px;
+    font-size:15px;
+    margin-right:20px;
+}
+.createOrg span{
+    width:100%;
+    height:100%;
+    background-color: white;
+    position:absolute;
+    border-radius:5px;
+    z-index:-25;
 }
