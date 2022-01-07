@@ -22,12 +22,12 @@ function AuthPage() {
     const data = await dispatch(login(email, password));
     if (data) {
       setErrors(data);
+      console.log(data)
     }
     if (!errors.length) {
       return <Redirect to='/channel' />;
     }
   };
-
   return (
     <div className="wrapper authwrapper">
       <div className="auth">
