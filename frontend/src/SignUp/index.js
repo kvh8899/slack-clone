@@ -1,5 +1,5 @@
 import "./signup.css"
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
 function SignUp(){
     return (
         <div className="wrapper authwrapper">
