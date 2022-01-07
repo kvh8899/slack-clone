@@ -1,3 +1,4 @@
+import "./workspacelist.css"
 import { useNavigate } from "react-router-dom"
 function WorkspaceList(){
     const hist = useNavigate();

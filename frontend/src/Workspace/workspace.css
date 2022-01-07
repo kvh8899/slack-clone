@@ -1,164 +1,114 @@
-.workspace-wrapper{
-    position:fixed;
-    overflow: scroll;
-    height:100%;
-    width:100%;
-    background-color:#4a154b;
-    display:flex;
-    flex-direction:column;
+.workspace-wrapper {
+  position: fixed;
+  overflow: scroll;
+  height: 100%;
+  width: 100%;
+  background-color: #4a154b;
+  display: flex;
+  flex-direction: column;
 }
-.workspace-wrapper nav{
-    background-color:#4a154b;
-    color:white;
+.workspace-wrapper nav {
+  background-color: #4a154b;
+  color: white;
 }
-.workspace-wrapper nav button{
-    color:#4a154b;
-    background-color: white;
-    font-weight:bold;
-    border-radius:5px;
+.workspace-wrapper nav button {
+  color: #4a154b;
+  background-color: white;
+  font-weight: bold;
+  border-radius: 5px;
 }
-
-.midContent{
-    align-self:center;
-    width:90%;
-    max-width:1000px;
-    margin-left:30px;
-    margin-right:30px;
+.midContent {
+  align-self: center;
+  width: 90%;
+  max-width: 1000px;
+  margin-left: 30px;
+  margin-right: 30px;
 }
-.midContent > h2{
-    color:white;
-    font-size:50px;
-    display:flex;
+.midContent > h2 {
+  color: white;
+  font-size: 50px;
+  display: flex;
 }
-.midContent > div{
-    border: 4px solid rgba(255, 255, 255, 0.2);
-    border-radius: 9px;
-    box-sizing:inherit;
+.midContent > div {
+  border: 4px solid rgba(255, 255, 255, 0.2);
+  border-radius: 9px;
+  box-sizing: inherit;
 }
-.midContent > h2 > img{
-    width:50px;
-    margin-bottom:5px;
+.midContent > h2 > img {
+  width: 50px;
+  margin-bottom: 5px;
 }
-.midContent > .logins{
-    display:flex;
-    text-align:center;
-    margin-top:40px;
-    margin-bottom:40px;
-    color:white;
-    border:none;
-    align-items: center;
-    justify-content: center;
+.midContent > .logins {
+  display: flex;
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  color: white;
+  border: none;
+  align-items: center;
+  justify-content: center;
 }
-.midContent p > div{
-    display:flex;
-    flex-direction:column;
-    align-items: center;
+.logins a {
+  display: block;
+  position: relative;
+  line-height: 25px;
+  color: rgb(120, 202, 202);
+  text-decoration: none;
+  margin-left: 5px;
+  overflow: hidden;
 }
-.logins a{
-    display:block;
-    position:relative;
-    line-height:25px;
-    color:rgb(120, 202, 202);
-    text-decoration:none;
-    margin-left:5px;
-    overflow: hidden;
-}
-.logins a:hover{
-    color:rgb(120, 202, 202);
+.logins a:hover {
+  color: rgb(120, 202, 202);
 }
 .logins a::after {
-    content: "";
-    display: block;
-    width: 100%;
-    height: 2px;
-    background-color: rgb(120, 202, 202);
-    transform: translate3d(-101%, 0, 0);
-    transition: transform 0.4s ease;
-  }
-  .logins a:hover::after{
-    background-color: rgb(120, 202, 202);
-    transform: translate3d(0, 0, 0);
-  }
-.workSpace-wrap > h3{
-    margin:0px;
-    padding:20px;
-    border-radius:5px;
-    border-bottom-left-radius: 0px;
-    border-bottom-right-radius: 0px;
-    background-color: #ecdeec;
+  content: "";
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: rgb(120, 202, 202);
+  transform: translate3d(-101%, 0, 0);
+  transition: transform 0.4s ease;
 }
-.workSpace-wrap > div{
-    background-color:white;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-}
-.orgData{
-    display:flex;
-    align-items:center;
-}
-.orgData > img{
-    margin:20px;
-    border-radius:5px;
-    width:70px;
-    height:70px;
-    object-fit:cover;
-}
-.orgData > button{
-    margin-left:auto;
-    margin-right:20px;
-    color:white;
-    background-color: #4a154b;
-    font-weight:bold;
-    border-radius:5px;
-    padding:15px;
-    border:none;
-}
-.orgData > div > h3{
-    margin:0px;
-    margin-bottom:10px;
+.logins a:hover::after {
+  background-color: rgb(120, 202, 202);
+  transform: translate3d(0, 0, 0);
 }
 
-.orgData > div > p{
-    margin:0px;
-    color:rgb(90, 90, 90);
-    font-size:13px;
+.createOrg {
+  display: flex;
+  align-items: center;
 }
-
-.createOrg{
-    display:flex;
-    align-items:center;
+.createOrg img {
+  align-self: flex-start;
+  height: 125px;
+  width: 200px;
 }
-.createOrg img{
-    align-self:flex-start;
-    height:125px;
-    width:200px;
+.createOrg {
+  position: relative;
+  margin-top: 50px;
+  height: 93px;
 }
-.createOrg{
-    position:relative;
-    margin-top:50px;
-    height:93px;
+.createOrg div {
+  display: flex;
+  margin-left: 30px;
+  width: 100%;
+  justify-content: space-between;
 }
-.createOrg div{
-    display:flex;
-    margin-left:30px;
-    width:100%;
-    justify-content:space-between;
+.createOrg div button {
+  color: #4a154b;
+  border: 1px solid #4a154b;
+  background-color: transparent;
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 15px;
+  font-size: 15px;
+  margin-right: 20px;
 }
-.createOrg div button{
-    color:#4a154b;
-    border: 1px solid #4a154b;
-    background-color: transparent;
-    font-weight:bold;
-    border-radius:5px;
-    padding:15px;
-    font-size:15px;
-    margin-right:20px;
-}
-.createOrg span{
-    width:100%;
-    height:100%;
-    background-color: white;
-    position:absolute;
-    border-radius:5px;
-    z-index:-25;
+.createOrg span {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  position: absolute;
+  border-radius: 5px;
+  z-index: -25;
 }
