@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import * as sessionActions from "../store/session";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function SignUp() {
   const dispatch = useDispatch();
-  //const hist = useNavigate();
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -29,16 +29,14 @@ function SignUp() {
       const data = await dispatch(sessionActions.signUp(username, email, password));
       if (data) {
         setErrors(data);
+        return
       }
     } else if (password !== confirmPassword) {
-      setErrors([
+      return setErrors([
         "Passwords need to match!",
       ]);
     }
-    if (!errors.length) {
-      console.log('hiiiii')
-      return < Navigate to='/channel' />;
-    }
+    navigate('/channel')
   };
 
   return (

@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom"
 
 function AuthPage() {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
@@ -21,12 +22,9 @@ function AuthPage() {
     setErrors([]);
     const data = await dispatch(login(email, password));
     if (data) {
-      setErrors(data);
+      return setErrors(data);
     }
-    if (!errors.length) {
-      console.log('hiiiii')
-      return < Navigate to='/channel' />;
-    }
+    navigate('/channel')
   };
   return (
     <div className="wrapper authwrapper">
