@@ -20,7 +20,7 @@ function Splash(){
                 <h1>Join a Community</h1>
                 <p>Transform the way you work with one place for everyone and everything you need to get stuff done.</p>
                 <button onClick={() => {
-                    hist("signup");
+                    hist("/signup");
                 }}>Try For Free</button>
             </div>
         </div>

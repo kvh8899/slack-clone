@@ -24,7 +24,7 @@ export const authenticate = () => async (dispatch) => {
     if (data.errors) {
       return;
     }
-  
+
     dispatch(setUser(data));
   }
 }
@@ -40,14 +40,15 @@ export const login = (email, password) => async (dispatch) => {
       password
     })
   });
-  
-  
+
+
   if (response.ok) {
     const data = await response.json();
     dispatch(setUser(data))
     return null;
   } else if (response.status < 500) {
     const data = await response.json();
+    console.log(data)
     if (data.errors) {
       return data.errors;
     }
@@ -82,7 +83,7 @@ export const signUp = (username, email, password) => async (dispatch) => {
       password,
     }),
   });
-  
+
   if (response.ok) {
     const data = await response.json();
     dispatch(setUser(data))
