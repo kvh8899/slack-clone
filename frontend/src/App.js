@@ -8,14 +8,12 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 function App() {
   // organization page:
   return (
-    <BrowserRouter>
       <Routes>
         <Route path="/organization" element ={<Workspace />}> </Route>
         <Route path="/" element={<Splash />}></Route>
         <Route path="/login" element={<AuthPage />}></Route>
         <Route path="/signup" element={<SignUp />}></Route>
       </Routes>
-    </BrowserRouter>
   );
 }
 
