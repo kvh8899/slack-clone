@@ -6,7 +6,7 @@ from flask_login import LoginManager
 
 from flask import Flask
 from app.models import db
-from app.config import Configuration
+from app.config import Config
 from flask_migrate import Migrate
 from flask_socketio import SocketIO, send
 from app.seeds import seed_commands
@@ -23,9 +23,8 @@ app = Flask(__name__)
 login = LoginManager(app)
 login.login_view = 'auth.unauthorized'
 
-# app.config['SECRET_KEY'] = Configuration.SECRET_KEY
 
-app.config.from_object(Configuration)
+app.config.from_object(Config)
 app.cli.add_command(seed_commands)
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')

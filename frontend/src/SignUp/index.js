@@ -7,39 +7,36 @@ import { useNavigate } from "react-router-dom";
 
 function SignUp() {
   const dispatch = useDispatch();
-  //const hist = useNavigate();
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
 
-  const demoLogin = (e) => {
+  const demoLogin = async (e) => {
     e.preventDefault();
-    return dispatch(
-      sessionActions.login({ email: "demo@aa.io", hashedPassword: "password" })
-    );
-  };
+    const data = await dispatch(sessionActions.login('demo@aa.io', 'password'));
+    navigate('/channel')
+  }
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors([]);
     if (password === confirmPassword) {
       setErrors([]);
-      await dispatch(
-        sessionActions.signUp(username, email, password )
-      ).catch(async (res) => {
-        const data = await res.json();
-        if (data && data.errors) setErrors(data.errors);
-      });
+      const data = await dispatch(sessionActions.signUp(username, email, password));
+      if (data) {
+        setErrors(data);
+        return
+      }
     } else if (password !== confirmPassword) {
-      setErrors([
-        "Confirm Password field must be the same as the Password field",
+      return setErrors([
+        "Passwords need to match!",
       ]);
     }
-    if (!errors.length) {
-      // redirect to organization page
-    }
+    navigate('/channel')
   };
 
   return (
@@ -58,15 +55,10 @@ function SignUp() {
             </li>
           ))}
         </ul>
-        <Link to="/login">Already have an account?</Link>
         <form onSubmit={handleSubmit}>
-          <div>
-            {errors.map((error, ind) => (
-              <div key={ind}>{error}</div>
-            ))}
-          </div>
           <input
             type='text'
+            required
             name='username'
             placeholder="Username"
             value={username}
@@ -74,6 +66,7 @@ function SignUp() {
           />
           <input
             type='text'
+            required
             name='email'
             placeholder={"Email"}
             value={email}
@@ -81,6 +74,7 @@ function SignUp() {
           />
           <input
             type='password'
+            required
             name='password'
             placeholder={"Password"}
             value={password}
@@ -88,6 +82,7 @@ function SignUp() {
           />
           <input
             type='password'
+            required
             name='repeat_password'
             placeholder={'Confirm Password'}
             value={confirmPassword}
