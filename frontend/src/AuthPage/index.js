@@ -12,9 +12,10 @@ function AuthPage() {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
 
-  const demoLogin = (e) => {
+  const demoLogin = async (e) => {
     e.preventDefault();
-    return dispatch(login({ email: 'demo@aa.io', hashedPassword: 'password' }))
+    const data = await dispatch(login('demo@aa.io', 'password'));
+    navigate('/channel')
   }
 
   const handleSubmit = async (e) => {
