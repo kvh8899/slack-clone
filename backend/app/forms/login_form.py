@@ -21,7 +21,7 @@ def password_matches(form, field):
     if not user:
         raise ValidationError('User does not exist.')
     if not user.check_password(password):
-        raise ValidationError('Password is incorrect.')
+        raise ValidationError('Password or Email is incorrect.')
 
 
 class LoginForm(FlaskForm):
