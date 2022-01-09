@@ -1,0 +1,45 @@
+.workSpace-wrap > h3 {
+  margin: 0px;
+  padding: 20px;
+  border-radius: 5px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  background-color: #ecdeec;
+}
+.workSpace-wrap > div {
+  background-color: white;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+.orgData {
+  display: flex;
+  align-items: center;
+}
+.orgData > img {
+  margin: 20px;
+  border-radius: 5px;
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+}
+
+.orgData > button {
+  margin-left: auto;
+  margin-right: 20px;
+  color: white;
+  background-color: #4a154b;
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 15px;
+  border: none;
+}
+.orgData > div > h3 {
+  margin: 0px;
+  margin-bottom: 10px;
+}
+
+.orgData > div > p {
+  margin: 0px;
+  color: rgb(90, 90, 90);
+  font-size: 13px;
+}
