@@ -50,6 +50,16 @@ class Organization(db.Model):
     channels = db.relationship("Channel", back_populates="organizations", cascade='all, delete')
     members = db.relationship('User', secondary='members', back_populates='organization', cascade='all, delete')
 
+    def to_dict(self):
+        return {
+            id: self.id,
+            name: self.name,
+            owner_id: self.owner_id,
+            owner: self.owner,
+            channels: self.channels,
+            members: self.members
+        }
+
 
 class Channel(db.Model):
     __tablename__ = "channels"
