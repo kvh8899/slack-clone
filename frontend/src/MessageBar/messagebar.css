@@ -10,3 +10,10 @@
 .messageBar > div > div{
     padding-left:10px;
 }
+
+.orgeditdiv {
+    display: flex;
+    /* align-items: center; */
+    max-width: fit-content;
+    max-height: fit-content;
+}

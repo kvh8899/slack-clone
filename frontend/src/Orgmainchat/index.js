@@ -1,12 +1,7 @@
 import "./orgmainchat.css";
 import MessageBar from "../MessageBar";
 import Message from "../Message";
-import { useDispatch } from 'react-redux';
-import { removeWorkspace } from "../store/organizations";
-import { useParams } from "react-router";
-
-import { useNavigate } from "react-router-dom";
-import OrgEdit from "../EditOrgForm";
+import OrgEdit from "../OrgEdit";
 
 
 function Orgmainchat() {
@@ -23,7 +18,6 @@ function Orgmainchat() {
         <MessageBar />
         <Message />
       </div>
-      <OrgEdit />
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import OrgEdit from "../EditOrgForm";
+import OrgEdit from "../OrgEdit";
 import "./messagebar.css";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -23,7 +23,7 @@ function MessageBar() {
     if (showForm === false) return setShowForm(true)
     if (showForm === true) return setShowForm(false)
   }
-
+  console.log(showEdit)
   const orgDelete = (e) => {
     e.preventDefault()
     dispatch(removeWorkspace(id))
@@ -34,9 +34,9 @@ function MessageBar() {
       <div className="title">
         <h2 onClick={editToggle}>Title</h2>
         {showEdit &&
-          <div>
-            <button onClick={formToggle}>Edit Org Name</button>
-            <button onClick={orgDelete}>Delete Org</button>
+          <div className="orgeditdiv">
+            <button className="editbutton" onClick={formToggle}>Edit Name</button>
+            <button className="editbutton" onClick={orgDelete}>Delete Org</button>
           </div>
         }
         <div>
@@ -47,7 +47,7 @@ function MessageBar() {
         <div>
           {showForm &&
             <div>
-              <OrgEdit />
+              <OrgEdit setShowForm={setShowForm} />
             </div>
           }
           <p>Channels</p>
