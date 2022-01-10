@@ -4,8 +4,10 @@ import {useDispatch, useSelector} from "react-redux"
 function WorkspaceList(){
     const hist = useNavigate();
     // get orgs from database and use map
+    const session = useSelector((state) => state.session.user)
+    //const list = fetch(`/api/users/${session.id}/organizations`)
     return (
-        <div>
+        <div className="workSpace-wrap">
           <div className="workSpace-wrap">
             <h3>Workspaces for {"example@gmail.com"}</h3>
             <div className="orgData">

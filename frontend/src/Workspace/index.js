@@ -25,7 +25,7 @@ function Workspace() {
           Welcome Back!
         </h2>
         <WorkspaceList />
-        <div className="createOrg">
+        <div className="createOrg workSpace-wrap">
           <img src="/laptopPerson.png" alt="person"></img>
           <span></span>
           <div>
