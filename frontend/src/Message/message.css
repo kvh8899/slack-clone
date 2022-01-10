@@ -16,9 +16,12 @@
     height:50px;
 }
 .inputMessages input{
+    color:white;
     margin:10px;
     width:100%;
     height:25px;
+    background-color: #222529;
+    border:1px solid #555856;
     border-radius:5px;
 }
 .inputMessages form{
