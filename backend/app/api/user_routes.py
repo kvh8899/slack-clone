@@ -21,7 +21,6 @@ def user(id):
 ## get all organizations of a user
 @user_routes.route('/<int:userId>/organizations')
 def getWorkspace(userId):
-    print(userId,"USERID")
     allWorkspaces = User.query.filter_by(id=userId).join(Organization).first()
     organizations = []
     if(allWorkspaces):
