@@ -6,18 +6,10 @@ import { removeWorkspace } from "../store/organizations";
 import { useParams } from "react-router";
 
 import { useNavigate } from "react-router-dom";
+import OrgEdit from "../EditOrgForm";
 
 
 function Orgmainchat() {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { id } = useParams()
-  const testDelete = (e) => {
-    e.preventDefault()
-    dispatch(removeWorkspace(id))
-    navigate('/organization')
-
-  }
   return (
     <div className="content">
       <div className="topBar">
@@ -31,6 +23,7 @@ function Orgmainchat() {
         <MessageBar />
         <Message />
       </div>
+      <OrgEdit />
     </div>
   );
 }
