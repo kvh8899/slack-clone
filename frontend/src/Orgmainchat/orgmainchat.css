@@ -15,12 +15,12 @@
     display:flex;
     justify-content:center;
     align-items:center;
-    background-color: rgb(33, 31, 51);
+    background-color: #131017;
     width:100%;
-    border-bottom: 1px solid rgb(85, 85, 85);
+    border-bottom: 1px solid rgba(54,55,59,1);
 }
 .topBar > input{
-    background-color:rgb(117, 114, 131);
+    background-color:#38373c;
     color:rgb(212, 212, 212);
     padding: 5px;
     margin: 5px;
@@ -38,14 +38,14 @@ input:focus{
 }
 .topBar div{
     display:flex;
-    color:rgb(212, 212, 212);
+    color:#131017;
     justify-content:flex-end;
     padding-right:15px;
     flex-grow:1;
 }
 
 .title{
-    border-bottom:1px solid rgb(85, 85, 85);
+    border-bottom:1px solid rgba(54,55,59,1);
     display:flex;
     align-items:center;
 }
