@@ -5,13 +5,17 @@ import io from "socket.io-client";
 // must use http here
 //"https://<herokuname>.herokuapp.com" for heroku
 let endPoint = "http://localhost:5000/";
-let socket = io(`${endPoint}`);
+let socket;
 function Message() {
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
   const dummyDiv = useRef(null)
   useEffect(() => {
+    socket = io(`${endPoint}`)
     getMessages();
+    return (() =>{
+      socket.disconnect()
+    })
   }, [messages.length]);
 
   const getMessages = () => {
