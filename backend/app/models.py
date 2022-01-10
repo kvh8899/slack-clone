@@ -37,10 +37,6 @@ class User(db.Model, UserMixin):
             'username': self.username,
             'email': self.email
         }
-    def members(self):
-        return {
-            'members':self.members
-        }
 
 class Organization(db.Model):
     __tablename__ = "organizations"
