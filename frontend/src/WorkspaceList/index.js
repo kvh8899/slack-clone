@@ -39,7 +39,7 @@ function WorkspaceList() {
               <button
                 onClick={() => {
                   //redirect to proper workspace page
-                  hist("/");
+                  hist(`/organizations/${e.id}`);
                 }}
               >
                 LAUNCH ZING
