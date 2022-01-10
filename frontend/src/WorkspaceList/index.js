@@ -16,9 +16,6 @@ function WorkspaceList() {
     }
   }
   useEffect(() => {
-    //dispatch(restoreUser(JSON.parse(window.localStorage.getItem("session"))));
-  },[]);
-  useEffect(() => {
     loadOrg(session);
   }, [session]);
   return session ? (

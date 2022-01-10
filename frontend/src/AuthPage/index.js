@@ -13,7 +13,7 @@ function AuthPage() {
 
   const demoLogin = async (e) => {
     e.preventDefault();
-    const data = await dispatch(login('demo@aa.io', 'password'));
+    await dispatch(login('demo@aa.io', 'password'));
     navigate('/organization');
   }
 

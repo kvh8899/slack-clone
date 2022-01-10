@@ -8,7 +8,7 @@ from flask import Flask
 from app.models import db
 from app.config import Config
 from flask_migrate import Migrate
-##from flask_socketio import SocketIO, send
+from flask_socketio import SocketIO, send
 from app.seeds import seed_commands
 
 from flask_cors import CORS
@@ -75,8 +75,8 @@ def react_root(path):
 
 @socketIo.on("message")
 def handleMessage(msg):
-    ##send(msg, broadcast=True)
-    ##return None
+    send(msg, broadcast=True)
+    return None
 
 
 if __name__ == '__main__':

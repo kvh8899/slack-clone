@@ -1,7 +1,6 @@
 // constants
 const SET_USER = 'session/SET_USER';
 const REMOVE_USER = 'session/REMOVE_USER';
-const RESTORE_USER = 'session/RESTORE_USER';
 const setUser = (user) => ({
   type: SET_USER,
   payload: user
@@ -10,12 +9,6 @@ const setUser = (user) => ({
 const removeUser = () => ({
   type: REMOVE_USER,
 })
-
-export const restoreUser = (session) => ({
-  type: RESTORE_USER,
-  session
-})
-
 const initialState = { user: null };
 
 export const authenticate = () => async (dispatch) => {
@@ -103,13 +96,9 @@ export const signUp = (username, email, password) => async (dispatch) => {
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_USER:
-      //window.localStorage.setItem('session',JSON.stringify({ user: action.payload})) 
       return { user: action.payload }
     case REMOVE_USER:
-      window.localStorage.setItem('session',null) 
       return { user: null }
-   // case RESTORE_USER:
-      //return action.session
     default:
       return state;
   }
