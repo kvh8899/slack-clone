@@ -1,7 +1,7 @@
 import "./signup.css";
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as sessionActions from "../store/session";
 import { useNavigate } from "react-router-dom";
 
@@ -13,11 +13,11 @@ function SignUp() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
-
+  
   const demoLogin = async (e) => {
     e.preventDefault();
-    const data = await dispatch(sessionActions.login('demo@aa.io', 'password'));
-    navigate('/channel')
+    await dispatch(sessionActions.login('demo@aa.io', 'password'));
+    navigate('/organization')
   }
 
 
@@ -36,7 +36,7 @@ function SignUp() {
         "Passwords need to match!",
       ]);
     }
-    navigate('/channel')
+    navigate('/organization')
   };
 
   return (

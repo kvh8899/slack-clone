@@ -5,7 +5,7 @@ from flask_login import LoginManager
 
 
 from flask import Flask
-from app.models import db
+from app.models import db, User
 from app.config import Config
 from flask_migrate import Migrate
 from flask_socketio import SocketIO, send
@@ -18,11 +18,15 @@ from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
 from .api.organizations import organization_routes
 
+
 app = Flask(__name__)
 
 login = LoginManager(app)
 login.login_view = 'auth.unauthorized'
 
+@login.user_loader
+def load_user(id):
+    return User.query.get(int(id))
 
 app.config.from_object(Config)
 app.cli.add_command(seed_commands)
