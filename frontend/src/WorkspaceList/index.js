@@ -6,14 +6,13 @@ import {restoreUser} from "../store/session"
 function WorkspaceList(){
     const hist = useNavigate();
     // get orgs from database and use map
-    const session = useSelector((state) => state.session)
+    const session = useSelector((state) => state.session.user)
     const dispatch = useDispatch()
     useEffect(() => {
-      console.log(session,window.localStorage.getItem('session'))
       dispatch(restoreUser(JSON.parse(window.localStorage.getItem('session'))))
     },[])
-    //const list = fetch(`/api/users/${session.id}/organizations`)
-    return (
+
+    return session?(
         <div className="workSpace-wrap">
           <div className="workSpace-wrap">
             <h3>Workspaces for {"example@gmail.com"}</h3>
@@ -33,7 +32,7 @@ function WorkspaceList(){
             </div>
           </div>
         </div>
-    )
+    ):null
 }
 
 export default WorkspaceList;

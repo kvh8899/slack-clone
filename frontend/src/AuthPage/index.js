@@ -15,7 +15,7 @@ function AuthPage() {
   const demoLogin = async (e) => {
     e.preventDefault();
     const data = await dispatch(login('demo@aa.io', 'password'));
-    navigate('/channel')
+    navigate('/organization')
   }
 
   const handleSubmit = async (e) => {
