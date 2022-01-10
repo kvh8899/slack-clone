@@ -34,7 +34,7 @@ app.register_blueprint(auth_routes, url_prefix='/api/auth')
 
 db.init_app(app)
 Migrate(app, db)
-##socketIo = SocketIO(app=app, cors_allowed_origins='*')
+socketIo = SocketIO(app=app, cors_allowed_origins='*')
 
 CORS(app)
 
@@ -73,11 +73,11 @@ def react_root(path):
     return app.send_static_file('index.html')
 
 
-##@socketIo.on("message")
-##def handleMessage(msg):
+@socketIo.on("message")
+def handleMessage(msg):
     ##send(msg, broadcast=True)
     ##return None
 
 
-##if __name__ == '__main__':
-    ##socketIo.run(app)
+if __name__ == '__main__':
+    socketIo.run(app)
