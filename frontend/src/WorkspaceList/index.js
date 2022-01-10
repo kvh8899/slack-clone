@@ -1,30 +1,55 @@
-import "./workspacelist.css"
-import { useNavigate } from "react-router-dom"
-import {useDispatch, useSelector} from "react-redux"
-function WorkspaceList(){
-    const hist = useNavigate();
-    // get orgs from database and use map
-    return (
-        <div>
-          <div className="workSpace-wrap">
-            <h3>Workspaces for {"example@gmail.com"}</h3>
-            <div className="orgData">
+import "./workspacelist.css";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { restoreUser } from "../store/session";
+import { workspaces } from "../store/organizations";
+function WorkspaceList() {
+  const hist = useNavigate();
+  // get orgs from database and use map
+  const session = useSelector((state) => state.session.user);
+  const organizations = useSelector((state) => state.organizations);
+  const dispatch = useDispatch();
+  async function loadOrg(session) {
+    if (session) {
+      await dispatch(workspaces(session.id));
+    }
+  }
+  useEffect(() => {
+    dispatch(restoreUser(JSON.parse(window.localStorage.getItem("session"))));
+  },[]);
+  useEffect(() => {
+    loadOrg(session);
+  }, [session]);
+  return session ? (
+    <div className="workSpace-wrap">
+      <div className="workSpace-wrap">
+        <h3>Workspaces for {session.email}</h3>
+        {organizations.map((e) => {
+          return (
+            <div className="orgData" key={e.id}>
               <img
                 src="https://avatars.slack-edge.com/2015-03-13/4045125376_172ec0a9d33356de3571_88.jpg"
                 alt="logo"
               ></img>
               <div>
-                <h3>App Academy</h3>
-                <p>5299 Members</p>
+                <h3>{e.name}</h3>
+                <p>{e.members.length} Members</p>
               </div>
-              <button onClick={() => {
+              <button
+                onClick={() => {
                   //redirect to proper workspace page
-                  hist("/")
-              }}>LAUNCH ZING</button>
+                  hist(`/organizations/${e.id}`);
+                }}
+              >
+                LAUNCH ZING
+              </button>
             </div>
-          </div>
-        </div>
-    )
+          );
+        })}
+      </div>
+    </div>
+  ) : null;
 }
 
 export default WorkspaceList;

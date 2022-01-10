@@ -38,7 +38,6 @@ class User(db.Model, UserMixin):
             'email': self.email
         }
 
-
 class Organization(db.Model):
     __tablename__ = "organizations"
 
@@ -49,6 +48,13 @@ class Organization(db.Model):
     owner = db.relationship("User", back_populates="organization", cascade='all, delete')
     channels = db.relationship("Channel", back_populates="organizations", cascade='all, delete')
     members = db.relationship('User', secondary='members', back_populates='organization', cascade='all, delete')
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'owner_id': self.owner_id,
+        }
 
 
 class Channel(db.Model):
@@ -61,6 +67,12 @@ class Channel(db.Model):
     channel_messages = db.relationship('Message', back_populates='user_channels')
     users = db.relationship('User',secondary='groups',back_populates="channels")
 
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'org_id': self.org_id,
+        }
 class DmChannel(db.Model):
     __tablename__ = "dmchannels"
     id = db.Column(db.Integer,primary_key=True)

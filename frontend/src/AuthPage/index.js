@@ -1,13 +1,12 @@
 import "./authpage.css";
 import React, { useState } from "react";
-import { login } from '../store/session'
-import { useDispatch } from 'react-redux'
-import { Link, useNavigate } from "react-router-dom"
-
+import { login } from '../store/session';
+import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from "react-router-dom";
 
 function AuthPage() {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
@@ -15,7 +14,7 @@ function AuthPage() {
   const demoLogin = async (e) => {
     e.preventDefault();
     const data = await dispatch(login('demo@aa.io', 'password'));
-    navigate('/channel')
+    navigate('/organization');
   }
 
   const handleSubmit = async (e) => {
@@ -25,7 +24,7 @@ function AuthPage() {
     if (data) {
       return setErrors(data);
     }
-    navigate('/channel')
+    navigate('/organization');
   };
   return (
     <div className="wrapper authwrapper">
