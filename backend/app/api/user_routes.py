@@ -21,15 +21,17 @@ def user(id):
 ## get all organizations of a user
 @user_routes.route('/<int:userId>/organizations')
 def getWorkspace(userId):
-    allWorkspaces = User.query.join(Organization).filter_by(id=userId).first()
+    print(userId,"USERID")
+    allWorkspaces = User.query.filter_by(id=userId).join(Organization).first()
     organizations = []
-    for i in range(len(allWorkspaces.organization)):
-        organizations.append(allWorkspaces.organization[i].to_dict())
-        members = []
-        ##inefficient, better to have a column in table that has
-        ##number of users
-        for x in allWorkspaces.organization[i].members:
-            members.append(x.to_dict())
-        organizations[i]['members'] = members
-
+    if(allWorkspaces):
+        for i in range(len(allWorkspaces.organization)):
+            organizations.append(allWorkspaces.organization[i].to_dict())
+            members = []
+            ##inefficient, better to have a column in table that has
+            ##number of users
+            for x in allWorkspaces.organization[i].members:
+                members.append(x.to_dict())
+            organizations[i]['members'] = members
+    
     return {'workspaces':organizations}

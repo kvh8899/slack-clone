@@ -15,7 +15,6 @@ export const workspaces = (userId) => async(dispatch) => {
         dispatch(addWorkspaces(body.workspaces))
         return;
     }else{
-        res.status = 404;
         return null;
     }
 }
