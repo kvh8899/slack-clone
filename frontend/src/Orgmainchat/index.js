@@ -28,7 +28,6 @@ function Orgmainchat() {
         </div>
       </div>
       <div className="midContent1">
-        <button onClick={testDelete}>delete</button>
         <MessageBar />
         <Message />
       </div>
