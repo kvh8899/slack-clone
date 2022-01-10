@@ -11,6 +11,7 @@ function MessageBar() {
       </div>
       <div>
         <div>
+          <i class="fas fa-caret-down"></i>
           <p>Channels</p>
         </div>
       </div>
@@ -23,4 +24,4 @@ function MessageBar() {
   );
 }
 
-export default MessageBar
+export default MessageBar;
