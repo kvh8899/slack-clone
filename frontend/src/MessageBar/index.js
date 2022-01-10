@@ -9,14 +9,25 @@ function MessageBar() {
           <button>New</button>
         </div>
       </div>
-      <div>
+      <div className="channels">
         <div>
-          <i class="fas fa-caret-down"></i>
+          <i
+            className="fas fa-caret-down"
+            onClick={(e) => {
+              e.target.classList.toggle("side");
+            }}
+          ></i>
           <p>Channels</p>
         </div>
       </div>
-      <div>
+      <div className="channels">
         <div>
+          <i
+            className="fas fa-caret-down"
+            onClick={(e) => {
+              e.target.classList.toggle("side");
+            }}
+          ></i>
           <p>Direct Messages</p>
         </div>
       </div>
