@@ -103,13 +103,13 @@ export const signUp = (username, email, password) => async (dispatch) => {
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_USER:
-      window.localStorage.setItem('session',JSON.stringify({ user: action.payload})) 
+      //window.localStorage.setItem('session',JSON.stringify({ user: action.payload})) 
       return { user: action.payload }
     case REMOVE_USER:
       window.localStorage.setItem('session',null) 
       return { user: null }
-    case RESTORE_USER:
-      return action.session
+   // case RESTORE_USER:
+      //return action.session
     default:
       return state;
   }

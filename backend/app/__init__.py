@@ -8,7 +8,7 @@ from flask import Flask
 from app.models import db
 from app.config import Config
 from flask_migrate import Migrate
-from flask_socketio import SocketIO, send
+##from flask_socketio import SocketIO, send
 from app.seeds import seed_commands
 
 from flask_cors import CORS
@@ -17,12 +17,15 @@ from flask_cors import CORS
 from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
 
-
+from .models import User
 app = Flask(__name__)
 
 login = LoginManager(app)
 login.login_view = 'auth.unauthorized'
 
+@login.user_loader
+def load_user(id):
+    return User.query.get(int(id))
 
 app.config.from_object(Config)
 app.cli.add_command(seed_commands)
@@ -31,7 +34,7 @@ app.register_blueprint(auth_routes, url_prefix='/api/auth')
 
 db.init_app(app)
 Migrate(app, db)
-socketIo = SocketIO(app=app, cors_allowed_origins='*')
+##socketIo = SocketIO(app=app, cors_allowed_origins='*')
 
 CORS(app)
 
@@ -70,11 +73,11 @@ def react_root(path):
     return app.send_static_file('index.html')
 
 
-@socketIo.on("message")
-def handleMessage(msg):
-    send(msg, broadcast=True)
-    return None
+##@socketIo.on("message")
+##def handleMessage(msg):
+    ##send(msg, broadcast=True)
+    ##return None
 
 
-if __name__ == '__main__':
-    socketIo.run(app)
+##if __name__ == '__main__':
+    ##socketIo.run(app)
