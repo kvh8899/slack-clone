@@ -11,7 +11,7 @@ function MessageBar() {
       </div>
       <div>
         <div>
-          <p>Channels</p>
+          <p>Channels</p> 
         </div>
       </div>
       <div>
