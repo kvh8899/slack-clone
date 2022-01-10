@@ -26,6 +26,8 @@ def getWorkspace(userId):
     for i in range(len(allWorkspaces.organization)):
         organizations.append(allWorkspaces.organization[i].to_dict())
         members = []
+        ##inefficient, better to have a column in table that has
+        ##number of users
         for x in allWorkspaces.organization[i].members:
             members.append(x.to_dict())
         organizations[i]['members'] = members
