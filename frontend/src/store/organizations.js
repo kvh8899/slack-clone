@@ -1,25 +1,3 @@
-
-
-
-export const workspaces = (userId) => async (dispatch) => {
-    const res = await fetch(`/api/users/${userId}/organizations`);
-
-    if (res.ok) {
-        const body = await res.json();
-        dispatch(addWorkspaces(body.workspaces))
-        return;
-    } else {
-        return null;
-    }
-}
-
-
-
-
-
-
-
-
 const SET_WORKSPACES = "workspaces/SET_WORKSPACES";
 const EDIT_ORG = "workspaces/EDIT_ORG";
 const DELETE_WORKSPACES = "workspaces/DELETE_WORKSPACES";
