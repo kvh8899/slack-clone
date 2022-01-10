@@ -25,7 +25,7 @@ function AuthPage() {
     if (data) {
       return setErrors(data);
     }
-    navigate('/channel')
+    navigate('/organization')
   };
   return (
     <div className="wrapper authwrapper">

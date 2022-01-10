@@ -1,10 +1,17 @@
 import "./workspacelist.css"
 import { useNavigate } from "react-router-dom"
 import {useDispatch, useSelector} from "react-redux"
+import { useEffect } from "react";
+import {restoreUser} from "../store/session"
 function WorkspaceList(){
     const hist = useNavigate();
     // get orgs from database and use map
-    const session = useSelector((state) => state.session.user)
+    const session = useSelector((state) => state.session)
+    const dispatch = useDispatch()
+    useEffect(() => {
+      console.log(session,window.localStorage.getItem('session'))
+      dispatch(restoreUser(JSON.parse(window.localStorage.getItem('session'))))
+    },[])
     //const list = fetch(`/api/users/${session.id}/organizations`)
     return (
         <div className="workSpace-wrap">
