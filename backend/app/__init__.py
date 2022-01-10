@@ -31,7 +31,6 @@ app.config.from_object(Config)
 app.cli.add_command(seed_commands)
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
-
 db.init_app(app)
 Migrate(app, db)
 socketIo = SocketIO(app=app, cors_allowed_origins='*')
