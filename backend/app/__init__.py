@@ -17,12 +17,15 @@ from flask_cors import CORS
 from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
 
-
+from .models import User
 app = Flask(__name__)
 
 login = LoginManager(app)
 login.login_view = 'auth.unauthorized'
 
+@login.user_loader
+def load_user(id):
+    return User.query.get(int(id))
 
 app.config.from_object(Config)
 app.cli.add_command(seed_commands)

@@ -88,5 +88,6 @@ nav img{
     height:100%;
     width:100%;
     background-color:#A2A3BB;
+    overflow:scroll;
 }
 
