@@ -5,7 +5,7 @@ function WorkspaceList(){
     const hist = useNavigate();
     // get orgs from database and use map
     return (
-        <div>
+        <div className="workSpace-wrap">
           <div className="workSpace-wrap">
             <h3>Workspaces for {"example@gmail.com"}</h3>
             <div className="orgData">

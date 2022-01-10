@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { login } from '../store/session'
 import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from "react-router-dom"
+import Orgmainchat from "../Orgmainchat";
+
 
 
 function AuthPage() {

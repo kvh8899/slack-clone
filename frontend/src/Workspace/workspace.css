@@ -18,6 +18,8 @@
   border-radius: 5px;
 }
 .midContent {
+  display: flex;
+  flex-direction: column;
   align-self: center;
   width: 90%;
   max-width: 1000px;
@@ -47,6 +49,7 @@
   border: none;
   align-items: center;
   justify-content: center;
+  width: 100%;
 }
 .logins a {
   display: block;
