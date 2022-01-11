@@ -1,0 +1,48 @@
+.topBar {
+  background: #350d36;
+  box-shadow: 0 1px 0 0 rgb(255 255 255 / 10%);
+  height: 50px;
+  border-bottom: none;
+}
+
+.mid-content {
+  display: flex;
+  flex-direction: column;
+  padding: 32px 80px 64px 80px;
+  height: 100%;
+  max-width: 650px;
+}
+
+.header {
+  font-size: 50px;
+  line-height: 56px;
+  font-weight: 700;
+}
+
+.input-name {
+  border-radius: 4px;
+  --saf-0: rgba(var(--sk_primary_foreground, 29, 28, 29), 0.3);
+  border: 1px solid var(--saf-0);
+  box-sizing: border-box;
+  margin: 0 0 20px;
+  padding: 4px 12px;
+  height: 36px;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  width: 100%;
+  font-size: 15px;
+  color: rgba(var(--sk_primary_foreground, 29, 28, 29), 1);
+  background-color: rgba(var(--sk_primary_background, 255, 255, 255), 1);
+}
+
+.submit-button {
+  background-color: #4a154b;
+  color: white;
+  box-shadow: none;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 900;
+  height: 44px;
+  min-width: 96px;
+  padding: 0 16px 3px;
+}

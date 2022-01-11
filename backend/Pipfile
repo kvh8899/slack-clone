@@ -30,7 +30,7 @@ pycodestyle = "*"
 pylint = "*"
 rope = "*"
 psycopg2-binary = "*"
-"wtforms.validators" = "*"
+wtforms-validators = "*"
 
 [dev-packages]
 psycopg2-binary = "==2.8.6"
