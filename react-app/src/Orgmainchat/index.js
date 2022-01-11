@@ -5,12 +5,15 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../store/session";
+import { offAction } from "../store/showForm";
 
 function Orgmainchat() {
   const dispatch = useDispatch();
   const hist = useNavigate();
   const session = useSelector((state) => state.session.user);
+  const showForm = useSelector((state) => state.showFormReducer);
   const [userData, setUserData] = useState({});
+  const [channelName, setChannelName] = useState("");
   const profDiv = useRef(null);
   async function getUserData(id) {
     const res = await fetch(`/api/users/${session.id}`);
@@ -36,14 +39,51 @@ function Orgmainchat() {
   }
   return (
     <div className="content">
-      <div className="blackout"></div>
-      <form className="channelForm">
-        <h2>Create Text Channel</h2>
-        <div>
-          <label>Channel Name</label>
-          <input placeholder={"# new channel"}></input>
-        </div>
-      </form>
+      {showForm && (
+        <div
+          className="blackout"
+          onClick={(e) => {
+            dispatch(offAction());
+          }}
+        ></div>
+      )}
+      {showForm && (
+        <form
+          className="channelForm"
+          onSubmit={(e) => {
+            e.preventDefault();
+            if(channelName) dispatch(offAction());
+            setChannelName("");
+          }}
+        >
+          <div className="form1">
+            <h2>Create Text Channel</h2>
+            <label>Channel Name</label>
+            <input
+              placeholder={"# new channel"}
+              value={channelName}
+              onChange={(e) => {
+                setChannelName(e.target.value);
+              }}
+              required
+            ></input>
+          </div>
+          <div id="channelButton">
+            <p
+              className="cancel"
+              onClick={(e) => {
+                dispatch(offAction());
+                setChannelName("");
+              }}
+            >
+              Cancel
+            </p>
+            <button className="submit" disabled={!channelName}>
+              Submit
+            </button>
+          </div>
+        </form>
+      )}
       <div className="topBar" onClick={awayClick}>
         <div></div>
         <input placeholder={"Search"}></input>
