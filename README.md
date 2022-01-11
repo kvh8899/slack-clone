@@ -132,3 +132,8 @@ of your Heroku app in the url and tag name:
    ```bash=3
    docker push registry.heroku.com/{NAME_OF_HEROKU_APP}/web
    ```
+
+4. To view Heroku Error Logs:
+   ```
+   heroku logs -a <app-name>
+   ```
