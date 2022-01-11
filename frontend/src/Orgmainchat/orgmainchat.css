@@ -65,15 +65,25 @@ input:focus{
     object-fit: cover;
 }
 .profMenu{
-    position:fixed;
+    position:absolute;
     height:300px;
     width:300px;
     background-color:#222529;
     top:39px;
     border-radius:5px;
     border: 1px solid #43464a;
+    z-index:25;
 }
-
+.profMenu > button{
+    border:none;
+    background-color:transparent;
+    color:white;
+    margin:auto;
+    width:100%;
+}
+.profMenu > button:hover{
+    background-color:rgb(51, 148, 180);
+}
 .settings{
     display:none;
 }

@@ -19,21 +19,29 @@ function Orgmainchat() {
     if(session) getUserData(session.id)
   },[session])
   function profClick(e){
+    e.stopPropagation();
+    profDiv.current.classList.forEach((e) => {
+      if(e === "settings"){
+        return
+      }
+    })
     profDiv.current.classList.toggle("settings")
   }
   return (
       <div className="content">
-        <div className="topBar">
+        <div className="topBar" onClick={profClick}>
           <div></div>
           <input placeholder={"Search"}></input>
           <div className="profile">
             {userData?.profilePicture ? <img src={userData.profilePicture} alt="404" onClick={profClick}></img>:<img src="https://avatars.slack-edge.com/2015-03-13/4045125376_172ec0a9d33356de3571_88.jpg" alt="404" onClick={profClick}></img>}
-            <div className="profMenu settings" ref={profDiv}>
+            <div className="profMenu settings" ref={profDiv} onClick={(e) =>{
+              e.stopPropagation()
+            }}>
               <button>Sign Out</button>
             </div>
           </div>
         </div>
-        <div className="midContent1">
+        <div className="midContent1" onClick={profClick}>
           <MessageBar />
           <Message user={userData}/>
         </div>
