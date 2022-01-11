@@ -1,10 +1,13 @@
 import "./orgmainchat.css";
 import MessageBar from "../MessageBar";
 import Message from "../Message";
+
 import {useSelector, useDispatch} from "react-redux";
 import { useEffect, useState,useRef} from "react";
 import { useNavigate } from "react-router-dom";
 import {logout} from "../store/session";
+import OrgEdit from "../OrgEdit";
+
 function Orgmainchat() {
   const dispatch = useDispatch();
   const hist = useNavigate();
@@ -55,6 +58,11 @@ function Orgmainchat() {
           <Message user={userData}/>
         </div>
       </div>
+      <div className="midContent1">
+        <MessageBar />
+        <Message />
+      </div>
+    </div>
   );
 }
 

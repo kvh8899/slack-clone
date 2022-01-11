@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { workspaces } from "../store/organizations";
+import { restoreUser } from "../store/session";
+import { getWorkspaces } from "../store/organizations";
 function WorkspaceList() {
   const hist = useNavigate();
   // get orgs from database and use map
@@ -11,7 +13,7 @@ function WorkspaceList() {
   const dispatch = useDispatch();
   async function loadOrg(session) {
     if (session) {
-      await dispatch(workspaces(session.id));
+      await dispatch(getWorkspaces(session.id));
     }
   }
   useEffect(() => {
