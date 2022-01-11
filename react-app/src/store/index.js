@@ -10,7 +10,7 @@ const rootReducer = combineReducers({
   organizations,
   orgmainchatReducer,
   channelReducer
-});
+})
 
 
 let enhancer;
