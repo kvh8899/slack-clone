@@ -24,14 +24,19 @@ function Orgmainchat() {
   },[session])
   function profClick(e){
     e.stopPropagation();
-    profDiv.current.classList.forEach((e) => {
-      if(e === "settings") return;
-    })
+  
     profDiv.current.classList.toggle("settings")
+  }
+  function awayClick(e){
+    let flag = false;
+    profDiv.current.classList.forEach((e) => {
+      if(e === "settings") flag = true;
+    })
+    if(!flag) profDiv.current.classList.toggle("settings")
   }
   return (
       <div className="content">
-        <div className="topBar" onClick={profClick}>
+        <div className="topBar" onClick={awayClick}>
           <div></div>
           <input placeholder={"Search"}></input>
           <div className="profile">
@@ -46,7 +51,7 @@ function Orgmainchat() {
             </div>
           </div>
         </div>
-        <div className="midContent1" onClick={profClick}>
+        <div className="midContent1" onClick={awayClick}>
           <MessageBar />
           <Message user={userData}/>
         </div>

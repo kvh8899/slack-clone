@@ -6,7 +6,7 @@ function MessageBar() {
       <div className="title">
         <h2>Title</h2>
         <div>
-          <button><i class="far fa-edit"></i></button>
+          <button><i className="far fa-edit"></i></button>
         </div>
       </div>
       <div className="channels">
