@@ -95,3 +95,43 @@ input:focus{
     background-color: rgb(41, 36, 87);
 }
 
+.blackout{
+    position:fixed;
+    background-color: black;
+    height:100%;
+    width:100%;
+    opacity:0.5;
+}
+.channelForm{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    border-radius:5px;
+    position:fixed;
+    height:300px;
+    width:400px;
+    background-color:gray;
+    z-index:1;
+    align-self:center;
+    top:100px;
+}
+.channelForm input{
+    border-radius:5px;
+    width:100%;
+    height:30px;
+    border:1px solid black;
+    background-color:rgb(102, 102, 102);
+    color:white;
+    margin-top:5px;
+}
+
+.channelForm > h2{
+    color:white;
+    margin:20px;
+}
+.channelForm > div{
+    display:flex;
+    justify-content: center;
+    width:80%;
+    flex-direction:column;
+}

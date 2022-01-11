@@ -1,12 +1,11 @@
-import { editOrg, getOrg } from "../store/orgmainchat";
-import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router";
-import "./messagebar.css";
-import React, { useState, useRef,useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-
 import { removeWorkspace ,editOrgThunk } from "../store/organizations";
-
+import React, { useState, useRef,useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { editOrg, getOrg } from "../store/orgmainchat";
+import { useParams } from "react-router";
+import { useNavigate } from "react-router-dom";
+import NewChannel from "../newChannel";
+import "./messagebar.css";
 import {
   editChannelThunk,
   postChannel,
@@ -34,7 +33,6 @@ function MessageBar() {
   const [errors, setErrors] = useState([]);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setErrors([]);
     formToggle();
     setShowEdit(false)
     const data = await dispatch(editOrgThunk(orgName, id));
@@ -65,10 +63,10 @@ function MessageBar() {
   //   e.preventDefault()
   //   dispatch(readChannels(id))
   // }
-  // const testCreate = async (e) => {
-  //   e.preventDefault()
-  //   await dispatch(postChannel(id, channelName))
-  // }
+  const testCreate = async (e) => {
+    e.preventDefault()
+    await dispatch(postChannel(id, channelName))
+  }
   // const testDelete = async (e) => {
   //   e.preventDefault()
   //   await dispatch(removeChannel(5, channelName))
@@ -151,6 +149,7 @@ function MessageBar() {
             <button>EDIT a channel</button>
           </form>
  */}
+        <NewChannel />
         </div>
       </div>
       <div className="channels">
