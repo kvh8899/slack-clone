@@ -70,6 +70,7 @@ export const editOrgThunk = (organization) => async (dispatch) => {
   return data;
 };
 
+
 //Delete Org
 export const removeWorkspace = (organizationId) => async (dispatch) => {
   const res = await fetch(`/api/organizations/${organizationId}/delete`, {
@@ -90,7 +91,7 @@ export default function orgReducer(state = [], action) {
     case SET_WORKSPACES:
       return action.payload;
     case DELETE_WORKSPACES:
-      return state.filter((workspace) => workspace.id !== action.payload.id);
+      return state.filter((workspace) => workspace.id === action.payload.id);
     default:
       return state;
     case ADD_WORKSPACE:

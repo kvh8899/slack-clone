@@ -1,12 +1,30 @@
 from app.forms.channel_form import ChannelForm
+
 from flask import Blueprint, jsonify,request
 from flask_login import login_required,current_user
 from app.models import db, User, Organization, Member, Channel
 from app.forms.organization_form import OrganizationForm
 from .auth_routes import validation_errors_to_error_messages
 
+
 organization_routes = Blueprint('organizations', __name__)
 
+# edit org route
+@organization_routes.route('/organizations/edit/<int:id>', methods=['PUT'])
+def edit_org(id):
+    org = Organization.query.get(id)
+    form = OrganizationForm()
+    if form.validate_on_submit():
+        org.name = form.name.data
+        db.session.commit()
+        return org.to_dict()
+    return {}
+
+# get one org route
+@organization_routes.route('/<int:id>', methods=['GET'])
+def get_one_org(id):
+    org = Organization.query.get(id)
+    return org.to_dict()
 
 # delete organizations
 @organization_routes.route('/<int:organizationId>/delete', methods=['DELETE'])

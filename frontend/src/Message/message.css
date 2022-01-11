@@ -2,23 +2,26 @@
     display:flex;
     flex-direction: column;
     justify-content:flex-start;
-    background-color:rgb(57, 52, 97);
+    background-color:#1b1d21;
     color:lightgrey;
     width:100%;
     height:100%;
 }
 
 .inputMessages{
-    background-color: rgb(57, 52, 97);
+    background-color: #1b1d21;
     display:flex;
     bottom:0px;
     width:100%;
     height:50px;
 }
 .inputMessages input{
+    color:white;
     margin:10px;
     width:100%;
     height:25px;
+    background-color: #222529;
+    border:1px solid #555856;
     border-radius:5px;
 }
 .inputMessages form{
@@ -34,9 +37,30 @@
 }
 
 .messages p{
-    margin: none;
     width: 100%;
 }
 .messages div{
     margin-left:10px;
 }
+.message{
+    display:flex;
+    align-items:flex-start;
+    margin:15px;
+}
+.message img{
+    margin-top:3px;
+    width:40px;
+    height:40px;
+    border-radius:5px;
+}
+.message div p{
+    margin:0px;
+    width:600px;
+    overflow-wrap:break-word;
+}
+.message div h3{
+    margin:0px;
+    margin-bottom:5px;
+    font-size:15px;
+}
+
