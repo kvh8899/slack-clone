@@ -59,11 +59,11 @@ export const addWorkspaces = (name) => async (dispatch) => {
 };
 
 //Edit Org
-export const editOrgThunk = (organization) => async (dispatch) => {
-  const id = organization.get("id");
-  const response = await fetch(`/api/organizations/${id}`, {
+export const editOrgThunk = (name,id) => async (dispatch) => {
+  const response = await fetch(`/api/organizations/edit/${id}`, {
     method: "PUT",
-    body: organization,
+    headers:{"Content-Type":"application/json"},
+    body: JSON.stringify({name}),
   });
   const data = await response.json();
   dispatch(editOrg(data));
