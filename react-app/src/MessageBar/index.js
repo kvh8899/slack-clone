@@ -38,13 +38,14 @@ function MessageBar() {
     formToggle();
     editToggle();
     const data = await dispatch(editOrgThunk(orgName, id));
+    await dispatch(getOrg(id))
     if (data) {
       return setErrors(data);
     }
   };
   useEffect(() => {
-    dispatch(getOrg(id));
-  }, [handleSubmit]);
+    dispatch(getOrg(id))
+  }, []);
   const editToggle = () => {
     if (showForm === true) return;
     if (showEdit === false) return setShowEdit(true);
