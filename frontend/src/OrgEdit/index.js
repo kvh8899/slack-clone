@@ -27,12 +27,11 @@ function OrgEdit({ setShowForm, setShowh2 }) {
                 <form className='editorgform' onSubmit={handleSubmit}>
                     <input
                         type="text"
-                        placeholder={"Name"}
+                        placeholder={"New Name"}
                         required
                         value={orgName}
                         onChange={(e) => setOrgName(e.target.value)}
                     />
-                    <button className="editbutton">Submit</button>
                 </form>
             </div>
         </div>
