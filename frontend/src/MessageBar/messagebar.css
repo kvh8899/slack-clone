@@ -31,3 +31,10 @@
 .side{
     transform: rotate(-90deg);
 }
+.title button{
+    border-radius:100%;
+    height:35px;
+    width:35px;
+    border:none;
+    font-size:15px;
+}
