@@ -116,7 +116,7 @@ export const getWorkspaces = (userId) => async (dispatch) => {
 export const addWorkspaces = (workspace) => async (dispatch) => {
   const response = await fetch(`/api/organizations/`, {
     method: "POST",
-    body: workspace
+    body: JSON.stringify(workspace)
   });
   const data = await response.json();
   dispatch(addWorkspace(data));
@@ -159,6 +159,6 @@ export default function orgReducer(state = [], action) {
     default:
       return state;
     case ADD_WORKSPACE:
-      return { ...state, [action.payload.id]: action.payload}
+      return [...state, action.payload]
   }
 }
