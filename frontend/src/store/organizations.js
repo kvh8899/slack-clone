@@ -16,7 +16,7 @@ const EDIT_MESSAGE = "messages/EDIT_MESSAGE";
 const DELETE_MESSAGE = "messages/DELETE_MESSAGE";
 
 //Organization actions
-export const getWorkspaces = (workspaces) => {
+export const getWorkspace = (workspaces) => {
   return {
     type: SET_WORKSPACES,
     payload: workspaces,
@@ -105,7 +105,7 @@ export const getWorkspaces = (userId) => async (dispatch) => {
 
   if (res.ok) {
     const body = await res.json();
-    dispatch(getWorkspaces(body.workspaces));
+    dispatch(getWorkspace(body.workspaces));
     return body;
   } else {
     return null;

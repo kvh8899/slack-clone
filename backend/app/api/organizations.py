@@ -20,7 +20,7 @@ def deleteWorkspace(organizationId):
     return org.to_dict()
 
 # create organization
-@organization_routes.route('/api/users/${userId}/organizations', methods=['POST'])
+@organization_routes.route('/api/organizations', methods=['POST'])
 @login_required
 def newWorkspace():
     form = OrganizationForm()

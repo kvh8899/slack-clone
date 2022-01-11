@@ -19,12 +19,6 @@ export default function NewWorkspace() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const errors = validate();
-
-    if (errors && errors.length > 0) {
-      return setErrors(errors);
-    }
-
     const formData = new FormData();
     formData.append("name", orgName);
 
