@@ -105,20 +105,6 @@ export const workspaces = (userId) => async (dispatch) => {
   }
 };
 
-//Edit Org
-export const editOrgThunk = (organization) => async (dispatch) => {
-  const id = organization.get("id");
-  const response = await fetch(`/api/organizations/${id}`, {
-    method: "PUT",
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    body: organization
-  });
-  const data = await response.json();
-  dispatch(editOrg(data));
-  return data;
-};
 
 //Delete Org
 export const removeWorkspace = (organizationId) => async (dispatch) => {

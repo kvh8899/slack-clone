@@ -15,7 +15,7 @@ export const getOrg = (id) => async dispatch => {
     const res = await fetch(`/api/organizations/${id}`)
     if (res.ok) {
         const data = await res.json()
-        await dispatch(getOneOrg(data))
+        dispatch(getOneOrg(data))
         return data
     }
 }
@@ -28,10 +28,8 @@ export const editOrg = data => async dispatch => {
         },
         body: JSON.stringify(data),
     })
-    console.log('res', res)
     if (res.ok) {
         const org = await res.json()
-        console.log('org', org)
         dispatch(updateOrg(org))
     }
 }
