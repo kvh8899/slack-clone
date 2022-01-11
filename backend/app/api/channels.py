@@ -7,7 +7,7 @@ from .auth_routes import validation_errors_to_error_messages
 
 channel_routes = Blueprint('channels', __name__)
 
-# delete organizations
+# delete channel
 @channel_routes.route('/<int:channelId>/delete', methods=['DELETE'])
 def deleteChannel(channelId):
     channel = Channel.query.filter_by(
@@ -16,3 +16,15 @@ def deleteChannel(channelId):
     db.session.delete(channel)
     db.session.commit()
     return channel.to_dict()
+
+
+# edit channel
+@channel_routes.route('/<int:channelId>/edit', methods=['PUT'])
+def edit_channel(channelId):
+    channel = Channel.query.get(channelId)
+    print(channel, 'chanelllllll')
+    form = ChannelForm()
+    if form.validate_on_submit():
+        channel.name = form.name.data
+        db.session.commit()
+        return channel.to_dict()

@@ -6,13 +6,14 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { removeWorkspace } from "../store/organizations";
 import { useParams } from "react-router";
-import { postChannel, readChannels, removeChannel } from "../store/channels";
+import { editChannelThunk, postChannel, readChannels, removeChannel } from "../store/channels";
 
 function MessageBar() {
   const [showEdit, setShowEdit] = useState(false)
   const [showForm, setShowForm] = useState(false)
   const [showh2, setShowh2] = useState(true)
   const [channelName, setChannelName] = useState('')
+  const [editChannelName, setEditChannelName] = useState('')
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -44,6 +45,10 @@ function MessageBar() {
   const testDelete = async (e) => {
     e.preventDefault()
     await dispatch(removeChannel(5, channelName))
+  }
+  const testEdit = async (e) => {
+    e.preventDefault()
+    await dispatch(editChannelThunk(id, editChannelName, 7))
   }
 
 
@@ -86,6 +91,17 @@ function MessageBar() {
             <button>create a channel</button>
           </form>
           <button onClick={testDelete}>delete a channel</button>
+          <form onSubmit={testEdit}>
+            <input
+              type="text"
+              placeholder={"Name"}
+              required
+              value={editChannelName}
+              onChange={(e) => setEditChannelName(e.target.value)}
+            />
+            <button>EDIT a channel</button>
+          </form>
+
         </div>
       </div>
       <div>
