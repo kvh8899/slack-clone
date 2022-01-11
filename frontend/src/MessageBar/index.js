@@ -6,11 +6,13 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { removeWorkspace } from "../store/organizations";
 import { useParams } from "react-router";
+import { postChannel, readChannels } from "../store/channels";
 
 function MessageBar() {
   const [showEdit, setShowEdit] = useState(false)
   const [showForm, setShowForm] = useState(false)
   const [showh2, setShowh2] = useState(true)
+  const [channelName, setChannelName] = useState('')
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -31,6 +33,14 @@ function MessageBar() {
     }
   }
 
+  const testRead = (e) => {
+    e.preventDefault()
+    dispatch(readChannels(id))
+  }
+  const testCreate = async (e) => {
+    e.preventDefault()
+    await dispatch(postChannel(id, channelName))
+  }
   const orgDelete = (e) => {
     e.preventDefault()
     dispatch(removeWorkspace(id))
@@ -58,6 +68,17 @@ function MessageBar() {
         }
         <div>
           <p>Channels</p>
+          <button onClick={testRead}>show all channels</button>
+          <form onSubmit={testCreate}>
+            <input
+              type="text"
+              placeholder={"Name"}
+              required
+              value={channelName}
+              onChange={(e) => setChannelName(e.target.value)}
+            />
+            <button>create a channel</button>
+          </form>
         </div>
       </div>
       <div>

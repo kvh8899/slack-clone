@@ -36,12 +36,11 @@ export const addMember = (organization) => ({
 
 // Get Channels
 export const readChannels = (orgId) => async (dispatch) => {
-  const channels = await fetch(`/api/organizations/${orgId}/channels`);
-
+  const res = await fetch(`/api/organizations/${orgId}/channels`);
   if (res.ok) {
-    const body = await res.json();
+    const channels = await res.json();
     dispatch(getChannels(channels, orgId));
-    return body;
+    return channels;
   } else {
     return null;
   }
@@ -54,9 +53,11 @@ export const postChannel = (orgId, name) => async (dispatch) => {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(name),
+    body: JSON.stringify({ name }),
   });
+  console.log(response, 'responseeee')
   const data = await response.json();
+  console.log(data, 'dataaaaaa')
   dispatch(addChannel(data));
   return data;
 };
@@ -77,7 +78,7 @@ export const editChannelThunk = (channel) => async (dispatch) => {
 
 //Delete Channel
 export const removeChannel = (channelId) => async (dispatch) => {
-  const res = await fetch(`/api/channel/${channelId}/delete`, {
+  const res = await fetch(`/api/channels/${channelId}/delete`, {
     method: "DELETE",
   });
 

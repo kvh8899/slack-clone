@@ -1,6 +1,7 @@
+from app.forms.channel_form import ChannelForm
 from flask import Blueprint, jsonify,request
 from flask_login import login_required,current_user
-from app.models import db, User, Organization, Member
+from app.models import db, User, Organization, Member, Channel
 from app.forms.organization_form import OrganizationForm
 from .auth_routes import validation_errors_to_error_messages
 
@@ -39,4 +40,33 @@ def newWorkspace():
         db.session.commit()
 
         return org.to_dict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
+# GET channels of an organization
+@organization_routes.route('/<int:orgId>/channels')
+def getChannel(orgId):
+    allChannels = Channel.query.filter_by(org_id=orgId).join(Organization).all()
+    print(allChannels, 'hiiiiii')
+    channels = []
+    if(allChannels):
+        for i in range(len(allChannels)):
+            channels.append(allChannels[i].to_dict())
+    return {'all_channels':channels}
+
+# ADD A CHANNEL TO AN ORGANIZATION
+@organization_routes.route('/<int:orgId>/channels', methods=['POST'])
+@login_required
+def newChannel(orgId):
+    form = ChannelForm()
+    print('hiiiiiii')
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.name.data:
+        channel = Channel(
+            name = form.name.data,
+            org_id = orgId
+        )
+        db.session.add(channel)
+        db.session.commit()
+        return channel.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
