@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import './orgedit.css'
 
-function OrgEdit({ setShowForm }) {
+function OrgEdit({ setShowForm, setShowh2 }) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [orgName, setOrgName] = useState("");
@@ -18,17 +18,12 @@ function OrgEdit({ setShowForm }) {
         //     return setErrors(data);
         // }
         setShowForm(false)
+        setShowh2(true)
     };
 
     return (
         <div>
             <div>
-                <p> Change Your Organization Name</p>
-                <ul className="errors-container">
-                    {errors.map((error, idx) => (
-                        <li className='errors' key={idx}>{error}</li>
-                    ))}
-                </ul>
                 <form className='editorgform' onSubmit={handleSubmit}>
                     <input
                         type="text"
