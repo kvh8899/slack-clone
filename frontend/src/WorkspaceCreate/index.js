@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { addWorkspaces } from "../store/organizations";
 import MessageBar from "../MessageBar";
 
-import { useNavigate } from "react-router-dom";
 import "./workspaceCreate.css";
 
 export default function NewWorkspace() {
   const dispatch = useDispatch();
+  const hist = useNavigate();
   const [orgName, setOrgName] = useState("");
 
   const validate = () => {
@@ -22,12 +23,14 @@ export default function NewWorkspace() {
     const formData = new FormData();
     formData.append("name", orgName);
     await dispatch(addWorkspaces({name:orgName}));
+    hist('/organization')
+
   }
   return (
     <div className="content">
       <div className="topBar"></div>
       <div className="midContent1">
-        <MessageBar />
+        {/* <MessageBar /> */}
         <div className="mid-content">
           <form onSubmit={handleSubmit}>
           <div>
@@ -44,7 +47,7 @@ export default function NewWorkspace() {
               placeholder="Ex: Acme Marketing or Acme Co"
               onChange={(e) => setOrgName(e.target.value)}
             ></input>
-            <button className="submit-button">Next</button>
+            <button className="submit-button">Create Workspace</button>
           </div>
         </form>
         </div>

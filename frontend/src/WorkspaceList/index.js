@@ -31,7 +31,7 @@ function WorkspaceList() {
               ></img>
               <div>
                 <h3>{e.name}</h3>
-                <p>{e.members.length} Members</p>
+                <p>{e.members?.length} Members</p>
               </div>
               <button
                 onClick={() => {
