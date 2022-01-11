@@ -1,25 +1,25 @@
 import { editOrg, getOrg } from "../store/orgmainchat";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router";
+import { useEffect } from "react";
 import "./messagebar.css";
-import React, { useState, useRef,useEffect } from "react";
+import { useRef } from "react"
+
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { removeWorkspace ,editOrgThunk } from "../store/organizations";
+import { removeWorkspace } from "../store/organizations";
 
-import {
-  editChannelThunk,
-  postChannel,
-  readChannels,
-  removeChannel,
-} from "../store/channels";
+import { editChannelThunk, postChannel, readChannels, removeChannel } from "../store/channels";
+import ChannelList from "../ChannelList";
 
 function MessageBar() {
-  const [showEdit, setShowEdit] = useState(false);
-  const [showForm, setShowForm] = useState(false);
-  const [showh2, setShowh2] = useState(true);
-  const [channelName, setChannelName] = useState("");
-  const [editChannelName, setEditChannelName] = useState("");
+  const [showEdit, setShowEdit] = useState(false)
+  const [showForm, setShowForm] = useState(false)
+  const [showh2, setShowh2] = useState(true)
+  const [showChannelList, setShowChannelList] = useState(true)
+  const [channelName, setChannelName] = useState('')
+  const [editChannelName, setEditChannelName] = useState('')
 
   const caret = useRef(null);
   const dCaret = useRef(null);
@@ -37,7 +37,7 @@ function MessageBar() {
     setErrors([]);
     formToggle();
     setShowEdit(false)
-    const data = await dispatch(editOrgThunk(orgName, id));
+    const data = await dispatch(editOrg(orgName, id));
     await dispatch(getOrg(id))
     if (data) {
       return setErrors(data);
@@ -45,7 +45,7 @@ function MessageBar() {
   };
   useEffect(() => {
     dispatch(getOrg(id))
-  }, []);
+  }, [])
   const editToggle = () => {
     if (showForm === true) return;
     if (showEdit === false) return setShowEdit(true);
@@ -121,12 +121,15 @@ function MessageBar() {
         )}
       </div>
       <div className="channels">
-        <div
-          onClick={(e) => {
-            caret.current.classList.toggle("side");
-          }}
-        >
-          <i className="fas fa-caret-down" ref={caret}></i>
+        <div onClick={(e) => {
+          caret.current.classList.toggle("side");
+          if (!showChannelList) setShowChannelList(true)
+          if (showChannelList) setShowChannelList(false)
+        }}>
+          <i
+            className="fas fa-caret-down"
+            ref={caret}
+          ></i>
           <p>Channels</p>
           {/* <button onClick={testRead}>show all channels</button>
           <form onSubmit={testCreate}>
@@ -152,14 +155,18 @@ function MessageBar() {
           </form>
  */}
         </div>
+        <div className="ChannelList">
+          {showChannelList && <ChannelList />}
+        </div>
       </div>
       <div className="channels">
-        <div
-          onClick={(e) => {
-            dCaret.current.classList.toggle("side");
-          }}
-        >
-          <i className="fas fa-caret-down" ref={dCaret}></i>
+        <div onClick={(e) => {
+          dCaret.current.classList.toggle("side");
+        }}>
+          <i
+            className="fas fa-caret-down"
+            ref={dCaret}
+          ></i>
           <p>Direct Messages</p>
         </div>
       </div>

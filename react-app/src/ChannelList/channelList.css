@@ -1,0 +1,19 @@
+.channelContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.singleChannel div{
+    border-top: 2px solid grey;
+    border-bottom: 2px solid grey;
+}
+
+.channelContainer > div {
+    width: auto;
+    font-size: 12px;
+}
+
+.singleChannel:hover{
+    cursor: pointer;
+    background-color: rgb(41, 36, 87);
+}
