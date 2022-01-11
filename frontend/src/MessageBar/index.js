@@ -5,6 +5,8 @@ import {useSelector,useDispatch} from "react-redux";
 import {useParams} from "react-router";
 import {useEffect} from  "react";
 import "./messagebar.css";
+import {useRef} from "react"
+
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -15,6 +17,8 @@ function MessageBar() {
   const [showEdit, setShowEdit] = useState(false)
   const [showForm, setShowForm] = useState(false)
   const [showh2, setShowh2] = useState(true)
+  const caret = useRef(null);
+  const dCaret = useRef(null);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -39,9 +43,9 @@ function MessageBar() {
     }
   }
 
-  const orgDelete = (e) => {
+  const orgDelete = async(e) => {
     e.preventDefault()
-    dispatch(removeWorkspace(id))
+    await dispatch(removeWorkspace(id))
     navigate('/organization')
   }
 
@@ -65,12 +69,26 @@ function MessageBar() {
             <button className="editbutton" onClick={orgDelete}>Delete Org</button>
           </div>
         }
-        <div>
+      </div>
+       <div className="channels">
+        <div onClick={(e) => {
+              caret.current.classList.toggle("side");
+            }}>
+          <i
+            className="fas fa-caret-down"
+            ref={caret}
+          ></i>
           <p>Channels</p>
         </div>
       </div>
-      <div>
-        <div>
+      <div className="channels">
+        <div onClick={(e) => {
+              dCaret.current.classList.toggle("side");
+            }}>
+          <i
+            className="fas fa-caret-down"
+            ref={dCaret}
+          ></i>
           <p>Direct Messages</p>
         </div>
       </div>
@@ -78,4 +96,4 @@ function MessageBar() {
   );
 }
 
-export default MessageBar
+export default MessageBar;

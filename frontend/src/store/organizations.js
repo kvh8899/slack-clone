@@ -91,7 +91,7 @@ export default function orgReducer(state = [], action) {
     case SET_WORKSPACES:
       return action.payload;
     case DELETE_WORKSPACES:
-      return state.filter((workspace) => workspace.id !== action.payload.id);
+      return state.filter((workspace) => workspace.id === action.payload.id);
     default:
       return state;
     case ADD_WORKSPACE:

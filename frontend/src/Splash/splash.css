@@ -1,7 +1,7 @@
 nav{
     display:flex;
     justify-content:space-between;
-    background-color:#9d9eb4;
+    background-color:#f6efe8;
     height:130px;
 }
 h1{
@@ -87,7 +87,7 @@ nav img{
     position:fixed;
     height:100%;
     width:100%;
-    background-color:#A2A3BB;
+    background-color:#f4ede3;
     overflow:scroll;
 }
 
