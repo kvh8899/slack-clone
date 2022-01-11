@@ -36,7 +36,7 @@ function MessageBar() {
     e.preventDefault();
     setErrors([]);
     formToggle();
-    editToggle();
+    setShowEdit(false)
     const data = await dispatch(editOrgThunk(orgName, id));
     await dispatch(getOrg(id))
     if (data) {
