@@ -2,7 +2,6 @@ import "./workspacelist.css";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { restoreUser } from "../store/session";
 import { editOrg, workspaces } from "../store/organizations";
 function WorkspaceList() {
   const hist = useNavigate();
@@ -11,17 +10,7 @@ function WorkspaceList() {
   const organizations = useSelector((state) => state.organizations);
   const dispatch = useDispatch();
 
-  const test = dispatch(editOrg('asdf'))
-  console.log()
-
-  async function loadOrg(session) {
-    if (session) {
-      await dispatch(workspaces(session.id));
-    }
-  }
-  useEffect(() => {
-    loadOrg(session);
-  }, [session]);
+  
   return session ? (
     <div className="workSpace-wrap">
       <div className="workSpace-wrap">
