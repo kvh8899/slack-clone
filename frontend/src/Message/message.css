@@ -37,9 +37,29 @@
 }
 
 .messages p{
-    margin: none;
     width: 100%;
 }
 .messages div{
     margin-left:10px;
+}
+.message{
+    display:flex;
+    align-items:flex-start;
+    margin:15px;
+}
+.message img{
+    margin-top:3px;
+    width:40px;
+    height:40px;
+    border-radius:5px;
+}
+.message div p{
+    margin:0px;
+    width:600px;
+    overflow-wrap:break-word;
+}
+.message div h3{
+    margin:0px;
+    margin-bottom:5px;
+    font-size:15px;
 }

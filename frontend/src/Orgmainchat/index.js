@@ -28,7 +28,7 @@ function Orgmainchat() {
         </div>
         <div className="midContent1">
           <MessageBar />
-          <Message />
+          <Message user={userData}/>
         </div>
       </div>
   );
