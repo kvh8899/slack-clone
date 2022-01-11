@@ -36,7 +36,7 @@ input{
 input:focus{
     outline:transparent;
 }
-.topBar div{
+.topBar > div{
     display:flex;
     color:#131017;
     justify-content:flex-end;
@@ -63,4 +63,17 @@ input:focus{
     height:30px;
     border-radius:5px;
     object-fit: cover;
+}
+.profMenu{
+    position:fixed;
+    height:300px;
+    width:300px;
+    background-color:#222529;
+    top:39px;
+    border-radius:5px;
+    border: 1px solid #43464a;
+}
+
+.settings{
+    display:none;
 }

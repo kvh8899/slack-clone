@@ -2,10 +2,11 @@ import "./orgmainchat.css";
 import MessageBar from "../MessageBar";
 import Message from "../Message";
 import {useSelector} from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect, useState,useRef} from "react";
 function Orgmainchat() {
   const session = useSelector((state) => state.session.user);
   const [userData,setUserData] = useState({})
+  const profDiv = useRef(null)
   async function getUserData(id){
     const res = await fetch(`/api/users/${session.id}`);
     if(res.ok){
@@ -17,13 +18,19 @@ function Orgmainchat() {
   useEffect(() =>{
     if(session) getUserData(session.id)
   },[session])
+  function profClick(e){
+    profDiv.current.classList.toggle("settings")
+  }
   return (
       <div className="content">
         <div className="topBar">
           <div></div>
           <input placeholder={"Search"}></input>
           <div className="profile">
-            {userData?.profilePicture ? <img src={userData.profilePicture} alt="404"></img>:<img src="https://avatars.slack-edge.com/2015-03-13/4045125376_172ec0a9d33356de3571_88.jpg" alt="404"></img>}
+            {userData?.profilePicture ? <img src={userData.profilePicture} alt="404" onClick={profClick}></img>:<img src="https://avatars.slack-edge.com/2015-03-13/4045125376_172ec0a9d33356de3571_88.jpg" alt="404" onClick={profClick}></img>}
+            <div className="profMenu settings" ref={profDiv}>
+              <button>Sign Out</button>
+            </div>
           </div>
         </div>
         <div className="midContent1">
