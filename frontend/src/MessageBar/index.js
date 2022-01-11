@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { removeWorkspace } from "../store/organizations";
 import { useParams } from "react-router";
-import { postChannel, readChannels } from "../store/channels";
+import { postChannel, readChannels, removeChannel } from "../store/channels";
 
 function MessageBar() {
   const [showEdit, setShowEdit] = useState(false)
@@ -41,6 +41,12 @@ function MessageBar() {
     e.preventDefault()
     await dispatch(postChannel(id, channelName))
   }
+  const testDelete = async (e) => {
+    e.preventDefault()
+    await dispatch(removeChannel(5, channelName))
+  }
+
+
   const orgDelete = (e) => {
     e.preventDefault()
     dispatch(removeWorkspace(id))
@@ -79,6 +85,7 @@ function MessageBar() {
             />
             <button>create a channel</button>
           </form>
+          <button onClick={testDelete}>delete a channel</button>
         </div>
       </div>
       <div>
