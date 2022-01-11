@@ -13,13 +13,6 @@ import { removeWorkspace } from "../store/organizations";
 import { editChannelThunk, postChannel, readChannels, removeChannel } from "../store/channels";
 import ChannelList from "../ChannelList";
 
-import {
-  editChannelThunk,
-  postChannel,
-  readChannels,
-  removeChannel,
-} from "../store/channels";
-
 function MessageBar() {
   const [showEdit, setShowEdit] = useState(false)
   const [showForm, setShowForm] = useState(false)
@@ -44,7 +37,7 @@ function MessageBar() {
     setErrors([]);
     formToggle();
     setShowEdit(false)
-    const data = await dispatch(editOrgThunk(orgName, id));
+    const data = await dispatch(editOrg(orgName, id));
     await dispatch(getOrg(id))
     if (data) {
       return setErrors(data);
