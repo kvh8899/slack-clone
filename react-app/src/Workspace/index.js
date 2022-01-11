@@ -14,7 +14,7 @@ function Workspace() {
           <h2>Zing</h2>
         </div>
         <div className="rightNav">
-          <NavLink to={`/users/${session.id}/organizations`}>
+          <NavLink to={`/users/${session?.id}/organizations`}>
             <button id="create" onClick={() => {}}>
               CREATE A NEW WORKSPACE
             </button>
@@ -35,7 +35,7 @@ function Workspace() {
           <span></span>
           <div>
             <p>Want to use Zing with a different Team?</p>
-            <NavLink to={`/users/${session.id}/organizations`}>
+            <NavLink to={`/users/${session?.id}/organizations`}>
               <button>Create a New Workspace</button>
             </NavLink>
           </div>
