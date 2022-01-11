@@ -70,6 +70,7 @@ export const editOrgThunk = (organization) => async (dispatch) => {
   return data;
 };
 
+
 //Delete Org
 export const removeWorkspace = (organizationId) => async (dispatch) => {
   const res = await fetch(`/api/organizations/${organizationId}/delete`, {

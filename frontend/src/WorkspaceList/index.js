@@ -2,14 +2,17 @@ import "./workspacelist.css";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+
 import { restoreUser } from "../store/session";
-import { getWorkspaces } from "../store/organizations";
+import { editOrg, workspaces, getWorkspaces } from "../store/organizations";
+
 function WorkspaceList() {
   const hist = useNavigate();
   // get orgs from database and use map
   const session = useSelector((state) => state.session.user);
   const organizations = useSelector((state) => state.organizations);
   const dispatch = useDispatch();
+
   async function loadOrg(session) {
     if (session) {
       await dispatch(getWorkspaces(session.id));
@@ -22,7 +25,7 @@ function WorkspaceList() {
     <div className="workSpace-wrap">
       <div className="workSpace-wrap">
         <h3>Workspaces for {session.email}</h3>
-        {organizations.map((e) => {
+        {organizations ? organizations.map((e) => {
           return (
             <div className="orgData" key={e.id}>
               <img
@@ -43,7 +46,7 @@ function WorkspaceList() {
               </button>
             </div>
           );
-        })}
+        }) : null}
       </div>
     </div>
   ) : null;
