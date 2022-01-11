@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { workspaces } from "../store/organizations";
 import { restoreUser } from "../store/session";
-import { editOrg, workspaces, getWorkspaces } from "../store/organizations";
+import { editOrg, getWorkspaces } from "../store/organizations";
 
 function WorkspaceList() {
   const hist = useNavigate();
