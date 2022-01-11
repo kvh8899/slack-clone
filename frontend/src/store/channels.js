@@ -34,3 +34,70 @@ export const addMember = (organization) => ({
   payload: organization,
 });
 
+// Get Channels
+export const readChannels = (orgId) => async (dispatch) => {
+  const channels = await fetch(`/api/organizations/${orgId}/channels`);
+
+  if (res.ok) {
+    const body = await res.json();
+    dispatch(getChannels(channels, orgId));
+    return body;
+  } else {
+    return null;
+  }
+};
+
+//Add Channel
+export const postChannel = (orgId, name) => async (dispatch) => {
+  const response = await fetch(`/api/organizations/${orgId}/channels`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(name),
+  });
+  const data = await response.json();
+  dispatch(addChannel(data));
+  return data;
+};
+
+//Edit Channel
+export const editChannelThunk = (channel) => async (dispatch) => {
+  const id = channel.get("id");
+  const response = await fetch(`/api/channels/${id}/edit`, {
+    method: "PUT",
+    body: channel,
+  });
+  const data = await response.json();
+  dispatch(editChannel(data));
+  return data;
+};
+
+
+//Delete Org
+export const removeChannel = (channelId) => async (dispatch) => {
+  const res = await fetch(`/api/channel/${channelId}/delete`, {
+    method: "DELETE",
+  });
+
+  if (res.ok) {
+    const channel = await res.json();
+    dispatch(deleteChannel(channel));
+    return;
+  } else {
+    return null;
+  }
+};
+
+export default function channelReducer(state = [], action) {
+  switch (action.type) {
+    case GET_CHANNELS:
+      return action.payload;
+    case DELETE_CHANNEL:
+      return state.filter((channel) => channel.id !== action.payload.id);
+    default:
+      return state;
+    case ADD_CHANNEL:
+      return [...state, action.payload];
+  }
+}
