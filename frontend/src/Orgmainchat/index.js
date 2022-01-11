@@ -1,9 +1,13 @@
 import "./orgmainchat.css";
 import MessageBar from "../MessageBar";
 import Message from "../Message";
-import {useSelector} from "react-redux";
+import {useSelector, useDispatch} from "react-redux";
 import { useEffect, useState,useRef} from "react";
+import { useNavigate } from "react-router-dom";
+import {logout} from "../store/session";
 function Orgmainchat() {
+  const dispatch = useDispatch();
+  const hist = useNavigate();
   const session = useSelector((state) => state.session.user);
   const [userData,setUserData] = useState({})
   const profDiv = useRef(null)
@@ -21,9 +25,7 @@ function Orgmainchat() {
   function profClick(e){
     e.stopPropagation();
     profDiv.current.classList.forEach((e) => {
-      if(e === "settings"){
-        return
-      }
+      if(e === "settings") return;
     })
     profDiv.current.classList.toggle("settings")
   }
@@ -37,7 +39,10 @@ function Orgmainchat() {
             <div className="profMenu settings" ref={profDiv} onClick={(e) =>{
               e.stopPropagation()
             }}>
-              <button>Sign Out</button>
+              <button onClick={async() => {
+                await dispatch(logout())
+                hist("/")
+              }}>Sign Out</button>
             </div>
           </div>
         </div>
