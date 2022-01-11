@@ -11,7 +11,6 @@ function NewChannelForm() {
   const [channelName, setChannelName] = useState("");
 
   const createChannel = async (e) => {
-    e.preventDefault();
     await dispatch(postChannel(id, channelName));
   };
   return (
@@ -28,8 +27,11 @@ function NewChannelForm() {
         <form
           className="channelForm"
           onSubmit={(e) => {
-            e.preventDefault();
-            if (channelName) dispatch(offAction());
+              e.preventDefault();
+            if (channelName){
+                dispatch(offAction());
+                createChannel()
+            }
             setChannelName("");
           }}
         >
