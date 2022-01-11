@@ -34,22 +34,22 @@ function MessageBar() {
     }
   }
 
-  const testRead = (e) => {
-    e.preventDefault()
-    dispatch(readChannels(id))
-  }
-  const testCreate = async (e) => {
-    e.preventDefault()
-    await dispatch(postChannel(id, channelName))
-  }
-  const testDelete = async (e) => {
-    e.preventDefault()
-    await dispatch(removeChannel(5, channelName))
-  }
-  const testEdit = async (e) => {
-    e.preventDefault()
-    await dispatch(editChannelThunk(id, editChannelName, 7))
-  }
+  // const testRead = (e) => {
+  //   e.preventDefault()
+  //   dispatch(readChannels(id))
+  // }
+  // const testCreate = async (e) => {
+  //   e.preventDefault()
+  //   await dispatch(postChannel(id, channelName))
+  // }
+  // const testDelete = async (e) => {
+  //   e.preventDefault()
+  //   await dispatch(removeChannel(5, channelName))
+  // }
+  // const testEdit = async (e) => {
+  //   e.preventDefault()
+  //   await dispatch(editChannelThunk(id, editChannelName, 7))
+  // }
 
 
   const orgDelete = (e) => {
@@ -79,7 +79,7 @@ function MessageBar() {
         }
         <div>
           <p>Channels</p>
-          <button onClick={testRead}>show all channels</button>
+          {/* <button onClick={testRead}>show all channels</button>
           <form onSubmit={testCreate}>
             <input
               type="text"
@@ -101,7 +101,7 @@ function MessageBar() {
             />
             <button>EDIT a channel</button>
           </form>
-
+ */}
         </div>
       </div>
       <div>
