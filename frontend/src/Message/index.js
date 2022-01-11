@@ -38,6 +38,7 @@ function Message({ user }) {
   };
   return (
     <div className="messageArea">
+      <p className="resizer"></p>
       <div className="title">
         <h2>Title</h2>
       </div>

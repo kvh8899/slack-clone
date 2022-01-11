@@ -63,4 +63,18 @@
     margin-bottom:5px;
     font-size:15px;
 }
-
+.resizer{
+    position:absolute;
+    width:1px;
+    height:100%;
+    background-color:rgba(54,55,59,1) ;
+    margin:0px;
+    z-index:20;
+    transition-property:background-color;
+    transition-duration:0.2s;
+}
+.resizer:hover{
+    width:3px;
+    background-color: lightskyblue;
+    cursor:col-resize;
+}
