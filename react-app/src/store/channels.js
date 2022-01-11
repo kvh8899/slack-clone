@@ -61,15 +61,15 @@ export const postChannel = (orgId, name) => async (dispatch) => {
 
 //Edit Channel
 export const editChannelThunk = (data, channelId) => async (dispatch) => {
-  const response = await fetch(`/api/channels/${channelId}/edit`, {
+  const res = await fetch(`/api/channels/${channelId}/edit`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
   })
-  if (response.ok) {
-    const channel = await response.json()
+  if (res.ok) {
+    const channel = await res.json()
     dispatch(editChannel(channel, channelId))
   }
 }
