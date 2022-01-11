@@ -10,7 +10,14 @@ function WorkspaceList() {
   const organizations = useSelector((state) => state.organizations);
   const dispatch = useDispatch();
 
-  
+  async function loadOrg(session) {
+    if (session) {
+      await dispatch(workspaces(session.id));
+    }
+  }
+  useEffect(() => {
+    loadOrg(session);
+  }, [session]);
   return session ? (
     <div className="workSpace-wrap">
       <div className="workSpace-wrap">
