@@ -1,5 +1,5 @@
-import { removeWorkspace ,editOrgThunk } from "../store/organizations";
-import React, { useState, useRef,useEffect } from "react";
+import { removeWorkspace, editOrgThunk } from "../store/organizations";
+import React, { useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { editOrg, getOrg } from "../store/orgmainchat";
 import { useParams } from "react-router";
@@ -34,15 +34,15 @@ function MessageBar() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     formToggle();
-    setShowEdit(false)
+    setShowEdit(false);
     const data = await dispatch(editOrgThunk(orgName, id));
-    await dispatch(getOrg(id))
+    await dispatch(getOrg(id));
     if (data) {
       return setErrors(data);
     }
   };
   useEffect(() => {
-    dispatch(getOrg(id))
+    dispatch(getOrg(id));
   }, []);
   const editToggle = () => {
     if (showForm === true) return;
@@ -63,10 +63,6 @@ function MessageBar() {
   //   e.preventDefault()
   //   dispatch(readChannels(id))
   // }
-  const testCreate = async (e) => {
-    e.preventDefault()
-    await dispatch(postChannel(id, channelName))
-  }
   // const testDelete = async (e) => {
   //   e.preventDefault()
   //   await dispatch(removeChannel(5, channelName))
@@ -127,16 +123,6 @@ function MessageBar() {
           <i className="fas fa-caret-down" ref={caret}></i>
           <p>Channels</p>
           {/* <button onClick={testRead}>show all channels</button>
-          <form onSubmit={testCreate}>
-            <input
-              type="text"
-              placeholder={"Name"}
-              required
-              value={channelName}
-              onChange={(e) => setChannelName(e.target.value)}
-            />
-            <button>create a channel</button>
-          </form>
           <button onClick={testDelete}>delete a channel</button>
           <form onSubmit={testEdit}>
             <input
@@ -149,10 +135,8 @@ function MessageBar() {
             <button>EDIT a channel</button>
           </form>
  */}
-        <NewChannel />
+          < NewChannel />
         </div>
-      </div>
-      <div className="channels">
         <div
           onClick={(e) => {
             dCaret.current.classList.toggle("side");
@@ -160,6 +144,7 @@ function MessageBar() {
         >
           <i className="fas fa-caret-down" ref={dCaret}></i>
           <p>Direct Messages</p>
+          <i className="fas fa-plus"></i>
         </div>
       </div>
     </div>
