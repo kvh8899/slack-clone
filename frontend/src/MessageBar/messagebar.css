@@ -1,12 +1,18 @@
 .messageBar{
-    background-color:rgb(29, 22, 87);
+    background-color: #3f0e40;
     border-right: 1px solid rgb(85, 85, 85);
     color:lightgrey;
     width:fit-content;
-    overflow:scroll;
+    overflow:hidden;
     height:100%;
-    width:350px;
+    width:250px;
 }
 .messageBar > div > div{
     padding-left:10px;
 }
+
+.orgeditdiv {
+    display: flex;
+    flex-direction: column;
+}
+

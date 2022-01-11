@@ -2,7 +2,10 @@ import "./workspacelist.css";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { editOrg, workspaces } from "../store/organizations";
+
+import { restoreUser } from "../store/session";
+import { editOrg, workspaces, getWorkspaces } from "../store/organizations";
+
 function WorkspaceList() {
   const hist = useNavigate();
   // get orgs from database and use map
@@ -12,7 +15,7 @@ function WorkspaceList() {
 
   async function loadOrg(session) {
     if (session) {
-      await dispatch(workspaces(session.id));
+      await dispatch(getWorkspaces(session.id));
     }
   }
   useEffect(() => {
@@ -31,7 +34,7 @@ function WorkspaceList() {
               ></img>
               <div>
                 <h3>{e.name}</h3>
-                <p>{e.members.length} Members</p>
+                <p>{e.members?.length} Members</p>
               </div>
               <button
                 onClick={() => {

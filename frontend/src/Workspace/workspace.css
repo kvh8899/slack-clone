@@ -18,6 +18,8 @@
   border-radius: 5px;
 }
 .midContent {
+  display: flex;
+  flex-direction: column;
   align-self: center;
   display:flex;
   flex-direction:column;

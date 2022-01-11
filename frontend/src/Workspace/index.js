@@ -1,9 +1,11 @@
 import "./workspace.css";
-import { useNavigate, Link } from "react-router-dom";
-import WorkspaceList from "../WorkspaceList"
+import { useNavigate, Link, NavLink } from "react-router-dom";
+import WorkspaceList from "../WorkspaceList";
+import {useSelector} from "react-redux";
 
 function Workspace() {
   const hist = useNavigate();
+  const session = useSelector((state) => state.session.user);
   return (
     <div className="workspace-wrapper">
       <nav>
@@ -12,9 +14,11 @@ function Workspace() {
           <h2>Zing</h2>
         </div>
         <div className="rightNav">
-          <button id="create" onClick={() => {}}>
-            CREATE A NEW WORKSPACE
-          </button>
+          <NavLink to={`/users/${session.id}/organizations`}>
+            <button id="create" onClick={() => {}}>
+              CREATE A NEW WORKSPACE
+            </button>
+          </NavLink>
         </div>
       </nav>
       <div className="midContent">
@@ -31,7 +35,9 @@ function Workspace() {
           <span></span>
           <div>
             <p>Want to use Zing with a different Team?</p>
-            <button>Create a New Workspace</button>
+            <NavLink to={`/users/${session.id}/organizations`}>
+              <button>Create a New Workspace</button>
+            </NavLink>
           </div>
         </div>
         <div className="logins">
