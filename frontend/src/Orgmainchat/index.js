@@ -27,6 +27,7 @@ function Orgmainchat() {
           <img src="/dsa" alt="404"></img>
         </div>
       </div>
+      <button onClick={testDelete}>Delete</button>
       <div className="midContent1">
         <MessageBar />
         <Message />
