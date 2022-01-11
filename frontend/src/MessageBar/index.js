@@ -1,13 +1,17 @@
-import { useEffect } from "react";
+
 import OrgEdit from "../OrgEdit";
+import { editOrg, getOrg } from "../store/orgmainchat";
+import {useSelector,useDispatch} from "react-redux";
+import {useParams} from "react-router";
+import {useEffect} from  "react";
 import "./messagebar.css";
 import {useRef} from "react"
 
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from 'react-redux';
+
 import { removeWorkspace } from "../store/organizations";
-import { useParams } from "react-router";
+
 
 function MessageBar() {
   const [showEdit, setShowEdit] = useState(false)
@@ -18,8 +22,12 @@ function MessageBar() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { id } = useParams()
+  const { id } = useParams();
+  const org = useSelector(state => state.orgmainchatReducer);
 
+  useEffect(() => {
+    dispatch(getOrg(id))
+  },[])
   const editToggle = () => {
     if (showForm === true) return
     if (showEdit === false) return setShowEdit(true)
@@ -40,11 +48,12 @@ function MessageBar() {
     await dispatch(removeWorkspace(id))
     navigate('/organization')
   }
+
   return (
     <div className="messageBar">
       <div onClick={editToggle} className="title">
         {showh2 &&
-          <h2 >Title</h2>
+          <h2 >{org.name}</h2>
         }
         {showForm &&
           <div>

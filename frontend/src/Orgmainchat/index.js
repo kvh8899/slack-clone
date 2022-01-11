@@ -1,12 +1,14 @@
 import "./orgmainchat.css";
 import MessageBar from "../MessageBar";
 import Message from "../Message";
-
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../store/session";
 import OrgEdit from "../OrgEdit";
+
+import { removeWorkspace } from "../store/organizations";
+import { useParams } from "react-router";
 
 function Orgmainchat() {
   const dispatch = useDispatch();
