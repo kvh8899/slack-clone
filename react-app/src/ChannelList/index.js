@@ -7,30 +7,25 @@ import { readChannels } from "../store/channels";
 function ChannelList() {
     const { id } = useParams()
     const dispatch = useDispatch();
-    const channels = useSelector((state) => state.channels);
-    // console.log(channels)
+    const channels = useSelector((state) => state.channelReducer.channels);
 
-    // async function loadChannels() {
-    //     await dispatch(readChannels(id))
-    // }
+    async function loadChannels() {
+        await dispatch(readChannels(id))
+    }
 
     useEffect(() => {
-        dispatch(readChannels(id))
-    }, []);
+        loadChannels();
+    }, [dispatch]);
 
     return (
-        <div >
-            <div >
-                {channels ? channels.map((channel) => {
-                    return (
-                        <div key={channel.id}>
-                            <div>
-                                <h3>{channel.name}</h3>
-                            </div>
-                        </div>
-                    );
-                }) : null}
-            </div>
+        <div className="channelContainer">
+            {channels ? channels.map((channel) => {
+                return (
+                    <div className="singleChannel" key={channel.id}>
+                        <h3># {channel.name}</h3>
+                    </div>
+                );
+            }) : null}
         </div>
     );
 }
