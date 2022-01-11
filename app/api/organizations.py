@@ -10,10 +10,11 @@ from .auth_routes import validation_errors_to_error_messages
 organization_routes = Blueprint('organizations', __name__)
 
 # edit org route
-@organization_routes.route('/organizations/edit/<int:id>', methods=['PUT'])
+@organization_routes.route('/edit/<int:id>', methods=['PUT'])
 def edit_org(id):
     org = Organization.query.get(id)
     form = OrganizationForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         org.name = form.name.data
         db.session.commit()
@@ -65,7 +66,6 @@ def newWorkspace():
 @organization_routes.route('/<int:orgId>/channels')
 def getChannel(orgId):
     allChannels = Channel.query.filter_by(org_id=orgId).join(Organization).all()
-    print(allChannels, 'hiiiiii')
     channels = []
     if(allChannels):
         for i in range(len(allChannels)):

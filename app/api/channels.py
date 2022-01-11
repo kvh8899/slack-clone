@@ -23,7 +23,6 @@ def deleteChannel(channelId):
 def edit_channel(channelId):
     channel = Channel.query.get(channelId)
     form = ChannelForm()
-    print(form.name.data, 'formmmmm')
     if form.name.data:
         channel.name = form.name.data
         db.session.commit()
