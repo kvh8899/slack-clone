@@ -35,9 +35,9 @@ function MessageBar() {
     }
   }
 
-  const orgDelete = (e) => {
+  const orgDelete = async(e) => {
     e.preventDefault()
-    dispatch(removeWorkspace(id))
+    await dispatch(removeWorkspace(id))
     navigate('/organization')
   }
   return (
