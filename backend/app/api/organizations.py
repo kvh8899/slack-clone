@@ -6,7 +6,7 @@ from app.forms.organization_form import OrganizationForm
 organization_routes = Blueprint('organizations', __name__)
 
 # edit org route
-@org_routes.route('/organizations/edit/<int:id>', methods=['PUT'])
+@organization_routes.route('/organizations/edit/<int:id>', methods=['PUT'])
 def edit_org(id):
     org = Organization.query.get(id)
     form = OrganizationForm()
@@ -21,7 +21,7 @@ def edit_org(id):
     return {}
 
 # get one org route
-@org_routes.route('/organizations/<int:id>', methods=['GET'])
+@organization_routes.route('/organizations/<int:id>', methods=['GET'])
 def get_one_org(id):
     org = Organization.query.get(id)
     return org.to_dict()

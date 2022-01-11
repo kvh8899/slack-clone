@@ -1,10 +1,13 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
+import thunk from 'redux-thunk'
 import session from './session'
 import organizations from './organizations'
+import orgmainchatReducer from './orgmainchat'
+
 const rootReducer = combineReducers({
   session,
-  organizations
+  organizations,
+  orgmainchatReducer
 });
 
 

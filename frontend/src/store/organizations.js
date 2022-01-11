@@ -110,7 +110,10 @@ export const editOrgThunk = (organization) => async (dispatch) => {
   const id = organization.get("id");
   const response = await fetch(`/api/organizations/${id}`, {
     method: "PUT",
-    body: organization,
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: organization
   });
   const data = await response.json();
   dispatch(editOrg(data));
