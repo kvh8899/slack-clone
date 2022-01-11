@@ -12,11 +12,16 @@ import { useNavigate } from "react-router-dom";
 
 import { removeWorkspace } from "../store/organizations";
 
+import { editChannelThunk, postChannel, readChannels, removeChannel } from "../store/channels";
+
 
 function MessageBar() {
   const [showEdit, setShowEdit] = useState(false)
   const [showForm, setShowForm] = useState(false)
   const [showh2, setShowh2] = useState(true)
+  const [channelName, setChannelName] = useState('')
+  const [editChannelName, setEditChannelName] = useState('')
+  
   const caret = useRef(null);
   const dCaret = useRef(null);
 
@@ -42,6 +47,24 @@ function MessageBar() {
       return setShowForm(false)
     }
   }
+
+  // const testRead = (e) => {
+  //   e.preventDefault()
+  //   dispatch(readChannels(id))
+  // }
+  // const testCreate = async (e) => {
+  //   e.preventDefault()
+  //   await dispatch(postChannel(id, channelName))
+  // }
+  // const testDelete = async (e) => {
+  //   e.preventDefault()
+  //   await dispatch(removeChannel(5, channelName))
+  // }
+  // const testEdit = async (e) => {
+  //   e.preventDefault()
+  //   await dispatch(editChannelThunk(id, editChannelName, 7))
+  // }
+
 
   const orgDelete = async(e) => {
     e.preventDefault()
@@ -79,6 +102,29 @@ function MessageBar() {
             ref={caret}
           ></i>
           <p>Channels</p>
+          {/* <button onClick={testRead}>show all channels</button>
+          <form onSubmit={testCreate}>
+            <input
+              type="text"
+              placeholder={"Name"}
+              required
+              value={channelName}
+              onChange={(e) => setChannelName(e.target.value)}
+            />
+            <button>create a channel</button>
+          </form>
+          <button onClick={testDelete}>delete a channel</button>
+          <form onSubmit={testEdit}>
+            <input
+              type="text"
+              placeholder={"Name"}
+              required
+              value={editChannelName}
+              onChange={(e) => setEditChannelName(e.target.value)}
+            />
+            <button>EDIT a channel</button>
+          </form>
+ */}
         </div>
       </div>
       <div className="channels">

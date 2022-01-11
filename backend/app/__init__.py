@@ -17,7 +17,7 @@ from flask_cors import CORS
 from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
 from .api.organizations import organization_routes
-
+from .api.channels import channel_routes
 
 app = Flask(__name__)
 
@@ -34,6 +34,7 @@ app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 
 app.register_blueprint(organization_routes,url_prefix='/api/organizations')
+app.register_blueprint(channel_routes,url_prefix='/api/channels')
 
 db.init_app(app)
 Migrate(app, db)
