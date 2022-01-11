@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify,request
 from flask_login import login_required,current_user
-from app.models import db, User, Organization
+from app.models import db, User, Organization, Member
 from app.forms.organization_form import OrganizationForm
 from .auth_routes import validation_errors_to_error_messages
 
@@ -30,5 +30,13 @@ def newWorkspace():
         )
         db.session.add(org)
         db.session.commit()
+
+        member = Member(
+                user_id = current_user.id,
+                org_id = org.to_dict()['id']
+        )
+        db.session.add(member)
+        db.session.commit()
+
         return org.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
