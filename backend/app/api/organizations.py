@@ -59,7 +59,6 @@ def getChannel(orgId):
 @login_required
 def newChannel(orgId):
     form = ChannelForm()
-    print('hiiiiiii')
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.name.data:
         channel = Channel(

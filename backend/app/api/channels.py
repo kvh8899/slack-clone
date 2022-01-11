@@ -22,9 +22,9 @@ def deleteChannel(channelId):
 @channel_routes.route('/<int:channelId>/edit', methods=['PUT'])
 def edit_channel(channelId):
     channel = Channel.query.get(channelId)
-    print(channel, 'chanelllllll')
     form = ChannelForm()
-    if form.validate_on_submit():
+    print(form.name.data, 'formmmmm')
+    if form.name.data:
         channel.name = form.name.data
         db.session.commit()
         return channel.to_dict()
