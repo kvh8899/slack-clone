@@ -18,7 +18,7 @@ export const addChannel = (channelInfo) => ({
 export const editChannel = (channelInfo, channelId) => ({
   type: EDIT_CHANNEL,
   payload: channelInfo,
-  channelId,
+  channelId
 });
 
 export const deleteChannel = (channelId, orgId) => ({
@@ -98,8 +98,7 @@ export default function channelReducer(state = [], action) {
       return state.filter((channel) => channel.id !== action.payload.id);
     case ADD_CHANNEL:
       return [...state, action.payload];
-    case EDIT_CHANNEL:
-      return action.payload
+
     default:
       return state;
   }
