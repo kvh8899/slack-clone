@@ -21,16 +21,8 @@ export default function NewWorkspace() {
 
     const formData = new FormData();
     formData.append("name", orgName);
-
-    let createdOrg = await dispatch(addWorkspaces(formData));
-    const defaultChannel = {
-      org_id: createdOrg.id,
-      name: "Welcome",
-    };
-    dispatch(addWorkspaces(defaultChannel));
+    await dispatch(addWorkspaces({name:orgName}));
   }
-
-
   return (
     <div className="content">
       <div className="topBar"></div>
@@ -48,6 +40,7 @@ export default function NewWorkspace() {
           <div>
             <input className="input-name"
               type="text"
+              name="name"
               placeholder="Ex: Acme Marketing or Acme Co"
               onChange={(e) => setOrgName(e.target.value)}
             ></input>
