@@ -1,11 +1,11 @@
 
 import OrgEdit from "../OrgEdit";
 import { editOrg, getOrg } from "../store/orgmainchat";
-import {useSelector,useDispatch} from "react-redux";
-import {useParams} from "react-router";
-import {useEffect} from  "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router";
+import { useEffect } from "react";
 import "./messagebar.css";
-import {useRef} from "react"
+import { useRef } from "react"
 
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -13,15 +13,17 @@ import { useNavigate } from "react-router-dom";
 import { removeWorkspace } from "../store/organizations";
 
 import { editChannelThunk, postChannel, readChannels, removeChannel } from "../store/channels";
+import ChannelList from "../ChannelList";
 
 
 function MessageBar() {
   const [showEdit, setShowEdit] = useState(false)
   const [showForm, setShowForm] = useState(false)
   const [showh2, setShowh2] = useState(true)
+  const [showChannelList, setShowChannelList] = useState(true)
   const [channelName, setChannelName] = useState('')
   const [editChannelName, setEditChannelName] = useState('')
-  
+
   const caret = useRef(null);
   const dCaret = useRef(null);
 
@@ -32,7 +34,7 @@ function MessageBar() {
 
   useEffect(() => {
     dispatch(getOrg(id))
-  },[])
+  }, [])
   const editToggle = () => {
     if (showForm === true) return
     if (showEdit === false) return setShowEdit(true)
@@ -66,7 +68,7 @@ function MessageBar() {
   // }
 
 
-  const orgDelete = async(e) => {
+  const orgDelete = async (e) => {
     e.preventDefault()
     await dispatch(removeWorkspace(id))
     navigate('/organization')
@@ -93,10 +95,12 @@ function MessageBar() {
           </div>
         }
       </div>
-       <div className="channels">
+      <div className="channels">
         <div onClick={(e) => {
-              caret.current.classList.toggle("side");
-            }}>
+          caret.current.classList.toggle("side");
+          if (!showChannelList) setShowChannelList(true)
+          if (showChannelList) setShowChannelList(false)
+        }}>
           <i
             className="fas fa-caret-down"
             ref={caret}
@@ -126,11 +130,14 @@ function MessageBar() {
           </form>
  */}
         </div>
+        <div className="ChannelList">
+          {showChannelList && <ChannelList />}
+        </div>
       </div>
       <div className="channels">
         <div onClick={(e) => {
-              dCaret.current.classList.toggle("side");
-            }}>
+          dCaret.current.classList.toggle("side");
+        }}>
           <i
             className="fas fa-caret-down"
             ref={dCaret}

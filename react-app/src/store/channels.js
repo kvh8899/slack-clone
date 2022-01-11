@@ -7,7 +7,7 @@ const ADD_MEMBER = "members/ADD_MEMBER";
 export const getChannels = (channels, orgId) => ({
   type: GET_CHANNELS,
   payload: channels,
-  orgId: orgId,
+  orgId,
 });
 
 export const addChannel = (channelInfo) => ({
@@ -94,6 +94,8 @@ export const removeChannel = (channelId) => async (dispatch) => {
 };
 
 export default function channelReducer(state = [], action) {
+  console.log(action.payload, 'payloaddddd')
+  console.log('hii')
   switch (action.type) {
     case GET_CHANNELS:
       return action.payload;
