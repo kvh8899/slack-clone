@@ -1,6 +1,6 @@
 import "./workspace.css";
-import { useNavigate, Link } from "react-router-dom";
-import WorkspaceList from "../WorkspaceList"
+import { useNavigate, Link, NavLink } from "react-router-dom";
+import WorkspaceList from "../WorkspaceList";
 function Workspace() {
   const hist = useNavigate();
   return (
@@ -11,9 +11,11 @@ function Workspace() {
           <h2>Zing</h2>
         </div>
         <div className="rightNav">
-          <button id="create" onClick={() => {}}>
-            CREATE A NEW WORKSPACE
-          </button>
+          <NavLink to="/users/${userId}/organizations">
+            <button id="create" onClick={() => {}}>
+              CREATE A NEW WORKSPACE
+            </button>
+          </NavLink>
         </div>
       </nav>
       <div className="midContent">
@@ -30,7 +32,9 @@ function Workspace() {
           <span></span>
           <div>
             <p>Want to use Zing with a different Team?</p>
-            <button>Create a New Workspace</button>
+            <NavLink to="/users/${userId}/organizations">
+              <button>Create a New Workspace</button>
+            </NavLink>
           </div>
         </div>
         <div className="logins">

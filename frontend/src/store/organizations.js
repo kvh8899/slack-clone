@@ -1,4 +1,5 @@
 const SET_WORKSPACES = "workspaces/SET_WORKSPACES";
+const ADD_WORKSPACE = "workspaces/ADD_WORKSPACE";
 const EDIT_ORG = "workspaces/EDIT_ORG";
 const DELETE_WORKSPACES = "workspaces/DELETE_WORKSPACES";
 
@@ -15,12 +16,18 @@ const EDIT_MESSAGE = "messages/EDIT_MESSAGE";
 const DELETE_MESSAGE = "messages/DELETE_MESSAGE";
 
 //Organization actions
-export const addWorkspaces = (workspaces) => {
+export const getWorkspaces = (workspaces) => {
   return {
     type: SET_WORKSPACES,
     payload: workspaces,
   };
 };
+
+export const addWorkspace = (workspaces) => ({
+  type: ADD_WORKSPACE,
+  payload: workspaces
+})
+
 
 export const editOrg = (orgInfo) => ({
   type: EDIT_ORG,
@@ -92,17 +99,28 @@ export const deleteMessage = (messages) => ({
 
 //Organization Thunks
 
-//Add Org
-export const workspaces = (userId) => async (dispatch) => {
+//Get Org
+export const getWorkspaces = (userId) => async (dispatch) => {
   const res = await fetch(`/api/users/${userId}/organizations`);
 
   if (res.ok) {
     const body = await res.json();
-    dispatch(addWorkspaces(body.workspaces));
-    return;
+    dispatch(getWorkspaces(body.workspaces));
+    return body;
   } else {
     return null;
   }
+};
+
+//Add Org
+export const addWorkspaces = (workspace) => async (dispatch) => {
+  const response = await fetch(`/api/organizations/`, {
+    method: "POST",
+    body: workspace
+  });
+  const data = await response.json();
+  dispatch(addWorkspace(data));
+  return data;
 };
 
 //Edit Org
@@ -140,5 +158,7 @@ export default function orgReducer(state = [], action) {
       return state.filter((workspace) => workspace.id !== action.payload.id);
     default:
       return state;
+    case ADD_WORKSPACE:
+      return { ...state, [action.payload.id]: action.payload}
   }
 }

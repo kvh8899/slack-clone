@@ -4,10 +4,12 @@ import AuthPage from "./AuthPage";
 import SignUp from "./SignUp";
 import Splash from "./Splash";
 import Workspace from "./Workspace"
+import WorkspaceCreate from "./WorkspaceCreate";
 import { Routes, Route } from "react-router-dom";
 import {useEffect, useState} from "react"
 import { useDispatch } from "react-redux"
 import { authenticate } from './store/session';
+
 function App() {
   // organization page:
   const [loaded, setLoaded] = useState(false);
@@ -30,6 +32,7 @@ function App() {
         <Route path="/login" element={<AuthPage />}></Route>
         <Route path="/signup" element={<SignUp />}></Route>
         <Route path="/organizations/:id" element={<Orgmainchat />}></Route>
+        <Route path="/users/:id/organizations" element={<WorkspaceCreate />}></Route>
       </Routes>
   );
 }
