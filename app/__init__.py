@@ -42,11 +42,6 @@ socketIo = SocketIO(app=app, cors_allowed_origins='*')
 CORS(app)
 
 
-@app.route("/")
-def index():
-    return ""
-
-
 @app.before_request
 def https_redirect():
     if os.environ.get('FLASK_ENV') == 'production':
