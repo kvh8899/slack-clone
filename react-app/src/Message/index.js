@@ -6,22 +6,22 @@ import io from "socket.io-client";
 //"https://<herokuname>.herokuapp.com" for heroku
 let endPoint = "https://zing-app.herokuapp.com";
 let socket;
-function Message() {
+function Message({ user }) {
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
-  const dummyDiv = useRef(null)
+  const dummyDiv = useRef(null);
   useEffect(() => {
-    socket = io(`${endPoint}`)
+    socket = io(`${endPoint}`);
     getMessages();
-    return (() =>{
-      socket.disconnect()
-    })
+    return () => {
+      socket.disconnect();
+    };
   }, [messages.length]);
 
   const getMessages = () => {
     socket.once("message", (msg) => {
       setMessages([...messages, msg]);
-      dummyDiv.current.scrollIntoView(false)
+      dummyDiv.current.scrollIntoView(false);
     });
   };
   const onChange = (e) => {
@@ -37,7 +37,6 @@ function Message() {
     }
   };
   return (
-
     <div className="messageArea">
       <div className="title">
         <h2>Title</h2>
@@ -45,17 +44,38 @@ function Message() {
       <div className="messages">
         <div>
           {messages.map((msg) => {
-            return <p>{msg}</p>;
+            return (
+              <div className="message">
+                {user?.profilePicture ? (
+                  <img src={user.profilePicture} alt="404"></img>
+                ) : (
+                  <img
+                    src="https://avatars.slack-edge.com/2015-03-13/4045125376_172ec0a9d33356de3571_88.jpg"
+                    alt="404"
+                  ></img>
+                )}
+                <div>
+                  <h3>{user.username}</h3>
+                  <p>{msg}</p>
+                </div>
+              </div>
+            );
           })}
           <p ref={dummyDiv}></p>
         </div>
       </div>
       <div className="inputMessages">
-        <form onSubmit={(e) => {
-          e.preventDefault();
-          onClick();
-        }}>
-          <input value={message} onChange={(e) => onChange(e)} placeholder={"Message"}></input>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            onClick();
+          }}
+        >
+          <input
+            value={message}
+            onChange={(e) => onChange(e)}
+            placeholder={"Message"}
+          ></input>
         </form>
       </div>
     </div>
