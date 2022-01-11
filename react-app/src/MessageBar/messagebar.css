@@ -57,3 +57,34 @@
   overflow: hidden;
   white-space: nowrap;
 }
+
+.editbutton {
+  color: #4a154b;
+  background-color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 9px;
+  border: 1px solid #000807;
+  cursor: pointer;
+  max-height: fit-content;
+}
+
+.editorgform input{
+  height: 25px;
+  border-radius: 5px;
+}
+
+.editorgform {
+  display: flex;
+  align-content: flex-start;
+  justify-content: center;
+  align-items: center;
+}
+
+.orgeditdiv {
+  margin-right: 10px;
+}
+
+.inputShow{
+  display:none;
+}
