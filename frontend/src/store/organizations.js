@@ -3,18 +3,6 @@ const ADD_WORKSPACE = "workspaces/ADD_WORKSPACE";
 const EDIT_ORG = "workspaces/EDIT_ORG";
 const DELETE_WORKSPACES = "workspaces/DELETE_WORKSPACES";
 
-const GET_CHANNELS = "channels/GET_CHANNELS";
-const ADD_CHANNEL = "channels/ADD_CHANNEL";
-const EDIT_CHANNEL = "channels/EDIT_CHANNEL";
-const DELETE_CHANNEL = "channels/DELETE_CHANNEL";
-
-const ADD_MEMBER = "members/ADD_MEMBER";
-
-const GET_MESSAGES = "messages/GET_MESSAGES";
-const ADD_MESSAGE = "messages/ADD_MESSAGE";
-const EDIT_MESSAGE = "messages/EDIT_MESSAGE";
-const DELETE_MESSAGE = "messages/DELETE_MESSAGE";
-
 //Organization actions
 export const getWorkspace = (workspaces) => {
   return {
@@ -58,15 +46,12 @@ export const getWorkspaces = (userId) => async (dispatch) => {
 
 //Add Org
 export const addWorkspaces = (name) => async (dispatch) => {
-  console.log(name);
   const response = await fetch(`/api/organizations/`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({
-      name,
-    }),
+    body: JSON.stringify(name),
   });
   const data = await response.json();
   dispatch(addWorkspace(data));

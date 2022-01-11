@@ -23,9 +23,9 @@ def deleteWorkspace(organizationId):
 def newWorkspace():
     form = OrganizationForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    if form.name.data["name"]:
+    if form.name.data:
         org = Organization(
-            name = form.name.data["name"],
+            name = form.name.data,
             owner_id = current_user.id
         )
         db.session.add(org)

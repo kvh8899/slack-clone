@@ -1,3 +1,8 @@
+const GET_MESSAGES = "messages/GET_MESSAGES";
+const ADD_MESSAGE = "messages/ADD_MESSAGE";
+const EDIT_MESSAGE = "messages/EDIT_MESSAGE";
+const DELETE_MESSAGE = "messages/DELETE_MESSAGE";
+
 //Messages action
 export const getMessages = (messages, orgId, channelId) => ({
   type: GET_MESSAGES,
