@@ -24,7 +24,6 @@ function Orgmainchat() {
   },[session])
   function profClick(e){
     e.stopPropagation();
-  
     profDiv.current.classList.toggle("settings")
   }
   function awayClick(e){

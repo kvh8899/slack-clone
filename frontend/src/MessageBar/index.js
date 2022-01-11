@@ -1,6 +1,8 @@
 import "./messagebar.css";
-
+import {useRef} from "react"
 function MessageBar() {
+  const caret = useRef(null);
+  const dCaret = useRef(null);
   return (
     <div className="messageBar">
       <div className="title">
@@ -10,23 +12,23 @@ function MessageBar() {
         </div>
       </div>
       <div className="channels">
-        <div>
+        <div onClick={(e) => {
+              caret.current.classList.toggle("side");
+            }}>
           <i
             className="fas fa-caret-down"
-            onClick={(e) => {
-              e.target.classList.toggle("side");
-            }}
+            ref={caret}
           ></i>
           <p>Channels</p>
         </div>
       </div>
       <div className="channels">
-        <div>
+        <div onClick={(e) => {
+              dCaret.current.classList.toggle("side");
+            }}>
           <i
             className="fas fa-caret-down"
-            onClick={(e) => {
-              e.target.classList.toggle("side");
-            }}
+            ref={dCaret}
           ></i>
           <p>Direct Messages</p>
         </div>

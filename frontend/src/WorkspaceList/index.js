@@ -2,7 +2,6 @@ import "./workspacelist.css";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { restoreUser } from "../store/session";
 import { workspaces } from "../store/organizations";
 function WorkspaceList() {
   const hist = useNavigate();
@@ -30,13 +29,13 @@ function WorkspaceList() {
                 alt="logo"
               ></img>
               <div>
-                <h3>{e.name}</h3>
-                <p>{e.members.length} Members</p>
+                <h3>{e?.name}</h3>
+                <p>{e?.members?.length} Members</p>
               </div>
               <button
                 onClick={() => {
                   //redirect to proper workspace page
-                  hist(`/organizations/${e.id}`);
+                  hist(`/organizations/${e?.id}`);
                 }}
               >
                 LAUNCH ZING
