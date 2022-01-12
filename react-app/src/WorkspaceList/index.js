@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getWorkspaces } from "../store/organizations";
-import { readChannels } from "../store/channels";
+import { readChannels , postChannel} from "../store/channels";
 import{setName} from "../store/currentChannel"
 function WorkspaceList() {
   const hist = useNavigate();
