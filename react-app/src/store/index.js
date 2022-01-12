@@ -3,11 +3,15 @@ import thunk from 'redux-thunk'
 import session from './session'
 import organizations from './organizations'
 import orgmainchatReducer from './orgmainchat'
+import showFormReducer from './showForm';
+import channelReducer from './channels';
 
 const rootReducer = combineReducers({
   session,
   organizations,
-  orgmainchatReducer
+  orgmainchatReducer,
+  showFormReducer,
+  channelReducer
 });
 
 

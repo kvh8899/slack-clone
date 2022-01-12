@@ -4,7 +4,7 @@ import io from "socket.io-client";
 
 // must use http here
 //"https://<herokuname>.herokuapp.com" for heroku
-let endPoint = "https://zing-app.herokuapp.com";
+let endPoint = "http://localhost:5000";
 let socket;
 function Message({ user }) {
   const [messages, setMessages] = useState([]);
@@ -61,6 +61,7 @@ function Message({ user }) {
               </div>
             );
           })}
+          <div className="space"></div>
           <p ref={dummyDiv}></p>
         </div>
       </div>

@@ -1,16 +1,18 @@
-import { getOrg } from "../store/orgmainchat";
+import { removeWorkspace, editOrgThunk } from "../store/organizations";
+import React, { useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { getOrg } from "../store/orgmainchat";
 import { useParams } from "react-router";
-import "./messagebar.css";
-import React, { useState, useRef,useEffect } from "react";
+import NewChannel from "../newChannel";
 import { useNavigate } from "react-router-dom";
-import { removeWorkspace ,editOrgThunk } from "../store/organizations";
-
+import ChannelList from "../ChannelList";
+import "./messagebar.css";
 
 function MessageBar() {
   const [showEdit, setShowEdit] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [showh2, setShowh2] = useState(true);
+  const [showChannelList, setShowChannelList] = useState(true);
   const [channelName, setChannelName] = useState("");
   const [editChannelName, setEditChannelName] = useState("");
 
@@ -25,25 +27,29 @@ function MessageBar() {
   const input = useRef(null);
   const [orgName, setOrgName] = useState("");
   const [errors, setErrors] = useState([]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setErrors([]);
     formToggle();
-    setShowEdit(false)
+    setShowEdit(false);
     const data = await dispatch(editOrgThunk(orgName, id));
-    await dispatch(getOrg(id))
+
+    await dispatch(getOrg(id));
     if (data) {
       return setErrors(data);
     }
   };
+
   useEffect(() => {
-    dispatch(getOrg(id))
+    dispatch(getOrg(id));
   }, []);
+
   const editToggle = () => {
     if (showForm === true) return;
     if (showEdit === false) return setShowEdit(true);
     if (showEdit === true) return setShowEdit(false);
   };
+
   const formToggle = () => {
     if (showForm === false) {
       setShowh2(false);
@@ -57,10 +63,6 @@ function MessageBar() {
   // const testRead = (e) => {
   //   e.preventDefault()
   //   dispatch(readChannels(id))
-  // }
-  // const testCreate = async (e) => {
-  //   e.preventDefault()
-  //   await dispatch(postChannel(id, channelName))
   // }
   // const testDelete = async (e) => {
   //   e.preventDefault()
@@ -113,50 +115,44 @@ function MessageBar() {
           </div>
         )}
       </div>
-      <div className="channels">
-        <div
-          onClick={(e) => {
-            caret.current.classList.toggle("side");
-          }}
-        >
-          <i className="fas fa-caret-down" ref={caret}></i>
-          <p>Channels</p>
 
-          {/* <button onClick={testRead}>show all channels</button>
-          <button onClick={channelDelete}>delete a channel</button>
-          <form onSubmit={testCreate}>
-            <input
-              type="text"
-              placeholder={"Name"}
-              required
-              value={channelName}
-              onChange={(e) => setChannelName(e.target.value)}
-            />
-            <button>create a channel</button>
-          </form>
-          <button onClick={testDelete}>delete a channel</button>
-          <form onSubmit={testEdit}>
-            <input
-              type="text"
-              placeholder={"Name"}
-              required
-              value={editChannelName}
-              onChange={(e) => setEditChannelName(e.target.value)}
-            />
-            <button>EDIT a channel</button>
-          </form>
- */}
+      <div className="channelContent">
+        <div className="channels">
+          <div>
+            <div
+              onClick={(e) => {
+                caret.current.classList.toggle("side");
+                if (!showChannelList) setShowChannelList(true);
+                if (showChannelList) setShowChannelList(false);
+              }}
+            >
+              <i className="fas fa-caret-down" ref={caret}></i>
+              <p>Channels</p>
+            </div>
+            <NewChannel />
+          </div>
+          <div className="ChannelList">
+            {showChannelList && <ChannelList />}
+          </div>
         </div>
-      </div>
-      <div className="channels">
-        <div
-          onClick={(e) => {
-            dCaret.current.classList.toggle("side");
-          }}
-        >
-          <i className="fas fa-caret-down" ref={dCaret}></i>
-          <p>Direct Messages</p>
+        <div className="channels">
+          <div>
+            <div
+              onClick={(e) => {
+                dCaret.current.classList.toggle("side");
+              }}
+            >
+              <i className="fas fa-caret-down" ref={dCaret}></i>
+              <p>Direct Messages</p>
+            </div>
+            <div className="addChannel">
+              <button>
+                <i className="fas fa-plus"></i>
+              </button>
+            </div>
+          </div>
         </div>
+        <div className="height"></div>
       </div>
     </div>
   );

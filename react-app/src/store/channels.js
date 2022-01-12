@@ -6,7 +6,7 @@ const DELETE_CHANNEL = "channels/DELETE_CHANNEL";
 export const getChannels = (channels, orgId) => ({
   type: GET_CHANNELS,
   payload: channels,
-  orgId: orgId,
+  orgId,
 });
 
 export const addChannel = (channelInfo) => ({
@@ -32,7 +32,7 @@ export const readChannels = (orgId) => async (dispatch) => {
   const res = await fetch(`/api/organizations/${orgId}/channels`);
   if (res.ok) {
     const channels = await res.json();
-    dispatch(getChannels(channels, orgId));
+    dispatch(getChannels(channels.channels, orgId));
     return channels;
   } else {
     return null;
@@ -87,14 +87,15 @@ export const removeChannel = (channelId) => async (dispatch) => {
 };
 
 export default function channelReducer(state = [], action) {
+
   switch (action.type) {
     case GET_CHANNELS:
       return action.payload;
     case DELETE_CHANNEL:
       return state.filter((channel) => channel.id !== action.payload.id);
-    default:
-      return state;
     case ADD_CHANNEL:
       return [...state, action.payload];
+    default:
+    return state;
   }
 }

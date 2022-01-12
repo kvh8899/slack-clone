@@ -5,20 +5,25 @@
   width: fit-content;
   overflow: hidden;
   height: 100%;
-  width: 250px;
+  min-width: 220px;
 }
 .messageBar > div > div {
   padding-left: 10px;
 }
-
-.messageBar .channels div {
+.messageBar .channels > div {
   display: flex;
-  width: 100%;
   align-items: center;
-  margin: 10px;
+  margin-left: 10px;
+  margin-top: 4px;
 }
-
-.channels div i {
+.channels > div{
+  display:flex;
+  justify-content: space-between;
+}
+.channels > div > div{
+  display:flex;
+}
+.channels div .fa-caret-down{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -86,4 +91,14 @@
 
 .inputShow{
   display:none;
+}
+.channelContent{
+  position:absolute;
+  height:100%;
+  width:210px;
+  overflow:scroll;
+  scrollbar-color: white;
+}
+.height{
+  height:200px;
 }
