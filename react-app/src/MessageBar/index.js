@@ -130,9 +130,9 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
             </div>
             <NewChannel />
           </div>
-          <div className="ChannelList">
-            {showChannelList && <ChannelList setSelectedChannel={setSelectedChannel} setSelectedChannelId={setSelectedChannelId}/>}
-          </div>
+          {/* <div className="ChannelList"> */}
+          {showChannelList && <ChannelList setSelectedChannel={setSelectedChannel} setSelectedChannelId={setSelectedChannelId}/>}
+          {/* </div> */}
         </div>
         <div className="channels">
           <div>

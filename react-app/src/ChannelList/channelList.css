@@ -1,21 +1,28 @@
 .channelContainer {
+    margin-left: 20px;
     display: flex;
     flex-direction: column;
     margin-left:20px;
+    width: fit-content;
 }
 
 .singleChannel div{
     border-top: 2px solid grey;
     border-bottom: 2px solid grey;
-    
 }
 
 .channelContainer > div {
-    width: auto;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 150px;
     font-size: 12px;
+    padding: 0px 5px;
 }
 
 .selected{
     background-color:lightskyblue;
     color:black;
+    border-radius: 15px;
 }
