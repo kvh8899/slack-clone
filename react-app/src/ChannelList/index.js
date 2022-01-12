@@ -11,6 +11,7 @@ function ChannelList() {
     const [showh3, setShowh3] = useState(true)
     const [channelName, setChannelName] = useState('')
     const [channelId, setChannelId] = useState(null)
+    const [errors, setErrors] = useState([])
 
     const input = useRef(null)
     const navigate = useNavigate()
