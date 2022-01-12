@@ -2,7 +2,7 @@ import "./channelList.css";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState, useRef } from "react";
-import { editChannel, readChannels, removeChannel } from "../store/channels";
+import { readChannels, removeChannel } from "../store/channels";
 import {
   useNavigate,
   createSearchParams,
@@ -10,7 +10,6 @@ import {
 } from "react-router-dom";
 
 function ChannelList({ setSelectedChannel, setSelectedChannelId }) {
-  const [showForm, setShowForm] = useState(false);
   const [channelName, setChannelName] = useState("");
   const [channelParams] = useSearchParams();
   const hist = useNavigate();
@@ -52,7 +51,7 @@ function ChannelList({ setSelectedChannel, setSelectedChannelId }) {
                 <div
                   ref={(e) => (specificChannel.current[i] = e)}
                   key={channel.id}
-                  className=`${channel.name} singleChannel`
+                  className={`${channel.name} singleChannel`}
                   id={channel.id}
                   onClick={() => {
                     setSelectedChannel(specificChannel.current[i].classList[0]);

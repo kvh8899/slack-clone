@@ -15,11 +15,7 @@
     font-size: 12px;
 }
 
-.singleChannel:hover{
-    cursor: pointer;
-    background-color: rgb(41, 36, 87);
-}
-
 .selected{
     background-color:lightskyblue;
+    color:black;
 }
