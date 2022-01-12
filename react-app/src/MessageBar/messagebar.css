@@ -96,7 +96,7 @@
   position:absolute;
   height:100%;
   width:210px;
-  overflow:scroll;
+  overflow:hidden;
   scrollbar-color: white;
 }
 .height{

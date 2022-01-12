@@ -8,7 +8,14 @@ import { logout } from "../store/session";
 import NewChannelForm from "../newChannelForm";
 import Search from "../Search";
 
+import { readChannels } from "../store/channels";
+import {useParams} from "react-router-dom";
+import {setName} from "../store/currentChannel"
+
 function Orgmainchat() {
+  const [selectedChannel, setSelectedChannel] = useState('')
+  const [selectedChannelId, setSelectedChannelId] = useState('')
+  const {id} = useParams()
   const dispatch = useDispatch();
   const hist = useNavigate();
   const session = useSelector((state) => state.session.user);
@@ -22,9 +29,11 @@ function Orgmainchat() {
     }
     return null;
   }
+  
   useEffect(() => {
     if (session) getUserData(session.id);
   }, [session]);
+
   function profClick(e) {
     e.stopPropagation();
     profDiv.current.classList.toggle("settings");
@@ -36,10 +45,21 @@ function Orgmainchat() {
     });
     if (!flag) profDiv.current.classList.toggle("settings");
   }
+
+  const backClick = (e) => {
+    e.preventDefault()
+    hist('/organization')
+  }
+
   return (
     <div className="content">
       <NewChannelForm />
       <div className="topBar" onClick={awayClick}>
+        <div className="backbuttoncontainer">
+          <button className="backbutton" onClick={backClick}>
+            Back To Workspaces
+          </button>
+        </div>
         <Search />
         <div className="profile">
           {userData?.profilePicture ? (
@@ -50,7 +70,8 @@ function Orgmainchat() {
             ></img>
           ) : (
             <img
-              src="https://avatars.slack-edge.com/2015-03-13/4045125376_172ec0a9d33356de3571_88.jpg"
+              // src="https://avatars.slack-edge.com/2015-03-13/4045125376_172ec0a9d33356de3571_88.jpg"
+              src="https://cdn.discordapp.com/attachments/919391399269515305/930910536193933312/aa_logo.png"
               alt="404"
               onClick={profClick}
             ></img>
@@ -74,8 +95,8 @@ function Orgmainchat() {
         </div>
       </div>
       <div className="midContent1" onClick={awayClick}>
-        <MessageBar />
-        <Message user={userData} />
+        <MessageBar setSelectedChannel={setSelectedChannel} setSelectedChannelId={setSelectedChannelId}/>
+        <Message user={userData} setSelectedChannel={setSelectedChannel} selectedChannel={selectedChannel} selectedChannelId={selectedChannelId}/>
       </div>
     </div>
   );

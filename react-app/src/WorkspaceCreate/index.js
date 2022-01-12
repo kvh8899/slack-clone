@@ -33,23 +33,29 @@ export default function NewWorkspace() {
         {/* <MessageBar /> */}
         <div className="mid-content">
           <form onSubmit={handleSubmit}>
-          <div>
-            <h2 className="header">What’s the name of your company or team?</h2>
-            <p>
-              This will be the name of your Zing workspace — choose something
-              that your team will recognize.
-            </p>
-          </div>
-          <div>
-            <input className="input-name"
-              type="text"
-              name="name"
-              placeholder="Ex: Acme Marketing or Acme Co"
-              onChange={(e) => setOrgName(e.target.value)}
-            ></input>
-            <button className="submit-button">Create Workspace</button>
-          </div>
-        </form>
+            <div>
+              <h2 className="header">
+                What’s the name of your company or team?
+              </h2>
+              <p>
+                This will be the name of your Zing workspace — choose something
+                that your team will recognize.
+              </p>
+            </div>
+            <div>
+              <input
+                className="input-name"
+                type="text"
+                name="name"
+                placeholder="Ex: Acme Marketing or Acme Co"
+                onChange={(e) => setOrgName(e.target.value)}
+              ></input>
+              <div className="form-buttons">
+                <button className="submit-button">Create Workspace</button>
+                <button className="submit-button" onClick="hist(/organization)">Cancel</button>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>
