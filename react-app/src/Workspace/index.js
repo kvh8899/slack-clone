@@ -24,14 +24,14 @@ function Workspace() {
       <div className="midContent">
         <h2>
           <img
-            src="https://a.slack-edge.com/6c404/marketing/img/homepage/bold-existing-users/waving-hand@2x.gif"
+            src="./waving-hand@2x.gif"
             alt="emoji"
           ></img>
           Welcome Back!
         </h2>
         <WorkspaceList />
         <div className="createOrg workSpace-wrap">
-          <img src="/laptopPerson.png" alt="person"></img>
+          <img src="./laptopPerson.png" alt="person"></img>
           <span></span>
           <div>
             <p>Want to use Zing with a different Team?</p>
