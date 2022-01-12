@@ -6,9 +6,12 @@ import io from "socket.io-client";
 //"https://<herokuname>.herokuapp.com" for heroku
 let endPoint = "https://zing-app.herokuapp.com";
 let socket;
+
 function Message({ user }) {
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
+  const [channelName, setChannelName] = useState('')
+
   const dummyDiv = useRef(null);
   useEffect(() => {
     socket = io(`${endPoint}`);
@@ -40,6 +43,9 @@ function Message({ user }) {
     <div className="messageArea">
       <div className="title">
         <h2>Title</h2>
+        <button>
+          Edit
+        </button>
       </div>
       <div className="messages">
         <div>
