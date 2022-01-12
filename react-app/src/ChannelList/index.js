@@ -8,7 +8,6 @@ import { useNavigate ,createSearchParams} from "react-router-dom";
 function ChannelList({ setSelectedChannel, setSelectedChannelId }) {
   const [showForm, setShowForm] = useState(false);
   const [channelName, setChannelName] = useState("");
-  const [errors, setErrors] = useState([]);
   const hist = useNavigate();
   const specificChannel = useRef([]);
   const { id } = useParams();
@@ -24,14 +23,10 @@ function ChannelList({ setSelectedChannel, setSelectedChannelId }) {
     specificChannel.current.slice(0, channels.length);
   }, [dispatch]);
 
-  const channelClick = (e, i) => {
-    e.preventDefault();
-  };
-
   return (
     <div className="channelContainer">
       {channels
-        ? channels.map((channel, i) => {
+        ? channels?.map((channel, i) => {
             return (
               <>
                 <div
@@ -41,6 +36,7 @@ function ChannelList({ setSelectedChannel, setSelectedChannelId }) {
                   id={channel.id}
                   onClick={() => {
                     setSelectedChannel(specificChannel.current[i].className);
+                    setSelectedChannelId(specificChannel.current[i].id)
                     hist(`?${createSearchParams({
                         channel: `${specificChannel.current[i].className}`
                     })}`)

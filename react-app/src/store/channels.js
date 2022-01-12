@@ -60,13 +60,14 @@ export const postChannel = (orgId, name) => async (dispatch) => {
 };
 
 //Edit Channel
-export const editChannelThunk = (data, channelId) => async (dispatch) => {
+export const editChannelThunk = (name, channelId) => async (dispatch) => {
+  console.log(name,channelId)
   const res = await fetch(`/api/channels/${channelId}/edit`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(data),
+    body: JSON.stringify({name}),
   })
   if (res.ok) {
     const channel = await res.json()
@@ -100,7 +101,12 @@ export default function channelReducer(state = [], action) {
     case ADD_CHANNEL:
       return [...state, action.payload];
     case EDIT_CHANNEL:
-      return action.payload
+      return state.map((e) => {
+        if( e.id === action.payload.id){
+          return action.payload;
+        }
+        return e;
+      })
     default:
       return state;
   }
