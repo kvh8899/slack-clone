@@ -11,11 +11,12 @@ function ChannelList() {
     const [showh3, setShowh3] = useState(true)
     const [channelName, setChannelName] = useState('')
     const [channelId, setChannelId] = useState(null)
-    const input = useRef(null)
 
+    const input = useRef(null)
+    const navigate = useNavigate()
     const { id } = useParams()
-    const dispatch = useDispatch();
-    const channels = useSelector((state) => state.channelReducer.channels);
+    const dispatch = useDispatch()
+    const channels = useSelector((state) => state.channelReducer.channels)
 
     async function loadChannels() {
         await dispatch(readChannels(id))
@@ -56,7 +57,7 @@ function ChannelList() {
     const channelDelete = async e => {
         e.preventDefault()
         await dispatch(removeChannel(channelId))
-        Navigate('/channels')
+        navigate('/channels')
     }
 
     return (
