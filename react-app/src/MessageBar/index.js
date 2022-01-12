@@ -84,11 +84,6 @@ function MessageBar() {
     navigate("/organization");
   };
 
-  const channelDelete = async (e) => {
-    e.preventDefault();
-    await dispatch(removeChannel(id));
-  }
-
   return (
     <div className="messageBar">
       <div onClick={editToggle} className="title">
@@ -133,9 +128,9 @@ function MessageBar() {
         >
           <i className="fas fa-caret-down" ref={caret}></i>
           <p>Channels</p>
-          <button onClick={channelDelete}>delete a channel</button>
 
           {/* <button onClick={testRead}>show all channels</button>
+          <button onClick={channelDelete}>delete a channel</button>
           <form onSubmit={testCreate}>
             <input
               type="text"
