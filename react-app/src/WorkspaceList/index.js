@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getWorkspaces } from "../store/organizations";
-
+import { readChannels , postChannel} from "../store/channels";
+import{setName} from "../store/currentChannel"
 function WorkspaceList() {
   const hist = useNavigate();
   // get orgs from database and use map
@@ -27,7 +28,8 @@ function WorkspaceList() {
           return (
             <div className="orgData" key={e.id}>
               <img
-                src="https://avatars.slack-edge.com/2015-03-13/4045125376_172ec0a9d33356de3571_88.jpg"
+                // src="https://avatars.slack-edge.com/2015-03-13/4045125376_172ec0a9d33356de3571_88.jpg"
+                src="https://cdn.discordapp.com/attachments/919391399269515305/930910536193933312/aa_logo.png"
                 alt="logo"
               ></img>
               <div>
@@ -35,9 +37,11 @@ function WorkspaceList() {
                 <p>{e?.members?.length} Members</p>
               </div>
               <button
-                onClick={() => {
+                onClick={async() => {
                   //redirect to proper workspace page
-                  hist(`/organizations/${e?.id}`);
+                  const channels = await dispatch(readChannels(e?.id));
+                  dispatch(setName(channels.channels[0].name))
+                  hist(`/organizations/${e?.id}/channels/${channels.channels[0].id}`);
                 }}
               >
                 LAUNCH ZING

@@ -1,4 +1,3 @@
-
 .mid-content {
   display: flex;
   flex-direction: column;
@@ -30,13 +29,17 @@
 }
 
 .submit-button {
-  background-color: #4a154b;
   color: white;
-  box-shadow: none;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 18px;
-  font-weight: 900;
-  height: 44px;
-  min-width: 96px;
-  padding: 0 16px 3px;
+  background-color: rgb(25, 33, 100);
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 15px;
+  border: none;
+}
+
+.form-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  gap: 10px;
 }

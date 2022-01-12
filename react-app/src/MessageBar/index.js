@@ -8,13 +8,13 @@ import { useNavigate } from "react-router-dom";
 import ChannelList from "../ChannelList";
 import "./messagebar.css";
 
-function MessageBar() {
-  const [showEdit, setShowEdit] = useState(false);
-  const [showForm, setShowForm] = useState(false);
-  const [showh2, setShowh2] = useState(true);
-  const [showChannelList, setShowChannelList] = useState(true);
-  const [channelName, setChannelName] = useState("");
-  const [editChannelName, setEditChannelName] = useState("");
+function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
+  const [showEdit, setShowEdit] = useState(false)
+  const [showForm, setShowForm] = useState(false)
+  const [showh2, setShowh2] = useState(true)
+  const [showChannelList, setShowChannelList] = useState(true)
+  const [channelName, setChannelName] = useState('')
+  const [editChannelName, setEditChannelName] = useState('')
 
   const caret = useRef(null);
   const dCaret = useRef(null);
@@ -82,7 +82,7 @@ function MessageBar() {
   return (
     <div className="messageBar">
       <div onClick={editToggle} className="title">
-        {showh2 && <h2>{org.name}</h2>}
+        {showh2 && <h2>{org.name}</h2>} <i class="fas fa-ellipsis-v"></i>
         {showForm && (
           <div>
             <div>
@@ -115,7 +115,6 @@ function MessageBar() {
           </div>
         )}
       </div>
-
       <div className="channelContent">
         <div className="channels">
           <div>
@@ -132,7 +131,7 @@ function MessageBar() {
             <NewChannel />
           </div>
           <div className="ChannelList">
-            {showChannelList && <ChannelList />}
+            {showChannelList && <ChannelList setSelectedChannel={setSelectedChannel} setSelectedChannelId={setSelectedChannelId}/>}
           </div>
         </div>
         <div className="channels">

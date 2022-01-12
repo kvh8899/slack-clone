@@ -1,14 +1,27 @@
 import "./message.css";
 import { useState, useEffect, useRef } from "react";
 import io from "socket.io-client";
-
+import { editChannelThunk } from "../store/channels";
+import { useDispatch, useSelector } from "react-redux";
+import {useParams} from "react-router-dom"
 // must use http here
 //"https://<herokuname>.herokuapp.com" for heroku
 let endPoint = "http://localhost:5000";
 let socket;
-function Message({ user }) {
+
+function Message({ user,selectedChannelId, setSelectedChannel }) {
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
+  const [channelName, setChannelName] = useState('')
+  const [showForm, setShowForm] = useState(false)
+  const {channelId} = useParams()
+  const currentChannel = useSelector((state) => state.currentChannel);
+  const dispatch = useDispatch();
+  const handleChannelSubmit = async e => {
+    e.preventDefault()
+    setShowForm(false)
+    await dispatch(editChannelThunk(channelName, channelId))
+  }
   const dummyDiv = useRef(null);
   useEffect(() => {
     socket = io(`${endPoint}`);
@@ -39,7 +52,28 @@ function Message({ user }) {
   return (
     <div className="messageArea">
       <div className="title">
-        <h2>Title</h2>
+        <h2>{currentChannel}</h2>
+        <button onClick={e => {
+                    e.preventDefault()
+                    setShowForm(!showForm)
+                    }
+                }
+        >
+          Edit
+        </button>
+        { showForm && (
+          <div>
+            <form className="editchannelnameform" onSubmit={ handleChannelSubmit }>
+              <input
+                type='text'
+                placeholder={"New Channel Name"}
+                required
+                value={channelName}
+                onChange={e => setChannelName(e.target.value)}
+              />
+            </form>
+          </div>
+        )}
       </div>
       <div className="messages">
         <div>
@@ -50,7 +84,8 @@ function Message({ user }) {
                   <img src={user.profilePicture} alt="404"></img>
                 ) : (
                   <img
-                    src="https://avatars.slack-edge.com/2015-03-13/4045125376_172ec0a9d33356de3571_88.jpg"
+                    // src="https://avatars.slack-edge.com/2015-03-13/4045125376_172ec0a9d33356de3571_88.jpg"
+                    src="https://cdn.discordapp.com/attachments/919391399269515305/930910536193933312/aa_logo.png"
                     alt="404"
                   ></img>
                 )}

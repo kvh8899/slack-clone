@@ -5,8 +5,8 @@ function Splash(){
     return (
         <div className="wrapper">
             <nav>
-                <div className="leftNav"> 
-                    <img src="./zinglogo.png" alt="logo"></img>
+                <div className="leftNav">
+                    <img src="https://cdn.discordapp.com/attachments/919391399269515305/930910536839864351/zinglogo.png" alt="logo"></img>
                     <h2>Zing</h2>
                 </div>
                 <div className="rightNav">
