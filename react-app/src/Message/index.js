@@ -1,6 +1,8 @@
 import "./message.css";
 import { useState, useEffect, useRef } from "react";
 import io from "socket.io-client";
+import { editChannel, readChannels, removeChannel } from "../store/channels";
+import { useDispatch, useSelector } from "react-redux";
 
 // must use http here
 //"https://<herokuname>.herokuapp.com" for heroku
@@ -11,6 +13,16 @@ function Message({ user }) {
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
   const [channelName, setChannelName] = useState('')
+
+
+
+  const dispatch = useDispatch()
+  // const channel = useSelector((state) => state.channelReducer)
+
+  useEffect(() => {
+    // dispatch(readChannels())
+    // console.log('channel', channel)
+  }, [])
 
   const dummyDiv = useRef(null);
   useEffect(() => {

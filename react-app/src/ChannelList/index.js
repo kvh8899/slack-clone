@@ -12,6 +12,10 @@ function ChannelList() {
     const [channelName, setChannelName] = useState('')
     const [errors, setErrors] = useState([])
 
+    // const changeState = () => {
+    //     setChannelName()
+    // }
+
     const specificChannel = useRef(null)
     const navigate = useNavigate()
     const { id } = useParams()
@@ -47,18 +51,18 @@ function ChannelList() {
     //     }
     // }
 
-    const handleSubmit = async e => {
-        e.preventDefault()
-        setErrors([])
-        // formToggle()
-        // setShowEdit(false)
-        let channelId = e.target.id
-        const data = await dispatch(editChannel(channelName, channelId))
-        await dispatch(readChannels(channelId))
-        if (data) {
-            return setErrors(data)
-        }
-    }
+    // const handleSubmit = async e => {
+    //     e.preventDefault()
+    //     setErrors([])
+    //     // formToggle()
+    //     // setShowEdit(false)
+    //     let channelId = e.target.id
+    //     const data = await dispatch(editChannel(channelName, channelId))
+    //     await dispatch(readChannels(channelId))
+    //     if (data) {
+    //         return setErrors(data)
+    //     }
+    // }
 
     // const channelDelete = async e => {
     //     e.preventDefault()
@@ -76,7 +80,9 @@ function ChannelList() {
                             className="singleChannel"
                             key={channel.id}
                         >
-                            <h3># { channel.name }</h3>
+                            <h3
+                                // onClick={setChannelName(channel.name)}
+                            ># { channel.name }</h3>
                             {/* <button
                                 id={ channel.id }
                                 onClick={e => {
