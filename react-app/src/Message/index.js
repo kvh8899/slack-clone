@@ -4,6 +4,7 @@ import io from "socket.io-client";
 import { editChannelThunk, readChannels, removeChannel } from "../store/channels";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
+import {setName} from "../store/currentChannel"
 // must use http here
 //"https://<herokuname>.herokuapp.com" for heroku
 let endPoint = "http://localhost:5000";
@@ -14,7 +15,8 @@ function Message({ user, selectedChannel, selectedChannelId, setSelectedChannel 
   const [message, setMessage] = useState("");
   const [channelName, setChannelName] = useState('')
   const [showForm, setShowForm] = useState(false)
-  const [queryName] = useSearchParams();
+  const currentChannel = useSelector((state) => state.currentChannel);
+  const dispatch = useDispatch();
   const handleChannelSubmit = async e => {
     e.preventDefault()
     setShowForm(false)
@@ -22,7 +24,6 @@ function Message({ user, selectedChannel, selectedChannelId, setSelectedChannel 
     setSelectedChannel(channelName)
     await dispatch(editChannelThunk(channelName, selectedChannelId))
   }
-  const dispatch = useDispatch()
   const dummyDiv = useRef(null);
   useEffect(() => {
     socket = io(`${endPoint}`);
@@ -53,7 +54,7 @@ function Message({ user, selectedChannel, selectedChannelId, setSelectedChannel 
   return (
     <div className="messageArea">
       <div className="title">
-        <h2>{queryName.get("channelName")}</h2>
+        <h2>{currentChannel}</h2>
         <button onClick={e => {
                     e.preventDefault()
                     setShowForm(!showForm)

@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState, useRef } from "react";
 import { readChannels, removeChannel } from "../store/channels";
+import { setName } from "../store/currentChannel";
 import {
   useNavigate,
   createSearchParams,
@@ -22,16 +23,17 @@ function ChannelList({ setSelectedChannel, setSelectedChannelId }) {
   }
   function select() {
     specificChannel.current.forEach((e, i) => {
-      if (e.id !== channelId) {
-        specificChannel.current[i].classList.remove("selected");
+      if (e?.id !== channelId) {
+        specificChannel.current[i]?.classList.remove("selected");
         return;
       }
-      specificChannel.current[i].classList.remove("selected");
-      specificChannel.current[i].classList.add("selected");
+      specificChannel.current[i]?.classList.remove("selected");
+      specificChannel.current[i]?.classList.add("selected");
     });
   }
   const handleSubmit = async (e) => {
     e.preventDefault()
+    e.stopPropagation()
     await dispatch(removeChannel(e.target.id));
   }
   useEffect(() => {
@@ -41,6 +43,15 @@ function ChannelList({ setSelectedChannel, setSelectedChannelId }) {
  useEffect(() => {
     select();
  })
+ useEffect(() => {
+    channels.forEach((e) => {
+        if(e.id === parseInt(channelId)){
+            
+            dispatch(setName(`# ${e.name}`));
+            return;
+        }
+    })
+ },[channels])
   return (
     <div className="channelContainer">
       {channels
@@ -54,6 +65,7 @@ function ChannelList({ setSelectedChannel, setSelectedChannelId }) {
                   onClick={() => {
                     setSelectedChannel(specificChannel.current[i].classList[0]);
                     setSelectedChannelId(channelId);
+                    dispatch(setName(specificChannel.current[i].children[0].innerHTML))
                     hist(`/organizations/${id}/channels/${specificChannel.current[i].id}`
                     );
                   }}

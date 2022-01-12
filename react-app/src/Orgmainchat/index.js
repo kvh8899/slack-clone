@@ -6,11 +6,13 @@ import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../store/session";
 import NewChannelForm from "../newChannelForm";
-
+import { readChannels } from "../store/channels";
+import {useParams} from "react-router-dom";
+import {setName} from "../store/currentChannel"
 function Orgmainchat() {
   const [selectedChannel, setSelectedChannel] = useState('')
   const [selectedChannelId, setSelectedChannelId] = useState('')
-
+  const {id} = useParams()
   const dispatch = useDispatch();
   const hist = useNavigate();
   const session = useSelector((state) => state.session.user);
@@ -24,6 +26,7 @@ function Orgmainchat() {
     }
     return null;
   }
+  
   useEffect(() => {
     if (session) getUserData(session.id);
   }, [session]);
