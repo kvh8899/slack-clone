@@ -115,6 +115,7 @@ function MessageBar() {
           </div>
         )}
       </div>
+
       <div className="channelContent">
         <div className="channels">
           <div>

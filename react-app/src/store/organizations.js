@@ -2,6 +2,7 @@ const SET_WORKSPACES = "workspaces/SET_WORKSPACES";
 const ADD_WORKSPACE = "workspaces/ADD_WORKSPACE";
 const EDIT_ORG = "workspaces/EDIT_ORG";
 const DELETE_WORKSPACES = "workspaces/DELETE_WORKSPACES";
+const ADD_MEMBER = "workspaces/ADD_MEMBER";
 
 //Organization actions
 export const getWorkspace = (workspaces) => {
@@ -28,6 +29,11 @@ const deleteWorkspaces = (workspace) => {
   };
 };
 
+//Member action
+export const addMember = (organization) => ({
+  type: ADD_MEMBER,
+  payload: organization,
+});
 
 //Organization Thunks
 
@@ -59,17 +65,16 @@ export const addWorkspaces = (name) => async (dispatch) => {
 };
 
 //Edit Org
-export const editOrgThunk = (name,id) => async (dispatch) => {
+export const editOrgThunk = (name, id) => async (dispatch) => {
   const response = await fetch(`/api/organizations/edit/${id}`, {
     method: "PUT",
-    headers:{"Content-Type":"application/json"},
-    body: JSON.stringify({name}),
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ name }),
   });
   const data = await response.json();
   dispatch(editOrg(data));
   return data;
 };
-
 
 //Delete Org
 export const removeWorkspace = (organizationId) => async (dispatch) => {
@@ -86,15 +91,28 @@ export const removeWorkspace = (organizationId) => async (dispatch) => {
   }
 };
 
+//Add Member
+export const addMembers = (organizationId) => async (dispatch) => {
+  const response = await fetch(`/api/organizations/${organizationId}/members`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+  });
+  const data = await response.json();
+  dispatch(addMember(data));
+  return data;
+};
+
 export default function orgReducer(state = [], action) {
   switch (action.type) {
     case SET_WORKSPACES:
       return action.payload;
-    case DELETE_WORKSPACES:
-      return state.filter((workspace) => workspace.id === action.payload.id);
-    default:
-      return state;
     case ADD_WORKSPACE:
       return [...state, action.payload];
+    case DELETE_WORKSPACES:
+      return state.filter((workspace) => workspace.id === action.payload.id);
+    case ADD_MEMBER:
+      return [...state, action.payload];
+    default:
+      return state;
   }
 }
