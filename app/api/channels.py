@@ -1,7 +1,7 @@
 from app.forms.channel_form import ChannelForm
 from flask import Blueprint, jsonify,request
 from flask_login import login_required,current_user
-from app.models import db, User, Organization, Member, Channel
+from app.models import db, User, Organization, Member, Channel,Message
 from app.forms.organization_form import OrganizationForm
 from .auth_routes import validation_errors_to_error_messages
 
@@ -27,3 +27,17 @@ def edit_channel(channelId):
         channel.name = form.name.data
         db.session.commit()
         return channel.to_dict()
+
+## get messages of a channel
+@channel_routes.route('/<int:channelId>/messages')
+def get_messages(channelId):
+    messages = Message.query.filter(channelId == Message.channel_id).all()
+    msgDict = []
+    for i in messages:
+        msgDict.append(i.to_dict())
+    return { 'messages': msgDict }
+
+## send messages in a channel
+@channel_routes.route('/<int:channelId>/messages',methods=['POST'])
+def create_msg(channelId):
+    pass
