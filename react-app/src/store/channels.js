@@ -15,12 +15,11 @@ export const addChannel = (channelInfo) => ({
   payload: channelInfo,
 });
 
-export const editChannel = (channelInfo, orgId, channelId) => ({
+export const editChannel = (channelInfo, channelId) => ({
   type: EDIT_CHANNEL,
   payload: channelInfo,
-  orgId,
-  channelId,
-});
+  channelId
+})
 
 export const deleteChannel = (channelId, orgId) => ({
   type: DELETE_CHANNEL,
@@ -61,21 +60,19 @@ export const postChannel = (orgId, name) => async (dispatch) => {
 };
 
 //Edit Channel
-export const editChannelThunk = (orgId, name, channelId) => async (dispatch) => {
-  console.log(orgId, name, channelId)
-  const response = await fetch(`/api/channels/${channelId}/edit`, {
+export const editChannelThunk = (data, channelId) => async (dispatch) => {
+  const res = await fetch(`/api/channels/${channelId}/edit`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ name }),
-  });
-  const data = await response.json();
-  console.log(data, 'dataaaaaaaa')
-  const { id } = data
-  dispatch(editChannel(data, orgId, id));
-  return data;
-};
+    body: JSON.stringify(data),
+  })
+  if (res.ok) {
+    const channel = await res.json()
+    dispatch(editChannel(channel, channelId))
+  }
+}
 
 
 //Delete Channel
@@ -102,7 +99,9 @@ export default function channelReducer(state = [], action) {
       return state.filter((channel) => channel.id !== action.payload.id);
     case ADD_CHANNEL:
       return [...state, action.payload];
+    case EDIT_CHANNEL:
+      return action.payload
     default:
-    return state;
+      return state;
   }
 }
