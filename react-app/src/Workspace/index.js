@@ -10,7 +10,10 @@ function Workspace() {
     <div className="workspace-wrapper">
       <nav>
         <div className="leftNav">
-          <img src="./zinglogo.png" alt="logo"></img>
+          <img
+            src="https://cdn.discordapp.com/attachments/919391399269515305/930910536839864351/zinglogo.png"
+            alt="logo"
+          ></img>
           <h2>Zing</h2>
         </div>
         <div className="rightNav">
@@ -24,14 +27,17 @@ function Workspace() {
       <div className="midContent">
         <h2>
           <img
-            src="./waving-hand@2x.gif"
+            src="https://cdn.discordapp.com/attachments/919391399269515305/930910536638562334/waving-hand2x.gif"
             alt="emoji"
           ></img>
           Welcome Back!
         </h2>
         <WorkspaceList />
         <div className="createOrg workSpace-wrap">
-          <img src="./laptopPerson.png" alt="person"></img>
+          <img
+            src="https://cdn.discordapp.com/attachments/919391399269515305/930910536395276308/laptopPerson.png"
+            alt="person"
+          ></img>
           <span></span>
           <div>
             <p>Want to use Zing with a different Team?</p>
