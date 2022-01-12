@@ -10,7 +10,7 @@ import { editChannelThunk, postChannel, readChannels, removeChannel } from "../s
 import ChannelList from "../ChannelList";
 
 
-function MessageBar({ setSelectedChannel }) {
+function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
   const [showEdit, setShowEdit] = useState(false)
   const [showForm, setShowForm] = useState(false)
   const [showh2, setShowh2] = useState(true)
@@ -140,7 +140,7 @@ function MessageBar({ setSelectedChannel }) {
           < NewChannel />
         </div>
         <div className="ChannelList">
-          {showChannelList && <ChannelList setSelectedChannel={setSelectedChannel} />}
+          {showChannelList && <ChannelList setSelectedChannel={setSelectedChannel} setSelectedChannelId={setSelectedChannelId} />}
         </div>
       </div>
       <div className="channels">

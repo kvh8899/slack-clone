@@ -9,6 +9,8 @@ import NewChannelForm from "../newChannelForm";
 
 function Orgmainchat() {
   const [selectedChannel, setSelectedChannel] = useState('')
+  const [selectedChannelId, setSelectedChannelId] = useState('')
+
   const dispatch = useDispatch();
   const hist = useNavigate();
   const session = useSelector((state) => state.session.user);
@@ -79,8 +81,8 @@ function Orgmainchat() {
         </div>
       </div>
       <div className="midContent1" onClick={awayClick}>
-        <MessageBar setSelectedChannel={setSelectedChannel}/>
-        <Message user={userData} selectedChannel={selectedChannel}/>
+        <MessageBar setSelectedChannel={setSelectedChannel} setSelectedChannelId={setSelectedChannelId}/>
+        <Message user={userData} selectedChannel={selectedChannel} selectedChannelId={selectedChannelId}/>
       </div>
     </div>
   );

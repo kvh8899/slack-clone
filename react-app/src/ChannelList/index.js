@@ -5,7 +5,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { editChannel, readChannels, removeChannel } from "../store/channels";
 import { useNavigate } from 'react-router-dom'
 
-function ChannelList({ setSelectedChannel }) {
+function ChannelList({ setSelectedChannel, setSelectedChannelId }) {
     // const [showEdit, setShowEdit] = useState(false)
     const [showForm, setShowForm] = useState(false)
     // const [showh3, setShowh3] = useState(true)
@@ -73,6 +73,7 @@ function ChannelList({ setSelectedChannel }) {
     const channelClick = (e) => {
         e.preventDefault()
         setSelectedChannel(e.target.className)
+        setSelectedChannelId(e.target.id)
     }
 
     return (

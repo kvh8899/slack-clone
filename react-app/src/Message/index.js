@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 let endPoint = "https://zing-app.herokuapp.com";
 let socket;
 
-function Message({ user, selectedChannel }) {
+function Message({ user, selectedChannel, setSelectedChannelId }) {
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
   const [channelName, setChannelName] = useState('')
