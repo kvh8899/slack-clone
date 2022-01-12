@@ -1,7 +1,7 @@
 import "./message.css";
 import { useState, useEffect, useRef } from "react";
 import io from "socket.io-client";
-import { editChannel, readChannels, removeChannel } from "../store/channels";
+import { editChannelThunk, readChannels, removeChannel } from "../store/channels";
 import { useDispatch, useSelector } from "react-redux";
 
 // must use http here
@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 let endPoint = "https://zing-app.herokuapp.com";
 let socket;
 
-function Message({ user, selectedChannel, setSelectedChannelId }) {
+function Message({ user, selectedChannel, selectedChannelId }) {
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
   const [channelName, setChannelName] = useState('')
@@ -19,7 +19,7 @@ function Message({ user, selectedChannel, setSelectedChannelId }) {
     e.preventDefault()
     setShowForm(false)
     setChannelName('')
-    // await dispatch(editChannel(channelName, channelId))
+    await dispatch(editChannelThunk(channelName, selectedChannelId))
     // await dispatch(readChannels(channelId))
   }
 

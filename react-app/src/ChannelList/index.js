@@ -30,10 +30,10 @@ function ChannelList({ setSelectedChannel, setSelectedChannelId }) {
         loadChannels()
     }, [dispatch])
 
-    useEffect(() => {
-        const editChannelForm = specificChannel.current
-        console.log('useRef toggled')
-    }, [])
+    // useEffect(() => {
+    //     const editChannelForm = specificChannel.current
+    //     console.log('useRef toggled')
+    // }, [])
 
     // const editToggle = () => {
     //     if (showForm === true) return
