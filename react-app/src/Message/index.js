@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import io from "socket.io-client";
 import { editChannelThunk } from "../store/channels";
 import { useDispatch, useSelector } from "react-redux";
+import {useParams} from "react-router-dom"
 // must use http here
 //"https://<herokuname>.herokuapp.com" for heroku
 let endPoint = "http://localhost:5000";
@@ -13,14 +14,13 @@ function Message({ user,selectedChannelId, setSelectedChannel }) {
   const [message, setMessage] = useState("");
   const [channelName, setChannelName] = useState('')
   const [showForm, setShowForm] = useState(false)
+  const {channelId} = useParams()
   const currentChannel = useSelector((state) => state.currentChannel);
   const dispatch = useDispatch();
   const handleChannelSubmit = async e => {
     e.preventDefault()
     setShowForm(false)
-    setChannelName('')
-    setSelectedChannel(channelName)
-    await dispatch(editChannelThunk(channelName, selectedChannelId))
+    await dispatch(editChannelThunk(channelName, channelId))
   }
   const dummyDiv = useRef(null);
   useEffect(() => {

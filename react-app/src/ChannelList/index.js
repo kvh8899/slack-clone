@@ -6,7 +6,7 @@ import { readChannels, removeChannel } from "../store/channels";
 import { setName } from "../store/currentChannel";
 import { useNavigate } from "react-router-dom";
 
-function ChannelList({setSelectedChannel,setSelectedChannelId}) {
+function ChannelList() {
   const hist = useNavigate();
   const specificChannel = useRef([]);
   const { id, channelId } = useParams();
@@ -60,8 +60,6 @@ function ChannelList({setSelectedChannel,setSelectedChannelId}) {
                   dispatch(
                     setName(specificChannel.current[i].children[0].innerHTML)
                   );
-                  setSelectedChannel(channel.name)
-                  setSelectedChannelId(channel.id)
                   hist(
                     `/organizations/${id}/channels/${specificChannel.current[i].id}`
                   );
