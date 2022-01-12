@@ -8,6 +8,9 @@ import { logout } from "../store/session";
 import NewChannelForm from "../newChannelForm";
 
 function Orgmainchat() {
+  const [selectedChannel, setSelectedChannel] = useState('')
+  const [selectedChannelId, setSelectedChannelId] = useState('')
+
   const dispatch = useDispatch();
   const hist = useNavigate();
   const session = useSelector((state) => state.session.user);
@@ -24,6 +27,7 @@ function Orgmainchat() {
   useEffect(() => {
     if (session) getUserData(session.id);
   }, [session]);
+
   function profClick(e) {
     e.stopPropagation();
     profDiv.current.classList.toggle("settings");
@@ -82,8 +86,8 @@ function Orgmainchat() {
         </div>
       </div>
       <div className="midContent1" onClick={awayClick}>
-        <MessageBar />
-        <Message user={userData} />
+        <MessageBar setSelectedChannel={setSelectedChannel} setSelectedChannelId={setSelectedChannelId}/>
+        <Message user={userData} setSelectedChannel={setSelectedChannel} selectedChannel={selectedChannel} selectedChannelId={selectedChannelId}/>
       </div>
     </div>
   );
