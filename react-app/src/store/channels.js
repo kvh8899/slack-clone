@@ -7,7 +7,7 @@ const ADD_MEMBER = "members/ADD_MEMBER";
 export const getChannels = (channels, orgId) => ({
   type: GET_CHANNELS,
   payload: channels,
-  orgId: orgId,
+  orgId,
 });
 
 export const addChannel = (channelInfo) => ({
