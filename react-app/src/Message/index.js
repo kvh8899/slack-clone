@@ -13,8 +13,14 @@ function Message({ user }) {
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
   const [channelName, setChannelName] = useState('')
+  const [showForm, setShowForm] = useState(false)
 
+  const handleChannelSubmit = async e => {
+    e.preventDefault()
 
+    // const data = await dispatch(editChannel(channelName, channelId))
+    // await dispatch(readChannels(channelId))
+  }
 
   const dispatch = useDispatch()
   // const channel = useSelector((state) => state.channelReducer)
@@ -55,9 +61,27 @@ function Message({ user }) {
     <div className="messageArea">
       <div className="title">
         <h2>Title</h2>
-        <button>
+        <button onClick={e => {
+                    e.preventDefault()
+                    setShowForm(!showForm)
+                  }
+                }
+        >
           Edit
         </button>
+        { showForm && (
+          <div>
+            <form className="editchannelnameform" onSubmit={ handleChannelSubmit }>
+              <input
+                type='text'
+                placeholder={"New Channel Name"}
+                required
+                value={channelName}
+                onChange={e => setChannelName(e.target.value)}
+              />
+            </form>
+          </div>
+        )}
       </div>
       <div className="messages">
         <div>
