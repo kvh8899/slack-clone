@@ -1,12 +1,12 @@
 import "./channelList.css";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { readChannels, removeChannel } from "../store/channels";
 import { setName } from "../store/currentChannel";
 import { useNavigate } from "react-router-dom";
 
-function ChannelList() {
+function ChannelList({setSelectedChannel,setSelectedChannelId}) {
   const hist = useNavigate();
   const specificChannel = useRef([]);
   const { id, channelId } = useParams();
@@ -28,6 +28,7 @@ function ChannelList() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     e.stopPropagation();
+    hist(`/organizations/${id}/channels/${channels[0].id}`)
     await dispatch(removeChannel(e.target.id));
   };
   useEffect(() => {
@@ -59,6 +60,8 @@ function ChannelList() {
                   dispatch(
                     setName(specificChannel.current[i].children[0].innerHTML)
                   );
+                  setSelectedChannel(channel.name)
+                  setSelectedChannelId(channel.id)
                   hist(
                     `/organizations/${id}/channels/${specificChannel.current[i].id}`
                   );

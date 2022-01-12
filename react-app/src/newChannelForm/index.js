@@ -2,14 +2,13 @@ import { offAction } from "../store/showForm";
 import { postChannel } from "../store/channels";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
-import { useParams } from "react-router";
+import { useParams ,useNavigate} from "react-router";
 import "./newchannelform.css";
 function NewChannelForm() {
   const dispatch = useDispatch();
   const {id} = useParams();
   const showForm = useSelector((state) => state.showFormReducer);
   const [channelName, setChannelName] = useState("");
-
   const createChannel = async (e) => {
     await dispatch(postChannel(id, channelName));
   };

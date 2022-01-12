@@ -1,16 +1,14 @@
 import "./message.css";
 import { useState, useEffect, useRef } from "react";
 import io from "socket.io-client";
-import { editChannelThunk, readChannels, removeChannel } from "../store/channels";
+import { editChannelThunk } from "../store/channels";
 import { useDispatch, useSelector } from "react-redux";
-import { useSearchParams } from "react-router-dom";
-import {setName} from "../store/currentChannel"
 // must use http here
 //"https://<herokuname>.herokuapp.com" for heroku
 let endPoint = "http://localhost:5000";
 let socket;
 
-function Message({ user, selectedChannel, selectedChannelId, setSelectedChannel }) {
+function Message({ user,selectedChannelId, setSelectedChannel }) {
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
   const [channelName, setChannelName] = useState('')
