@@ -51,7 +51,7 @@ function ChannelList({ setSelectedChannel, setSelectedChannelId }) {
                 <div
                   ref={(e) => (specificChannel.current[i] = e)}
                   key={channel.id}
-                  className={`${channel.name} singleChannel`}
+                  className={`${channel.name}`}
                   id={channel.id}
                   onClick={() => {
                     setSelectedChannel(specificChannel.current[i].classList[0]);
@@ -59,7 +59,7 @@ function ChannelList({ setSelectedChannel, setSelectedChannelId }) {
                     hist(
                       `?${createSearchParams({
                         channel: `${specificChannel.current[i].id}`,
-                        channelName: `${specificChannel.current[i].classList[0]}`
+                        channelName: `${specificChannel.current[i].classList}`
                       })}`
                     );
                   }}
