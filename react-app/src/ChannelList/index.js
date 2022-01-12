@@ -24,13 +24,13 @@ function ChannelList() {
     }
 
     useEffect(() => {
-        loadChannels();
-    }, [dispatch]);
+        loadChannels()
+    }, [dispatch])
 
     const editToggle = () => {
-        if (showForm === true) return;
-        if (showEdit === false) return setShowEdit(true);
-        if (showEdit === true) return setShowEdit(false);
+        if (showForm === true) return
+        if (showEdit === false) return setShowEdit(true)
+        if (showEdit === true) return setShowEdit(false)
     }
 
     const formToggle = () => {
