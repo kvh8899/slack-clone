@@ -8,7 +8,6 @@ function SingleMember({ username }) {
     return (
         <>
             <div className="membername">{username}</div>
-            <h1>hiii</h1>
         </>
     );
 }

@@ -46,10 +46,11 @@ function Search() {
             <div className="membercontainer">
                 <ul >
                     {filteredMembers && (filteredMembers.map(member => {
-                        < li key={member.id} >
-                            <SingleMember username={member.username} />
-                            <p>{member.username}</p>
-                        </li>
+                        return (
+                            < li key={member.id} >
+                                <SingleMember username={member.username} />
+                            </li>
+                        )
                         console.log(member.username)
                     })
                     )}

@@ -3,9 +3,8 @@
     color:rgb(212, 212, 212);
     padding: 5px;
     margin: 5px;
-    width:200%;
+    width: 200%;
     border-radius:10px;
-    z-index: 100;
 }
 
 .member {
