@@ -7,7 +7,7 @@ import { readChannels } from "../store/channels";
 function ChannelList() {
     const { id } = useParams()
     const dispatch = useDispatch();
-    const channels = useSelector((state) => state.channelReducer.channels);
+    const channels = useSelector((state) => state.channelReducer);
 
     async function loadChannels() {
         await dispatch(readChannels(id))

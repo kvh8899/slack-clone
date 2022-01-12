@@ -4,13 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { editOrg, getOrg } from "../store/orgmainchat";
 import { useParams } from "react-router";
 import NewChannel from "../newChannel";
-import { useEffect } from "react";
 import "./messagebar.css";
-import { useRef } from "react"
-import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { removeWorkspace } from "../store/organizations";
-
 import { editChannelThunk, postChannel, readChannels, removeChannel } from "../store/channels";
 import ChannelList from "../ChannelList";
 

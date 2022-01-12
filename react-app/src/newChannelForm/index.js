@@ -26,11 +26,11 @@ function NewChannelForm() {
       {showForm && (
         <form
           className="channelForm"
-          onSubmit={(e) => {
+          onSubmit={async(e) => {
               e.preventDefault();
             if (channelName){
                 dispatch(offAction());
-                createChannel()
+                await createChannel()
             }
             setChannelName("");
           }}
