@@ -4,15 +4,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { getOrg } from "../store/orgmainchat";
 import { useParams } from "react-router";
 import NewChannel from "../newChannel";
-import "./messagebar.css";
 import { useNavigate } from "react-router-dom";
-import {
-  editChannelThunk,
-  postChannel,
-  readChannels,
-  removeChannel,
-} from "../store/channels";
 import ChannelList from "../ChannelList";
+import "./messagebar.css";
 
 function MessageBar() {
   const [showEdit, setShowEdit] = useState(false);
@@ -33,24 +27,29 @@ function MessageBar() {
   const input = useRef(null);
   const [orgName, setOrgName] = useState("");
   const [errors, setErrors] = useState([]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     formToggle();
     setShowEdit(false);
     const data = await dispatch(editOrgThunk(orgName, id));
+
     await dispatch(getOrg(id));
     if (data) {
       return setErrors(data);
     }
   };
+
   useEffect(() => {
     dispatch(getOrg(id));
   }, []);
+
   const editToggle = () => {
     if (showForm === true) return;
     if (showEdit === false) return setShowEdit(true);
     if (showEdit === true) return setShowEdit(false);
   };
+
   const formToggle = () => {
     if (showForm === false) {
       setShowh2(false);
