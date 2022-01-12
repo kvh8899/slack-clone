@@ -21,7 +21,7 @@ function Search() {
 
         return members.filter((member) => {
             const memberName = member.username.toLowerCase();
-            return memberName.includes(query.toLowerCase());
+            return memberName.includes(query);
         });
     };
     const onSubmit = e => {
