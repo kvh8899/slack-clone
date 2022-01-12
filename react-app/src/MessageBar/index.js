@@ -135,7 +135,7 @@ function MessageBar() {
             {showChannelList && <ChannelList />}
           </div>
         </div>
-        <div className="channels height">
+        <div className="channels">
           <div>
             <div
               onClick={(e) => {
@@ -152,6 +152,7 @@ function MessageBar() {
             </div>
           </div>
         </div>
+        <div className="height"></div>
       </div>
     </div>
   );
