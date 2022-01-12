@@ -1,18 +1,11 @@
-import { editOrg, getOrg } from "../store/orgmainchat";
+import { getOrg } from "../store/orgmainchat";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router";
 import "./messagebar.css";
 import React, { useState, useRef,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
 import { removeWorkspace ,editOrgThunk } from "../store/organizations";
 
-import {
-  editChannelThunk,
-  postChannel,
-  readChannels,
-  removeChannel,
-} from "../store/channels";
 
 function MessageBar() {
   const [showEdit, setShowEdit] = useState(false);
