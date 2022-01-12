@@ -29,6 +29,7 @@ function ChannelList({ setSelectedChannel, setSelectedChannelId }) {
         specificChannel.current[i].classList.remove("selected");
         return;
       }
+      specificChannel.current[i].classList.remove("selected");
       specificChannel.current[i].classList.add("selected");
     });
   }
@@ -51,7 +52,7 @@ function ChannelList({ setSelectedChannel, setSelectedChannelId }) {
                   className={channel.name}
                   id={channel.id}
                   onClick={() => {
-                    setSelectedChannel(specificChannel.current[i].className);
+                    setSelectedChannel(specificChannel.current[i].classList[0]);
                     setSelectedChannelId(specificChannel.current[i].id);
                     hist(
                       `?${createSearchParams({
