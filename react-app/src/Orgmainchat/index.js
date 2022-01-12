@@ -82,7 +82,7 @@ function Orgmainchat() {
       </div>
       <div className="midContent1" onClick={awayClick}>
         <MessageBar setSelectedChannel={setSelectedChannel} setSelectedChannelId={setSelectedChannelId}/>
-        <Message user={userData} selectedChannel={selectedChannel} selectedChannelId={selectedChannelId}/>
+        <Message user={userData} setSelectedChannel={setSelectedChannel} selectedChannel={selectedChannel} selectedChannelId={selectedChannelId}/>
       </div>
     </div>
   );

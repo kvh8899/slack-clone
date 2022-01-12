@@ -10,7 +10,7 @@ import { useParams } from 'react-router'
 let endPoint = "https://zing-app.herokuapp.com";
 let socket;
 
-function Message({ user, selectedChannel, selectedChannelId }) {
+function Message({ user, selectedChannel, setSelectedChannel, selectedChannelId }) {
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
   const [channelName, setChannelName] = useState('')
@@ -23,11 +23,18 @@ function Message({ user, selectedChannel, selectedChannelId }) {
     e.preventDefault()
     setShowForm(false)
     setChannelName('')
+    // selectedChannel = channelName
+    setSelectedChannel(channelName)
+    console.log('insideHANDLESUBMIT', selectedChannel, channelName)
     await dispatch(editChannelThunk(channelName, selectedChannelId))
     await dispatch(readChannels(orgId))
   }
 
   // const channel = useSelector((state) => state.channelReducer)
+
+  useEffect(() => {
+
+  })
 
   useEffect(() => {
     dispatch(readChannels(orgId))
