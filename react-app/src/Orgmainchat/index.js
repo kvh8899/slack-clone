@@ -47,7 +47,7 @@ function Orgmainchat() {
       <div className="topBar" onClick={awayClick}>
         <div className="backbuttoncontainer">
           <button className="backbutton" onClick={backClick}>
-            Back To Organizations
+            Back To Workspaces
           </button>
         </div>
         <input placeholder={"Search"}></input>
