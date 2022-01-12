@@ -14,17 +14,15 @@ function ChannelList({ setSelectedChannel, setSelectedChannelId }) {
   const [channelParams] = useSearchParams();
   const hist = useNavigate();
   const specificChannel = useRef([]);
-  const { id } = useParams();
+  const { id ,channelId} = useParams();
   const dispatch = useDispatch();
   const channels = useSelector((state) => state.channelReducer);
   async function loadChannels() {
     await dispatch(readChannels(id));
   }
   function select() {
-    let current = channelParams.get("channel");
-
     specificChannel.current.forEach((e, i) => {
-      if (e.id !== current) {
+      if (e.id !== channelId) {
         specificChannel.current[i].classList.remove("selected");
         return;
       }
@@ -55,12 +53,8 @@ function ChannelList({ setSelectedChannel, setSelectedChannelId }) {
                   id={channel.id}
                   onClick={() => {
                     setSelectedChannel(specificChannel.current[i].classList[0]);
-                    setSelectedChannelId(specificChannel.current[i].id);
-                    hist(
-                      `?${createSearchParams({
-                        channel: `${specificChannel.current[i].id}`,
-                        channelName: `${specificChannel.current[i].classList[0]}`
-                      })}`
+                    setSelectedChannelId(channelId);
+                    hist(`/organizations/${id}/channels/${specificChannel.current[i].id}`
                     );
                   }}
                 >

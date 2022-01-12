@@ -31,7 +31,7 @@ function App() {
         <Route path="/" element={<Splash />}></Route>
         <Route path="/login" element={<AuthPage />}></Route>
         <Route path="/signup" element={<SignUp />}></Route>
-        <Route path="/organizations/:id" element={<Orgmainchat />}></Route>
+        <Route path="/organizations/:id/channels/:channelId" element={<Orgmainchat />}></Route>
         <Route path="/users/:id/organizations" element={<WorkspaceCreate />}></Route>
       </Routes>
   );
