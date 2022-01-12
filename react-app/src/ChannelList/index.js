@@ -10,14 +10,13 @@ function ChannelList() {
     const [showForm, setShowForm] = useState(false)
     const [showh3, setShowh3] = useState(true)
     const [channelName, setChannelName] = useState('')
-    const [channelId, setChannelId] = useState(null)
     const [errors, setErrors] = useState([])
 
     const input = useRef(null)
     const navigate = useNavigate()
     const { id } = useParams()
     const dispatch = useDispatch()
-    const channels = useSelector((state) => state.channelReducer.channels)
+    const channels = useSelector((state) => state.channelReducer)
 
     async function loadChannels() {
         await dispatch(readChannels(id))
@@ -48,7 +47,7 @@ function ChannelList() {
         setErrors([])
         formToggle()
         setShowEdit(false)
-        const data = await dispatch(editChannel(channelName, channelId))
+        const data = await dispatch(editChannel(channelName, e.target.id))
         await dispatch(readChannels(id))
         if (data) {
             return setErrors(data)
@@ -57,7 +56,7 @@ function ChannelList() {
 
     const channelDelete = async e => {
         e.preventDefault()
-        await dispatch(removeChannel(channelId))
+        await dispatch(removeChannel(e.target.id))
         navigate('/channels')
     }
 
@@ -67,7 +66,7 @@ function ChannelList() {
                 return (
                     <>
                         <div onClick={editToggle} className="singleChannel" key={channel.id}>
-                            <h3 onClick={setChannelId(channel.id)}># {showh3 && channel.name}</h3>
+                            <h3 id={ channel.id }># {showh3 && channel.name}</h3>
                             { showForm && (
                                 <div>
                                     <form className="editchannelform" onSubmit={ handleSubmit }>
