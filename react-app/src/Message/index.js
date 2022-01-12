@@ -50,7 +50,8 @@ function Message({ user }) {
                   <img src={user.profilePicture} alt="404"></img>
                 ) : (
                   <img
-                    src="https://avatars.slack-edge.com/2015-03-13/4045125376_172ec0a9d33356de3571_88.jpg"
+                    // src="https://avatars.slack-edge.com/2015-03-13/4045125376_172ec0a9d33356de3571_88.jpg"
+                    src="./aa_logo.png"
                     alt="404"
                   ></img>
                 )}
