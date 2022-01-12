@@ -6,6 +6,7 @@ import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../store/session";
 import NewChannelForm from "../newChannelForm";
+import Search from "../Search";
 
 function Orgmainchat() {
   const dispatch = useDispatch();
@@ -40,7 +41,8 @@ function Orgmainchat() {
       <NewChannelForm />
       <div className="topBar" onClick={awayClick}>
         <div></div>
-        <input placeholder={"Search"}></input>
+        {/* <input placeholder={"Search"}></input> */}
+        <Search />
         <div className="profile">
           {userData?.profilePicture ? (
             <img
