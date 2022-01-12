@@ -61,8 +61,8 @@ function Message({ user }) {
               </div>
             );
           })}
-          <p ref={dummyDiv}></p>
           <div className="space"></div>
+          <p ref={dummyDiv}></p>
         </div>
       </div>
       <div className="inputMessages">
