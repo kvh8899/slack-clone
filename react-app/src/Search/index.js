@@ -46,14 +46,9 @@ function Search() {
                 {searchQuery.length > 0 && <ul >
                     {searchQuery.length > 0 && (filteredMembers.map(member => {
                         return (
-                            <>
-                                < li key={member.id} >
-                                    <SingleMember username={member.username} />
-                                </li>
-                                <li>User 1</li>
-                                <li>User 2</li>
-                                <li>User 3</li>
-                            </>
+                            < li key={member.id} >
+                                <SingleMember username={member.username} />
+                            </li>
                         )
                     })
                     )}
