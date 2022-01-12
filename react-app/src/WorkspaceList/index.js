@@ -28,7 +28,7 @@ function WorkspaceList() {
             <div className="orgData" key={e.id}>
               <img
                 // src="https://avatars.slack-edge.com/2015-03-13/4045125376_172ec0a9d33356de3571_88.jpg"
-                src="./aa_logo.png"
+                src="https://cdn.discordapp.com/attachments/919391399269515305/930910536193933312/aa_logo.png"
                 alt="logo"
               ></img>
               <div>

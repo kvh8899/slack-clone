@@ -46,7 +46,9 @@ function Orgmainchat() {
       <NewChannelForm />
       <div className="topBar" onClick={awayClick}>
         <div className="backbuttoncontainer">
-          <button className="backbutton" onClick={backClick}>Back To Organizations</button>
+          <button className="backbutton" onClick={backClick}>
+            Back To Organizations
+          </button>
         </div>
         <input placeholder={"Search"}></input>
         <div className="profile">
@@ -59,7 +61,7 @@ function Orgmainchat() {
           ) : (
             <img
               // src="https://avatars.slack-edge.com/2015-03-13/4045125376_172ec0a9d33356de3571_88.jpg"
-              src="./aa_logo.png"
+              src="https://cdn.discordapp.com/attachments/919391399269515305/930910536193933312/aa_logo.png"
               alt="404"
               onClick={profClick}
             ></img>
