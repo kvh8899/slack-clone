@@ -6,17 +6,21 @@ import { useParams } from "react-router";
 import NewChannel from "../newChannel";
 import "./messagebar.css";
 import { useNavigate } from "react-router-dom";
-import { editChannelThunk, postChannel, readChannels, removeChannel } from "../store/channels";
+import {
+  editChannelThunk,
+  postChannel,
+  readChannels,
+  removeChannel,
+} from "../store/channels";
 import ChannelList from "../ChannelList";
 
-
 function MessageBar() {
-  const [showEdit, setShowEdit] = useState(false)
-  const [showForm, setShowForm] = useState(false)
-  const [showh2, setShowh2] = useState(true)
-  const [showChannelList, setShowChannelList] = useState(true)
-  const [channelName, setChannelName] = useState('')
-  const [editChannelName, setEditChannelName] = useState('')
+  const [showEdit, setShowEdit] = useState(false);
+  const [showForm, setShowForm] = useState(false);
+  const [showh2, setShowh2] = useState(true);
+  const [showChannelList, setShowChannelList] = useState(true);
+  const [channelName, setChannelName] = useState("");
+  const [editChannelName, setEditChannelName] = useState("");
 
   const caret = useRef(null);
   const dCaret = useRef(null);
@@ -32,15 +36,14 @@ function MessageBar() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     formToggle();
-    setShowEdit(false)
+    setShowEdit(false);
     const data = await dispatch(editOrg(orgName, id));
-    await dispatch(getOrg(id))
+    await dispatch(getOrg(id));
     if (data) {
       return setErrors(data);
     }
   };
   useEffect(() => {
-
     dispatch(getOrg(id));
   }, []);
   const editToggle = () => {
@@ -113,46 +116,41 @@ function MessageBar() {
           </div>
         )}
       </div>
-      <div className="channels">
-        <div onClick={(e) => {
-          caret.current.classList.toggle("side");
-          if (!showChannelList) setShowChannelList(true)
-          if (showChannelList) setShowChannelList(false)
-        }}>
-          <i
-            className="fas fa-caret-down"
-            ref={caret}
-          ></i>
-          <p>Channels</p>
-          {/* <button onClick={testRead}>show all channels</button>
-          <button onClick={testDelete}>delete a channel</button>
-          <form onSubmit={testEdit}>
-            <input
-              type="text"
-              placeholder={"Name"}
-              required
-              value={editChannelName}
-              onChange={(e) => setEditChannelName(e.target.value)}
-            />
-            <button>EDIT a channel</button>
-          </form>
- */}
-          < NewChannel />
+      <div className="channelContent">
+        <div className="channels">
+          <div>
+            <div
+              onClick={(e) => {
+                caret.current.classList.toggle("side");
+                if (!showChannelList) setShowChannelList(true);
+                if (showChannelList) setShowChannelList(false);
+              }}
+            >
+              <i className="fas fa-caret-down" ref={caret}></i>
+              <p>Channels</p>
+            </div>
+            <NewChannel />
+          </div>
+          <div className="ChannelList">
+            {showChannelList && <ChannelList />}
+          </div>
         </div>
-        <div className="ChannelList">
-          {showChannelList && <ChannelList />}
-        </div>
-      </div>
-      <div className="channels">
-        <div onClick={(e) => {
-          dCaret.current.classList.toggle("side");
-        }}>
-          <i
-            className="fas fa-caret-down"
-            ref={dCaret}
-          ></i>
-          <p>Direct Messages</p>
-          <i className="fas fa-plus"></i>
+        <div className="channels height">
+          <div>
+            <div
+              onClick={(e) => {
+                dCaret.current.classList.toggle("side");
+              }}
+            >
+              <i className="fas fa-caret-down" ref={dCaret}></i>
+              <p>Direct Messages</p>
+            </div>
+            <div className="addChannel">
+              <button>
+                <i className="fas fa-plus"></i>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

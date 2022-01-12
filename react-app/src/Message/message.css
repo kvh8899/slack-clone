@@ -32,7 +32,6 @@
     overflow:scroll;
     position:relative;
     width:100%;
-    height:100px;
     flex: 1 1 auto;
 }
 
