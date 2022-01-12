@@ -77,6 +77,7 @@ function ChannelList() {
         : null}
     </div>
   );
+
 }
 
 export default ChannelList;

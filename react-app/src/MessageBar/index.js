@@ -82,7 +82,7 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
   return (
     <div className="messageBar">
       <div onClick={editToggle} className="title">
-        {showh2 && <h2>{org.name}</h2>}
+        {showh2 && <h2>{org.name}</h2>} <i class="fas fa-ellipsis-v"></i>
         {showForm && (
           <div>
             <div>
