@@ -1,17 +1,14 @@
-import { editOrg, getOrg } from "../store/orgmainchat";
+import { removeWorkspace, editOrgThunk } from "../store/organizations";
+import React, { useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { editOrg, getOrg } from "../store/orgmainchat";
 import { useParams } from "react-router";
-import { useEffect } from "react";
+import NewChannel from "../newChannel";
 import "./messagebar.css";
-import { useRef } from "react"
-
-import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-import { removeWorkspace } from "../store/organizations";
-
 import { editChannelThunk, postChannel, readChannels, removeChannel } from "../store/channels";
 import ChannelList from "../ChannelList";
+
 
 function MessageBar() {
   const [showEdit, setShowEdit] = useState(false)
@@ -34,7 +31,6 @@ function MessageBar() {
   const [errors, setErrors] = useState([]);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setErrors([]);
     formToggle();
     setShowEdit(false)
     const data = await dispatch(editOrg(orgName, id));
@@ -44,8 +40,9 @@ function MessageBar() {
     }
   };
   useEffect(() => {
-    dispatch(getOrg(id))
-  }, [])
+
+    dispatch(getOrg(id));
+  }, []);
   const editToggle = () => {
     if (showForm === true) return;
     if (showEdit === false) return setShowEdit(true);
@@ -64,10 +61,6 @@ function MessageBar() {
   // const testRead = (e) => {
   //   e.preventDefault()
   //   dispatch(readChannels(id))
-  // }
-  // const testCreate = async (e) => {
-  //   e.preventDefault()
-  //   await dispatch(postChannel(id, channelName))
   // }
   // const testDelete = async (e) => {
   //   e.preventDefault()
@@ -132,16 +125,6 @@ function MessageBar() {
           ></i>
           <p>Channels</p>
           {/* <button onClick={testRead}>show all channels</button>
-          <form onSubmit={testCreate}>
-            <input
-              type="text"
-              placeholder={"Name"}
-              required
-              value={channelName}
-              onChange={(e) => setChannelName(e.target.value)}
-            />
-            <button>create a channel</button>
-          </form>
           <button onClick={testDelete}>delete a channel</button>
           <form onSubmit={testEdit}>
             <input
@@ -154,6 +137,7 @@ function MessageBar() {
             <button>EDIT a channel</button>
           </form>
  */}
+          < NewChannel />
         </div>
         <div className="ChannelList">
           {showChannelList && <ChannelList />}
@@ -168,6 +152,7 @@ function MessageBar() {
             ref={dCaret}
           ></i>
           <p>Direct Messages</p>
+          <i className="fas fa-plus"></i>
         </div>
       </div>
     </div>

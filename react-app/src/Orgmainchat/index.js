@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../store/session";
+import NewChannelForm from "../newChannelForm";
 
 function Orgmainchat() {
   const dispatch = useDispatch();
@@ -36,26 +37,47 @@ function Orgmainchat() {
   }
   return (
     <div className="content">
+      <NewChannelForm />
       <div className="topBar" onClick={awayClick}>
-      <div></div>
-      <input placeholder={"Search"}></input>
-      <div className="profile">
-            {userData?.profilePicture ? <img src={userData.profilePicture} alt="404" onClick={profClick}></img>:<img src="https://avatars.slack-edge.com/2015-03-13/4045125376_172ec0a9d33356de3571_88.jpg" alt="404" onClick={profClick}></img>}
-            <div className="profMenu settings" ref={profDiv} onClick={(e) =>{
-              e.stopPropagation()
-            }}>
-              <button onClick={async() => {
-                await dispatch(logout())
-                hist("/")
-              }}>Sign Out</button>
-            </div>
+        <div></div>
+        <input placeholder={"Search"}></input>
+        <div className="profile">
+          {userData?.profilePicture ? (
+            <img
+              src={userData.profilePicture}
+              alt="404"
+              onClick={profClick}
+            ></img>
+          ) : (
+            <img
+              src="https://avatars.slack-edge.com/2015-03-13/4045125376_172ec0a9d33356de3571_88.jpg"
+              alt="404"
+              onClick={profClick}
+            ></img>
+          )}
+          <div
+            className="profMenu settings"
+            ref={profDiv}
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
+          >
+            <button
+              onClick={async () => {
+                await dispatch(logout());
+                hist("/");
+              }}
+            >
+              Sign Out
+            </button>
           </div>
-      </div>
-        <div className="midContent1" onClick={awayClick}>
-          <MessageBar />
-          <Message user={userData}/>
         </div>
       </div>
+      <div className="midContent1" onClick={awayClick}>
+        <MessageBar />
+        <Message user={userData} />
+      </div>
+    </div>
   );
 }
 
