@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 let endPoint = "https://zing-app.herokuapp.com";
 let socket;
 
-function Message({ user, channel }) {
+function Message({ user, selectedChannel }) {
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
   const [channelName, setChannelName] = useState('')
@@ -61,7 +61,7 @@ function Message({ user, channel }) {
   return (
     <div className="messageArea">
       <div className="title">
-        <h2>{ channel ? channel.name : 'Title' }</h2>
+        <h2>{ selectedChannel ? selectedChannel : 'Title' }</h2>
         <button onClick={e => {
                     e.preventDefault()
                     setShowForm(!showForm)

@@ -5,7 +5,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { editChannel, readChannels, removeChannel } from "../store/channels";
 import { useNavigate } from 'react-router-dom'
 
-function ChannelList() {
+function ChannelList({ setSelectedChannel }) {
     // const [showEdit, setShowEdit] = useState(false)
     const [showForm, setShowForm] = useState(false)
     // const [showh3, setShowh3] = useState(true)
@@ -81,7 +81,7 @@ function ChannelList() {
                             key={channel.id}
                         >
                             <h3
-                                // onClick={setChannelName(channel.name)}
+                                onClick={setSelectedChannel(channel.name)}
                             ># { channel.name }</h3>
                             {/* <button
                                 id={ channel.id }
