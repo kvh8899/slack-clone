@@ -28,7 +28,7 @@ function ChannelList() {
             return (
               <div className="singleChannel" key={channel.id}>
                 <h3># {channel.name}</h3>
-                <i class="fas fa-trash-alt" onClick={handleSubmit} id={channel.id}></i>
+                <i className="fas fa-trash-alt" onClick={handleSubmit} id={channel.id}></i>
               </div>
             );
           })

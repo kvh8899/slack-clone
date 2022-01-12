@@ -39,6 +39,7 @@
     width: 100%;
 }
 .messages div{
+    max-height: 100px;
     margin-left:10px;
 }
 .message{
@@ -54,7 +55,7 @@
 }
 .message div p{
     margin:0px;
-    width:600px;
+    width:100%;
     overflow-wrap:break-word;
 }
 .message div h3{
@@ -62,4 +63,7 @@
     margin-bottom:5px;
     font-size:15px;
 }
-
+.space{
+    height:10px;
+    width:25px;
+}
