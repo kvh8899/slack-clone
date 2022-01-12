@@ -28,7 +28,6 @@ function ChannelList({ setSelectedChannel, setSelectedChannelId }) {
       {channels
         ? channels?.map((channel, i) => {
             return (
-              <>
                 <div
                   ref={(e) => (specificChannel.current[i] = e)}
                   key={channel.id}
@@ -43,6 +42,7 @@ function ChannelList({ setSelectedChannel, setSelectedChannelId }) {
                   }}
                 >
                   <h3
+                    key={i}
                     onClick={() => {
                       setChannelName(specificChannel.current[i].className);
                     }}
@@ -50,7 +50,6 @@ function ChannelList({ setSelectedChannel, setSelectedChannelId }) {
                     # {channel.name}
                   </h3>
                 </div>
-              </>
             );
           })
         : null}

@@ -28,21 +28,23 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
   const session = useSelector((state) => state.session.user);
   const input = useRef(null);
   const [orgName, setOrgName] = useState("");
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState([])
+
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    formToggle();
+    e.preventDefault()
+    formToggle()
     setShowEdit(false)
     const data = await dispatch(editOrg(orgName, id));
     await dispatch(getOrg(id))
     if (data) {
       return setErrors(data);
     }
-  };
-  useEffect(() => {
+  }
 
+  useEffect(() => {
     dispatch(getOrg(id));
-  }, []);
+  }, [])
+
   const editToggle = () => {
     if (showForm === true) return;
     if (showEdit === false) return setShowEdit(true);
