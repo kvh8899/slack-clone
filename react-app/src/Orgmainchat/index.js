@@ -24,6 +24,7 @@ function Orgmainchat() {
   useEffect(() => {
     if (session) getUserData(session.id);
   }, [session]);
+  
   function profClick(e) {
     e.stopPropagation();
     profDiv.current.classList.toggle("settings");
