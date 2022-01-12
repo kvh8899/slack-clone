@@ -6,9 +6,12 @@ import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../store/session";
 import NewChannelForm from "../newChannelForm";
+import Search from "../Search";
+
 import { readChannels } from "../store/channels";
 import {useParams} from "react-router-dom";
 import {setName} from "../store/currentChannel"
+
 function Orgmainchat() {
   const [selectedChannel, setSelectedChannel] = useState('')
   const [selectedChannelId, setSelectedChannelId] = useState('')
@@ -57,7 +60,7 @@ function Orgmainchat() {
             Back To Workspaces
           </button>
         </div>
-        <input placeholder={"Search"}></input>
+        <Search />
         <div className="profile">
           {userData?.profilePicture ? (
             <img
