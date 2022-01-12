@@ -25,36 +25,40 @@ function Search() {
         });
     };
     const onSubmit = e => {
-        e.preventDefault()
+        // e.preventDefault()
         // history.push(`/organizations/${id}/?s=${searchQuery}`)
     };
 
     const filteredMembers = filterMembers(members, searchQuery)
     return (
         <>
-            <form autoComplete="off" onSubmit={onsubmit} action="/" method="get">
-                <input
-                    value={searchQuery}
-                    onInput={e => setSearchQuery(e.target.value)}
-                    className="searchbar"
-                    type="text"
-                    id="header-search"
-                    placeholder="Search Users"
-                    name="s"
-                />
-            </form>
+            <input
+                value={searchQuery}
+                onInput={e => setSearchQuery(e.target.value)}
+                className="searchbar"
+                type="text"
+                id="header-search"
+                placeholder="Search Users"
+                name="s"
+                autoComplete="off"
+            />
             <div className="membercontainer">
-                <ul >
-                    {filteredMembers && (filteredMembers.map(member => {
+                {searchQuery.length > 0 && <ul >
+                    {searchQuery.length > 0 && (filteredMembers.map(member => {
                         return (
-                            < li key={member.id} >
-                                <SingleMember username={member.username} />
-                            </li>
+                            <>
+                                < li key={member.id} >
+                                    <SingleMember username={member.username} />
+                                </li>
+                                <li>User 1</li>
+                                <li>User 2</li>
+                                <li>User 3</li>
+                            </>
                         )
-                        console.log(member.username)
                     })
                     )}
                 </ul>
+                }
             </div>
         </>
     );

@@ -40,8 +40,7 @@ function Orgmainchat() {
     <div className="content">
       <NewChannelForm />
       <div className="topBar" onClick={awayClick}>
-        <div></div>
-        {/* <input placeholder={"Search"}></input> */}
+        <div>Back To Organizations</div>
         <Search />
         <div className="profile">
           {userData?.profilePicture ? (
