@@ -59,6 +59,7 @@ function ChannelList({ setSelectedChannel, setSelectedChannelId }) {
                     hist(
                       `?${createSearchParams({
                         channel: `${specificChannel.current[i].id}`,
+                        channelName: `${specificChannel.current[i].classList[0]}`
                       })}`
                     );
                   }}
