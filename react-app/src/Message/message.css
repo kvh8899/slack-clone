@@ -29,7 +29,7 @@
     height:50px;
 }
 .messages{
-    overflow:scroll;
+    overflow:hidden;
     position:relative;
     width:100%;
     flex: 1 1 auto;
