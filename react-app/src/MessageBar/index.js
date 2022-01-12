@@ -1,7 +1,7 @@
 import { removeWorkspace, editOrgThunk } from "../store/organizations";
 import React, { useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { editOrg, getOrg } from "../store/orgmainchat";
+import { getOrg } from "../store/orgmainchat";
 import { useParams } from "react-router";
 import NewChannel from "../newChannel";
 import "./messagebar.css";
@@ -37,7 +37,7 @@ function MessageBar() {
     e.preventDefault();
     formToggle();
     setShowEdit(false);
-    const data = await dispatch(editOrg(orgName, id));
+    const data = await dispatch(editOrgThunk(orgName, id));
     await dispatch(getOrg(id));
     if (data) {
       return setErrors(data);
