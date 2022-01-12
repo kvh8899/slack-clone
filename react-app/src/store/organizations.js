@@ -1,3 +1,4 @@
+import { postChannel } from "./channels";
 const SET_WORKSPACES = "workspaces/SET_WORKSPACES";
 const ADD_WORKSPACE = "workspaces/ADD_WORKSPACE";
 const EDIT_ORG = "workspaces/EDIT_ORG";
@@ -61,6 +62,7 @@ export const addWorkspaces = (name) => async (dispatch) => {
   });
   const data = await response.json();
   dispatch(addWorkspace(data));
+  await dispatch(postChannel(data.id,"General"))
   return data;
 };
 

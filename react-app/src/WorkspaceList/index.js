@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getWorkspaces } from "../store/organizations";
-
+import { readChannels , postChannel} from "../store/channels";
+import{setName} from "../store/currentChannel"
 function WorkspaceList() {
   const hist = useNavigate();
   // get orgs from database and use map
@@ -36,9 +37,11 @@ function WorkspaceList() {
                 <p>{e?.members?.length} Members</p>
               </div>
               <button
-                onClick={() => {
+                onClick={async() => {
                   //redirect to proper workspace page
-                  hist(`/organizations/${e?.id}`);
+                  const channels = await dispatch(readChannels(e?.id));
+                  dispatch(setName(channels.channels[0].name))
+                  hist(`/organizations/${e?.id}/channels/${channels.channels[0].id}`);
                 }}
               >
                 LAUNCH ZING
