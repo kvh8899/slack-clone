@@ -40,7 +40,6 @@ function Orgmainchat() {
     <div className="content">
       <NewChannelForm />
       <div className="topBar" onClick={awayClick}>
-        <div>Back To Organizations</div>
         <Search />
         <div className="profile">
           {userData?.profilePicture ? (
