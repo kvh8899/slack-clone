@@ -3,15 +3,14 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState, useRef } from "react";
 import { editChannel, readChannels, removeChannel } from "../store/channels";
-import { useNavigate } from "react-router-dom";
+import { useNavigate ,createSearchParams} from "react-router-dom";
 
 function ChannelList({ setSelectedChannel, setSelectedChannelId }) {
   const [showForm, setShowForm] = useState(false);
   const [channelName, setChannelName] = useState("");
   const [errors, setErrors] = useState([]);
-
+  const hist = useNavigate();
   const specificChannel = useRef([]);
-  const navigate = useNavigate();
   const { id } = useParams();
   const dispatch = useDispatch();
   const channels = useSelector((state) => state.channelReducer);
@@ -42,6 +41,9 @@ function ChannelList({ setSelectedChannel, setSelectedChannelId }) {
                   id={channel.id}
                   onClick={() => {
                     setSelectedChannel(specificChannel.current[i].className);
+                    hist(`?${createSearchParams({
+                        channel: `${specificChannel.current[i].className}`
+                    })}`)
                   }}
                 >
                   <h3
