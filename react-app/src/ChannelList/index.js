@@ -70,19 +70,23 @@ function ChannelList({ setSelectedChannel }) {
     //     navigate('/channels')
     // }
 
+    const channelClick = (e) => {
+        e.preventDefault()
+        setSelectedChannel(e.target.className)
+    }
+
     return (
         <div className="channelContainer">
             {channels ? channels.map((channel) => {
                 return (
                     <>
                         <div
-                            // onClick={editToggle}
-                            className="singleChannel"
                             key={channel.id}
+                            className={channel.name}
+                            id={channel.id}
+                            onClick={channelClick}
                         >
-                            <h3
-                                onClick={setSelectedChannel(channel.name)}
-                            ># { channel.name }</h3>
+                            <h3># { channel.name }</h3>
                             {/* <button
                                 id={ channel.id }
                                 onClick={e => {
