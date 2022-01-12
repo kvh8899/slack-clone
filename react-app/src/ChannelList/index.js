@@ -33,6 +33,10 @@ function ChannelList({ setSelectedChannel, setSelectedChannelId }) {
       specificChannel.current[i].classList.add("selected");
     });
   }
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    await dispatch(removeChannel(e.target.id));
+  }
   useEffect(() => {
     loadChannels();
     specificChannel.current.slice(0, channels.length);
@@ -48,7 +52,7 @@ function ChannelList({ setSelectedChannel, setSelectedChannelId }) {
                 <div
                   ref={(e) => (specificChannel.current[i] = e)}
                   key={channel.id}
-                  className={channel.name}
+                  className=`${channel.name} singleChannel`
                   id={channel.id}
                   onClick={() => {
                     setSelectedChannel(specificChannel.current[i].classList[0]);
@@ -67,6 +71,7 @@ function ChannelList({ setSelectedChannel, setSelectedChannelId }) {
                   >
                     # {channel.name}
                   </h3>
+                <i className="fas fa-trash-alt" onClick={handleSubmit} id={channel.id}></i>
                 </div>
             );
           })

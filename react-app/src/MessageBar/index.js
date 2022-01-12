@@ -1,14 +1,12 @@
 import { removeWorkspace, editOrgThunk } from "../store/organizations";
 import React, { useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { editOrg, getOrg } from "../store/orgmainchat";
+import { getOrg } from "../store/orgmainchat";
 import { useParams } from "react-router";
 import NewChannel from "../newChannel";
-import "./messagebar.css";
 import { useNavigate } from "react-router-dom";
-import { editChannelThunk, postChannel, readChannels, removeChannel } from "../store/channels";
 import ChannelList from "../ChannelList";
-
+import "./messagebar.css";
 
 function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
   const [showEdit, setShowEdit] = useState(false)
@@ -29,25 +27,29 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
   const input = useRef(null);
   const [orgName, setOrgName] = useState("");
   const [errors, setErrors] = useState([]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     formToggle();
-    setShowEdit(false)
-    const data = await dispatch(editOrg(orgName, id));
-    await dispatch(getOrg(id))
+    setShowEdit(false);
+    const data = await dispatch(editOrgThunk(orgName, id));
+
+    await dispatch(getOrg(id));
     if (data) {
       return setErrors(data);
     }
   };
-  useEffect(() => {
 
+  useEffect(() => {
     dispatch(getOrg(id));
   }, []);
+
   const editToggle = () => {
     if (showForm === true) return;
     if (showEdit === false) return setShowEdit(true);
     if (showEdit === true) return setShowEdit(false);
   };
+
   const formToggle = () => {
     if (showForm === false) {
       setShowh2(false);
@@ -113,47 +115,43 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
           </div>
         )}
       </div>
-      <div className="channels">
-        <div onClick={(e) => {
-          caret.current.classList.toggle("side");
-          if (!showChannelList) setShowChannelList(true)
-          if (showChannelList) setShowChannelList(false)
-        }}>
-          <i
-            className="fas fa-caret-down"
-            ref={caret}
-          ></i>
-          <p>Channels</p>
-          {/* <button onClick={testRead}>show all channels</button>
-          <button onClick={testDelete}>delete a channel</button>
-          <form onSubmit={testEdit}>
-            <input
-              type="text"
-              placeholder={"Name"}
-              required
-              value={editChannelName}
-              onChange={(e) => setEditChannelName(e.target.value)}
-            />
-            <button>EDIT a channel</button>
-          </form>
- */}
-          < NewChannel />
+      <div className="channelContent">
+        <div className="channels">
+          <div>
+            <div
+              onClick={(e) => {
+                caret.current.classList.toggle("side");
+                if (!showChannelList) setShowChannelList(true);
+                if (showChannelList) setShowChannelList(false);
+              }}
+            >
+              <i className="fas fa-caret-down" ref={caret}></i>
+              <p>Channels</p>
+            </div>
+            <NewChannel />
+          </div>
+          <div className="ChannelList">
+            {showChannelList && <ChannelList setSelectedChannel={setSelectedChannel} setSelectedChannelId={setSelectedChannelId}/>}
+          </div>
         </div>
-        <div className="ChannelList">
-          {showChannelList && <ChannelList setSelectedChannel={setSelectedChannel} setSelectedChannelId={setSelectedChannelId} />}
+        <div className="channels">
+          <div>
+            <div
+              onClick={(e) => {
+                dCaret.current.classList.toggle("side");
+              }}
+            >
+              <i className="fas fa-caret-down" ref={dCaret}></i>
+              <p>Direct Messages</p>
+            </div>
+            <div className="addChannel">
+              <button>
+                <i className="fas fa-plus"></i>
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
-      <div className="channels">
-        <div onClick={(e) => {
-          dCaret.current.classList.toggle("side");
-        }}>
-          <i
-            className="fas fa-caret-down"
-            ref={dCaret}
-          ></i>
-          <p>Direct Messages</p>
-          <i className="fas fa-plus"></i>
-        </div>
+        <div className="height"></div>
       </div>
     </div>
   );

@@ -6,31 +6,12 @@ const getOneOrg = data => ({
     data
 })
 
-const updateOrg = org => ({
-    type: EDIT_ORG,
-    org
-})
-
 export const getOrg = (id) => async dispatch => {
     const res = await fetch(`/api/organizations/${id}`)
     if (res.ok) {
         const data = await res.json()
         dispatch(getOneOrg(data))
         return data
-    }
-}
-
-export const editOrg = data => async dispatch => {
-    const res = await fetch(`/api/organizations/edit/${data.id}`, {
-        method: "PUT",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data),
-    })
-    if (res.ok) {
-        const org = await res.json()
-        dispatch(updateOrg(org))
     }
 }
 

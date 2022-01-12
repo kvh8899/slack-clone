@@ -40,13 +40,18 @@ function Orgmainchat() {
     if (!flag) profDiv.current.classList.toggle("settings");
   }
 
-
+  const backClick = (e) => {
+    e.preventDefault()
+    hist('/organization')
+  }
 
   return (
     <div className="content">
       <NewChannelForm />
       <div className="topBar" onClick={awayClick}>
-        <div></div>
+        <div className="backbuttoncontainer">
+          <button className="backbutton" onClick={backClick}>Back To Organizations</button>
+        </div>
         <input placeholder={"Search"}></input>
         <div className="profile">
           {userData?.profilePicture ? (

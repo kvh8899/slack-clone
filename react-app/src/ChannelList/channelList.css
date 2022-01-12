@@ -1,11 +1,13 @@
 .channelContainer {
     display: flex;
     flex-direction: column;
+    margin-left:20px;
 }
 
 .singleChannel div{
     border-top: 2px solid grey;
     border-bottom: 2px solid grey;
+    
 }
 
 .channelContainer > div {

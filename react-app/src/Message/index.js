@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 // must use http here
 //"https://<herokuname>.herokuapp.com" for heroku
-let endPoint = "https://zing-app.herokuapp.com";
+let endPoint = "http://localhost:5000";
 let socket;
 
 function Message({ user, selectedChannel, selectedChannelId }) {
@@ -104,6 +104,7 @@ function Message({ user, selectedChannel, selectedChannelId }) {
               </div>
             );
           })}
+          <div className="space"></div>
           <p ref={dummyDiv}></p>
         </div>
       </div>

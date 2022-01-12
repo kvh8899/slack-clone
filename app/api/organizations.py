@@ -96,3 +96,22 @@ def newChannel(orgId):
         db.session.commit()
         return channel.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
+# ADD Member to Organization
+@organization_routes.route('/<int:organizationId>/members/<int:memberId>', methods=['POST'])
+@login_required
+def addMember(orgId, memberId):
+    userId = memberId
+    user = User.query.get(int(userId))
+    org = Organization.query.get(int(orgId))
+    if user and user not in org.members:
+        member = Member(
+            user_id = userId,
+            orgId = orgId
+        )
+        db.session.add(member)
+        db.session.commit()
+        return org.to_dict()
+
+    return {'error': "Cannot add member"}
