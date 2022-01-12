@@ -19,7 +19,7 @@
     width:100%;
     border-bottom: 1px solid rgba(54,55,59,1);
 }
-.topBar > .searchbar{
+.topBar > input{
     background-color:#38373c;
     color:rgb(212, 212, 212);
     padding: 5px;
