@@ -17,3 +17,7 @@
     cursor: pointer;
     background-color: rgb(41, 36, 87);
 }
+
+.selected{
+    background-color:lightskyblue;
+}
