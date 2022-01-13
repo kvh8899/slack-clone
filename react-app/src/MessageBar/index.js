@@ -103,6 +103,7 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
                 onChange={(e) => setOrgName(e.target.value)}
               />
             </form>
+
           </div>
         )} */}
       </div>
@@ -135,7 +136,7 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
             <NewChannel />
           </div>
           {/* <div className="ChannelList"> */}
-          {showChannelList && <ChannelList setSelectedChannel={setSelectedChannel} setSelectedChannelId={setSelectedChannelId}/>}
+          {showChannelList && <ChannelList setSelectedChannel={setSelectedChannel} setSelectedChannelId={setSelectedChannelId} />}
           {/* </div> */}
         </div>
         <div className="channels">
