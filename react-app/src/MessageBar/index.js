@@ -91,9 +91,9 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
                   <input
                     type="text"
                     ref={input}
-                    placeholder={"New Name"}
+                    placeholder={org.name}
                     required
-                    value={org.name}
+                    value={orgName}
                     onChange={(e) => setOrgName(e.target.value)}
                   />
                 </form>
@@ -131,7 +131,7 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
             <NewChannel />
           </div>
           {/* <div className="ChannelList"> */}
-          {showChannelList && <ChannelList setSelectedChannel={setSelectedChannel} setSelectedChannelId={setSelectedChannelId}/>}
+          {showChannelList && <ChannelList setSelectedChannel={setSelectedChannel} setSelectedChannelId={setSelectedChannelId} />}
           {/* </div> */}
         </div>
         <div className="channels">
