@@ -24,6 +24,7 @@ function Message({ user }) {
     await dispatch(editChannelThunk(channelName, channelId))
   }
   const dummyDiv = useRef(null);
+  
   useEffect(() => {
     socket = io(`${endPoint}`);
     getMessages();
@@ -34,7 +35,7 @@ function Message({ user }) {
 
   const getMessages = () => {
     socket.once("message", async(msg) => {
-      await dispatch(createOneMessage(channelId,msg))
+      //create msg
       dummyDiv.current.scrollIntoView(false);
     });
   };
@@ -103,8 +104,9 @@ function Message({ user }) {
       </div>
       <div className="inputMessages">
         <form
-          onSubmit={(e) => {
+          onSubmit={async(e) => {
             e.preventDefault();
+            await dispatch(createOneMessage(channelId,message))
             onClick();
           }}
         >

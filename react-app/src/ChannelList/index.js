@@ -26,18 +26,13 @@ function ChannelList() {
       specificChannel.current[i]?.classList.add("selected");
     });
   }
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    hist(`/organizations/${id}/channels/${channels[0].id}`)
-    await dispatch(removeChannel(e.target.id));
-  };
+  
   useEffect(() => {
     loadChannels();
     specificChannel.current.slice(0, channels.length);
   }, [dispatch]);
   useEffect(() => {
-    select();
+    select()
   });
   useEffect(() => {
     channels.forEach((e) => {
@@ -70,7 +65,20 @@ function ChannelList() {
                 <h3># {channel.name}</h3>
                 {channels.length > 1?<i
                   className="fas fa-trash-alt"
-                  onClick={handleSubmit}
+                  onClick={ async (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    await dispatch(removeChannel(e.target.id));
+                    if(!(channelId === e.target.id)) return;
+                    for(let i = 0; i < channels.length;i++){
+                        if(channels[i].id === parseInt(e.target.id) && i === 0){
+                            hist(`/organizations/${id}/channels/${channels[i+1].id}`);
+                        }else if(channels[i].id === parseInt(e.target.id)){
+                            hist(`/organizations/${id}/channels/${channels[i-1].id}`);
+                        }
+                    }
+                
+                  }}
                   id={channel.id}
                 ></i>:""}
               </div>
