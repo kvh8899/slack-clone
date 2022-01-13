@@ -15,8 +15,9 @@ function Message({ user }) {
   const [channelName, setChannelName] = useState('')
   const [showForm, setShowForm] = useState(false)
   const { channelId } = useParams()
-  const currentChannel = useSelector((state) => state.currentChannel);
+  const currentChannel = useSelector((state) => state.currentChannel)
   const allMessages = useSelector((state) => state.messages)
+  const session = useSelector((state) => state.session.user)
   const dispatch = useDispatch();
   const handleChannelSubmit = async e => {
     e.preventDefault()
@@ -45,7 +46,7 @@ function Message({ user }) {
 
   const onClick = () => {
     if (message !== "") {
-      socket.emit("message", message);
+      socket.emit("message", {session,message});
       setMessage("");
     } else {
       alert("Please add message");

@@ -22,6 +22,7 @@ function ChannelList() {
         specificChannel.current[i]?.classList.remove("selected");
         return;
       }
+      dispatch(setName(specificChannel?.current[i]?.children[0].innerHTML));
       specificChannel.current[i]?.classList.remove("selected");
       specificChannel.current[i]?.classList.add("selected");
     });
@@ -31,7 +32,7 @@ function ChannelList() {
     specificChannel.current.slice(0, channels.length);
   }, [dispatch]);
   useEffect(() => {
-    select()
+    select();
   });
   useEffect(() => {
     channels.forEach((e) => {
@@ -51,7 +52,7 @@ function ChannelList() {
                 key={channel.id}
                 className={`${channel.name} singleChannel`}
                 id={channel.id}
-                onClick={async() => {
+                onClick={async () => {
                   dispatch(
                     setName(specificChannel.current[i].children[0].innerHTML)
                   );
@@ -62,31 +63,45 @@ function ChannelList() {
                 }}
               >
                 <h3># {channel.name}</h3>
-                {channels.length > 1?<i
-                  className="fas fa-trash-alt"
-                  onClick={ async (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    await dispatch(removeChannel(e.target.id));
-                    if(!(channelId === e.target.id)) return;
-                    for(let i = 0; i < channels.length;i++){
+                {channels.length > 1 ? (
+                  <i
+                    className="fas fa-trash-alt"
+                    onClick={async (e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      await dispatch(removeChannel(e.target.id));
+                      if (!(channelId === e.target.id)) return;
+                      for (let i = 0; i < channels.length; i++) {
                         //need to update state of channel name as well here
-                        if(channels[i].id === parseInt(e.target.id) && i === 0){
-                            hist(`/organizations/${id}/channels/${channels[i+1].id}`);
-                        }else if(channels[i].id === parseInt(e.target.id)){
-                            hist(`/organizations/${id}/channels/${channels[i-1].id}`);
+                        if (
+                          channels[i].id === parseInt(e.target.id) &&
+                          i === 0
+                        ) {
+                          hist(
+                            `/organizations/${id}/channels/${
+                              channels[i + 1].id
+                            }`
+                          );
+                        } else if (channels[i].id === parseInt(e.target.id)) {
+                          hist(
+                            `/organizations/${id}/channels/${
+                              channels[i - 1].id
+                            }`
+                          );
                         }
-                    }
-                  }}
-                  id={channel.id}
-                ></i>:""}
+                      }
+                    }}
+                    id={channel.id}
+                  ></i>
+                ) : (
+                  ""
+                )}
               </div>
             );
           })
         : null}
     </div>
   );
-
 }
 
 export default ChannelList;
