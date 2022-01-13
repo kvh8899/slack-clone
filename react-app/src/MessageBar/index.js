@@ -93,7 +93,7 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
                     ref={input}
                     placeholder={"New Name"}
                     required
-                    value={orgName}
+                    value={org.name}
                     onChange={(e) => setOrgName(e.target.value)}
                   />
                 </form>
