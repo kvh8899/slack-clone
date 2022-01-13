@@ -4,7 +4,7 @@ import io from "socket.io-client";
 import { editChannelThunk } from "../store/channels";
 import { useDispatch, useSelector } from "react-redux";
 import {useParams} from "react-router-dom"
-import {createOneMessage} from "../store/messages";
+import {createOneMessage ,getAllMessages} from "../store/messages";
 // must use http here
 //"https://<herokuname>.herokuapp.com" for heroku
 let endPoint = "http://localhost:5000";
@@ -38,18 +38,17 @@ function Message({ user }) {
   useEffect(() => {
     socket = io(`${endPoint}`);
     socket.emit('joinroom',{channelId,session,message});
-    socket.on("message", async(msg) => {
+    socket.on("message", (msg) => {
       //create msg
-      console.log(msg)
-      setIncoming([...incoming,msg])
-      dummyDiv.current.scrollIntoView(false);
-    });
+      setIncoming(msg)
+    })
+    dummyDiv.current.scrollIntoView(false);
     return () => {
       socket.disconnect();
     };
   })
   useEffect(() => {
-    setIncoming([])
+    setIncoming(allMessages)
   },[channelId])
   const onChange = (e) => {
     setMessage(e.target.value);
@@ -57,9 +56,10 @@ function Message({ user }) {
 
   const onClick = async() => {
     if (message !== "") {
-      const msgObj = await dispatch(createOneMessage(channelId,message))
-      socket.emit("message", {channelId,session,msgObj});
-      
+      await dispatch(createOneMessage(channelId,message)) 
+      const msgs = await dispatch(getAllMessages(channelId))
+      socket.emit("message", {channelId,session,allMessages:msgs.messages});
+      setIncoming(msgs.messages)
       setMessage("");
       socket.disconnect();
     } else {
@@ -94,7 +94,7 @@ function Message({ user }) {
       </div>
       <div className="messages">
         <div>
-          {allMessages.map((msg) => {
+          {incoming.map((msg) => {
             return (
               <div className="message" key={msg.id}>
                 {user?.profilePicture ? (
@@ -112,25 +112,6 @@ function Message({ user }) {
                 </div>
               </div>
             );
-          })}
-          {filterOut() ? "" : incoming.map((e) => {
-            return(
-              <div className="message" key={e.msgObj.id}>
-                {e.session.profilePicture ? (
-                  <img src={e.session.profilePicture} alt="404"></img>
-                ) : (
-                  <img
-                    // src="https://avatars.slack-edge.com/2015-03-13/4045125376_172ec0a9d33356de3571_88.jpg"
-                    src="https://cdn.discordapp.com/attachments/919391399269515305/930910536193933312/aa_logo.png"
-                    alt="404"
-                  ></img>
-                )}
-                <div>
-                  <h3>{e.session.username}</h3>
-                  <p>{e.msgObj.content}</p>
-                </div>
-              </div>
-            )
           })}
           <div className="space"></div>
           <p ref={dummyDiv}></p>
