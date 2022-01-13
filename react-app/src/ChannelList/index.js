@@ -22,7 +22,7 @@ function ChannelList() {
         specificChannel.current[i]?.classList.remove("selected");
         return;
       }
-      dispatch(setName(specificChannel?.current[i]?.children[0].innerHTML));
+      dispatch(setName({name:specificChannel?.current[i]?.children[0].innerHTML}));
       specificChannel.current[i]?.classList.remove("selected");
       specificChannel.current[i]?.classList.add("selected");
     });
@@ -37,7 +37,7 @@ function ChannelList() {
   useEffect(() => {
     channels.forEach((e) => {
       if (e.id === parseInt(channelId)) {
-        dispatch(setName(`# ${e.name}`));
+        dispatch(setName({name:`# ${e.name}`}));
         return;
       }
     });

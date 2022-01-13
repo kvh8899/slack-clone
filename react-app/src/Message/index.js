@@ -12,6 +12,7 @@ let socket;
 
 function Message({ user }) {
   const [message, setMessage] = useState("");
+  const [incoming,setIncoming] = useState([])
   const [channelName, setChannelName] = useState('')
   const [showForm, setShowForm] = useState(false)
   const { channelId } = useParams()
@@ -19,35 +20,48 @@ function Message({ user }) {
   const allMessages = useSelector((state) => state.messages)
   const session = useSelector((state) => state.session.user)
   const dispatch = useDispatch();
+  const filterOut = () => {
+      for(let i = 0; i < allMessages.length;i++){
+        if(!incoming.length) return true
+        if(incoming[0].msgObj.id === allMessages[i].id){
+          return true;
+        }
+      }
+      return false;
+  }
   const handleChannelSubmit = async e => {
     e.preventDefault()
     setShowForm(false)
     await dispatch(editChannelThunk(channelName, channelId))
   }
   const dummyDiv = useRef(null);
-  
   useEffect(() => {
     socket = io(`${endPoint}`);
-    getMessages();
+    socket.emit('joinroom',{channelId,session,message});
+    socket.on("message", async(msg) => {
+      //create msg
+      console.log(msg)
+      setIncoming([...incoming,msg])
+      dummyDiv.current.scrollIntoView(false);
+    });
     return () => {
       socket.disconnect();
     };
-  }, [allMessages]);
-
-  const getMessages = () => {
-    socket.once("message", async(msg) => {
-      //create msg
-      dummyDiv.current.scrollIntoView(false);
-    });
-  };
+  })
+  useEffect(() => {
+    setIncoming([])
+  },[channelId])
   const onChange = (e) => {
     setMessage(e.target.value);
   };
 
-  const onClick = () => {
+  const onClick = async() => {
     if (message !== "") {
-      socket.emit("message", {session,message});
+      const msgObj = await dispatch(createOneMessage(channelId,message))
+      socket.emit("message", {channelId,session,msgObj});
+      
       setMessage("");
+      socket.disconnect();
     } else {
       alert("Please add message");
     }
@@ -55,7 +69,7 @@ function Message({ user }) {
   return (
     <div className="messageArea">
       <div className="title">
-        <h2>{currentChannel}</h2>
+        <h2>{currentChannel.name}</h2>
         <button onClick={e => {
                     e.preventDefault()
                     setShowForm(!showForm)
@@ -99,6 +113,25 @@ function Message({ user }) {
               </div>
             );
           })}
+          {filterOut() ? "" : incoming.map((e) => {
+            return(
+              <div className="message" key={e.msgObj.id}>
+                {e.session.profilePicture ? (
+                  <img src={e.session.profilePicture} alt="404"></img>
+                ) : (
+                  <img
+                    // src="https://avatars.slack-edge.com/2015-03-13/4045125376_172ec0a9d33356de3571_88.jpg"
+                    src="https://cdn.discordapp.com/attachments/919391399269515305/930910536193933312/aa_logo.png"
+                    alt="404"
+                  ></img>
+                )}
+                <div>
+                  <h3>{e.session.username}</h3>
+                  <p>{e.msgObj.content}</p>
+                </div>
+              </div>
+            )
+          })}
           <div className="space"></div>
           <p ref={dummyDiv}></p>
         </div>
@@ -107,7 +140,6 @@ function Message({ user }) {
         <form
           onSubmit={async(e) => {
             e.preventDefault();
-            await dispatch(createOneMessage(channelId,message))
             onClick();
           }}
         >
