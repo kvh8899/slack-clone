@@ -64,16 +64,17 @@ function EditOrgFrom() {
                             onChange={e => {
                                 setOrgName(e.target.value)
                             }}
+                            required
                         ></input>
                     </div>
                     <div id='channelButton'>
-                            <button
+                            <div
                                 className="delete"
                                 id={id}
                                 onClick={handleDelete}
                             >
                                 Delete <i className="fas fa-trash-alt"></i>
-                            </button>
+                            </div>
                             <p
                                 className="cancel"
                                 onClick={e => {

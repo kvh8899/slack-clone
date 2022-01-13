@@ -61,7 +61,7 @@ function EditChannelForm() {
                         ></input>
                     </div>
                     <div id="channelButton">
-                        { channels.length > 1 ? <button
+                        { channels.length > 1 ? <div
                                 className="delete"
                                 id={channelId}
                                 onClick={handleDelete}
@@ -69,7 +69,7 @@ function EditChannelForm() {
                             Delete <i
                                 className="fas fa-trash-alt"
                             ></i>
-                        </button> : ''}
+                        </div> : ''}
                         <p
                             className="cancel"
                             onClick={e => {
