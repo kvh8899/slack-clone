@@ -59,7 +59,7 @@ class Organization(db.Model):
         "Channel", back_populates="organizations", cascade='all, delete-orphan')
     members = db.relationship('User', secondary='members',
                               back_populates='organization')
-
+    
     def to_dict(self):
         return {
             'id': self.id,
