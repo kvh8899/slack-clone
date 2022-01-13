@@ -26,7 +26,6 @@ function ChannelList() {
       specificChannel.current[i]?.classList.add("selected");
     });
   }
-  
   useEffect(() => {
     loadChannels();
     specificChannel.current.slice(0, channels.length);
@@ -71,13 +70,13 @@ function ChannelList() {
                     await dispatch(removeChannel(e.target.id));
                     if(!(channelId === e.target.id)) return;
                     for(let i = 0; i < channels.length;i++){
+                        //need to update state of channel name as well here
                         if(channels[i].id === parseInt(e.target.id) && i === 0){
                             hist(`/organizations/${id}/channels/${channels[i+1].id}`);
                         }else if(channels[i].id === parseInt(e.target.id)){
                             hist(`/organizations/${id}/channels/${channels[i-1].id}`);
                         }
                     }
-                
                   }}
                   id={channel.id}
                 ></i>:""}
