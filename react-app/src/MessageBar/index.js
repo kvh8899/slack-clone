@@ -1,12 +1,12 @@
-import { removeWorkspace, editOrgThunk } from "../store/organizations";
-import React, { useState, useRef, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { getOrg } from "../store/orgmainchat";
-import { useParams } from "react-router";
-import NewChannel from "../newChannel";
-import { useNavigate } from "react-router-dom";
-import ChannelList from "../ChannelList";
-import "./messagebar.css";
+import { removeWorkspace, editOrgThunk } from "../store/organizations"
+import React, { useState, useRef, useEffect } from "react"
+import { useSelector, useDispatch } from "react-redux"
+import { getOrg } from "../store/orgmainchat"
+import { useParams } from "react-router"
+import NewChannel from "../newChannel"
+import { useNavigate } from "react-router-dom"
+import ChannelList from "../ChannelList"
+import "./messagebar.css"
 
 function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
   const [showEdit, setShowEdit] = useState(false)
