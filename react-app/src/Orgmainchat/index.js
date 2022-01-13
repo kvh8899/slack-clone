@@ -10,14 +10,15 @@ import EditChannelForm from "../EditChannelForm"
 import EditOrgForm from '../EditOrgForm'
 import Search from "../Search"
 
-import { readChannels } from "../store/channels"
-import {useParams} from "react-router-dom"
-import {setName} from "../store/currentChannel"
+import { readChannels } from "../store/channels";
+import { useParams } from "react-router-dom";
+import { setName } from "../store/currentChannel"
+
 
 function Orgmainchat() {
   const [selectedChannel, setSelectedChannel] = useState('')
   const [selectedChannelId, setSelectedChannelId] = useState('')
-  const {id} = useParams()
+  const { id } = useParams()
   const dispatch = useDispatch();
   const hist = useNavigate();
   const session = useSelector((state) => state.session.user);
@@ -64,7 +65,9 @@ function Orgmainchat() {
             Back To Workspaces
           </button>
         </div>
-        <Search />
+        <div className="searchContainer">
+          <Search />
+        </div>
         <div className="profile">
           {userData?.profilePicture ? (
             <img
@@ -99,8 +102,8 @@ function Orgmainchat() {
         </div>
       </div>
       <div className="midContent1" onClick={awayClick}>
-        <MessageBar setSelectedChannel={setSelectedChannel} setSelectedChannelId={setSelectedChannelId}/>
-        <Message user={userData} setSelectedChannel={setSelectedChannel} selectedChannel={selectedChannel} selectedChannelId={selectedChannelId}/>
+        <MessageBar setSelectedChannel={setSelectedChannel} setSelectedChannelId={setSelectedChannelId} />
+        <Message user={userData} setSelectedChannel={setSelectedChannel} selectedChannel={selectedChannel} selectedChannelId={selectedChannelId} />
       </div>
     </div>
   );

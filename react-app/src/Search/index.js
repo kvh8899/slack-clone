@@ -42,19 +42,25 @@ function Search() {
                 name="s"
                 autoComplete="off"
             />
-            <div className="membercontainer">
-                {searchQuery.length > 0 && <ul >
-                    {searchQuery.length > 0 && (filteredMembers.map(member => {
-                        return (
+            {searchQuery.length > 0 && <ul >
+                {searchQuery.length > 0 && (filteredMembers.map(member => {
+                    return (
+                        <>
                             < li key={member.id} >
                                 <SingleMember username={member.username} />
                             </li>
-                        )
-                    })
-                    )}
-                </ul>
-                }
-            </div>
+                            <li>user1</li>
+                            <li>user2</li>
+                            <li>user3</li>
+                            <li>user3</li>
+                            <li>user3</li>
+                            <li>user3</li>
+                        </>
+                    )
+                })
+                )}
+            </ul>
+            }
         </>
     );
 }
