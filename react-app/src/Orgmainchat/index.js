@@ -6,6 +6,7 @@ import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../store/session";
 import NewChannelForm from "../newChannelForm";
+import NewMemberForm from "../NewMemberForm"
 import Search from "../Search";
 
 import { readChannels } from "../store/channels";
