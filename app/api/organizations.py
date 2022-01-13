@@ -29,11 +29,17 @@ def edit_org(id):
 @organization_routes.route('/<int:id>', methods=['GET'])
 def get_one_org(id):
     org = Organization.query.get(id)
+    users = User.query.all()
+    print(users, 'hiiiiii')
     dictOrg = org.to_dict()
     members = []
     for member in org.members:
         members.append(member.to_dict())
+    available_users = []
+    for user in users:
+        available_users.append(user.to_dict())
     dictOrg['members'] = members
+    dictOrg['available_users'] = available_users
     return dictOrg
 # delete organizations
 
