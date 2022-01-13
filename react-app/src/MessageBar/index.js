@@ -13,8 +13,6 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
   const [showForm, setShowForm] = useState(false)
   const [showh2, setShowh2] = useState(true)
   const [showChannelList, setShowChannelList] = useState(true)
-  const [channelName, setChannelName] = useState('')
-  const [editChannelName, setEditChannelName] = useState('')
 
   const caret = useRef(null);
   const dCaret = useRef(null);
@@ -59,30 +57,15 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
       return setShowForm(false);
     }
   };
-
-  // const testRead = (e) => {
-  //   e.preventDefault()
-  //   dispatch(readChannels(id))
-  // }
-  // const testDelete = async (e) => {
-  //   e.preventDefault()
-  //   await dispatch(removeChannel(5, channelName))
-  // }
-  // const testEdit = async (e) => {
-  //   e.preventDefault()
-  //   await dispatch(editChannelThunk(id, editChannelName, 7))
-  // }
-
   const orgDelete = async (e) => {
     e.preventDefault();
     await dispatch(removeWorkspace(id));
     navigate("/organization");
   };
-
   return (
     <div className="messageBar">
       <div onClick={editToggle} className="title">
-        {showh2 && <h2>{org.name}</h2>} <i class="fas fa-ellipsis-v"></i>
+        {showh2 && <h2>{org.name}</h2>} <i className="fas fa-ellipsis-v"></i>
         {showForm && (
           <div>
             <div>

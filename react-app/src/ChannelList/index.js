@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useRef } from "react";
 import { readChannels, removeChannel } from "../store/channels";
+import { getAllMessages } from "../store/messages";
 import { setName } from "../store/currentChannel";
 import { useNavigate } from "react-router-dom";
 
@@ -56,10 +57,11 @@ function ChannelList() {
                 key={channel.id}
                 className={`${channel.name} singleChannel`}
                 id={channel.id}
-                onClick={() => {
+                onClick={async() => {
                   dispatch(
                     setName(specificChannel.current[i].children[0].innerHTML)
                   );
+                  await dispatch(getAllMessages(channel.id));
                   hist(
                     `/organizations/${id}/channels/${specificChannel.current[i].id}`
                   );

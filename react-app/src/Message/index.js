@@ -4,18 +4,19 @@ import io from "socket.io-client";
 import { editChannelThunk } from "../store/channels";
 import { useDispatch, useSelector } from "react-redux";
 import {useParams} from "react-router-dom"
+import {createOneMessage} from "../store/messages";
 // must use http here
 //"https://<herokuname>.herokuapp.com" for heroku
 let endPoint = "http://localhost:5000";
 let socket;
 
-function Message({ user,selectedChannelId, setSelectedChannel }) {
-  const [messages, setMessages] = useState([]);
+function Message({ user }) {
   const [message, setMessage] = useState("");
   const [channelName, setChannelName] = useState('')
   const [showForm, setShowForm] = useState(false)
-  const {channelId} = useParams()
+  const { channelId } = useParams()
   const currentChannel = useSelector((state) => state.currentChannel);
+  const allMessages = useSelector((state) => state.messages)
   const dispatch = useDispatch();
   const handleChannelSubmit = async e => {
     e.preventDefault()
@@ -29,11 +30,11 @@ function Message({ user,selectedChannelId, setSelectedChannel }) {
     return () => {
       socket.disconnect();
     };
-  }, [messages.length]);
+  }, [allMessages]);
 
   const getMessages = () => {
-    socket.once("message", (msg) => {
-      setMessages([...messages, msg]);
+    socket.once("message", async(msg) => {
+      await dispatch(createOneMessage(channelId,msg))
       dummyDiv.current.scrollIntoView(false);
     });
   };
@@ -77,9 +78,9 @@ function Message({ user,selectedChannelId, setSelectedChannel }) {
       </div>
       <div className="messages">
         <div>
-          {messages.map((msg) => {
+          {allMessages.map((msg) => {
             return (
-              <div className="message">
+              <div className="message" key={msg.id}>
                 {user?.profilePicture ? (
                   <img src={user.profilePicture} alt="404"></img>
                 ) : (
@@ -91,7 +92,7 @@ function Message({ user,selectedChannelId, setSelectedChannel }) {
                 )}
                 <div>
                   <h3>{user.username}</h3>
-                  <p>{msg}</p>
+                  <p>{msg.content}</p>
                 </div>
               </div>
             );

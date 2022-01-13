@@ -31,7 +31,7 @@ export const getAllMessages = (channelId) => async(dispatch) => {
   if(res.ok){
     const messages = await res.json();
     dispatch(getMessages(messages.messages));
-    return messages.messages;
+    return messages;
   }
   return null;
 }
@@ -44,7 +44,7 @@ export const createOneMessage = (channelId,content) => async(dispatch) => {
   })
   if(res.ok){
     const message = await res.json();
-    dispatch(addMessage(message.content))
+    dispatch(addMessage(message))
     return message
   }
   return null
