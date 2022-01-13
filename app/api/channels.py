@@ -37,7 +37,15 @@ def get_messages(channelId):
         msgDict.append(i.to_dict())
     return { 'messages': msgDict }
 
-## send messages in a channel
+## send messages in a channel (create route)
 @channel_routes.route('/<int:channelId>/messages',methods=['POST'])
-def create_msg(channelId):
-    pass
+def createMsg(channelId):
+    form = message_form()
+    if(form.validate_on_submit()):
+        new = Message(content=content,channel_id=channelId,owner_id=current_user.id)
+        db.session.add(new)
+        db.session.commit()
+        return new.to_dict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
