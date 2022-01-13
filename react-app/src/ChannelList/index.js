@@ -22,7 +22,6 @@ function ChannelList() {
         specificChannel.current[i]?.classList.remove("selected");
         return;
       }
-      dispatch(setName({name:specificChannel?.current[i]?.children[0].innerHTML}));
       specificChannel.current[i]?.classList.remove("selected");
       specificChannel.current[i]?.classList.add("selected");
     });
@@ -37,7 +36,7 @@ function ChannelList() {
   useEffect(() => {
     channels.forEach((e) => {
       if (e.id === parseInt(channelId)) {
-        dispatch(setName({name:`# ${e.name}`}));
+        dispatch(setName({name:`# ${e.name}`,prev:channelId}));
         return;
       }
     });
@@ -54,7 +53,7 @@ function ChannelList() {
                 id={channel.id}
                 onClick={async () => {
                   dispatch(
-                    setName(specificChannel.current[i].children[0].innerHTML)
+                    setName({name:specificChannel.current[i].children[0].innerHTML,prev:channelId})
                   );
                   await dispatch(getAllMessages(channel.id));
                   hist(
@@ -72,7 +71,7 @@ function ChannelList() {
                       await dispatch(removeChannel(e.target.id));
                       if (!(channelId === e.target.id)) return;
                       for (let i = 0; i < channels.length; i++) {
-                        //need to update state of channel name as well here
+                        //need to update state of channel messages
                         if (
                           channels[i].id === parseInt(e.target.id) &&
                           i === 0

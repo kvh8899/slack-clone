@@ -20,15 +20,6 @@ function Message({ user }) {
   const allMessages = useSelector((state) => state.messages)
   const session = useSelector((state) => state.session.user)
   const dispatch = useDispatch();
-  const filterOut = () => {
-      for(let i = 0; i < allMessages.length;i++){
-        if(!incoming.length) return true
-        if(incoming[0].msgObj.id === allMessages[i].id){
-          return true;
-        }
-      }
-      return false;
-  }
   const handleChannelSubmit = async e => {
     e.preventDefault()
     setShowForm(false)
@@ -37,19 +28,23 @@ function Message({ user }) {
   const dummyDiv = useRef(null);
   useEffect(() => {
     socket = io(`${endPoint}`);
-    socket.emit('joinroom',{channelId,session,message});
     socket.on("message", (msg) => {
       //create msg
       setIncoming(msg)
+      dummyDiv.current.scrollIntoView(false);
     })
-    dummyDiv.current.scrollIntoView(false);
     return () => {
       socket.disconnect();
     };
-  })
+  },[])
   useEffect(() => {
     setIncoming(allMessages)
-  },[channelId])
+    socket.emit('leaveroom',{channelId:currentChannel.prev})
+    socket.emit('joinroom',{channelId,session,message});
+  },[channelId,allMessages])
+  useEffect(() => {
+    dummyDiv.current.scrollIntoView(false);
+  })
   const onChange = (e) => {
     setMessage(e.target.value);
   };
@@ -59,9 +54,7 @@ function Message({ user }) {
       await dispatch(createOneMessage(channelId,message)) 
       const msgs = await dispatch(getAllMessages(channelId))
       socket.emit("message", {channelId,session,allMessages:msgs.messages});
-      setIncoming(msgs.messages)
       setMessage("");
-      socket.disconnect();
     } else {
       alert("Please add message");
     }
