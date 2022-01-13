@@ -1,15 +1,16 @@
-import "./orgmainchat.css";
-import MessageBar from "../MessageBar";
-import Message from "../Message";
-import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
-import { logout } from "../store/session";
-import NewChannelForm from "../newChannelForm";
-import Search from "../Search";
+import "./orgmainchat.css"
+import MessageBar from "../MessageBar"
+import Message from "../Message"
+import { useSelector, useDispatch } from "react-redux"
+import { useEffect, useState, useRef } from "react"
+import { useNavigate } from "react-router-dom"
+import { logout } from "../store/session"
+import NewChannelForm from "../newChannelForm"
+import EditChannelForm from "../EditChannelForm"
+import Search from "../Search"
 
-import { readChannels } from "../store/channels";
-import {useParams} from "react-router-dom";
+import { readChannels } from "../store/channels"
+import {useParams} from "react-router-dom"
 import {setName} from "../store/currentChannel"
 
 function Orgmainchat() {
@@ -29,7 +30,7 @@ function Orgmainchat() {
     }
     return null;
   }
-  
+
   useEffect(() => {
     if (session) getUserData(session.id);
   }, [session]);
@@ -54,6 +55,7 @@ function Orgmainchat() {
   return (
     <div className="content">
       <NewChannelForm />
+      <EditChannelForm />
       <div className="topBar" onClick={awayClick}>
         <div className="backbuttoncontainer">
           <button className="backbutton" onClick={backClick}>

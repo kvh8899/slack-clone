@@ -38,7 +38,7 @@ function NewChannelForm() {
             <h2>Create Text Channel</h2>
             <label>Channel Name</label>
             <input
-              placeholder={"# new channel"}
+              placeholder={"# New Channel"}
               value={channelName}
               onChange={(e) => {
                 setChannelName(e.target.value);
