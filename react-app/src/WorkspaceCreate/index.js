@@ -19,13 +19,17 @@ export default function NewWorkspace() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const formData = new FormData();
     formData.append("name", orgName);
     await dispatch(addWorkspaces({name:orgName}));
     hist('/organization')
-
   }
+
+  const orgPage = (e) => {
+    e.preventDefault();
+    hist("/organization");
+  };
+
   return (
     <div className="content">
       <div className="topBar"></div>
@@ -52,7 +56,7 @@ export default function NewWorkspace() {
               ></input>
               <div className="form-buttons">
                 <button className="submit-button">Create Workspace</button>
-                <button className="submit-button" onClick="hist(/organization)">Cancel</button>
+                <button className="submit-button" onClick={orgPage}>Cancel</button>
               </div>
             </div>
           </form>
