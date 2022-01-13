@@ -6,7 +6,7 @@ function EditChannel() {
     const dispatch = useDispatch()
 
     return (
-        <div className="editChanel">
+        <div className="editChannel">
             <button
                 onClick={e => {
                     e.stopPropagation()

@@ -56,14 +56,6 @@ function Message({ user,selectedChannelId, setSelectedChannel }) {
     <div className="messageArea">
       <div className="title">
         <h2>{currentChannel}</h2>
-        {/* <button onClick={e => {
-                    e.preventDefault()
-                    setShowForm(!showForm)
-                    }
-                }
-        >
-          Edit
-        </button> */}
         <EditChannel />
         { showForm && (
           <div>

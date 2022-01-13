@@ -68,9 +68,7 @@ function EditChannelForm() {
                             >
                             Delete <i
                                 className="fas fa-trash-alt"
-                            >
-
-                            </i>
+                            ></i>
                         </button> : ''}
                         <p
                             className="cancel"

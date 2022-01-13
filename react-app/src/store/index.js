@@ -5,6 +5,7 @@ import organizations from './organizations'
 import orgmainchatReducer from './orgmainchat'
 import showFormReducer from './showForm';
 import editChannelFormReducer from './showEditChannelForm';
+import editOrgFormReducer from './showEditOrg'
 import channelReducer from './channels';
 import currentChannel from './currentChannel';
 
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   orgmainchatReducer,
   showFormReducer,
   editChannelFormReducer,
+  editOrgFormReducer,
   channelReducer,
   currentChannel
 });
