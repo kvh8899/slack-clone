@@ -2,7 +2,7 @@ import "./channelList.css";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useRef } from "react";
-import { readChannels, removeChannel } from "../store/channels";
+import { readChannels } from "../store/channels";
 import { setName } from "../store/currentChannel";
 import { useNavigate } from "react-router-dom";
 
@@ -25,19 +25,16 @@ function ChannelList() {
       specificChannel.current[i]?.classList.add("selected");
     });
   }
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    hist(`/organizations/${id}/channels/${channels[0].id}`)
-    await dispatch(removeChannel(e.target.id));
-  };
+
   useEffect(() => {
     loadChannels();
     specificChannel.current.slice(0, channels.length);
   }, [dispatch]);
+
   useEffect(() => {
     select();
   });
+
   useEffect(() => {
     channels.forEach((e) => {
       if (e.id === parseInt(channelId)) {
@@ -46,6 +43,7 @@ function ChannelList() {
       }
     });
   }, [channels]);
+
   return (
     <div className="channelContainer">
       {channels
@@ -66,11 +64,6 @@ function ChannelList() {
                 }}
               >
                 <h3># {channel.name}</h3>
-                {/* {channels.length > 1?<i
-                  className="fas fa-trash-alt"
-                  onClick={handleSubmit}
-                  id={channel.id}
-                ></i>:""} */}
               </div>
             );
           })
