@@ -15,7 +15,7 @@ function NewChannel() {
         <i className="fas fa-plus"></i>
       </button>
     </div>
-  );
+  ); 
 }
 
 export default NewChannel;
