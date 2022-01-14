@@ -12,6 +12,7 @@ function ChannelList() {
   const { id, channelId } = useParams();
   const dispatch = useDispatch();
   const channels = useSelector((state) => state.channelReducer);
+
   async function loadChannels() {
     await dispatch(readChannels(id));
   }
@@ -47,7 +48,7 @@ function ChannelList() {
   return (
     <div className="channelContainer">
       {channels
-        ? channels?.map((channel, i) => {
+        ? channels.map((channel, i) => {
             return (
               <div
                 ref={(e) => (specificChannel.current[i] = e)}
