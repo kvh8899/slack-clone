@@ -120,53 +120,55 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
         )}
       </div> */}
         <div className="channelContent" ref={size}>
-          <div className="uc" ref={size1}>
-            <div className="channels">
-              <div>
-                <div
-                  onClick={(e) => {
-                    caret.current.classList.toggle("side");
-                    if (!showChannelList) setShowChannelList(true);
-                    if (showChannelList) setShowChannelList(false);
-                  }}
-                  className="cs"
-                >
-                  <div className="is isc">
-                    <i className="fas fa-caret-down" ref={caret}></i>
-                  </div>
-
-                  <p>Channels</p>
-                </div>
-                <NewChannel />
-              </div>
-              {/* <div className="ChannelList"> */}
-              {showChannelList && (
-                <ChannelList
-                  setSelectedChannel={setSelectedChannel}
-                  setSelectedChannelId={setSelectedChannelId}
-                />
-              )}
-              {/* </div> */}
-            </div>
-            <div className="channels">
-              <div>
-                <div
-                  onClick={(e) => {
-                    dCaret.current.classList.toggle("side");
-                  }}
-                  className="cs"
-                >
-                  <div className="is isc">
-                    <i className="fas fa-caret-down" ref={dCaret}></i>
-                  </div>
-                  <p>Direct Messages</p>
-                </div>
-                <div className="addChannel">
-                  <button>
-                    <div className="is">
-                      <i className="fas fa-plus"></i>
+          <div class="od">
+            <div className="uc" ref={size1}>
+              <div className="channels">
+                <div>
+                  <div
+                    onClick={(e) => {
+                      caret.current.classList.toggle("side");
+                      if (!showChannelList) setShowChannelList(true);
+                      if (showChannelList) setShowChannelList(false);
+                    }}
+                    className="cs"
+                  >
+                    <div className="is isc">
+                      <i className="fas fa-caret-down" ref={caret}></i>
                     </div>
-                  </button>
+
+                    <p>Channels</p>
+                  </div>
+                  <NewChannel />
+                </div>
+                {/* <div className="ChannelList"> */}
+                {showChannelList && (
+                  <ChannelList
+                    setSelectedChannel={setSelectedChannel}
+                    setSelectedChannelId={setSelectedChannelId}
+                  />
+                )}
+                {/* </div> */}
+              </div>
+              <div className="channels">
+                <div>
+                  <div
+                    onClick={(e) => {
+                      dCaret.current.classList.toggle("side");
+                    }}
+                    className="cs"
+                  >
+                    <div className="is isc">
+                      <i className="fas fa-caret-down" ref={dCaret}></i>
+                    </div>
+                    <p>Direct Messages</p>
+                  </div>
+                  <div className="addChannel">
+                    <button>
+                      <div className="is">
+                        <i className="fas fa-plus"></i>
+                      </div>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

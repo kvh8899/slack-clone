@@ -125,3 +125,8 @@ fa-ellipsis-v{
   position:absolute;
   width:220px;
 }
+.od{
+  position: relative;
+  height: 100%;
+  overflow: scroll;
+}
