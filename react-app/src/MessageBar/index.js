@@ -102,7 +102,7 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
             x.target.classList.remove("dSelect");
           });
           document.addEventListener("mousemove", (e) => {
-            if (e.clientX > 250 && 
+            if (e.clientX > 215 && 
               e.clientX < document.body.clientWidth * 0.5 && drag) {
               size.current.style.width = (e.clientX + 2 )+ "px";
               size1.current.style.width = (e.clientX + 2) + "px";

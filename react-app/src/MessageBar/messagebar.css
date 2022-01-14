@@ -48,11 +48,15 @@
 }
 
 .title h2 {
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
+  text-overflow:ellipsis;
+  overflow:hidden;
+  white-space:nowrap;
 }
-
+@media only screen and (max-width: 600px) {
+  .title h2 {
+    max-width:150px;
+  }
+}
 .editbutton {
   color: #4a154b;
   background-color: white;
@@ -117,6 +121,9 @@ fa-ellipsis-v{
   margin:5px;
   margin-left:31px;
   font-size:15px;
+  text-overflow:ellipsis;
+  overflow:hidden;
+  white-space:nowrap;
 }
 .cs{
   margin-left:10px;
