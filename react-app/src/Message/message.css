@@ -30,9 +30,11 @@
 }
 .messages{
     overflow:scroll;
+    overflow-x:hidden;
     position:relative;
     width:100%;
     flex: 1 1 auto;
+    transition:0.5s;
 }
 
 .messages p{
@@ -68,3 +70,19 @@
     width:25px;
 }
 
+.d{
+    height:100%;
+    position:absolute;
+    background-color:transparent;
+    width:5px;
+    transition-property: background-color;
+    transition-duration: 0.3s;
+}
+.d:hover{
+    cursor:col-resize;
+    background-color:skyblue;
+}
+.dSelect{
+    cursor:col-resize;
+    background-color:skyblue;
+}

@@ -3,7 +3,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { addMemberOff } from "../store/showMemberForm";
 import { addMembers } from "../store/orgmainchat";
 import { useParams } from "react-router";
+<<<<<<< HEAD
 import "./newMemberForm.css";
+=======
+>>>>>>> 70f1b2203ec0b2f9f02d18c875fcde7cd6a89d1e
 
 function NewMemberForm() {
   const { id } = useParams()
@@ -11,14 +14,7 @@ function NewMemberForm() {
   const showForm = useSelector((state) => state.addMemberFormReducer);
   const [memberName, setMemberName] = useState("");
   const org = useSelector((state) => state.orgmainchatReducer);
-
-  // const users = org.available_users?.map((user) => user.username);
-
-
   const users = org.available_users?.map((user) => user);
-  // console.log(users)
-
-  // const users = org.available_users
   const { search } = window.location;
   const query = new URLSearchParams(search).get("s");
   const [searchQuery, setSearchQuery] = useState(query || "");
@@ -35,18 +31,17 @@ function NewMemberForm() {
     });
   }
 
-
   const filteredUsers = filterUsers(users, searchQuery);
-  // console.log(id)
-  const addToOrg = async (e) => {
-    // console.log(e.target.id, 'eeeeeeee')
-    const data = await dispatch(addMembers(id, e.target.id))
-    // console.log(data)
 
+  const addToOrg = async (e) => {
+    await dispatch(addMembers(id, e.target.id))
   }
 
+<<<<<<< HEAD
   // console.log("😣😣", users);
 
+=======
+>>>>>>> 70f1b2203ec0b2f9f02d18c875fcde7cd6a89d1e
   const addMember = async (e) => {
     await dispatch(addMembers(memberName));
   };
