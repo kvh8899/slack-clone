@@ -110,19 +110,19 @@ def newChannel(orgId):
 
 
 # ADD Member to Organization
-@ organization_routes.route('/<int:organizationId>/members/<int:memberId>', methods=['POST'])
+@ organization_routes.route('/<int:orgId>/members/<int:userId>', methods=['POST'])
 @ login_required
-def addMember(orgId, memberId):
-    userId = memberId
+def addMember(orgId, userId):
+    print('testbackend')
     user = User.query.get(int(userId))
     org = Organization.query.get(int(orgId))
     if user and user not in org.members:
         member = Member(
             user_id=userId,
-            orgId=orgId
+            org_id=orgId
         )
         db.session.add(member)
         db.session.commit()
-        return org.to_dict()
+        return user.to_dict()
 
     return {'error': "Cannot add member"}

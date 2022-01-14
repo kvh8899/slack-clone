@@ -1,39 +1,50 @@
-import { removeWorkspace, editOrgThunk } from "../store/organizations"
-import React, { useState, useRef, useEffect } from "react"
-import { useSelector, useDispatch } from "react-redux"
-import { getOrg } from "../store/orgmainchat"
-import { useParams } from "react-router"
-import NewChannel from "../newChannel"
-import { useNavigate } from "react-router-dom"
-import ChannelList from "../ChannelList"
+import { removeWorkspace, editOrgThunk } from "../store/organizations";
+import React, { useState, useRef, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getOrg } from "../store/orgmainchat";
+import { useParams } from "react-router";
+import NewChannel from "../newChannel";
+import NewMember from "../NewMember";
+import { useNavigate } from "react-router-dom";
+import ChannelList from "../ChannelList";
 import { editOrgOn } from '../store/showEditOrg'
 import "./messagebar.css"
+
 
 function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
   const [showEdit, setShowEdit] = useState(false)
   const [showForm, setShowForm] = useState(false)
   const [showh2, setShowh2] = useState(true)
   const [showChannelList, setShowChannelList] = useState(true)
+  const [showMemberList, setshowMemberList] = useState(true)
   const [channelName, setChannelName] = useState('')
   const [editChannelName, setEditChannelName] = useState('')
 
   const caret = useRef(null);
   const dCaret = useRef(null);
+  const mCaret = useRef(null);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
   const org = useSelector((state) => state.orgmainchatReducer);
+  const members = org.members
+  console.log(members, 'MEMBERS OBJECT')
   const session = useSelector((state) => state.session.user);
   const input = useRef(null);
   const [orgName, setOrgName] = useState("");
   const [errors, setErrors] = useState([]);
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   formToggle();
-  //   setShowEdit(false);
-  //   const data = await dispatch(editOrgThunk(orgName, id));
+  // const users = org.available_users?.map(user => user.username)
+  // console.log(users)
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    formToggle();
+    setShowEdit(false);
+    const data = await dispatch(editOrgThunk(orgName, id));
+
 
   //   await dispatch(getOrg(id));
   //   if (data) {
@@ -136,7 +147,12 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
             <NewChannel />
           </div>
           {/* <div className="ChannelList"> */}
-          {showChannelList && <ChannelList setSelectedChannel={setSelectedChannel} setSelectedChannelId={setSelectedChannelId} />}
+          {showChannelList && (
+            <ChannelList
+              setSelectedChannel={setSelectedChannel}
+              setSelectedChannelId={setSelectedChannelId}
+            />
+          )}
           {/* </div> */}
         </div>
         <div className="channels">
@@ -155,6 +171,35 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
               </button>
             </div>
           </div>
+        </div>
+        <div className="channels">
+          <div>
+            <div
+              onClick={(e) => {
+                mCaret.current.classList.toggle("side");
+                if (!showMemberList) setshowMemberList(true);
+                if (showMemberList) setshowMemberList(false);
+              }}
+            >
+              <i className="fas fa-caret-down" ref={mCaret}></i>
+              <p>Members</p>
+            </div>
+            <NewMember />
+          </div>
+          {/* <div className="ChannelList"> */}
+          {showMemberList && (
+            <div className="channelContainer">
+              {members ? members?.map((member) => {
+                return (
+                  <div >
+                    <h3>- {member.username}</h3>
+                    {members.length > 1 ? (<i className="fas fa-trash-alt" onClick={handleSubmit}></i>) : ("")}
+                  </div>
+                );
+              })
+                : null}
+            </div>
+          )}
         </div>
         <div className="height"></div>
       </div>
