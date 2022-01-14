@@ -66,6 +66,10 @@ function EditOrgFrom() {
                             }}
                             required
                         ></input>
+                        {/* <div>
+                            <label>Add User</label>
+                            <input></input>
+                        </div> */}
                     </div>
                     <div id='channelButton'>
                             <div
