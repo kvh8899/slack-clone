@@ -134,6 +134,7 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
                 if (!showChannelList) setShowChannelList(true);
                 if (showChannelList) setShowChannelList(false);
               }}
+              className="cs"
             >
               <div className="is isc">
                 <i className="fas fa-caret-down" ref={caret}></i>
@@ -158,6 +159,7 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
               onClick={(e) => {
                 dCaret.current.classList.toggle("side");
               }}
+              className="cs"
             >
               <div className="is isc">
                 <i className="fas fa-caret-down" ref={dCaret}></i>

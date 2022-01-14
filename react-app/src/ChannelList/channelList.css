@@ -1,9 +1,7 @@
 .channelContainer {
-    margin-left: 20px;
     display: flex;
     flex-direction: column;
-    margin-left:20px;
-    width: fit-content;
+  
 }
 
 .singleChannel div{
@@ -12,7 +10,6 @@
 }
 
 .channelContainer > div {
-    width: 150px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -22,5 +19,4 @@
 .selected{
     background-color:lightskyblue;
     color:black;
-    border-radius: 5px;
 }
