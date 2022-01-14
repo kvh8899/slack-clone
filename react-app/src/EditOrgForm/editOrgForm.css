@@ -1,0 +1,22 @@
+.channelForm h5 {
+    text-align: center;
+    margin: 0px 0px 20px 0px;
+}
+
+.delete {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    margin: 15px 10px 15px 0px;
+    font-size: 14px;
+    color: red;
+}
+
+.delete i {
+    padding: 0px 5px;
+    margin-right: 10px;
+}
+
+.delete:hover {
+    cursor: pointer;
+}

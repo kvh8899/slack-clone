@@ -7,11 +7,15 @@ import { useNavigate } from "react-router-dom";
 import { logout } from "../store/session";
 import NewChannelForm from "../newChannelForm";
 import NewMemberForm from "../NewMemberForm"
-import Search from "../Search";
+import EditChannelForm from "../EditChannelForm"
+import EditOrgForm from '../EditOrgForm'
+import Search from "../Search"
+
 
 import { readChannels } from "../store/channels";
 import { useParams } from "react-router-dom";
 import { setName } from "../store/currentChannel"
+
 
 function Orgmainchat() {
   const [selectedChannel, setSelectedChannel] = useState('')
@@ -56,6 +60,8 @@ function Orgmainchat() {
     <div className="content">
       <NewChannelForm />
       <NewMemberForm />
+      <EditChannelForm />
+      <EditOrgForm />
       <div className="topBar" onClick={awayClick}>
         <div className="backbuttoncontainer">
           <button className="backbutton" onClick={backClick}>
