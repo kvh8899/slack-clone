@@ -11,7 +11,6 @@ import EditChannel from '../EditChannel'
 //"https://<herokuname>.herokuapp.com" for heroku
 let endPoint = "http://localhost:5000";
 let socket;
-
 function Message({ user }) {
   const [message, setMessage] = useState("");
   const [incoming,setIncoming] = useState([])
@@ -84,7 +83,6 @@ function Message({ user }) {
       <div className="messages">
         <div>
           {incoming.map((msg) => {
-            console.log(msg)
             return (
               
               <div className="message" key={msg.id}>
