@@ -25,13 +25,12 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
   useEffect(() => {
     function onResize(){
       let r = document.querySelector(".r")
-      if(r.clientWidth > document.body.clientWidth * 0.5){
+      if(r.clientWidth > document.body.clientWidth * 0.7){
         size.current.classList.add("hide")
         size1.current.classList.add("hide")
         msgBar.current.classList.add("hide")
         r.classList.add("abs")
-        
-      }else if(r.clientWidth < document.body.clientWidth * 0.5){
+      }else if(r.clientWidth < document.body.clientWidth * 0.7){
         size.current.classList.remove("hide")
         size1.current.classList.remove("hide")
         msgBar.current.classList.remove("hide")
@@ -121,7 +120,7 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
             x.target.classList.remove("dSelect");
           });
           document.addEventListener("mousemove", (e) => {
-            if (e.clientX > 215 && 
+            if (e.clientX > 225 && 
               e.clientX < document.body.clientWidth * 0.5 && drag) {
               size.current.style.width = (e.clientX + 2 )+ "px";
               size1.current.style.width = (e.clientX + 2) + "px";
