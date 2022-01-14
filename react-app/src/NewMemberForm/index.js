@@ -9,7 +9,7 @@ import { useParams } from "react-router";
 function NewMemberForm() {
   const { id } = useParams()
   const dispatch = useDispatch();
-  const showForm = useSelector((state) => state.showFormReducer);
+  const showForm = useSelector((state) => state.addMemberFormReducer);
   const [memberName, setMemberName] = useState("");
   const org = useSelector((state) => state.orgmainchatReducer);
 
