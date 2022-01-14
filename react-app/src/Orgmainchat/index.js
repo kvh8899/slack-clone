@@ -6,14 +6,13 @@ import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../store/session";
 import NewChannelForm from "../newChannelForm";
+
 import NewMemberForm from "../NewMemberForm"
 import EditChannelForm from "../EditChannelForm"
 import EditOrgForm from '../EditOrgForm'
 import { getAllMessages } from "../store/messages"
-import { readChannels } from "../store/channels";
 import { useParams } from "react-router-dom";
 import Search from "../Search"
-
 
 function Orgmainchat() {
   const [selectedChannel, setSelectedChannel] = useState('')
@@ -57,9 +56,9 @@ function Orgmainchat() {
   }
 
   const backClick = (e) => {
-    e.preventDefault()
-    hist('/organization')
-  }
+    e.preventDefault();
+    hist("/organization");
+  };
 
   return (
     <div className="content">
@@ -71,7 +70,7 @@ function Orgmainchat() {
       <div className="topBar" onClick={awayClick}>
         <div className="backbuttoncontainer">
           <button className="backbutton" onClick={backClick}>
-            Back To Workspaces
+            <i className="fas fa-arrow-left"></i>
           </button>
         </div>
         <div className="searchContainer">
@@ -80,13 +79,14 @@ function Orgmainchat() {
         <div className="profile">
           {userData?.profilePicture ? (
             <img
+              className="unselect"
               src={userData.profilePicture}
               alt="404"
               onClick={profClick}
             ></img>
           ) : (
             <img
-              // src="https://avatars.slack-edge.com/2015-03-13/4045125376_172ec0a9d33356de3571_88.jpg"
+              className="unselect"
               src="https://cdn.discordapp.com/attachments/919391399269515305/930910536193933312/aa_logo.png"
               alt="404"
               onClick={profClick}
@@ -111,10 +111,13 @@ function Orgmainchat() {
         </div>
       </div>
       <div className="midContent1" onClick={awayClick}>
-        <MessageBar
-          setSelectedChannel={setSelectedChannel}
-          setSelectedChannelId={setSelectedChannelId}
-        />
+        <div className="r">
+          <MessageBar
+            setSelectedChannel={setSelectedChannel}
+            setSelectedChannelId={setSelectedChannelId}
+          />
+
+        </div>
         <Message
           user={userData}
           setSelectedChannel={setSelectedChannel}

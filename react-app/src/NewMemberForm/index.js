@@ -4,7 +4,6 @@ import { addMemberOff } from "../store/showMemberForm";
 import { addMembers } from "../store/orgmainchat";
 import SingleMember from "../SingleMember";
 import { useParams } from "react-router";
-import "./newchannelform.css";
 
 function NewMemberForm() {
   const { id } = useParams()
@@ -12,14 +11,7 @@ function NewMemberForm() {
   const showForm = useSelector((state) => state.addMemberFormReducer);
   const [memberName, setMemberName] = useState("");
   const org = useSelector((state) => state.orgmainchatReducer);
-
-  // const users = org.available_users?.map((user) => user.username);
-
-
   const users = org.available_users?.map((user) => user);
-  // console.log(users)
-
-  // const users = org.available_users
   const { search } = window.location;
   const query = new URLSearchParams(search).get("s");
   const [searchQuery, setSearchQuery] = useState(query || "");
@@ -36,17 +28,11 @@ function NewMemberForm() {
     });
   }
 
-
   const filteredUsers = filterUsers(users, searchQuery);
-  // console.log(id)
+
   const addToOrg = async (e) => {
-    // console.log(e.target.id, 'eeeeeeee')
-    const data = await dispatch(addMembers(id, e.target.id))
-    // console.log(data)
-
+    await dispatch(addMembers(id, e.target.id))
   }
-
-  // console.log("😣😣😣", users);
 
   const addMember = async (e) => {
     await dispatch(addMembers(memberName));

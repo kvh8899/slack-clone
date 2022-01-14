@@ -9,7 +9,9 @@
     width: 95%;
     pointer-events: all;
 }
-
+.searchbar:focus{
+    border: 2px solid rgb(91, 134, 151);
+}
 .searchContainer ul {
     /* position: fixed; */
     list-style: none;

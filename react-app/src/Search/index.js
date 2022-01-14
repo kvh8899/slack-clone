@@ -35,7 +35,7 @@ function Search() {
             <input
                 value={searchQuery}
                 onInput={e => setSearchQuery(e.target.value)}
-                className="searchbar"
+                className="searchbar unselect"
                 type="text"
                 id="header-search"
                 placeholder="Search Users"
