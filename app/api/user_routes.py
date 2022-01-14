@@ -25,7 +25,6 @@ def getWorkspace(userId):
     organizations = []
     if(allWorkSpaces):
         for i in allWorkSpaces:
-            print(i.members)
             message = i.to_dict();
             members = []
             for c in i.members:
