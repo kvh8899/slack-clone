@@ -39,12 +39,12 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
   // console.log(users)
 
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    // formToggle();
-    setShowEdit(false);
-    const data = await dispatch(editOrgThunk(orgName, id));
-  }
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   // formToggle();
+  //   setShowEdit(false);
+  //   const data = await dispatch(editOrgThunk(orgName, id));
+  // }
 
   //   await dispatch(getOrg(id));
   //   if (data) {
@@ -66,7 +66,7 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
         {showh2 && <h2>{org.name}</h2>} <i className="fas fa-ellipsis-v"></i>
 
       </div>
-     
+
       <div className="channelContent">
         <div className="channels">
           <div>
@@ -129,7 +129,7 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
                 return (
                   <div >
                     <h3>- {member.username}</h3>
-                    {members.length > 1 ? (<i className="fas fa-trash-alt" onClick={handleSubmit}></i>) : ("")}
+                    {members.length > 1 ? (<i className="fas fa-trash-alt" onClick></i>) : ("")}
                   </div>
                 );
               })
