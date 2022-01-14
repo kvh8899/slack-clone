@@ -4,20 +4,23 @@ import io from "socket.io-client";
 import { editChannelThunk } from "../store/channels";
 import { useDispatch, useSelector } from "react-redux";
 import {useParams} from "react-router-dom"
-import EditChannel from '../EditChannel'
 
+import {createOneMessage ,getAllMessages} from "../store/messages";
+import EditChannel from '../EditChannel'
 // must use http here
 //"https://<herokuname>.herokuapp.com" for heroku
 let endPoint = "http://localhost:5000";
 let socket;
 
-function Message({ user,selectedChannelId, setSelectedChannel }) {
-  const [messages, setMessages] = useState([]);
+function Message({ user }) {
   const [message, setMessage] = useState("");
+  const [incoming,setIncoming] = useState([])
   const [channelName, setChannelName] = useState('')
   const [showForm, setShowForm] = useState(false)
-  const {channelId} = useParams()
-  const currentChannel = useSelector((state) => state.currentChannel);
+  const { channelId } = useParams()
+  const currentChannel = useSelector((state) => state.currentChannel)
+  const allMessages = useSelector((state) => state.messages)
+  const session = useSelector((state) => state.session.user)
   const dispatch = useDispatch();
   const handleChannelSubmit = async e => {
     e.preventDefault()
@@ -28,25 +31,32 @@ function Message({ user,selectedChannelId, setSelectedChannel }) {
   const dummyDiv = useRef(null);
   useEffect(() => {
     socket = io(`${endPoint}`);
-    getMessages();
+    socket.on("message", (msg) => {
+      //create msg
+      setIncoming(msg)
+      dummyDiv.current.scrollIntoView(false);
+    })
     return () => {
       socket.disconnect();
     };
-  }, [messages.length]);
-
-  const getMessages = () => {
-    socket.once("message", (msg) => {
-      setMessages([...messages, msg]);
-      dummyDiv.current.scrollIntoView(false);
-    });
-  };
+  },[])
+  useEffect(() => {
+    setIncoming(allMessages)
+    socket.emit('leaveroom',{channelId:currentChannel.prev})
+    socket.emit('joinroom',{channelId,session,message});
+  },[channelId,allMessages])
+  useEffect(() => {
+    dummyDiv.current.scrollIntoView(false);
+  })
   const onChange = (e) => {
     setMessage(e.target.value);
   };
 
-  const onClick = () => {
+  const onClick = async() => {
     if (message !== "") {
-      socket.emit("message", message);
+      await dispatch(createOneMessage(channelId,message)) 
+      const msgs = await dispatch(getAllMessages(channelId))
+      socket.emit("message", {channelId,session,allMessages:msgs.messages});
       setMessage("");
     } else {
       alert("Please add message");
@@ -73,9 +83,9 @@ function Message({ user,selectedChannelId, setSelectedChannel }) {
       </div>
       <div className="messages">
         <div>
-          {messages.map((msg) => {
+          {incoming.map((msg) => {
             return (
-              <div className="message">
+              <div className="message" key={msg.id}>
                 {user?.profilePicture ? (
                   <img src={user.profilePicture} alt="404"></img>
                 ) : (
@@ -87,7 +97,7 @@ function Message({ user,selectedChannelId, setSelectedChannel }) {
                 )}
                 <div>
                   <h3>{user.username}</h3>
-                  <p>{msg}</p>
+                  <p>{msg.content}</p>
                 </div>
               </div>
             );
@@ -98,7 +108,7 @@ function Message({ user,selectedChannelId, setSelectedChannel }) {
       </div>
       <div className="inputMessages">
         <form
-          onSubmit={(e) => {
+          onSubmit={async(e) => {
             e.preventDefault();
             onClick();
           }}

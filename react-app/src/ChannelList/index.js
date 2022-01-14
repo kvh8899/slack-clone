@@ -2,7 +2,8 @@ import "./channelList.css";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useRef } from "react";
-import { readChannels } from "../store/channels";
+import { readChannels, removeChannel } from "../store/channels";
+import { getAllMessages } from "../store/messages";
 import { setName } from "../store/currentChannel";
 import { useNavigate } from "react-router-dom";
 
@@ -39,7 +40,7 @@ function ChannelList() {
   useEffect(() => {
     channels.forEach((e) => {
       if (e.id === parseInt(channelId)) {
-        dispatch(setName(`# ${e.name}`));
+        dispatch(setName({name:`# ${e.name}`,prev:channelId}));
         return;
       }
     });
@@ -55,22 +56,64 @@ function ChannelList() {
                 key={channel.id}
                 className={`${channel.name} singleChannel`}
                 id={channel.id}
-                onClick={() => {
+                onClick={async () => {
                   dispatch(
-                    setName(specificChannel.current[i].children[0].innerHTML)
+                    setName({name:specificChannel.current[i].children[0].innerHTML,prev:channelId})
                   );
+                  await dispatch(getAllMessages(channel.id));
                   hist(
                     `/organizations/${id}/channels/${specificChannel.current[i].id}`
                   );
                 }}
               >
                 <h3 class="unselect"># {channel.name}</h3>
+                {/* {channels.length > 1?<i
+                  className="fas fa-trash-alt"
+                  onClick={handleSubmit}
+                  id={channel.id} */}
+                {/* ></i>:""} */}
+
+                {/* {channels.length > 1 ? (
+                  <i
+                    className="fas fa-trash-alt"
+                    onClick={async (e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      await dispatch(removeChannel(e.target.id));
+                      if (!(channelId === e.target.id)) return;
+                      for (let i = 0; i < channels.length; i++) {
+                        //need to update state of channel messages
+                        if (
+                          channels[i].id === parseInt(e.target.id) &&
+                          i === 0
+                        ) {
+                          hist(
+                            `/organizations/${id}/channels/${
+                              channels[i + 1].id
+                            }`
+                          );
+                        } else if (channels[i].id === parseInt(e.target.id)) {
+                          hist(
+                            `/organizations/${id}/channels/${
+                              channels[i - 1].id
+                            }`
+                          );
+                        }
+                      }
+                    }}
+                    id={channel.id}
+                  ></i>
+                ) : (
+                  ""
+                )} */}
               </div>
             );
           })
         : null}
     </div>
-  )
+
+  );
+
 }
 
 export default ChannelList;

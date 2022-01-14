@@ -6,7 +6,7 @@ export const setName = (channelName) =>{
         payload:channelName
     }
 }
-const currentChannel = (state = "",action) => {
+const currentChannel = (state = {},action) => {
     switch(action.type){
         case SETCURRENT:
             return action.payload;

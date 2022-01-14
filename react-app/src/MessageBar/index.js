@@ -11,67 +11,39 @@ import "./messagebar.css";
 
 function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
   const [showChannelList, setShowChannelList] = useState(true);
+ const [showh2, setShowh2] = useState(true)
+  const [showChannelList, setShowChannelList] = useState(true)
 
+  const [showMemberList, setshowMemberList] = useState(true)
+  const [channelName, setChannelName] = useState('')
+  const [editChannelName, setEditChannelName] = useState('')
   const caret = useRef(null);
   const dCaret = useRef(null);
+  const mCaret = useRef(null);
   const size = useRef(null);
   const size1 = useRef(null);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { id } = useParams();
   const org = useSelector((state) => state.orgmainchatReducer);
+  const members = org.members
+  // console.log(members, 'MEMBERS OBJECT')
+
   const session = useSelector((state) => state.session.user);
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   formToggle();
-  //   setShowEdit(false);
-  //   const data = await dispatch(editOrgThunk(orgName, id));
+  // const users = org.available_users?.map(user => user.username)
+  // console.log(users)
 
-  //   await dispatch(getOrg(id));
-  //   if (data) {
-  //     return setErrors(data);
-  //   }
-  // };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // formToggle();
+    // setShowEdit(false);
+    const data = await dispatch(editOrgThunk(orgName, id));
+  };
 
   useEffect(() => {
     dispatch(getOrg(id));
   }, []);
-
-  // const editToggle = () => {
-  //   if (showForm === true) return;
-  //   if (showEdit === false) return setShowEdit(true);
-  //   if (showEdit === true) return setShowEdit(false);
-  // };
-
-  // const formToggle = () => {
-  //   if (showForm === false) {
-  //     setShowh2(false);
-  //     return setShowForm(true);
-  //   } else {
-  //     setShowh2(true);
-  //     return setShowForm(false);
-  //   }
-  // };
-
-  // const testRead = (e) => {
-  //   e.preventDefault()
-  //   dispatch(readChannels(id))
-  // }
-  // const testDelete = async (e) => {
-  //   e.preventDefault()
-  //   await dispatch(removeChannel(5, channelName))
-  // }
-  // const testEdit = async (e) => {
-  //   e.preventDefault()
-  //   await dispatch(editChannelThunk(id, editChannelName, 7))
-  // }
-
-  const orgDelete = async (e) => {
-    e.preventDefault();
-    await dispatch(removeWorkspace(id));
-    navigate("/organization");
-  };
 
   return (
     <>
@@ -197,4 +169,4 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
   );
 }
 
-export default MessageBar;
+export default MessageBar

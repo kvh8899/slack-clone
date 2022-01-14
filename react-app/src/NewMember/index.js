@@ -1,20 +1,20 @@
-import {onAction} from "../store/showForm";
+import {addMemberOn} from "../store/showMemberForm";
 import {useDispatch} from "react-redux";
 import "./newchannel.css";
-function NewChannel() {
+function NewMember() {
     const dispatch = useDispatch();
   return (
     <div className="addChannel">
       <button
         onClick={(e) => {
           e.stopPropagation();
-          dispatch(onAction());
+          dispatch(addMemberOn());
         }}
       >
-          <div className="is"><i className="fas fa-plus"></i></div>
+        <i className="fas fa-plus"></i>
       </button>
     </div>
-  ); 
+  );
 }
 
-export default NewChannel;
+export default NewMember;
