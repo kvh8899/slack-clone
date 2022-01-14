@@ -27,6 +27,7 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
   const { id } = useParams();
   const org = useSelector((state) => state.orgmainchatReducer);
   const members = org.members
+  console.log(members, 'MEMBERS OBJECT')
   const session = useSelector((state) => state.session.user);
   const input = useRef(null);
   const [orgName, setOrgName] = useState("");

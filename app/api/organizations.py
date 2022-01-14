@@ -123,6 +123,6 @@ def addMember(orgId, userId):
         )
         db.session.add(member)
         db.session.commit()
-        return org.to_dict()
+        return user.to_dict()
 
     return {'error': "Cannot add member"}

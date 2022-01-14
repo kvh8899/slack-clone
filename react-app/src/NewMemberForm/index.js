@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addMemberOff } from "../store/showMemberForm";
-import { addMembers } from "../store/organizations";
+import { addMembers } from "../store/orgmainchat";
 import SingleMember from "../SingleMember";
 import "./newchannelform.css";
 import { useParams } from "react-router";
