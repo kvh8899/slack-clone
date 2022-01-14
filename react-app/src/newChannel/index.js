@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {onAction} from "../store/showForm";
 import {useDispatch} from "react-redux";
 import "./newchannel.css";
@@ -15,7 +14,7 @@ function NewChannel() {
         <i className="fas fa-plus"></i>
       </button>
     </div>
-  );
+  ); 
 }
 
 export default NewChannel;

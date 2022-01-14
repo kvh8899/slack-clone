@@ -2,7 +2,7 @@ import { offAction } from "../store/showForm";
 import { postChannel } from "../store/channels";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
-import { useParams ,useNavigate} from "react-router";
+import { useParams } from "react-router";
 import "./newchannelform.css";
 function NewChannelForm() {
   const dispatch = useDispatch();
@@ -38,7 +38,7 @@ function NewChannelForm() {
             <h2>Create Text Channel</h2>
             <label>Channel Name</label>
             <input
-              placeholder={"# new channel"}
+              placeholder={"# New Channel"}
               value={channelName}
               onChange={(e) => {
                 setChannelName(e.target.value);

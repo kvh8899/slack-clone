@@ -4,17 +4,24 @@ import session from './session'
 import organizations from './organizations'
 import orgmainchatReducer from './orgmainchat'
 import showFormReducer from './showForm';
+import editChannelFormReducer from './showEditChannelForm';
+import editOrgFormReducer from './showEditOrg'
 import channelReducer from './channels';
 import currentChannel from './currentChannel';
-import addMemberFormReducer from './showMemberForm'
+import addMemberFormReducer from './showMemberForm';
+import messages from './messages';
+
 const rootReducer = combineReducers({
   session,
   organizations,
   orgmainchatReducer,
   showFormReducer,
+  editChannelFormReducer,
+  editOrgFormReducer,
   channelReducer,
   currentChannel,
   addMemberFormReducer,
+  messages,
 });
 
 
