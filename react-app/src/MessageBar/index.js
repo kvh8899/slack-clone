@@ -128,7 +128,7 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
           <div>
             <div
               onClick={(e) => {
-                caret.current.classList.toggle("side");
+                caret.current.classList.toggle("side"); 
                 if (!showChannelList) setShowChannelList(true);
                 if (showChannelList) setShowChannelList(false);
               }}
