@@ -55,6 +55,7 @@ function Orgmainchat() {
   return (
     <div className="content">
       <NewChannelForm />
+      <NewMemberForm />
       <div className="topBar" onClick={awayClick}>
         <div className="backbuttoncontainer">
           <button className="backbutton" onClick={backClick}>
@@ -98,8 +99,16 @@ function Orgmainchat() {
         </div>
       </div>
       <div className="midContent1" onClick={awayClick}>
-        <MessageBar setSelectedChannel={setSelectedChannel} setSelectedChannelId={setSelectedChannelId} />
-        <Message user={userData} setSelectedChannel={setSelectedChannel} selectedChannel={selectedChannel} selectedChannelId={selectedChannelId} />
+        <MessageBar
+          setSelectedChannel={setSelectedChannel}
+          setSelectedChannelId={setSelectedChannelId}
+        />
+        <Message
+          user={userData}
+          setSelectedChannel={setSelectedChannel}
+          selectedChannel={selectedChannel}
+          selectedChannelId={selectedChannelId}
+        />
       </div>
     </div>
   );

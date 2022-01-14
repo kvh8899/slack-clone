@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { offAction } from "../store/showForm";
+import { addMemberOff } from "../store/showMemberForm";
 import { addMembers } from "../store/organizations";
 import SingleMember from "../SingleMember";
 import "./newchannelform.css";
@@ -40,7 +40,7 @@ function NewMemberForm() {
         <div
           className="blackout"
           onClick={(e) => {
-            dispatch(offAction());
+            dispatch(addMemberOff());
           }}
         ></div>
       )}
@@ -50,7 +50,7 @@ function NewMemberForm() {
           onSubmit={async (e) => {
             e.preventDefault();
             if (memberName) {
-              dispatch(offAction());
+              dispatch(addMemberOff());
               await addMember();
             }
             setMemberName("");
@@ -85,7 +85,7 @@ function NewMemberForm() {
             <p
               className="cancel"
               onClick={(e) => {
-                dispatch(offAction());
+                dispatch(addMemberOff());
                 setMemberName("");
               }}
             >
