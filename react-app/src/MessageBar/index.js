@@ -12,22 +12,22 @@ import "./messagebar.css"
 
 
 function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
-  const [showEdit, setShowEdit] = useState(false)
-  const [showForm, setShowForm] = useState(false)
+
   const [showh2, setShowh2] = useState(true)
   const [showChannelList, setShowChannelList] = useState(true)
-  const [showMemberList, setshowMemberList] = useState(true)
-  const [channelName, setChannelName] = useState('')
-  const [editChannelName, setEditChannelName] = useState('')
 
   const caret = useRef(null);
   const dCaret = useRef(null);
   const mCaret = useRef(null);
 
+  const [showMemberList, setshowMemberList] = useState(true)
+  const [channelName, setChannelName] = useState('')
+  const [editChannelName, setEditChannelName] = useState('')
+
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { id } = useParams();
   const org = useSelector((state) => state.orgmainchatReducer);
+
   const members = org.members
   console.log(members, 'MEMBERS OBJECT')
   const session = useSelector((state) => state.session.user);
@@ -56,81 +56,17 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
     dispatch(getOrg(id));
   }, []);
 
-  // const editToggle = () => {
-  //   if (showForm === true) return;
-  //   if (showEdit === false) return setShowEdit(true);
-  //   if (showEdit === true) return setShowEdit(false);
-  // };
-
-  // const formToggle = () => {
-  //   if (showForm === false) {
-  //     setShowh2(false);
-  //     return setShowForm(true);
-  //   } else {
-  //     setShowh2(true);
-  //     return setShowForm(false);
-  //   }
-  // };
-
-  // const testRead = (e) => {
-  //   e.preventDefault()
-  //   dispatch(readChannels(id))
-  // }
-  // const testDelete = async (e) => {
-  //   e.preventDefault()
-  //   await dispatch(removeChannel(5, channelName))
-  // }
-  // const testEdit = async (e) => {
-  //   e.preventDefault()
-  //   await dispatch(editChannelThunk(id, editChannelName, 7))
-  // }
-
-  const orgDelete = async (e) => {
-    e.preventDefault();
-    await dispatch(removeWorkspace(id));
-    navigate("/organization");
-  };
-
   return (
     <div className="messageBar">
-      <div
-        onClick={e => {
+
+      <div onClick={e => {
           e.stopPropagation()
           dispatch(editOrgOn())
-        }}
-        className="title">
-        <h2>{org.name}</h2>
-        <i class='fas fa-ellipsis-v'></i>
-        {/* {showh2 && <h2>{org.name}</h2>} <i class="fas fa-ellipsis-v"></i>
-        {showForm && (
-          <div>
-            <form className="editorgform" onSubmit={handleSubmit}>
-              <input
-                type="text"
-                ref={input}
-                placeholder={"New Name"}
-                required
-                value={orgName}
-                onChange={(e) => setOrgName(e.target.value)}
-              />
-            </form>
+        }} className="title">
+        {showh2 && <h2>{org.name}</h2>} <i className="fas fa-ellipsis-v"></i>
 
-          </div>
-        )} */}
       </div>
-      {/* <div>
-        {showEdit && (
-          <div className="orgeditdiv">
-            <p>Owned by {session?.username}</p>
-            <button className="editbutton" onClick={formToggle}>
-              Edit Name
-            </button>
-            <button className="editbutton" onClick={orgDelete}>
-              Delete Org
-            </button>
-          </div>
-        )}
-      </div> */}
+     
       <div className="channelContent">
         <div className="channels">
           <div>

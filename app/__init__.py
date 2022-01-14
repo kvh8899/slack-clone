@@ -8,7 +8,8 @@ from flask import Flask
 from app.models import db, User
 from app.config import Config
 from flask_migrate import Migrate
-from flask_socketio import SocketIO, send
+from flask_socketio import SocketIO, send, join_room, leave_room
+
 from app.seeds import seed_commands
 
 from flask_cors import CORS
@@ -32,16 +33,12 @@ app.config.from_object(Config)
 app.cli.add_command(seed_commands)
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
-
 app.register_blueprint(organization_routes,url_prefix='/api/organizations')
 app.register_blueprint(channel_routes,url_prefix='/api/channels')
-
 db.init_app(app)
 Migrate(app, db)
-socketIo = SocketIO(app=app, cors_allowed_origins='*')
-
 CORS(app)
-
+socketIo = SocketIO(app=app, cors_allowed_origins='*')
 
 @app.before_request
 def https_redirect():
@@ -74,9 +71,20 @@ def react_root(path):
 
 @socketIo.on("message")
 def handleMessage(msg):
-    send(msg, broadcast=True)
+    room = f"{msg['channelId']}"
+    send(msg['allMessages'],to=room)
     return None
 
+@socketIo.on('joinroom')
+def on_join(data):
+    username = data['session']['username']
+    room = f"{data['channelId']}"
+    join_room(room)
+
+@socketIo.on('leaveroom')
+def on_leave(data):
+    room = f"{data['channelId']}"
+    leave_room(room)
 
 if __name__ == '__main__':
     socketIo.run(app)

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {onAction} from "../store/showForm";
 import {useDispatch} from "react-redux";
 import "./newchannel.css";

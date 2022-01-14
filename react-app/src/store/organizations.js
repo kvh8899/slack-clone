@@ -6,7 +6,7 @@ const DELETE_WORKSPACES = "workspaces/DELETE_WORKSPACES";
 // const ADD_MEMBER = "workspaces/ADD_MEMBER";
 
 //Organization actions
-export const getWorkspace = (workspaces) => {
+export const getworkspaces = (workspaces) => {
   return {
     type: SET_WORKSPACES,
     payload: workspaces,
@@ -44,7 +44,7 @@ export const getWorkspaces = (userId) => async (dispatch) => {
 
   if (res.ok) {
     const body = await res.json();
-    dispatch(getWorkspace(body.workspaces));
+    dispatch(getworkspaces(body.workspaces));
     return body;
   } else {
     return null;
