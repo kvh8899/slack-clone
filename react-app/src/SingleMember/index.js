@@ -7,7 +7,7 @@ function SingleMember({ username }) {
 
     return (
         <>
-            <div className="membername">{username}</div>
+            <div className="membername" >{username}</div>
         </>
     );
 }
