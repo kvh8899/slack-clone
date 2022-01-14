@@ -42,7 +42,7 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // formToggle();
-    setShowEdit(false);
+    // setShowEdit(false);
     const data = await dispatch(editOrgThunk(orgName, id));
   }
 
@@ -66,7 +66,7 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
         {showh2 && <h2>{org.name}</h2>} <i className="fas fa-ellipsis-v"></i>
 
       </div>
-     
+
       <div className="channelContent">
         <div className="channels">
           <div>

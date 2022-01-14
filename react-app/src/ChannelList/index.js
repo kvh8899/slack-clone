@@ -67,7 +67,7 @@ function ChannelList() {
               >
                 <h3># {channel.name}</h3>
 
-                {channels.length > 1 ? (
+                {/* {channels.length > 1 ? (
                   <i
                     className="fas fa-trash-alt"
                     onClick={async (e) => {
@@ -99,7 +99,7 @@ function ChannelList() {
                   ></i>
                 ) : (
                   ""
-                )}
+                )} */}
               </div>
             );
           })
