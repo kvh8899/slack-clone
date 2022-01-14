@@ -25,12 +25,12 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
   useEffect(() => {
     function onResize(){
       let r = document.querySelector(".r")
-      if(r.clientWidth > document.body.clientWidth * 0.7){
+      if(r.clientWidth > document.body.clientWidth * 0.5){
         size.current.classList.add("hide")
         size1.current.classList.add("hide")
         msgBar.current.classList.add("hide")
         r.classList.add("abs")
-      }else if(r.clientWidth < document.body.clientWidth * 0.7){
+      }else if(r.clientWidth < document.body.clientWidth * 0.5){
         size.current.classList.remove("hide")
         size1.current.classList.remove("hide")
         msgBar.current.classList.remove("hide")
