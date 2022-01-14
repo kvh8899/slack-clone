@@ -73,11 +73,14 @@
     position:absolute;
     background-color:transparent;
     width:5px;
-    z-index:100;
     transition-property: background-color;
     transition-duration: 0.3s;
 }
 .d:hover{
+    cursor:col-resize;
+    background-color:skyblue;
+}
+.dSelect{
     cursor:col-resize;
     background-color:skyblue;
 }

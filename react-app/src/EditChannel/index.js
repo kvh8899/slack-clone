@@ -12,7 +12,7 @@ function EditChannel() {
                     e.stopPropagation()
                     dispatch(editChannelOn())
                 }}
-                // className="editChannelButton"
+                className="unselect"
             >
                 Edit
             </button>

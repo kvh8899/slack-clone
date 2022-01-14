@@ -20,3 +20,6 @@
     background-color:lightskyblue;
     color:black;
 }
+.unselect{
+    user-select:none;
+}

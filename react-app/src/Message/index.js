@@ -55,7 +55,7 @@ function Message({ user,selectedChannelId, setSelectedChannel }) {
   return (
     <div className="messageArea">
       <div className="title">
-        <h2>{currentChannel}</h2>
+        <h2 className="unselect">{currentChannel}</h2>
         <EditChannel />
         { showForm && (
           <div>

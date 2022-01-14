@@ -63,7 +63,7 @@ function ChannelList() {
                   );
                 }}
               >
-                <h3># {channel.name}</h3>
+                <h3 class="unselect"># {channel.name}</h3>
               </div>
             );
           })

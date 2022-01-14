@@ -70,13 +70,14 @@ function Orgmainchat() {
         <div className="profile">
           {userData?.profilePicture ? (
             <img
+              className="unselect"
               src={userData.profilePicture}
               alt="404"
               onClick={profClick}
             ></img>
           ) : (
             <img
-              // src="https://avatars.slack-edge.com/2015-03-13/4045125376_172ec0a9d33356de3571_88.jpg"
+              className="unselect"
               src="https://cdn.discordapp.com/attachments/919391399269515305/930910536193933312/aa_logo.png"
               alt="404"
               onClick={profClick}

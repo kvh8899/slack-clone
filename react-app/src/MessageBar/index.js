@@ -77,7 +77,7 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
     <>
       <div className="messageBar">
         <div className="title">
-          <h2>{org.name}</h2>
+          <h2 className="unselect">{org.name}</h2>
           <div
             className="is"
             id="e"
@@ -136,7 +136,7 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
                       <i className="fas fa-caret-down" ref={caret}></i>
                     </div>
 
-                    <p>Channels</p>
+                    <p className="unselect">Channels</p>
                   </div>
                   <NewChannel />
                 </div>
@@ -160,7 +160,7 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
                     <div className="is isc">
                       <i className="fas fa-caret-down" ref={dCaret}></i>
                     </div>
-                    <p>Direct Messages</p>
+                    <p className="unselect">Direct Messages</p>
                   </div>
                   <div className="addChannel">
                     <button>
@@ -178,15 +178,17 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
       </div>
       <div
         className="d"
-        onMouseDown={(e) => {
+        onMouseDown={(x) => {
           let drag = true;
+          x.target.classList.add("dSelect");
           document.addEventListener("mouseup", () => {
             drag = false;
+            x.target.classList.remove("dSelect");
           });
           document.addEventListener("mousemove", (e) => {
             if (e.clientX > 250 && e.clientX < 880 && drag) {
-              size.current.style.width = e.clientX + "px";
-              size1.current.style.width = e.clientX + "px";
+              size.current.style.width = (e.clientX + 2 )+ "px";
+              size1.current.style.width = (e.clientX + 2) + "px";
             }
           });
         }}
