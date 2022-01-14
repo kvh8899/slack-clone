@@ -8,10 +8,9 @@ import "./editChannelForm.css"
 function EditChannelForm() {
     const dispatch = useDispatch()
     const hist = useNavigate()
-    const { id, channelId } = useParams()
+    const { id,channelId } = useParams()
     const showForm = useSelector(state => state.editChannelFormReducer)
     const channels = useSelector(state => state.channelReducer)
-
     const [channelName, setChannelName] = useState('')
 
     const editChannel = async e => {
@@ -21,11 +20,17 @@ function EditChannelForm() {
     const handleDelete = async e => {
         e.preventDefault()
         e.stopPropagation()
-        hist(`/organizations/${id}/channels/${channels[0].id}`)
-        console.log('channelId', channelId)
         await dispatch(removeChannel(channelId))
+        for(let i = 0;i < channels.length;i++){
+            if(channels[i].id === parseInt(channelId) && i === 0){
+                hist(`/organizations/${id}/channels/${channels[i+1].id}`);
+                return
+            }else if(channels[i].id === parseInt(channelId)){
+                hist(`/organizations/${id}/channels/${channels[i-1].id}`)
+                return
+            }
+        }
     }
-
     return (
         <>
             { showForm && (
