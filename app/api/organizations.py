@@ -11,6 +11,7 @@ organization_routes = Blueprint('organizations', __name__)
 
 # edit org route
 
+
 @organization_routes.route('/edit/<int:id>', methods=['PUT'])
 def edit_org(id):
     org = Organization.query.get(id)
@@ -28,12 +29,22 @@ def edit_org(id):
 @organization_routes.route('/<int:id>', methods=['GET'])
 def get_one_org(id):
     org = Organization.query.get(id)
-    return org.to_dict()
-
+    users = User.query.all()
+    print(users, 'hiiiiii')
+    dictOrg = org.to_dict()
+    members = []
+    for member in org.members:
+        members.append(member.to_dict())
+    available_users = []
+    for user in users:
+        available_users.append(user.to_dict())
+    dictOrg['members'] = members
+    dictOrg['available_users'] = available_users
+    return dictOrg
 # delete organizations
 
 
-@organization_routes.route('/<int:organizationId>/delete', methods=['DELETE'])
+@ organization_routes.route('/<int:organizationId>/delete', methods=['DELETE'])
 def deleteWorkspace(organizationId):
     org = Organization.query.filter_by(
         id=organizationId).first()
@@ -45,8 +56,8 @@ def deleteWorkspace(organizationId):
 # create organization
 
 
-@organization_routes.route('/', methods=['POST'])
-@login_required
+@ organization_routes.route('/', methods=['POST'])
+@ login_required
 def newWorkspace():
     form = OrganizationForm()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -70,7 +81,7 @@ def newWorkspace():
 
 
 # GET channels of an organization
-@organization_routes.route('/<int:orgId>/channels')
+@ organization_routes.route('/<int:orgId>/channels')
 def getChannel(orgId):
     allChannels = Channel.query.filter_by(
         org_id=orgId).join(Organization).all()
@@ -82,8 +93,8 @@ def getChannel(orgId):
 
 
 # ADD A CHANNEL TO AN ORGANIZATION
-@organization_routes.route('/<int:orgId>/channels', methods=['POST'])
-@login_required
+@ organization_routes.route('/<int:orgId>/channels', methods=['POST'])
+@ login_required
 def newChannel(orgId):
     form = ChannelForm()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -99,16 +110,16 @@ def newChannel(orgId):
 
 
 # ADD Member to Organization
-@organization_routes.route('/<int:organizationId>/members/<int:memberId>', methods=['POST'])
-@login_required
+@ organization_routes.route('/<int:organizationId>/members/<int:memberId>', methods=['POST'])
+@ login_required
 def addMember(orgId, memberId):
     userId = memberId
     user = User.query.get(int(userId))
     org = Organization.query.get(int(orgId))
     if user and user not in org.members:
         member = Member(
-            user_id = userId,
-            orgId = orgId
+            user_id=userId,
+            orgId=orgId
         )
         db.session.add(member)
         db.session.commit()

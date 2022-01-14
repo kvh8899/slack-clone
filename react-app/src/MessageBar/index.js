@@ -1,12 +1,13 @@
-import { removeWorkspace, editOrgThunk } from "../store/organizations";
-import React, { useState, useRef, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { getOrg } from "../store/orgmainchat";
-import { useParams } from "react-router";
-import NewChannel from "../newChannel";
-import { useNavigate } from "react-router-dom";
-import ChannelList from "../ChannelList";
-import "./messagebar.css";
+import { removeWorkspace, editOrgThunk } from "../store/organizations"
+import React, { useState, useRef, useEffect } from "react"
+import { useSelector, useDispatch } from "react-redux"
+import { getOrg } from "../store/orgmainchat"
+import { useParams } from "react-router"
+import NewChannel from "../newChannel"
+import { useNavigate } from "react-router-dom"
+import ChannelList from "../ChannelList"
+import { editOrgOn } from '../store/showEditOrg'
+import "./messagebar.css"
 
 function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
   const [showEdit, setShowEdit] = useState(false)
@@ -26,27 +27,27 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
   const [orgName, setOrgName] = useState("");
   const [errors, setErrors] = useState([]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    formToggle();
-    setShowEdit(false);
-    const data = await dispatch(editOrgThunk(orgName, id));
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   formToggle();
+  //   setShowEdit(false);
+  //   const data = await dispatch(editOrgThunk(orgName, id));
 
-    await dispatch(getOrg(id));
-    if (data) {
-      return setErrors(data);
-    }
-  };
+  //   await dispatch(getOrg(id));
+  //   if (data) {
+  //     return setErrors(data);
+  //   }
+  // };
 
   useEffect(() => {
     dispatch(getOrg(id));
   }, []);
 
-  const editToggle = () => {
-    if (showForm === true) return;
-    if (showEdit === false) return setShowEdit(true);
-    if (showEdit === true) return setShowEdit(false);
-  };
+  // const editToggle = () => {
+  //   if (showForm === true) return;
+  //   if (showEdit === false) return setShowEdit(true);
+  //   if (showEdit === true) return setShowEdit(false);
+  // };
 
   const formToggle = () => {
     if (showForm === false) {
@@ -64,40 +65,12 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
   };
   return (
     <div className="messageBar">
+
       <div onClick={editToggle} className="title">
         {showh2 && <h2>{org.name}</h2>} <i className="fas fa-ellipsis-v"></i>
-        {showForm && (
-          <div>
-            <div>
-              <div>
-                <form className="editorgform" onSubmit={handleSubmit}>
-                  <input
-                    type="text"
-                    ref={input}
-                    placeholder={"New Name"}
-                    required
-                    value={orgName}
-                    onChange={(e) => setOrgName(e.target.value)}
-                  />
-                </form>
-              </div>
-            </div>
-          </div>
-        )}
+
       </div>
-      <div>
-        {showEdit && (
-          <div className="orgeditdiv">
-            <p>Owned by {session?.username}</p>
-            <button className="editbutton" onClick={formToggle}>
-              Edit Name
-            </button>
-            <button className="editbutton" onClick={orgDelete}>
-              Delete Org
-            </button>
-          </div>
-        )}
-      </div>
+     
       <div className="channelContent">
         <div className="channels">
           <div>
@@ -113,9 +86,9 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
             </div>
             <NewChannel />
           </div>
-          <div className="ChannelList">
-            {showChannelList && <ChannelList setSelectedChannel={setSelectedChannel} setSelectedChannelId={setSelectedChannelId}/>}
-          </div>
+          {/* <div className="ChannelList"> */}
+          {showChannelList && <ChannelList setSelectedChannel={setSelectedChannel} setSelectedChannelId={setSelectedChannelId} />}
+          {/* </div> */}
         </div>
         <div className="channels">
           <div>

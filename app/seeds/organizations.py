@@ -18,6 +18,7 @@ def seed_organizations():
         name='Betelgeuse V',
         owner_id = 1
         )
+    
 
     db.session.add(demo_org1)
     db.session.add(demo_org2)

@@ -1,16 +1,25 @@
-import "./orgmainchat.css";
-import MessageBar from "../MessageBar";
-import Message from "../Message";
-import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
-import { logout } from "../store/session";
-import NewChannelForm from "../newChannelForm";
-import { getAllMessages } from "../store/messages";
-import {useParams} from 'react-router-dom';
+
+import "./orgmainchat.css"
+import MessageBar from "../MessageBar"
+import Message from "../Message"
+import { useSelector, useDispatch } from "react-redux"
+import { useEffect, useState, useRef } from "react"
+import { useNavigate } from "react-router-dom"
+import { logout } from "../store/session"
+import NewChannelForm from "../newChannelForm"
+import EditChannelForm from "../EditChannelForm"
+import EditOrgForm from '../EditOrgForm'
+import Search from "../Search"
+
+import { readChannels } from "../store/channels";
+import { useParams } from "react-router-dom";
+import { setName } from "../store/currentChannel"
+
+
 function Orgmainchat() {
   const [selectedChannel, setSelectedChannel] = useState('')
   const [selectedChannelId, setSelectedChannelId] = useState('')
+  const { id } = useParams()
   const dispatch = useDispatch();
   const hist = useNavigate();
   const session = useSelector((state) => state.session.user);
@@ -25,9 +34,11 @@ function Orgmainchat() {
     }
     return null;
   }
+
   async function loadData() {
     await dispatch(getAllMessages(channelId))
   }
+
   useEffect(() => {
     if (session){
       getUserData(session.id);
@@ -55,13 +66,17 @@ function Orgmainchat() {
   return (
     <div className="content">
       <NewChannelForm />
+      <EditChannelForm />
+      <EditOrgForm />
       <div className="topBar" onClick={awayClick}>
         <div className="backbuttoncontainer">
           <button className="backbutton" onClick={backClick}>
             Back To Workspaces
           </button>
         </div>
-        <input placeholder={"Search"}></input>
+        <div className="searchContainer">
+          <Search />
+        </div>
         <div className="profile">
           {userData?.profilePicture ? (
             <img
@@ -96,8 +111,8 @@ function Orgmainchat() {
         </div>
       </div>
       <div className="midContent1" onClick={awayClick}>
-        <MessageBar setSelectedChannel={setSelectedChannel} setSelectedChannelId={setSelectedChannelId}/>
-        <Message user={userData} setSelectedChannel={setSelectedChannel} selectedChannel={selectedChannel} selectedChannelId={selectedChannelId}/>
+        <MessageBar setSelectedChannel={setSelectedChannel} setSelectedChannelId={setSelectedChannelId} />
+        <Message user={userData} setSelectedChannel={setSelectedChannel} selectedChannel={selectedChannel} selectedChannelId={selectedChannelId} />
       </div>
     </div>
   );

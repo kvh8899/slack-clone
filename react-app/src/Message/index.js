@@ -4,7 +4,9 @@ import io from "socket.io-client";
 import { editChannelThunk } from "../store/channels";
 import { useDispatch, useSelector } from "react-redux";
 import {useParams} from "react-router-dom"
+
 import {createOneMessage ,getAllMessages} from "../store/messages";
+import EditChannel from '../EditChannel'
 // must use http here
 //"https://<herokuname>.herokuapp.com" for heroku
 let endPoint = "http://localhost:5000";
@@ -23,6 +25,7 @@ function Message({ user }) {
   const handleChannelSubmit = async e => {
     e.preventDefault()
     setShowForm(false)
+    setChannelName('')
     await dispatch(editChannelThunk(channelName, channelId))
   }
   const dummyDiv = useRef(null);
@@ -62,15 +65,10 @@ function Message({ user }) {
   return (
     <div className="messageArea">
       <div className="title">
-        <h2>{currentChannel.name}</h2>
-        <button onClick={e => {
-                    e.preventDefault()
-                    setShowForm(!showForm)
-                    }
-                }
-        >
-          Edit
-        </button>
+
+        <h2>{currentChannel}</h2>
+        <EditChannel />
+
         { showForm && (
           <div>
             <form className="editchannelnameform" onSubmit={ handleChannelSubmit }>

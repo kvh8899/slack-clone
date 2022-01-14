@@ -26,13 +26,16 @@ function ChannelList() {
       specificChannel.current[i]?.classList.add("selected");
     });
   }
+
   useEffect(() => {
     loadChannels();
     specificChannel.current.slice(0, channels.length);
   }, [dispatch]);
+
   useEffect(() => {
     select();
   });
+
   useEffect(() => {
     channels.forEach((e) => {
       if (e.id === parseInt(channelId)) {
@@ -41,6 +44,7 @@ function ChannelList() {
       }
     });
   }, [channels]);
+
   return (
     <div className="channelContainer">
       {channels
@@ -62,6 +66,7 @@ function ChannelList() {
                 }}
               >
                 <h3># {channel.name}</h3>
+
                 {channels.length > 1 ? (
                   <i
                     className="fas fa-trash-alt"
@@ -100,7 +105,9 @@ function ChannelList() {
           })
         : null}
     </div>
+
   );
+
 }
 
 export default ChannelList;

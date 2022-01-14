@@ -1,0 +1,69 @@
+.searchContainer > input{
+    background-color:#38373c;
+    color:rgb(212, 212, 212);
+    padding: 5px;
+    /* margin: 5px; */
+    /* margin: 0 auto; */
+    /* margin-left: 5px; */
+    border-radius:10px;
+    width: 95%;
+    pointer-events: all;
+}
+
+.searchContainer ul {
+    /* position: fixed; */
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    /* margin-right: %;
+    margin-left: 50%; */
+    margin: 0 auto;
+    /* margin-right: 11%; */
+    text-align: center;
+    z-index: 1;
+    border: 1px solid rgba(54, 55, 59, 1);
+    border-radius: 10px;
+    padding-inline-start: 0px;
+    background-color: #02001b;
+    max-height:200px;
+    overflow-y:auto;
+    overflow-x:hidden;
+    width: 100%;
+    z-index: 99;
+    pointer-events: all;
+}
+.searchContainer ul > li {
+    margin: 0 auto;
+    color: lightgrey;
+    display: inline-block;
+    vertical-align: top;
+    padding: 8px 0px;
+    cursor: pointer;
+    position: relative;
+    border-bottom: 1px solid rgba(54, 55, 59, 1);
+    width: 100%;
+    pointer-events: all;
+}
+
+.searchContainer ul > li:hover {
+    cursor: pointer;
+    background-color: rgb(41, 36, 87);
+}
+
+.searchContainer {
+    position: absolute;
+    /* background-color: blue; */
+    display: flex;
+    flex-direction: column;
+    margin-left: 120px;
+    margin-top: 220px;
+    justify-content: space-between;
+    align-items: center;
+    width: 40%;
+    min-height: 250px;
+    /* height:300px; */
+    justify-content: flex-start !important;
+    z-index: 5;
+    pointer-events: none;
+}

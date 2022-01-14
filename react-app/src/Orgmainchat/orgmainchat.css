@@ -24,7 +24,7 @@
     color:rgb(212, 212, 212);
     padding: 5px;
     margin: 5px;
-    width:45%;
+    width:480px;
     border-radius:10px;
 }
 ::placeholder{
@@ -42,6 +42,7 @@ input:focus{
     justify-content:flex-end;
     padding-right:15px;
     flex-grow:1;
+
 }
 
 .title{
@@ -50,6 +51,7 @@ input:focus{
     align-items:center;
     max-height: 51px;
     min-height: 51px;
+    z-index: 1;
 }
 .title h2{
     margin:10px;
