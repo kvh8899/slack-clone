@@ -7,7 +7,7 @@ import "./newchannelform.css";
 
 function NewMemberForm() {
   const dispatch = useDispatch();
-  const showForm = useSelector((state) => state.showFormReducer);
+  const showForm = useSelector((state) => state.addMemberFormReducer);
   const [memberName, setMemberName] = useState("");
   const org = useSelector((state) => state.orgmainchatReducer);
   const users = org.available_users?.map((user) => user.username);

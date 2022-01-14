@@ -1,4 +1,4 @@
-import {onAction} from "../store/showForm";
+import {addMemberOn} from "../store/showMemberForm";
 import {useDispatch} from "react-redux";
 import "./newchannel.css";
 function NewMember() {
@@ -8,7 +8,7 @@ function NewMember() {
       <button
         onClick={(e) => {
           e.stopPropagation();
-          dispatch(onAction());
+          dispatch(addMemberOn());
         }}
       >
         <i className="fas fa-plus"></i>
