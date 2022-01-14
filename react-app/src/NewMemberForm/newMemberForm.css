@@ -1,0 +1,158 @@
+.blackout {
+  position: fixed;
+  background-color: black;
+  height: 100%;
+  width: 100%;
+  opacity: 0.5;
+  z-index: 1;
+}
+.memberForm {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 5px;
+  position: fixed;
+  height: 300px;
+  width: 400px;
+  background-color: #373942;
+  z-index: 1;
+  align-self: center;
+  top: 100px;
+  animation: createBox 0.25s;
+}
+.memberForm input {
+  box-sizing: border-box;
+  color: white;
+  border-radius: 5px;
+  height: 30px;
+  padding: 5px;
+  border: 1px solid black;
+  background-color: #2b2f35;
+  margin-top: 5px;
+}
+.memberForm h2 {
+  text-align: center;
+  margin: 20px;
+}
+.memberForm > div {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+#memberButton {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: flex-end;
+  background-color: #2b2f35;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+#memberButton button {
+  margin: 15px;
+  padding: 10px;
+}
+#memberButton p {
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+#memberButton .cancel {
+  background-color: transparent;
+  border: none;
+  color: rgb(137, 196, 219);
+}
+#memberButton .submit {
+  background-color: rgb(100, 154, 175);
+  border: none;
+  border-radius: 5px;
+}
+.form1 {
+  width: 92%;
+  padding: 15px;
+}
+@keyframes createBox {
+  0% {
+    transform: scale(0.7);
+  }
+  50% {
+    transform: scale(1);
+  }
+  75% {
+    transform: scale(1.03);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.topBar > .backbuttoncontainer {
+  display:flex;
+  color:lightgrey;
+  justify-content:flex-start;
+  padding-left: 15px;
+}
+
+.backbutton {
+  background: none;
+	color: inherit;
+	border: 2px solid rgba(211, 211, 211, 0.181);
+  border-radius: 10px;
+	padding: 6px;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+  font-size: 15px;
+}
+
+.backbutton:hover {
+  background-color: #2b2f35;
+}
+
+.test {
+  background-color: blue;
+}
+
+.search-content {
+  margin-top:10px;
+  max-height: 120px;
+  overflow:auto;
+  border-radius: 10px;
+  box-shadow: inset 0 0 6px rgb(0 0 0 / 50%);
+  padding-bottom:5px;
+}
+  ::-webkit-scrollbar {
+  width: .2em;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(70, 67, 67, 0.432);
+}
+
+ul > li {
+    margin: 0 auto;
+    color: lightgrey;
+    padding: 3px 0px;
+    cursor: pointer;
+    width: 80%;
+    pointer-events: all;
+}
+
+ul > li:hover {
+    cursor: pointer;
+    background-color: rgb(100, 154, 175,0.2);
+    border-radius: 7px;
+}
+
+.namebutton {
+  background-color:transparent;
+  border: none;
+  color: lightgrey;
+  font-size: 16px;
+
+}

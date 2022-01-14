@@ -141,3 +141,12 @@ fa-ellipsis-v{
 .abs{
   position:absolute;
 }
+
+.btn {
+  background: transparent;
+  border: none;
+  cursor: inherit
+}
+.fa-trash-alt{
+  color:white
+}

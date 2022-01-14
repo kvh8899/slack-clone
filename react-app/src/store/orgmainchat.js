@@ -1,6 +1,7 @@
 const GET_ONE_ORG = 'orgs/GET_ONE_ORG'
 const EDIT_ORG = 'orgs/EDIT_ORG'
 const ADD_MEMBER = "orgs/ADD_MEMBER";
+const DELETE_MEMBER = "workspaces/DELETE_MEMBER";
 
 const getOneOrg = data => ({
     type: GET_ONE_ORG,
@@ -11,6 +12,13 @@ export const addMember = (organization) => ({
     type: ADD_MEMBER,
     payload: organization,
 });
+
+export const deleteMember = (member) => {
+  return {
+    type: DELETE_MEMBER,
+    payload: member,
+  };
+};
 
 export const getOrg = (id) => async dispatch => {
     const res = await fetch(`/api/organizations/${id}`)
@@ -38,19 +46,41 @@ export const addMembers = (orgId, userId) => async (dispatch) => {
     return data;
 };
 
+//Delete Member
+export const removeMember = (memberId, orgId) => async (dispatch) => {
+    // console.log("😣Fet")
+    const res = await fetch(`/api/organizations/${orgId}/${memberId}`, {
+      method: "DELETE",
+    });
+
+  if (res.ok) {
+    const member = await res.json();
+    dispatch(deleteMember(member));
+    return member;
+  } else {
+    return null;
+  }
+};
+
 
 export default function orgmainchatReducer(state = {}, action) {
     switch (action.type) {
-        case GET_ONE_ORG:
-            return action.data
-        case EDIT_ORG:
-            return action.org
-        case ADD_MEMBER:
-            return {
-                ...state,
-                'members': [...state.members, action.payload]
-            };
-        default:
-            return state
+      case GET_ONE_ORG:
+        return action.data;
+      case EDIT_ORG:
+        return action.org;
+      case ADD_MEMBER:
+        return {
+          ...state,
+          members: [...state.members, action.payload],
+        };
+      case DELETE_MEMBER:
+        // console.log("🍎🍎🍎",action.payload);
+        const newState = state.members.filter(
+          (member) => member.id !== action.payload.user_id
+        );
+        return { ...state, members: newState };
+      default:
+        return state;
     }
 }
