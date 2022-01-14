@@ -9,10 +9,10 @@ import NewChannelForm from "../newChannelForm";
 import NewMemberForm from "../NewMemberForm"
 import EditChannelForm from "../EditChannelForm"
 import EditOrgForm from '../EditOrgForm'
-import Search from "../Search"
 import { getAllMessages } from "../store/messages"
 import { readChannels } from "../store/channels";
 import { useParams } from "react-router-dom";
+import Search from "../Search"
 
 
 function Orgmainchat() {

@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { addMemberOff } from "../store/showMemberForm";
 import { addMembers } from "../store/orgmainchat";
 import SingleMember from "../SingleMember";
-import "./newchannelform.css";
 import { useParams } from "react-router";
+import "./newchannelform.css";
 
 function NewMemberForm() {
   const { id } = useParams()
@@ -13,13 +13,18 @@ function NewMemberForm() {
   const [memberName, setMemberName] = useState("");
   const org = useSelector((state) => state.orgmainchatReducer);
 
-  const users = org.available_users?.map((user) => user);
-  console.log(users)
+  const users = org.available_users?.map((user) => user.username);
+
+
+  // const users = org.available_users?.map((user) => user);
+  // console.log(users)
+
   // const users = org.available_users
   const { search } = window.location;
   const query = new URLSearchParams(search).get("s");
   const [searchQuery, setSearchQuery] = useState(query || "");
   const filterUsers = (users, query) => {
+    
     if (!query) {
       return users;
     }
@@ -30,18 +35,20 @@ function NewMemberForm() {
     });
   }
   const filteredUsers = filterUsers(users, searchQuery);
-  console.log(id)
+  // console.log(id)
   const addToOrg = async (e) => {
-    console.log(e.target.id, 'eeeeeeee')
+    // console.log(e.target.id, 'eeeeeeee')
     const data = await dispatch(addMembers(id, e.target.id))
     // console.log(data)
+  
   }
 
   // console.log("😣😣😣", users);
 
-  // const addMember = async (e) => {
-  //   await dispatch(addMembers(memberName));
-  // };
+  const addMember = async (e) => {
+    await dispatch(addMembers(memberName));
+  };
+
   return (
     <>
       {showForm && (
@@ -59,7 +66,7 @@ function NewMemberForm() {
             e.preventDefault();
             if (memberName) {
               dispatch(addMemberOff());
-              // await addMember();
+              await addMember();
             }
             setMemberName("");
           }}
@@ -77,6 +84,7 @@ function NewMemberForm() {
             {searchQuery.length > 0 && (
               <ul>
                 {searchQuery.length > 0 &&
+
                   filteredUsers?.map((user) => {
                     return (
                       <li onClick={addToOrg} id={user.id} key={user.id}>
@@ -102,8 +110,7 @@ function NewMemberForm() {
             </button>
           </div>
         </form>
-      )
-      }
+      )}
     </>
   );
 }

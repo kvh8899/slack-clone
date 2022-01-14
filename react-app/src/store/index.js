@@ -8,8 +8,7 @@ import editChannelFormReducer from './showEditChannelForm';
 import editOrgFormReducer from './showEditOrg'
 import channelReducer from './channels';
 import currentChannel from './currentChannel';
-import addMemberFormReducer from './showMemberForm'
-
+import addMemberFormReducer from './showMemberForm';
 import messages from './messages';
 
 const rootReducer = combineReducers({
@@ -21,9 +20,8 @@ const rootReducer = combineReducers({
   editOrgFormReducer,
   channelReducer,
   currentChannel,
-  messages,
   addMemberFormReducer,
-
+  messages,
 });
 
 

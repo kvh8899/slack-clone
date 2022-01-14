@@ -8,7 +8,8 @@ import NewMember from "../NewMember";
 import { useNavigate } from "react-router-dom";
 import ChannelList from "../ChannelList";
 import { editOrgOn } from '../store/showEditOrg'
-import "./messagebar.css"
+import "./messagebar.css";
+
 
 
 function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
@@ -16,20 +17,20 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
   const [showh2, setShowh2] = useState(true)
   const [showChannelList, setShowChannelList] = useState(true)
 
-  const caret = useRef(null);
-  const dCaret = useRef(null);
-  const mCaret = useRef(null);
-
   const [showMemberList, setshowMemberList] = useState(true)
   const [channelName, setChannelName] = useState('')
   const [editChannelName, setEditChannelName] = useState('')
 
+  const caret = useRef(null);
+  const dCaret = useRef(null);
+  const mCaret = useRef(null);
+
   const dispatch = useDispatch();
   const { id } = useParams();
   const org = useSelector((state) => state.orgmainchatReducer);
-
   const members = org.members
-  console.log(members, 'MEMBERS OBJECT')
+  // console.log(members, 'MEMBERS OBJECT')
+
   const session = useSelector((state) => state.session.user);
   const input = useRef(null);
   const [orgName, setOrgName] = useState("");
@@ -46,11 +47,11 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
     const data = await dispatch(editOrgThunk(orgName, id));
   }
 
-  //   await dispatch(getOrg(id));
-  //   if (data) {
-  //     return setErrors(data);
-  //   }
-  // };
+    await dispatch(getOrg(id));
+    if (data) {
+      return setErrors(data);
+    }
+  };
 
   useEffect(() => {
     dispatch(getOrg(id));
@@ -124,17 +125,18 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
           </div>
           {/* <div className="ChannelList"> */}
           {showMemberList && (
-            <div className="channelContainer">
-              {members ? members?.map((member) => {
-                return (
-                  <div >
-                    <h3>- {member.username}</h3>
-                    {members.length > 1 ? (<i className="fas fa-trash-alt" onClick={handleSubmit}></i>) : ("")}
-                  </div>
-                );
-              })
-                : null}
-            </div>
+
+          <div className="channelContainer">
+            {members? members?.map((member) => {
+                  return (
+                    <div>
+                      <h3>- {member.username}</h3>
+                      {members.length > 1 ? (<i className="fas fa-trash-alt" onClick={handleSubmit}></i>) : ("")}
+                    </div>
+                  );
+                })
+              : null}
+          </div>
           )}
         </div>
         <div className="height"></div>

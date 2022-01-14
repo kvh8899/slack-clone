@@ -66,6 +66,11 @@ function ChannelList() {
                 }}
               >
                 <h3># {channel.name}</h3>
+                {/* {channels.length > 1?<i
+                  className="fas fa-trash-alt"
+                  onClick={handleSubmit}
+                  id={channel.id} */}
+                {/* ></i>:""} */}
 
                 {/* {channels.length > 1 ? (
                   <i
