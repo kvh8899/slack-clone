@@ -30,9 +30,11 @@
 }
 .messages{
     overflow:scroll;
+    overflow-x:hidden;
     position:relative;
     width:100%;
     flex: 1 1 auto;
+    transition:0.5s;
 }
 
 .messages p{

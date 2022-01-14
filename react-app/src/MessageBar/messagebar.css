@@ -1,11 +1,11 @@
 .messageBar {
+  position:relative;
   background-color: #1a1b20;
   border-right: 1px solid rgba(54, 55, 59, 1);
   color: lightgrey;
   width: fit-content;
   overflow: hidden;
   height: 100%;
-  min-width: 220px;
 }
 
 .messageBar .channels > div {
@@ -134,4 +134,10 @@ fa-ellipsis-v{
 }
 .od{
   position: relative;
+}
+.hide{
+  left:-100%;
+}
+.abs{
+  position:absolute;
 }
