@@ -91,7 +91,7 @@
   background-color:#24252c;
 }
 .height {
-  height: 200px;
+  height: 220px;
 }
 .addChannel {
   display: flex;
@@ -127,6 +127,4 @@ fa-ellipsis-v{
 }
 .od{
   position: relative;
-  height: 100%;
-  overflow: scroll;
 }

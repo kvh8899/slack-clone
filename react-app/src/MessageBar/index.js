@@ -171,9 +171,9 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
                   </div>
                 </div>
               </div>
+              <div className="height"></div>
             </div>
           </div>
-          <div className="height"></div>
         </div>
       </div>
       <div
