@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify
 from flask_login import login_required
-from app.models import User, Organization
+from app.models import User, Organization, Member
 
 user_routes = Blueprint('users', __name__)
 
@@ -21,16 +21,17 @@ def user(id):
 # get all organizations of a user
 @user_routes.route('/<int:userId>/organizations')
 def getWorkspace(userId):
-    allWorkspaces = User.query.filter_by(id=userId).join(Organization).first()
+    allWorkSpaces = Organization.query.join(Member).filter_by(user_id=userId).join(User).all()
     organizations = []
-    if(allWorkspaces):
-        for i in range(len(allWorkspaces.organization)):
-            organizations.append(allWorkspaces.organization[i].to_dict())
+    if(allWorkSpaces):
+        for i in allWorkSpaces:
+            print(i.members)
+            message = i.to_dict();
             members = []
-            # inefficient, better to have a column in table that has
-            # number of users
-            for x in allWorkspaces.organization[i].members:
-                members.append(x.to_dict())
-            organizations[i]['members'] = members
+            for c in i.members:
+                members.append(c.to_dict())
+            message['members'] = members;
+
+            organizations.append(message)
 
     return {'workspaces': organizations}
