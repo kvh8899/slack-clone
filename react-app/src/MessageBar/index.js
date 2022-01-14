@@ -7,7 +7,9 @@ import NewChannel from "../newChannel";
 import NewMember from "../NewMember";
 import { useNavigate } from "react-router-dom";
 import ChannelList from "../ChannelList";
-import "./messagebar.css";
+import { editOrgOn } from '../store/showEditOrg'
+import "./messagebar.css"
+
 
 function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
   const [showEdit, setShowEdit] = useState(false)
@@ -43,31 +45,32 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
     setShowEdit(false);
     const data = await dispatch(editOrgThunk(orgName, id));
 
-    await dispatch(getOrg(id));
-    if (data) {
-      return setErrors(data);
-    }
-  };
+
+  //   await dispatch(getOrg(id));
+  //   if (data) {
+  //     return setErrors(data);
+  //   }
+  // };
 
   useEffect(() => {
     dispatch(getOrg(id));
   }, []);
 
-  const editToggle = () => {
-    if (showForm === true) return;
-    if (showEdit === false) return setShowEdit(true);
-    if (showEdit === true) return setShowEdit(false);
-  };
+  // const editToggle = () => {
+  //   if (showForm === true) return;
+  //   if (showEdit === false) return setShowEdit(true);
+  //   if (showEdit === true) return setShowEdit(false);
+  // };
 
-  const formToggle = () => {
-    if (showForm === false) {
-      setShowh2(false);
-      return setShowForm(true);
-    } else {
-      setShowh2(true);
-      return setShowForm(false);
-    }
-  };
+  // const formToggle = () => {
+  //   if (showForm === false) {
+  //     setShowh2(false);
+  //     return setShowForm(true);
+  //   } else {
+  //     setShowh2(true);
+  //     return setShowForm(false);
+  //   }
+  // };
 
   // const testRead = (e) => {
   //   e.preventDefault()
@@ -90,28 +93,32 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
 
   return (
     <div className="messageBar">
-      <div onClick={editToggle} className="title">
-        {showh2 && <h2>{org.name}</h2>} <i class="fas fa-ellipsis-v"></i>
+      <div
+        onClick={e => {
+          e.stopPropagation()
+          dispatch(editOrgOn())
+        }}
+        className="title">
+        <h2>{org.name}</h2>
+        <i class='fas fa-ellipsis-v'></i>
+        {/* {showh2 && <h2>{org.name}</h2>} <i class="fas fa-ellipsis-v"></i>
         {showForm && (
           <div>
-            <div>
-              <div>
-                <form className="editorgform" onSubmit={handleSubmit}>
-                  <input
-                    type="text"
-                    ref={input}
-                    placeholder={org.name}
-                    required
-                    value={orgName}
-                    onChange={(e) => setOrgName(e.target.value)}
-                  />
-                </form>
-              </div>
-            </div>
+            <form className="editorgform" onSubmit={handleSubmit}>
+              <input
+                type="text"
+                ref={input}
+                placeholder={"New Name"}
+                required
+                value={orgName}
+                onChange={(e) => setOrgName(e.target.value)}
+              />
+            </form>
+
           </div>
-        )}
+        )} */}
       </div>
-      <div>
+      {/* <div>
         {showEdit && (
           <div className="orgeditdiv">
             <p>Owned by {session?.username}</p>
@@ -123,7 +130,7 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
             </button>
           </div>
         )}
-      </div>
+      </div> */}
       <div className="channelContent">
         <div className="channels">
           <div>
