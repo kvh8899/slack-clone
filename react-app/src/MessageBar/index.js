@@ -38,8 +38,8 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    formToggle();
-    setShowEdit(false);
+    // formToggle();
+    // setShowEdit(false);
     const data = await dispatch(editOrgThunk(orgName, id));
 
     await dispatch(getOrg(id));
