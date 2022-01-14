@@ -1,54 +1,46 @@
 .messageBar {
-  background-color: #02001b;
+  position:relative;
+  background-color: #1a1b20;
   border-right: 1px solid rgba(54, 55, 59, 1);
   color: lightgrey;
   width: fit-content;
   overflow: hidden;
   height: 100%;
-  min-width: 220px;
 }
-.messageBar > div > div {
-  padding-left: 10px;
-}
+
 .messageBar .channels > div {
   display: flex;
-  align-items: center;
   margin-top: 4px;
 }
-.channels > div{
-  display:flex;
+.channels > div {
+  display: flex;
   justify-content: space-between;
 }
-.channels > div > div{
-  display:flex;
+.channels > div > div {
+  display: flex;
+  align-items: center;
 }
-.channels div .fa-caret-down{
+.channels div .fa-caret-down {
   display: flex;
   justify-content: center;
-  align-items: center;
-  border-radius: 5px;
-  margin-right: 10px;
-  height: 20px;
-  width: 20px;
 }
 .channels div:hover {
   cursor: pointer;
 }
 .channels div > p {
   margin: 0px;
-}
-.channels i:hover {
-  background-color: rgba(173, 173, 173, 0.8);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 .side {
   transform: rotate(-90deg);
 }
 .title button {
-  border-radius: 100%;
-  height: 35px;
-  width: 35px;
+  background-color: transparent;
   border: none;
   font-size: 15px;
+  color: white;
 }
 .orgeditdiv {
   display: flex;
@@ -56,11 +48,15 @@
 }
 
 .title h2 {
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
+  text-overflow:ellipsis;
+  overflow:hidden;
+  white-space:nowrap;
 }
-
+@media only screen and (max-width: 600px) {
+  .title h2 {
+    max-width:150px;
+  }
+}
 .editbutton {
   color: #4a154b;
   background-color: white;
@@ -72,7 +68,7 @@
   max-height: fit-content;
 }
 
-.editorgform input{
+.editorgform input {
   height: 25px;
   border-radius: 5px;
 }
@@ -88,16 +84,60 @@
   margin-right: 10px;
 }
 
-.inputShow{
-  display:none;
+.inputShow {
+  display: none;
 }
-.channelContent{
-  position:absolute;
-  height:100%;
-  width:210px;
-  overflow:hidden;
+.channelContent {
+  height: 100%;
+  width: 225px;
+  overflow: scroll;
   scrollbar-color: white;
+  background-color:#24252c;
 }
-.height{
-  height:200px;
+.height {
+  height: 220px;
+}
+.addChannel {
+  display: flex;
+  justify-content: flex-end;
+  width: 100px;
+}
+.isc{
+  margin-right:5px;
+}
+fa-ellipsis-v{
+  transform:rotate(90deg);
+}
+#e{
+  margin:0px;
+  margin-top:5px;
+  margin-right:5px;
+  flex-grow:0;
+  transform:rotate(90deg);
+  padding-left:0px;
+  justify-content: center;
+}
+.singleChannel h3{
+  margin:5px;
+  margin-left:31px;
+  font-size:15px;
+  text-overflow:ellipsis;
+  overflow:hidden;
+  white-space:nowrap;
+}
+.cs{
+  margin-left:10px;
+}
+.uc{
+  position:absolute;
+  width:220px;
+}
+.od{
+  position: relative;
+}
+.hide{
+  left:-100%;
+}
+.abs{
+  position:absolute;
 }
