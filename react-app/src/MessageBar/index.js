@@ -180,12 +180,11 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
         className="d"
         onMouseDown={(e) => {
           let drag = true;
-          console.log(drag);
           document.addEventListener("mouseup", () => {
             drag = false;
           });
           document.addEventListener("mousemove", (e) => {
-            if (e.clientX > 220 && e.clientX < 800 && drag) {
+            if (e.clientX > 250 && e.clientX < 880 && drag) {
               size.current.style.width = e.clientX + "px";
               size1.current.style.width = e.clientX + "px";
             }
