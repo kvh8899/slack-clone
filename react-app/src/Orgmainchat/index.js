@@ -1,4 +1,3 @@
-
 import "./orgmainchat.css"
 import MessageBar from "../MessageBar"
 import Message from "../Message"
@@ -10,16 +9,13 @@ import NewChannelForm from "../newChannelForm"
 import EditChannelForm from "../EditChannelForm"
 import EditOrgForm from '../EditOrgForm'
 import Search from "../Search"
-
-import { readChannels } from "../store/channels";
+import { getAllMessages } from "../store/messages"
 import { useParams } from "react-router-dom";
-import { setName } from "../store/currentChannel"
 
 
 function Orgmainchat() {
   const [selectedChannel, setSelectedChannel] = useState('')
   const [selectedChannelId, setSelectedChannelId] = useState('')
-  const { id } = useParams()
   const dispatch = useDispatch();
   const hist = useNavigate();
   const session = useSelector((state) => state.session.user);

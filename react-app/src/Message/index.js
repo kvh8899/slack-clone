@@ -65,10 +65,8 @@ function Message({ user }) {
   return (
     <div className="messageArea">
       <div className="title">
-
-        <h2>{currentChannel}</h2>
+        <h2>{currentChannel.name}</h2>
         <EditChannel />
-
         { showForm && (
           <div>
             <form className="editchannelnameform" onSubmit={ handleChannelSubmit }>
