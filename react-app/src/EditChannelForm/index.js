@@ -22,6 +22,7 @@ function EditChannelForm() {
         e.preventDefault()
         e.stopPropagation()
         await dispatch(removeChannel(channelId))
+        //update messages when removing channel
         for(let i = 0;i < channels.length;i++){
             if(channels[i].id === parseInt(channelId) && i === 0){
                 hist(`/organizations/${id}/channels/${channels[i+1].id}`);
