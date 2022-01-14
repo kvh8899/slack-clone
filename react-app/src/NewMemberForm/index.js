@@ -4,36 +4,44 @@ import { addMemberOff } from "../store/showMemberForm";
 import { addMembers } from "../store/organizations";
 import SingleMember from "../SingleMember";
 import "./newchannelform.css";
+import { useParams } from "react-router";
 
 function NewMemberForm() {
+  const { id } = useParams()
   const dispatch = useDispatch();
   const showForm = useSelector((state) => state.showFormReducer);
   const [memberName, setMemberName] = useState("");
   const org = useSelector((state) => state.orgmainchatReducer);
-  const users = org.available_users?.map((user) => user.username);
+
+  const users = org.available_users?.map((user) => user);
+  console.log(users)
   // const users = org.available_users
   const { search } = window.location;
   const query = new URLSearchParams(search).get("s");
   const [searchQuery, setSearchQuery] = useState(query || "");
   const filterUsers = (users, query) => {
-        if (!query) {
-            return users;
-        }
+    if (!query) {
+      return users;
+    }
 
-        return users.filter((user) => {
-            const userName = user.toLowerCase();
-            return userName.includes(query.toLowerCase());
-        });
+    return users.filter((user) => {
+      const userName = user.username.toLowerCase();
+      return userName.includes(query.toLowerCase());
+    });
   }
   const filteredUsers = filterUsers(users, searchQuery);
+  console.log(id)
+  const addToOrg = async (e) => {
+    console.log(e.target.id, 'eeeeeeee')
+    const data = await dispatch(addMembers(id, e.target.id))
+    // console.log(data)
+  }
 
+  // console.log("😣😣😣", users);
 
-
-  console.log("😣😣😣", users);
-
-  const addMember = async (e) => {
-    await dispatch(addMembers(memberName));
-  };
+  // const addMember = async (e) => {
+  //   await dispatch(addMembers(memberName));
+  // };
   return (
     <>
       {showForm && (
@@ -51,7 +59,7 @@ function NewMemberForm() {
             e.preventDefault();
             if (memberName) {
               dispatch(addMemberOff());
-              await addMember();
+              // await addMember();
             }
             setMemberName("");
           }}
@@ -64,18 +72,16 @@ function NewMemberForm() {
               value={searchQuery}
               onInput={(e) => setSearchQuery(e.target.value)}
               name="s"
-              // onChange={(e) => {setMemberName(e.target.value)}}
+              onChange={(e) => { setMemberName(e.target.value) }}
             />
             {searchQuery.length > 0 && (
               <ul>
                 {searchQuery.length > 0 &&
-                  filteredUsers.map((user) => {
+                  filteredUsers?.map((user) => {
                     return (
-                      <>
-                        <li key={user.id}>
-                          <SingleMember username={user} />
-                        </li>
-                      </>
+                      <li onClick={addToOrg} id={user.id} key={user.id}>
+                        <SingleMember username={user.username} />
+                      </li>
                     );
                   })}
               </ul>
@@ -96,7 +102,8 @@ function NewMemberForm() {
             </button>
           </div>
         </form>
-      )}
+      )
+      }
     </>
   );
 }

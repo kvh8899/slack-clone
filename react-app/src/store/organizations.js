@@ -62,7 +62,7 @@ export const addWorkspaces = (name) => async (dispatch) => {
   });
   const data = await response.json();
   dispatch(addWorkspace(data));
-  await dispatch(postChannel(data.id,"General"))
+  await dispatch(postChannel(data.id, "General"))
   return data;
 };
 
@@ -94,11 +94,17 @@ export const removeWorkspace = (organizationId) => async (dispatch) => {
 };
 
 //Add Member
-export const addMembers = (organizationId) => async (dispatch) => {
-  const response = await fetch(`/api/organizations/${organizationId}/members`, {
+export const addMembers = (orgId, userId) => async (dispatch) => {
+  console.log(orgId, 'orgId')
+  console.log(userId, 'userId')
+  const response = await fetch(`/api/organizations/${orgId}/members/${userId}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      userId
+    })
   });
+  console.log(response, 'hiiiii')
   const data = await response.json();
   dispatch(addMember(data));
   return data;

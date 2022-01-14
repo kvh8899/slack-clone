@@ -180,17 +180,17 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
           </div>
           {/* <div className="ChannelList"> */}
           {showMemberList && (
-          <div className="channelContainer">
-            {members? members?.map((member) => {
-                  return (
-                    <div>
-                      <h3>- {member.username}</h3>
-                      {members.length > 1 ? (<i className="fas fa-trash-alt" onClick={handleSubmit}></i>) : ("")}
-                    </div>
-                  );
-                })
-              : null}
-          </div>
+            <div className="channelContainer">
+              {members ? members?.map((member) => {
+                return (
+                  <div >
+                    <h3>- {member.username}</h3>
+                    {members.length > 1 ? (<i className="fas fa-trash-alt" onClick={handleSubmit}></i>) : ("")}
+                  </div>
+                );
+              })
+                : null}
+            </div>
           )}
         </div>
         <div className="height"></div>
