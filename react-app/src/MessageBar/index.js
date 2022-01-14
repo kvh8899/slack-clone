@@ -8,6 +8,7 @@ import NewMember from "../NewMember";
 import { useNavigate } from "react-router-dom";
 import ChannelList from "../ChannelList";
 import { editOrgOn } from '../store/showEditOrg'
+import { removeMember } from "../store/orgmainchat";
 import "./messagebar.css";
 
 
@@ -20,17 +21,19 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
   const [showMemberList, setshowMemberList] = useState(true)
   const [channelName, setChannelName] = useState('')
   const [editChannelName, setEditChannelName] = useState('')
+  const [deleteMember, setDeleteMember] = useState("");
+
 
   const caret = useRef(null);
   const dCaret = useRef(null);
   const mCaret = useRef(null);
 
   const dispatch = useDispatch();
-  const { id } = useParams();
+  const hist = useNavigate();
+  const { id, channelId } = useParams();
   const org = useSelector((state) => state.orgmainchatReducer);
   const members = org.members
   // console.log(members, 'MEMBERS OBJECT')
-
   const session = useSelector((state) => state.session.user);
   const input = useRef(null);
   const [orgName, setOrgName] = useState("");
@@ -44,7 +47,11 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
     e.preventDefault();
     // formToggle();
     // setShowEdit(false);
-    const data = await dispatch(editOrgThunk(orgName, id));
+    // const data = await dispatch(editOrgThunk(orgName, id));
+    await dispatch(removeMember(deleteMember, org.id));
+    hist(`/organizations/${org.id}/channels/${channelId}`)
+
+
   };
 
   useEffect(() => {
@@ -123,10 +130,23 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
           <div className="channelContainer">
             {members? members?.map((member) => {
                   return (
-                    <div>
-                      <h3>- {member.username}</h3>
-                      {members.length > 1 ? (<i className="fas fa-trash-alt" onClick={handleSubmit}></i>) : ("")}
-                    </div>
+                    <form key={member.id} onSubmit={handleSubmit}>
+                      <h3>
+                        - {member.username}
+                        {members.length > 1 ? (
+                          <button>
+                            <i
+                              className="fas fa-trash-alt"
+                              onClick={() => {
+                                setDeleteMember(member.id);
+                              }}
+                            ></i>
+                          </button>
+                        ) : (
+                          ""
+                        )}
+                      </h3>
+                    </form>
                   );
                 })
               : null}
