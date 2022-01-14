@@ -13,10 +13,10 @@ function NewMemberForm() {
   const [memberName, setMemberName] = useState("");
   const org = useSelector((state) => state.orgmainchatReducer);
 
-  const users = org.available_users?.map((user) => user.username);
+  // const users = org.available_users?.map((user) => user.username);
 
 
-  // const users = org.available_users?.map((user) => user);
+  const users = org.available_users?.map((user) => user);
   // console.log(users)
 
   // const users = org.available_users
@@ -24,7 +24,7 @@ function NewMemberForm() {
   const query = new URLSearchParams(search).get("s");
   const [searchQuery, setSearchQuery] = useState(query || "");
   const filterUsers = (users, query) => {
-    
+
     if (!query) {
       return users;
     }
@@ -34,13 +34,15 @@ function NewMemberForm() {
       return userName.includes(query.toLowerCase());
     });
   }
+
+
   const filteredUsers = filterUsers(users, searchQuery);
   // console.log(id)
   const addToOrg = async (e) => {
     // console.log(e.target.id, 'eeeeeeee')
     const data = await dispatch(addMembers(id, e.target.id))
     // console.log(data)
-  
+
   }
 
   // console.log("😣😣😣", users);

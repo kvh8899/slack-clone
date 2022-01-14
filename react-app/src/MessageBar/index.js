@@ -45,12 +45,6 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
     // formToggle();
     // setShowEdit(false);
     const data = await dispatch(editOrgThunk(orgName, id));
-  }
-
-    await dispatch(getOrg(id));
-    if (data) {
-      return setErrors(data);
-    }
   };
 
   useEffect(() => {
