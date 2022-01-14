@@ -2,7 +2,7 @@ import "./channelList.css";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useRef } from "react";
-import { readChannels, removeChannel } from "../store/channels";
+import { readChannels } from "../store/channels";
 import { getAllMessages } from "../store/messages";
 import { setName } from "../store/currentChannel";
 import { useNavigate } from "react-router-dom";
@@ -66,46 +66,7 @@ function ChannelList() {
                   );
                 }}
               >
-                <h3 class="unselect"># {channel.name}</h3>
-                {/* {channels.length > 1?<i
-                  className="fas fa-trash-alt"
-                  onClick={handleSubmit}
-                  id={channel.id} */}
-                {/* ></i>:""} */}
-
-                {/* {channels.length > 1 ? (
-                  <i
-                    className="fas fa-trash-alt"
-                    onClick={async (e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      await dispatch(removeChannel(e.target.id));
-                      if (!(channelId === e.target.id)) return;
-                      for (let i = 0; i < channels.length; i++) {
-                        //need to update state of channel messages
-                        if (
-                          channels[i].id === parseInt(e.target.id) &&
-                          i === 0
-                        ) {
-                          hist(
-                            `/organizations/${id}/channels/${
-                              channels[i + 1].id
-                            }`
-                          );
-                        } else if (channels[i].id === parseInt(e.target.id)) {
-                          hist(
-                            `/organizations/${id}/channels/${
-                              channels[i - 1].id
-                            }`
-                          );
-                        }
-                      }
-                    }}
-                    id={channel.id}
-                  ></i>
-                ) : (
-                  ""
-                )} */}
+                <h3 className="unselect"># {channel.name}</h3>
               </div>
             );
           })

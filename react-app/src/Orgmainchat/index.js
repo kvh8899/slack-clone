@@ -11,11 +11,8 @@ import NewMemberForm from "../NewMemberForm"
 import EditChannelForm from "../EditChannelForm"
 import EditOrgForm from '../EditOrgForm'
 import { getAllMessages } from "../store/messages"
-import { readChannels } from "../store/channels";
 import { useParams } from "react-router-dom";
- import { setName } from "../store/currentChannel";
 import Search from "../Search"
-const { id } = useParams();
 
 function Orgmainchat() {
   const [selectedChannel, setSelectedChannel] = useState('')

@@ -1,45 +1,21 @@
-import { removeWorkspace, editOrgThunk } from "../store/organizations";
 import React, { useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getOrg } from "../store/orgmainchat";
 import { useParams } from "react-router";
 import NewChannel from "../newChannel";
-import { useNavigate } from "react-router-dom";
 import ChannelList from "../ChannelList";
 import { editOrgOn } from "../store/showEditOrg";
 import "./messagebar.css";
 
 function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
   const [showChannelList, setShowChannelList] = useState(true);
- const [showh2, setShowh2] = useState(true)
-  const [showChannelList, setShowChannelList] = useState(true)
-
-  const [showMemberList, setshowMemberList] = useState(true)
-  const [channelName, setChannelName] = useState('')
-  const [editChannelName, setEditChannelName] = useState('')
   const caret = useRef(null);
   const dCaret = useRef(null);
-  const mCaret = useRef(null);
   const size = useRef(null);
   const size1 = useRef(null);
   const dispatch = useDispatch();
   const { id } = useParams();
   const org = useSelector((state) => state.orgmainchatReducer);
-  const members = org.members
-  // console.log(members, 'MEMBERS OBJECT')
-
-  const session = useSelector((state) => state.session.user);
-
-  // const users = org.available_users?.map(user => user.username)
-  // console.log(users)
-
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    // formToggle();
-    // setShowEdit(false);
-    const data = await dispatch(editOrgThunk(orgName, id));
-  };
 
   useEffect(() => {
     dispatch(getOrg(id));
@@ -60,39 +36,9 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
           >
             <i className="fas fa-ellipsis-v"></i>
           </div>
-
-          {/* {showh2 && <h2>{org.name}</h2>} <i class="fas fa-ellipsis-v"></i>
-        {showForm && (
-          <div>
-            <form className="editorgform" onSubmit={handleSubmit}>
-              <input
-                type="text"
-                ref={input}
-                placeholder={"New Name"}
-                required
-                value={orgName}
-                onChange={(e) => setOrgName(e.target.value)}
-              />
-            </form>
-
-          </div>
-        )} */}
         </div>
-        {/* <div>
-        {showEdit && (
-          <div className="orgeditdiv">
-            <p>Owned by {session?.username}</p>
-            <button className="editbutton" onClick={formToggle}>
-              Edit Name
-            </button>
-            <button className="editbutton" onClick={orgDelete}>
-              Delete Org
-            </button>
-          </div>
-        )}
-      </div> */}
         <div className="channelContent" ref={size}>
-          <div class="od">
+          <div className="od">
             <div className="uc" ref={size1}>
               <div className="channels">
                 <div>
@@ -112,14 +58,12 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
                   </div>
                   <NewChannel />
                 </div>
-                {/* <div className="ChannelList"> */}
                 {showChannelList && (
                   <ChannelList
                     setSelectedChannel={setSelectedChannel}
                     setSelectedChannelId={setSelectedChannelId}
                   />
                 )}
-                {/* </div> */}
               </div>
               <div className="channels">
                 <div>
@@ -158,7 +102,8 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
             x.target.classList.remove("dSelect");
           });
           document.addEventListener("mousemove", (e) => {
-            if (e.clientX > 250 && e.clientX < 880 && drag) {
+            if (e.clientX > 250 && 
+              e.clientX < document.body.clientWidth * 0.5 && drag) {
               size.current.style.width = (e.clientX + 2 )+ "px";
               size1.current.style.width = (e.clientX + 2) + "px";
             }
