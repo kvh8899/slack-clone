@@ -128,9 +128,12 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
                       if (!showMemberList) setshowMemberList(true);
                       if (showMemberList) setshowMemberList(false);
                     }}
+                    className="cs"
                   >
-                    <i className="fas fa-caret-down" ref={mCaret}></i>
-                    <p>Members</p>
+                    <div className="is isc">
+                      <i className="fas fa-caret-down" ref={mCaret}></i>
+                    </div>
+                    <p className="unselect">Members</p>
                   </div>
                   <NewMember />
                 </div>
@@ -140,7 +143,11 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
                     {members
                       ? members?.map((member) => {
                           return (
-                            <form key={member.id} onSubmit={handleSubmit}>
+                            <form
+                              className="ms"
+                              key={member.id}
+                              onSubmit={handleSubmit}
+                            >
                               <h3>- {member.username}</h3>
                               {members.length > 1 ? (
                                 <button className="btn">

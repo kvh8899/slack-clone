@@ -90,12 +90,12 @@ function NewMemberForm() {
                         </li>
                       );
                     })}
+                  {/* <li>asdasd</li>
                   <li>asdasd</li>
                   <li>asdasd</li>
                   <li>asdasd</li>
                   <li>asdasd</li>
-                  <li>asdasd</li>
-                  <li>asdasd</li>
+                  <li>asdasd</li> */}
                 </ul>
               </div>
             )}
