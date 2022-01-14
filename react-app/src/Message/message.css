@@ -68,3 +68,13 @@
     width:25px;
 }
 
+.d{
+    height:100%;
+    position:absolute;
+    background-color:yellow;
+    width:3px;
+    z-index:100;
+}
+.d:hover{
+    cursor:col-resize;
+}

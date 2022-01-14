@@ -105,3 +105,9 @@ input:focus{
     cursor: pointer;
     background-color: lightskyblue;
 }
+.r{
+    display:flex;
+    flex-direction:row-reverse;
+    height:100%;
+    
+}

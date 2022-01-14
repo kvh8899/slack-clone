@@ -1,24 +1,23 @@
-import "./orgmainchat.css"
-import MessageBar from "../MessageBar"
-import Message from "../Message"
-import { useSelector, useDispatch } from "react-redux"
-import { useEffect, useState, useRef } from "react"
-import { useNavigate } from "react-router-dom"
-import { logout } from "../store/session"
-import NewChannelForm from "../newChannelForm"
-import EditChannelForm from "../EditChannelForm"
-import EditOrgForm from '../EditOrgForm'
-import Search from "../Search"
+import "./orgmainchat.css";
+import MessageBar from "../MessageBar";
+import Message from "../Message";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect, useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import { logout } from "../store/session";
+import NewChannelForm from "../newChannelForm";
+import EditChannelForm from "../EditChannelForm";
+import EditOrgForm from "../EditOrgForm";
+import Search from "../Search";
 
 import { readChannels } from "../store/channels";
 import { useParams } from "react-router-dom";
-import { setName } from "../store/currentChannel"
-
+import { setName } from "../store/currentChannel";
 
 function Orgmainchat() {
-  const [selectedChannel, setSelectedChannel] = useState('')
-  const [selectedChannelId, setSelectedChannelId] = useState('')
-  const { id } = useParams()
+  const [selectedChannel, setSelectedChannel] = useState("");
+  const [selectedChannelId, setSelectedChannelId] = useState("");
+  const { id } = useParams();
   const dispatch = useDispatch();
   const hist = useNavigate();
   const session = useSelector((state) => state.session.user);
@@ -50,9 +49,9 @@ function Orgmainchat() {
   }
 
   const backClick = (e) => {
-    e.preventDefault()
-    hist('/organization')
-  }
+    e.preventDefault();
+    hist("/organization");
+  };
 
   return (
     <div className="content">
@@ -62,7 +61,7 @@ function Orgmainchat() {
       <div className="topBar" onClick={awayClick}>
         <div className="backbuttoncontainer">
           <button className="backbutton" onClick={backClick}>
-          <i className="fas fa-arrow-left"></i>
+            <i className="fas fa-arrow-left"></i>
           </button>
         </div>
         <div className="searchContainer">
@@ -102,8 +101,19 @@ function Orgmainchat() {
         </div>
       </div>
       <div className="midContent1" onClick={awayClick}>
-        <MessageBar setSelectedChannel={setSelectedChannel} setSelectedChannelId={setSelectedChannelId} />
-        <Message user={userData} setSelectedChannel={setSelectedChannel} selectedChannel={selectedChannel} selectedChannelId={selectedChannelId} />
+        <div className="r">
+          <MessageBar
+            setSelectedChannel={setSelectedChannel}
+            setSelectedChannelId={setSelectedChannelId}
+          />
+
+        </div>
+        <Message
+          user={userData}
+          setSelectedChannel={setSelectedChannel}
+          selectedChannel={selectedChannel}
+          selectedChannelId={selectedChannelId}
+        />
       </div>
     </div>
   );

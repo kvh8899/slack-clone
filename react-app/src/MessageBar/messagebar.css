@@ -84,12 +84,11 @@
   display: none;
 }
 .channelContent {
-  margin-top: 15px;
-  position: absolute;
   height: 100%;
   width: 220px;
-  overflow: hidden;
+  overflow: scroll;
   scrollbar-color: white;
+  background-color:#24252c;
 }
 .height {
   height: 200px;
@@ -121,4 +120,8 @@ fa-ellipsis-v{
 }
 .cs{
   margin-left:10px;
+}
+.uc{
+  position:absolute;
+  width:220px;
 }

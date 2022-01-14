@@ -10,24 +10,17 @@ import { editOrgOn } from "../store/showEditOrg";
 import "./messagebar.css";
 
 function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
-  const [showEdit, setShowEdit] = useState(false);
-  const [showForm, setShowForm] = useState(false);
-  const [showh2, setShowh2] = useState(true);
   const [showChannelList, setShowChannelList] = useState(true);
-  const [channelName, setChannelName] = useState("");
-  const [editChannelName, setEditChannelName] = useState("");
 
   const caret = useRef(null);
   const dCaret = useRef(null);
-
+  const size = useRef(null);
+  const size1 = useRef(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
   const org = useSelector((state) => state.orgmainchatReducer);
   const session = useSelector((state) => state.session.user);
-  const input = useRef(null);
-  const [orgName, setOrgName] = useState("");
-  const [errors, setErrors] = useState([]);
 
   // const handleSubmit = async (e) => {
   //   e.preventDefault();
@@ -81,21 +74,22 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
   };
 
   return (
-    <div className="messageBar">
-      <div className="title">
-        <h2>{org.name}</h2>
-        <div
-          className="is"
-          id="e"
-          onClick={(e) => {
-            e.stopPropagation();
-            dispatch(editOrgOn());
-          }}
-        >
-          <i class="fas fa-ellipsis-v"></i>
-        </div>
+    <>
+      <div className="messageBar">
+        <div className="title">
+          <h2>{org.name}</h2>
+          <div
+            className="is"
+            id="e"
+            onClick={(e) => {
+              e.stopPropagation();
+              dispatch(editOrgOn());
+            }}
+          >
+            <i className="fas fa-ellipsis-v"></i>
+          </div>
 
-        {/* {showh2 && <h2>{org.name}</h2>} <i class="fas fa-ellipsis-v"></i>
+          {/* {showh2 && <h2>{org.name}</h2>} <i class="fas fa-ellipsis-v"></i>
         {showForm && (
           <div>
             <form className="editorgform" onSubmit={handleSubmit}>
@@ -111,8 +105,8 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
 
           </div>
         )} */}
-      </div>
-      {/* <div>
+        </div>
+        {/* <div>
         {showEdit && (
           <div className="orgeditdiv">
             <p>Owned by {session?.username}</p>
@@ -125,59 +119,78 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
           </div>
         )}
       </div> */}
-      <div className="channelContent">
-        <div className="channels">
-          <div>
-            <div
-              onClick={(e) => {
-                caret.current.classList.toggle("side");
-                if (!showChannelList) setShowChannelList(true);
-                if (showChannelList) setShowChannelList(false);
-              }}
-              className="cs"
-            >
-              <div className="is isc">
-                <i className="fas fa-caret-down" ref={caret}></i>
-              </div>
+        <div className="channelContent" ref={size}>
+          <div className="uc" ref={size1}>
+            <div className="channels">
+              <div>
+                <div
+                  onClick={(e) => {
+                    caret.current.classList.toggle("side");
+                    if (!showChannelList) setShowChannelList(true);
+                    if (showChannelList) setShowChannelList(false);
+                  }}
+                  className="cs"
+                >
+                  <div className="is isc">
+                    <i className="fas fa-caret-down" ref={caret}></i>
+                  </div>
 
-              <p>Channels</p>
-            </div>
-            <NewChannel />
-          </div>
-          {/* <div className="ChannelList"> */}
-          {showChannelList && (
-            <ChannelList
-              setSelectedChannel={setSelectedChannel}
-              setSelectedChannelId={setSelectedChannelId}
-            />
-          )}
-          {/* </div> */}
-        </div>
-        <div className="channels">
-          <div>
-            <div
-              onClick={(e) => {
-                dCaret.current.classList.toggle("side");
-              }}
-              className="cs"
-            >
-              <div className="is isc">
-                <i className="fas fa-caret-down" ref={dCaret}></i>
-              </div>
-              <p>Direct Messages</p>
-            </div>
-            <div className="addChannel">
-              <button>
-                <div className="is">
-                  <i className="fas fa-plus"></i>
+                  <p>Channels</p>
                 </div>
-              </button>
+                <NewChannel />
+              </div>
+              {/* <div className="ChannelList"> */}
+              {showChannelList && (
+                <ChannelList
+                  setSelectedChannel={setSelectedChannel}
+                  setSelectedChannelId={setSelectedChannelId}
+                />
+              )}
+              {/* </div> */}
+            </div>
+            <div className="channels">
+              <div>
+                <div
+                  onClick={(e) => {
+                    dCaret.current.classList.toggle("side");
+                  }}
+                  className="cs"
+                >
+                  <div className="is isc">
+                    <i className="fas fa-caret-down" ref={dCaret}></i>
+                  </div>
+                  <p>Direct Messages</p>
+                </div>
+                <div className="addChannel">
+                  <button>
+                    <div className="is">
+                      <i className="fas fa-plus"></i>
+                    </div>
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
+          <div className="height"></div>
         </div>
-        <div className="height"></div>
       </div>
-    </div>
+      <div
+        className="d"
+        onMouseDown={(e) => {
+          let drag = true;
+          console.log(drag);
+          document.addEventListener("mouseup", () => {
+            drag = false;
+          });
+          document.addEventListener("mousemove", (e) => {
+            if (e.clientX > 220 && e.clientX < 800 && drag) {
+              size.current.style.width = e.clientX + "px";
+              size1.current.style.width = e.clientX + "px";
+            }
+          });
+        }}
+      ></div>
+    </>
   );
 }
 
