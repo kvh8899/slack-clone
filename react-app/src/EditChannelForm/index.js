@@ -1,5 +1,6 @@
 import { editChannelOff } from "../store/showEditChannelForm"
 import { editChannelThunk, removeChannel } from "../store/channels"
+import { getAllMessages } from "../store/messages"
 import { useSelector, useDispatch } from "react-redux"
 import { useState } from "react"
 import { useParams ,useNavigate} from "react-router"
@@ -24,9 +25,11 @@ function EditChannelForm() {
         for(let i = 0;i < channels.length;i++){
             if(channels[i].id === parseInt(channelId) && i === 0){
                 hist(`/organizations/${id}/channels/${channels[i+1].id}`);
+                await dispatch(getAllMessages(channels[i+1].id))
                 return
             }else if(channels[i].id === parseInt(channelId)){
                 hist(`/organizations/${id}/channels/${channels[i-1].id}`)
+                await dispatch(getAllMessages(channels[i-1].id))
                 return
             }
         }
