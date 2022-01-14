@@ -82,15 +82,19 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
 
   return (
     <div className="messageBar">
-      <div
-        onClick={(e) => {
-          e.stopPropagation();
-          dispatch(editOrgOn());
-        }}
-        className="title"
-      >
+      <div className="title">
         <h2>{org.name}</h2>
-        <i class="fas fa-ellipsis-v"></i>
+        <div
+          className="is"
+          id="e"
+          onClick={(e) => {
+            e.stopPropagation();
+            dispatch(editOrgOn());
+          }}
+        >
+          <i class="fas fa-ellipsis-v"></i>
+        </div>
+
         {/* {showh2 && <h2>{org.name}</h2>} <i class="fas fa-ellipsis-v"></i>
         {showForm && (
           <div>

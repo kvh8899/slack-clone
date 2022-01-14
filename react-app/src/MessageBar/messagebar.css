@@ -105,3 +105,15 @@
 .isc{
   margin-right:5px;
 }
+fa-ellipsis-v{
+  transform:rotate(90deg);
+}
+#e{
+  margin:0px;
+  margin-top:5px;
+  margin-right:15px;
+  flex-grow:0;
+  transform:rotate(90deg);
+  padding-left:0px;
+  justify-content: center;
+}

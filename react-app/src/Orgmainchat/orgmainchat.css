@@ -40,7 +40,7 @@ input:focus{
     display:flex;
     color:#131017;
     justify-content:flex-end;
-    padding-right:15px;
+    padding-right:23px;
     flex-grow:1;
 
 }
@@ -51,11 +51,13 @@ input:focus{
     align-items:center;
     max-height: 51px;
     min-height: 51px;
+    justify-content: space-between;
 }
 .title h2{
     margin:10px;
+    margin-left:15px;
 }
-.title div{
+.title > div{
     display:flex;
     justify-content: flex-end;
     margin-right:20px;
