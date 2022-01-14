@@ -9,23 +9,21 @@ import NewChannelForm from "../newChannelForm";
 import NewMemberForm from "../NewMemberForm"
 import EditChannelForm from "../EditChannelForm"
 import EditOrgForm from '../EditOrgForm'
-import Search from "../Search"
-
-
+import { getAllMessages } from "../store/messages"
 import { readChannels } from "../store/channels";
 import { useParams } from "react-router-dom";
-import { setName } from "../store/currentChannel"
+import Search from "../Search"
 
 
 function Orgmainchat() {
   const [selectedChannel, setSelectedChannel] = useState('')
   const [selectedChannelId, setSelectedChannelId] = useState('')
-  const { id } = useParams()
   const dispatch = useDispatch();
   const hist = useNavigate();
   const session = useSelector((state) => state.session.user);
   const [userData, setUserData] = useState({});
   const profDiv = useRef(null);
+  const {channelId} = useParams();
   async function getUserData(id) {
     const res = await fetch(`/api/users/${session.id}`);
     if (res.ok) {
@@ -35,8 +33,15 @@ function Orgmainchat() {
     return null;
   }
 
+  async function loadData() {
+    await dispatch(getAllMessages(channelId))
+  }
+
   useEffect(() => {
-    if (session) getUserData(session.id);
+    if (session){
+      getUserData(session.id);
+      loadData();
+    }
   }, [session]);
 
   function profClick(e) {
@@ -62,6 +67,7 @@ function Orgmainchat() {
       <NewMemberForm />
       <EditChannelForm />
       <EditOrgForm />
+
       <div className="topBar" onClick={awayClick}>
         <div className="backbuttoncontainer">
           <button className="backbutton" onClick={backClick}>

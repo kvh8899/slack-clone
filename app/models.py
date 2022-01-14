@@ -125,6 +125,14 @@ class Message(db.Model):
     owners = db.relationship("User", back_populates="messages")
     user_channels = db.relationship(
         "Channel", back_populates="channel_messages")
+    
+    def to_dict(self):
+        return {
+            'id':self.id,
+            'content':self.content,
+            'owner_id':self.owner_id,
+            'channel_id':self.channel_id
+        }
 
 
 class Member(db.Model):
