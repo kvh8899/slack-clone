@@ -12,7 +12,7 @@ function NewChannel() {
           dispatch(onAction());
         }}
       >
-        <i className="fas fa-plus"></i>
+          <div className="is"><i className="fas fa-plus"></i></div>
       </button>
     </div>
   ); 

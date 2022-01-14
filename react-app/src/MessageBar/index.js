@@ -1,21 +1,21 @@
-import { removeWorkspace, editOrgThunk } from "../store/organizations"
-import React, { useState, useRef, useEffect } from "react"
-import { useSelector, useDispatch } from "react-redux"
-import { getOrg } from "../store/orgmainchat"
-import { useParams } from "react-router"
-import NewChannel from "../newChannel"
-import { useNavigate } from "react-router-dom"
-import ChannelList from "../ChannelList"
-import { editOrgOn } from '../store/showEditOrg'
-import "./messagebar.css"
+import { removeWorkspace, editOrgThunk } from "../store/organizations";
+import React, { useState, useRef, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getOrg } from "../store/orgmainchat";
+import { useParams } from "react-router";
+import NewChannel from "../newChannel";
+import { useNavigate } from "react-router-dom";
+import ChannelList from "../ChannelList";
+import { editOrgOn } from "../store/showEditOrg";
+import "./messagebar.css";
 
 function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
-  const [showEdit, setShowEdit] = useState(false)
-  const [showForm, setShowForm] = useState(false)
-  const [showh2, setShowh2] = useState(true)
-  const [showChannelList, setShowChannelList] = useState(true)
-  const [channelName, setChannelName] = useState('')
-  const [editChannelName, setEditChannelName] = useState('')
+  const [showEdit, setShowEdit] = useState(false);
+  const [showForm, setShowForm] = useState(false);
+  const [showh2, setShowh2] = useState(true);
+  const [showChannelList, setShowChannelList] = useState(true);
+  const [channelName, setChannelName] = useState("");
+  const [editChannelName, setEditChannelName] = useState("");
 
   const caret = useRef(null);
   const dCaret = useRef(null);
@@ -83,13 +83,14 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
   return (
     <div className="messageBar">
       <div
-        onClick={e => {
-          e.stopPropagation()
-          dispatch(editOrgOn())
+        onClick={(e) => {
+          e.stopPropagation();
+          dispatch(editOrgOn());
         }}
-        className="title">
+        className="title"
+      >
         <h2>{org.name}</h2>
-        <i class='fas fa-ellipsis-v'></i>
+        <i class="fas fa-ellipsis-v"></i>
         {/* {showh2 && <h2>{org.name}</h2>} <i class="fas fa-ellipsis-v"></i>
         {showForm && (
           <div>
@@ -130,13 +131,21 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
                 if (showChannelList) setShowChannelList(false);
               }}
             >
-              <i className="fas fa-caret-down" ref={caret}></i>
+              <div className="is isc">
+                <i className="fas fa-caret-down" ref={caret}></i>
+              </div>
+
               <p>Channels</p>
             </div>
             <NewChannel />
           </div>
           {/* <div className="ChannelList"> */}
-          {showChannelList && <ChannelList setSelectedChannel={setSelectedChannel} setSelectedChannelId={setSelectedChannelId} />}
+          {showChannelList && (
+            <ChannelList
+              setSelectedChannel={setSelectedChannel}
+              setSelectedChannelId={setSelectedChannelId}
+            />
+          )}
           {/* </div> */}
         </div>
         <div className="channels">
@@ -146,12 +155,16 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
                 dCaret.current.classList.toggle("side");
               }}
             >
-              <i className="fas fa-caret-down" ref={dCaret}></i>
+              <div className="is isc">
+                <i className="fas fa-caret-down" ref={dCaret}></i>
+              </div>
               <p>Direct Messages</p>
             </div>
             <div className="addChannel">
               <button>
-                <i className="fas fa-plus"></i>
+                <div className="is">
+                  <i className="fas fa-plus"></i>
+                </div>
               </button>
             </div>
           </div>

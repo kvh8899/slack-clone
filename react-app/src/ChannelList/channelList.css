@@ -12,13 +12,11 @@
 }
 
 .channelContainer > div {
-    width: 200px;
+    width: 150px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 150px;
     font-size: 12px;
-    padding: 0px 5px;
 }
 
 .selected{

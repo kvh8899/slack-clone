@@ -15,40 +15,35 @@
   align-items: center;
   margin-top: 4px;
 }
-.channels > div{
-  display:flex;
+.channels > div {
+  display: flex;
   justify-content: space-between;
 }
-.channels > div > div{
-  display:flex;
+.channels > div > div {
+  display: flex;
+  align-items: center;
 }
-.channels div .fa-caret-down{
+.channels div .fa-caret-down {
   display: flex;
   justify-content: center;
-  align-items: center;
-  border-radius: 5px;
-  margin-right: 10px;
-  height: 20px;
-  width: 20px;
 }
 .channels div:hover {
   cursor: pointer;
 }
 .channels div > p {
   margin: 0px;
-}
-.channels i:hover {
-  background-color: rgba(173, 173, 173, 0.8);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 .side {
   transform: rotate(-90deg);
 }
 .title button {
-  border-radius: 100%;
-  height: 35px;
-  width: 35px;
+  background-color: transparent;
   border: none;
   font-size: 15px;
+  color: white;
 }
 .orgeditdiv {
   display: flex;
@@ -72,7 +67,7 @@
   max-height: fit-content;
 }
 
-.editorgform input{
+.editorgform input {
   height: 25px;
   border-radius: 5px;
 }
@@ -88,16 +83,25 @@
   margin-right: 10px;
 }
 
-.inputShow{
-  display:none;
+.inputShow {
+  display: none;
 }
-.channelContent{
-  position:absolute;
-  height:100%;
-  width:210px;
-  overflow:hidden;
+.channelContent {
+  margin-top: 15px;
+  position: absolute;
+  height: 100%;
+  width: 210px;
+  overflow: hidden;
   scrollbar-color: white;
 }
-.height{
-  height:200px;
+.height {
+  height: 200px;
+}
+.addChannel {
+  display: flex;
+  justify-content: flex-end;
+  width: 100px;
+}
+.isc{
+  margin-right:5px;
 }
