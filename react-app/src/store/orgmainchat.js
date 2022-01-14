@@ -75,10 +75,10 @@ export default function orgmainchatReducer(state = {}, action) {
                 'members': [...state.members, action.payload]
             };
         case DELETE_MEMBER:
-        //   console.log("🍎🍎🍎",action.payload);
-          const newState = state.members.filter(member => member.id !== action.payload)
-        return newState
-        
+          // console.log("🍎🍎🍎",action.payload);
+          const newState = state.members.filter(member => member.id !== action.payload.user_id)
+        return {...state, 'members': newState}
+
         default:
             return state
     }

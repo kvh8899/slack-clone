@@ -48,8 +48,9 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
     // formToggle();
     // setShowEdit(false);
     // const data = await dispatch(editOrgThunk(orgName, id));
+    console.log("DDD", deleteMember)
     await dispatch(removeMember(deleteMember, org.id));
-    hist(`/organizations/${org.id}/channels/${channelId}`)
+    // hist(`/organizations/${org.id}/channels/${channelId}`)
 
 
   };

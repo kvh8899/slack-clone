@@ -25,12 +25,13 @@ function NewMemberForm() {
   const [searchQuery, setSearchQuery] = useState(query || "");
   const filterUsers = (users, query) => {
 
+    // console.log ("😣😣😣😣😣",userName)
     if (!query) {
       return users;
     }
-
     return users.filter((user) => {
       const userName = user.username.toLowerCase();
+
       return userName.includes(query.toLowerCase());
     });
   }
