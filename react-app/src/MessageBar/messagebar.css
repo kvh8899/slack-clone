@@ -15,14 +15,14 @@
   align-items: center;
   margin-top: 4px;
 }
-.channels > div{
-  display:flex;
+.channels > div {
+  display: flex;
   justify-content: space-between;
 }
-.channels > div > div{
-  display:flex;
+.channels > div > div {
+  display: flex;
 }
-.channels div .fa-caret-down{
+.channels div .fa-caret-down {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -72,7 +72,7 @@
   max-height: fit-content;
 }
 
-.editorgform input{
+.editorgform input {
   height: 25px;
   border-radius: 5px;
 }
@@ -88,16 +88,24 @@
   margin-right: 10px;
 }
 
-.inputShow{
-  display:none;
+.inputShow {
+  display: none;
 }
-.channelContent{
-  position:absolute;
-  height:100%;
-  width:210px;
-  overflow:hidden;
+.channelContent {
+  position: absolute;
+  height: 100%;
+  width: 210px;
+  overflow: hidden;
   scrollbar-color: white;
 }
-.height{
-  height:200px;
+.height {
+  height: 200px;
+}
+.btn {
+  background: transparent;
+  border: none;
+  cursor: inherit
+}
+.fa-trash-alt{
+  color:white
 }

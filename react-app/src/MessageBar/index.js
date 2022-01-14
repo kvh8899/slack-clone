@@ -134,9 +134,9 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
                       <h3>
                         - {member.username}
                         {members.length > 1 ? (
-                          <button>
+                          <button className="btn">
                             <i
-                              className="fas fa-trash-alt"
+                              className="fas fa-trash-alt channelContainer"
                               onClick={() => {
                                 setDeleteMember(member.id);
                               }}
