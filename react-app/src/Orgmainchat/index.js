@@ -62,7 +62,7 @@ function Orgmainchat() {
       <div className="topBar" onClick={awayClick}>
         <div className="backbuttoncontainer">
           <button className="backbutton" onClick={backClick}>
-            Back To Workspaces
+          <i className="fas fa-arrow-left"></i>
           </button>
         </div>
         <div className="searchContainer">
