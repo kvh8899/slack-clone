@@ -19,7 +19,10 @@ def user(id):
     return user.to_dict()
 
 # get all organizations of a user
+
+
 @user_routes.route('/<int:userId>/organizations')
+@login_required
 def getWorkspace(userId):
     allWorkSpaces = Organization.query.join(Member).filter_by(user_id=userId).join(User).all()
     organizations = []

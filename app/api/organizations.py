@@ -13,6 +13,7 @@ organization_routes = Blueprint('organizations', __name__)
 
 
 @organization_routes.route('/edit/<int:id>', methods=['PUT'])
+@login_required
 def edit_org(id):
     org = Organization.query.get(id)
     form = OrganizationForm()
@@ -27,6 +28,7 @@ def edit_org(id):
 
 
 @organization_routes.route('/<int:id>', methods=['GET'])
+@login_required
 def get_one_org(id):
     org = Organization.query.get(id)
     users = User.query.all()
@@ -44,6 +46,7 @@ def get_one_org(id):
 
 
 @ organization_routes.route('/<int:organizationId>/delete', methods=['DELETE'])
+@login_required
 def deleteWorkspace(organizationId):
     org = Organization.query.filter_by(
         id=organizationId).first()
@@ -56,7 +59,7 @@ def deleteWorkspace(organizationId):
 
 
 @ organization_routes.route('/', methods=['POST'])
-@ login_required
+@login_required
 def newWorkspace():
     form = OrganizationForm()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -81,6 +84,7 @@ def newWorkspace():
 
 # GET channels of an organization
 @ organization_routes.route('/<int:orgId>/channels')
+@ login_required
 def getChannel(orgId):
     allChannels = Channel.query.filter_by(
         org_id=orgId).join(Organization).all()
