@@ -44,7 +44,6 @@ export const createOneMessage = (channelId,content) => async(dispatch) => {
   })
   if(res.ok){
     const message = await res.json();
-    dispatch(addMessage(message))
     return message
   }
   return null

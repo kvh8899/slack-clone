@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { editChannelThunk } from "../store/channels";
 import { useDispatch, useSelector } from "react-redux";
 import {useParams} from "react-router-dom"
-import {createOneMessage ,getAllMessages} from "../store/messages";
+import {createOneMessage ,addMessage} from "../store/messages";
 import EditChannel from '../EditChannel'
 
 function Message({ user }) {
@@ -27,8 +27,8 @@ function Message({ user }) {
     dummyDiv?.current?.scrollIntoView(false)
     socket.on("message", async(msg) => {
       //create msg
-      const {channelId} = msg
-      await dispatch(getAllMessages(channelId))
+      const {allMessages} = msg;
+      dispatch(addMessage(allMessages))
     })
   },[])
   useEffect(() => {
@@ -45,8 +45,8 @@ function Message({ user }) {
 
   const onClick = async() => {
     if (message !== "") {
-      await dispatch(createOneMessage(channelId,message))
-      socket.emit("message", {channelId,session,allMessages:message});
+      const msg = await dispatch(createOneMessage(channelId,message))
+      socket.emit("message", {channelId,session,allMessages:msg});
       dummyDiv?.current?.scrollIntoView(false)
       setMessage("");
     } else {
