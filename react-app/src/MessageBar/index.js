@@ -125,7 +125,6 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
               size.current.style.width = (e.clientX + 2 )+ "px";
               size1.current.style.width = (e.clientX + 2) + "px";
             }
-
           });
         }}
       ></div>

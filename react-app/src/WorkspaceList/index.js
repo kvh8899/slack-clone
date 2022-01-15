@@ -3,13 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getWorkspaces } from "../store/organizations";
-import { readChannels , postChannel} from "../store/channels";
+import { readChannels } from "../store/channels";
 import{setName} from "../store/currentChannel"
 function WorkspaceList() {
   const hist = useNavigate();
   // get orgs from database and use map
   const session = useSelector((state) => state.session.user);
   const organizations = useSelector((state) => state.organizations);
+  const socket = useSelector((state) => state.socket)
   const dispatch = useDispatch();
 
   async function loadOrg(session) {
@@ -42,6 +43,8 @@ function WorkspaceList() {
                   const channels = await dispatch(readChannels(e?.id));
                   dispatch(setName(channels.channels[0].name))
                   hist(`/organizations/${e?.id}/channels/${channels.channels[0].id}`);
+                  socket.emit("joinserver",{organization:e?.id})
+                  socket.emit("joinroom",{channelId:channels.channels[0].id})
                 }}
               >
                 LAUNCH ZING

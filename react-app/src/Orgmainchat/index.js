@@ -20,9 +20,10 @@ function Orgmainchat() {
   const dispatch = useDispatch();
   const hist = useNavigate();
   const session = useSelector((state) => state.session.user);
+  const socket = useSelector((state) => state.socket);
   const [userData, setUserData] = useState({});
   const profDiv = useRef(null);
-  const {channelId} = useParams();
+  const {id,channelId} = useParams();
   async function getUserData(id) {
     const res = await fetch(`/api/users/${session.id}`);
     if (res.ok) {
@@ -34,6 +35,7 @@ function Orgmainchat() {
 
   async function loadData() {
     await dispatch(getAllMessages(channelId))
+    
   }
 
   useEffect(() => {
@@ -57,6 +59,8 @@ function Orgmainchat() {
 
   const backClick = (e) => {
     e.preventDefault();
+    socket.emit("leaveserver",{organization:id})
+    socket.emit("leaveroom",{channelId})
     hist("/organization");
   };
 
@@ -66,7 +70,6 @@ function Orgmainchat() {
       <NewMemberForm />
       <EditChannelForm />
       <EditOrgForm />
-
       <div className="topBar" onClick={awayClick}>
         <div className="backbuttoncontainer">
           <button className="backbutton" onClick={backClick}>
@@ -102,6 +105,8 @@ function Orgmainchat() {
             <button
               onClick={async () => {
                 await dispatch(logout());
+                socket.emit("leaveserver",{organization:id})
+                socket.emit("leaveroom",{channelId})
                 hist("/");
               }}
             >

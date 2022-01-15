@@ -2,7 +2,7 @@ import { editChannelOff } from "../store/showEditChannelForm"
 import { editChannelThunk, removeChannel } from "../store/channels"
 import { getAllMessages } from "../store/messages"
 import { useSelector, useDispatch } from "react-redux"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useParams ,useNavigate} from "react-router"
 import "./editChannelForm.css"
 
@@ -12,11 +12,16 @@ function EditChannelForm() {
     const { id,channelId } = useParams()
     const showForm = useSelector(state => state.editChannelFormReducer)
     const channels = useSelector(state => state.channelReducer)
+    const socket = useSelector(state => state.socket)
+    const org = useSelector(state => state.orgmainchatReducer)
     const [channelName, setChannelName] = useState('')
 
-    const editChannel = async e => {
-        await dispatch(editChannelThunk(channelName, channelId))
-    }
+    useEffect(() => {
+        socket.on("updateChannel",(channel) => {
+            const {channelName,channelId} = channel
+            dispatch(editChannelThunk(channelName, channelId))
+        })
+    },[])
 
     const handleDelete = async e => {
         e.preventDefault()
@@ -52,7 +57,7 @@ function EditChannelForm() {
                         e.preventDefault()
                         if(channelName) {
                             dispatch(editChannelOff())
-                            await editChannel()
+                            socket.emit("updateChannel",{channelName,channelId,organization:org.id})
                         }
                         setChannelName('')
                     }}
