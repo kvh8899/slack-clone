@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { getWorkspaces } from "../store/organizations";
 import { readChannels } from "../store/channels";
 import{setName} from "../store/currentChannel"
+import {getSocket} from '../store/socket'
 function WorkspaceList() {
   const hist = useNavigate();
   // get orgs from database and use map
@@ -21,6 +22,12 @@ function WorkspaceList() {
   useEffect(() => {
     loadOrg(session);
   }, [session]);
+  useEffect(() => {
+    dispatch(getSocket());
+    return () =>{
+      socket.disconnect()
+    } 
+  },[])
   return session ? (
     <div className="workSpace-wrap">
       <div className="workSpace-wrap">
@@ -41,10 +48,10 @@ function WorkspaceList() {
                 onClick={async() => {
                   //redirect to proper workspace page
                   const channels = await dispatch(readChannels(e?.id));
-                  dispatch(setName(channels.channels[0].name))
-                  hist(`/organizations/${e?.id}/channels/${channels.channels[0].id}`);
                   socket.emit("joinserver",{organization:e?.id})
                   socket.emit("joinroom",{channelId:channels.channels[0].id})
+                  dispatch(setName(channels.channels[0].name))
+                  hist(`/organizations/${e?.id}/channels/${channels.channels[0].id}`);
                 }}
               >
                 LAUNCH ZING

@@ -13,6 +13,7 @@ import EditOrgForm from '../EditOrgForm'
 import { getAllMessages } from "../store/messages"
 import { useParams } from "react-router-dom";
 import Search from "../Search"
+import { getSocket } from "../store/socket";
 
 function Orgmainchat() {
   const [selectedChannel, setSelectedChannel] = useState('')
@@ -23,7 +24,7 @@ function Orgmainchat() {
   const socket = useSelector((state) => state.socket);
   const [userData, setUserData] = useState({});
   const profDiv = useRef(null);
-  const {id,channelId} = useParams();
+  const { id,channelId } = useParams();
   async function getUserData(id) {
     const res = await fetch(`/api/users/${session.id}`);
     if (res.ok) {
@@ -35,16 +36,23 @@ function Orgmainchat() {
 
   async function loadData() {
     await dispatch(getAllMessages(channelId))
-    
   }
-
   useEffect(() => {
     if (session){
       getUserData(session.id);
       loadData();
     }
   }, [session]);
-
+  useEffect(() => {
+    if(!socket){
+      dispatch(getSocket())
+    }
+    if(socket){
+      return () => {
+        socket.disconnect()
+      }
+    }
+  },[])
   function profClick(e) {
     e.stopPropagation();
     profDiv.current.classList.toggle("settings");

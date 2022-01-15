@@ -7,14 +7,12 @@ import Workspace from "./Workspace"
 import WorkspaceCreate from "./WorkspaceCreate";
 import { Routes, Route } from "react-router-dom";
 import {useEffect, useState} from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch , useSelector} from "react-redux"
 import { authenticate } from './store/session';
-
 function App() {
   // organization page:
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
-
   useEffect(() => {
     (async() => {
       await dispatch(authenticate());

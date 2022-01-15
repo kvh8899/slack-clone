@@ -2,52 +2,51 @@ import "./message.css";
 import { useState, useEffect, useRef } from "react";
 import { editChannelThunk } from "../store/channels";
 import { useDispatch, useSelector } from "react-redux";
-import {useParams} from "react-router-dom"
-import {createOneMessage ,addMessage} from "../store/messages";
-import EditChannel from '../EditChannel'
+import { useParams } from "react-router-dom";
+import { createOneMessage, addMessage } from "../store/messages";
+import EditChannel from "../EditChannel";
+import { getSocket } from "../store/socket";
 
 function Message({ user }) {
   const [message, setMessage] = useState("");
-  const [channelName, setChannelName] = useState('')
-  const [showForm, setShowForm] = useState(false)
-  const { channelId } = useParams()
-  const currentChannel = useSelector((state) => state.currentChannel)
-  const allMessages = useSelector((state) => state.messages)
-  const session = useSelector((state) => state.session.user)
-  const socket = useSelector((state) => state.socket)
+  const [channelName, setChannelName] = useState("");
+  const [showForm, setShowForm] = useState(false);
+  const { channelId } = useParams();
+  const currentChannel = useSelector((state) => state.currentChannel);
+  const allMessages = useSelector((state) => state.messages);
+  const session = useSelector((state) => state.session.user);
+  const socket = useSelector((state) => state.socket);
   const dispatch = useDispatch();
-  const handleChannelSubmit = async e => {
-    e.preventDefault()
-    setShowForm(false)
-    setChannelName('')
-    await dispatch(editChannelThunk(channelName, channelId))
-  }
+  const handleChannelSubmit = async (e) => {
+    e.preventDefault();
+    setShowForm(false);
+    setChannelName("");
+    await dispatch(editChannelThunk(channelName, channelId));
+  };
   const dummyDiv = useRef(null);
   useEffect(() => {
-    dummyDiv?.current?.scrollIntoView(false)
-    socket.on("message", async(msg) => {
-      //create msg
-      const {allMessages} = msg;
-      dispatch(addMessage(allMessages))
-    })
-  },[])
+    dummyDiv?.current?.scrollIntoView(false);
+    if (socket) {
+      socket.on("message", (msg) => {
+        //create msg
+        const { allMessages } = msg;
+        dispatch(addMessage(allMessages));
+      });
+    }
+  }, [socket]);
   useEffect(() => {
-    dummyDiv?.current?.scrollIntoView(false)
-  })
-  useEffect(() => {
-    socket.emit('leaveroom',{channelId:currentChannel.prev})
-    socket.emit('joinroom',{channelId,session,message});
-  },[channelId])
+    dummyDiv?.current?.scrollIntoView(false);
+  }, [allMessages]);
 
   const onChange = (e) => {
     setMessage(e.target.value);
   };
 
-  const onClick = async() => {
+  const onClick = async () => {
     if (message !== "") {
-      const msg = await dispatch(createOneMessage(channelId,message))
-      socket.emit("message", {channelId,session,allMessages:msg});
-      dummyDiv?.current?.scrollIntoView(false)
+      const msg = await dispatch(createOneMessage(channelId, message));
+      socket.emit("message", { channelId, session, allMessages: msg });
+      dummyDiv?.current?.scrollIntoView(false);
       setMessage("");
     } else {
       alert("Please add message");
@@ -58,15 +57,18 @@ function Message({ user }) {
       <div className="title">
         <h2 className="unselect">{currentChannel.name}</h2>
         <EditChannel />
-        { showForm && (
+        {showForm && (
           <div>
-            <form className="editchannelnameform" onSubmit={ handleChannelSubmit }>
+            <form
+              className="editchannelnameform"
+              onSubmit={handleChannelSubmit}
+            >
               <input
-                type='text'
+                type="text"
                 placeholder={"New Channel Name"}
                 required
                 value={channelName}
-                onChange={e => setChannelName(e.target.value)}
+                onChange={(e) => setChannelName(e.target.value)}
               />
             </form>
           </div>
@@ -98,13 +100,13 @@ function Message({ user }) {
       </div>
       <div className="inputMessages">
         <form
-          onSubmit={async(e) => {
+          onSubmit={async (e) => {
             e.preventDefault();
             onClick();
           }}
         >
           <input
-          name="message"
+            name="message"
             value={message}
             onChange={(e) => onChange(e)}
             placeholder={"Message"}

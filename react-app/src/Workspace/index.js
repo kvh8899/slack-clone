@@ -4,7 +4,6 @@ import WorkspaceList from "../WorkspaceList";
 import {useSelector} from "react-redux";
 
 function Workspace() {
-  const hist = useNavigate();
   const session = useSelector((state) => state.session.user);
   return (
     <div className="workspace-wrapper">

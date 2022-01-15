@@ -10,11 +10,11 @@ export const getSocket = () => {
 //"https://<herokuname>.herokuapp.com" for heroku
 const endPoint = "http://localhost:5000";
 
-const socket = (state = io(`${endPoint}`,{
-    reconnectionDelayMax: 10000}),action) => {
+const socket = (state = null,action) => {
     switch(action.type){
         case GET_SOCKET:
-            return state;
+            return io(`${endPoint}`,{
+                reconnectionDelayMax: 10000});
         default:
             return state
     }
