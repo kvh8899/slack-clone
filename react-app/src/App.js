@@ -6,15 +6,17 @@ import Splash from "./Splash";
 import Workspace from "./Workspace"
 import WorkspaceCreate from "./WorkspaceCreate";
 import { Routes, Route } from "react-router-dom";
-import {useEffect, useState} from "react"
-import { useDispatch , useSelector} from "react-redux"
+import { useEffect, useState } from "react"
+import { useDispatch } from "react-redux"
 import { authenticate } from './store/session';
+import NotFound from "./NotFound";
+
 function App() {
   // organization page:
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
   useEffect(() => {
-    (async() => {
+    (async () => {
       await dispatch(authenticate());
       setLoaded(true);
     })();
@@ -24,14 +26,15 @@ function App() {
     return null;
   }
   return (
-      <Routes>
-        <Route path="/organization" element ={<Workspace />}> </Route>
-        <Route path="/" element={<Splash />}></Route>
-        <Route path="/login" element={<AuthPage />}></Route>
-        <Route path="/signup" element={<SignUp />}></Route>
-        <Route path="/organizations/:id/channels/:channelId" element={<Orgmainchat />}></Route>
-        <Route path="/users/:id/organizations" element={<WorkspaceCreate />}></Route>
-      </Routes>
+    <Routes>
+      <Route path="/organization" element={<Workspace />}> </Route>
+      <Route path="/" element={<Splash />}></Route>
+      <Route path="/login" element={<AuthPage />}></Route>
+      <Route path="/signup" element={<SignUp />}></Route>
+      <Route path="/organizations/:id/channels/:channelId" element={<Orgmainchat />}></Route>
+      <Route path="/users/:id/organizations" element={<WorkspaceCreate />}></Route>
+      <Route path="/NotFound" element={<NotFound />}></Route>
+    </Routes>
   );
 }
 

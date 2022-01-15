@@ -24,7 +24,13 @@ function Orgmainchat() {
   const socket = useSelector((state) => state.socket);
   const [userData, setUserData] = useState({});
   const profDiv = useRef(null);
+
   const { id,channelId } = useParams();
+
+  useEffect(() => {
+    if (!session) return hist('/NotFound')
+  }, [])
+
   async function getUserData(id) {
     const res = await fetch(`/api/users/${session.id}`);
     if (res.ok) {
@@ -38,7 +44,7 @@ function Orgmainchat() {
     await dispatch(getAllMessages(channelId))
   }
   useEffect(() => {
-    if (session){
+    if (session) {
       getUserData(session.id);
       loadData();
     }

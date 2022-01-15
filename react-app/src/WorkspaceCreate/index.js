@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { addWorkspaces } from "../store/organizations";
 import MessageBar from "../MessageBar";
@@ -21,7 +21,8 @@ export default function NewWorkspace() {
     e.preventDefault();
     const formData = new FormData();
     formData.append("name", orgName);
-    await dispatch(addWorkspaces({name:orgName}));
+    const data = await dispatch(addWorkspaces({ name: orgName }));
+    if (data === '404') return hist('/NotFound')
     hist('/organization')
   }
 
@@ -29,7 +30,11 @@ export default function NewWorkspace() {
     e.preventDefault();
     hist("/organization");
   };
-
+  
+  const session = useSelector((state) => state.session.user);
+  useEffect(() => {
+    if (!session) return hist('/NotFound')
+  }, [])
   return (
     <div className="content">
       <div className="topBar"></div>
