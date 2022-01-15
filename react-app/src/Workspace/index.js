@@ -1,11 +1,15 @@
 import "./workspace.css";
 import { useNavigate, Link, NavLink } from "react-router-dom";
 import WorkspaceList from "../WorkspaceList";
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 function Workspace() {
-  const hist = useNavigate();
+  const hist = useNavigate()
   const session = useSelector((state) => state.session.user);
+  useEffect(() => {
+    if (!session) return hist('/NotFound')
+  }, [])
   return (
     <div className="workspace-wrapper">
       <nav>
@@ -18,7 +22,7 @@ function Workspace() {
         </div>
         <div className="rightNav">
           <NavLink to={`/users/${session?.id}/organizations`}>
-            <button id="create" onClick={() => {}}>
+            <button id="create" onClick={() => { }}>
               CREATE A NEW WORKSPACE
             </button>
           </NavLink>

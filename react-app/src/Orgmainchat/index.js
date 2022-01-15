@@ -22,7 +22,12 @@ function Orgmainchat() {
   const session = useSelector((state) => state.session.user);
   const [userData, setUserData] = useState({});
   const profDiv = useRef(null);
-  const {channelId} = useParams();
+  const { channelId } = useParams();
+
+  useEffect(() => {
+    if (!session) return hist('/NotFound')
+  }, [])
+
   async function getUserData(id) {
     const res = await fetch(`/api/users/${session.id}`);
     if (res.ok) {
@@ -37,7 +42,7 @@ function Orgmainchat() {
   }
 
   useEffect(() => {
-    if (session){
+    if (session) {
       getUserData(session.id);
       loadData();
     }
