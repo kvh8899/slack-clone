@@ -53,7 +53,7 @@ ul{
   padding:0px;
   margin:0px;
   overflow-y:scroll;
-  height:325px;
+  height:275px;
 }
 ul > li {
   list-style: none;
@@ -80,4 +80,7 @@ ul > li > button{
 }
 .add{
   height:500px;
+}
+.highlight{
+  background-color:skyblue;
 }

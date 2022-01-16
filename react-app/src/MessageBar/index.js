@@ -137,7 +137,6 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
                   </div>
                   <NewMember />
                 </div>
-                {/* <div className="ChannelList"> */}
                 {showMemberList && (
                   <div className="channelContainer">
                     {members
@@ -148,7 +147,7 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
                               key={member.id}
                               onSubmit={handleSubmit}
                             >
-                              <h3>- {member.username}</h3>
+                              <h3>{member.username}</h3>
                               {members.length > 1 ? (
                                 <button className="btn">
                                   <i

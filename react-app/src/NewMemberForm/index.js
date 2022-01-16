@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addMemberOff } from "../store/showMemberForm";
 import { addMembers } from "../store/orgmainchat";
@@ -29,13 +29,10 @@ function NewMemberForm() {
 
   const filteredUsers = filterUsers(users, searchQuery);
 
-  const addToOrg = async (e) => {
-    await dispatch(addMembers(id, e.target.id))
+  const addToOrg =  async(e) => {
+    await dispatch(addMembers(id,e.target.id));
+    setSearchQuery("");
   }
-
-  const addMember = async (e) => {
-    await dispatch(addMembers(memberName));
-  };
 
   return (
     <>
@@ -50,13 +47,8 @@ function NewMemberForm() {
       {showForm && (
         <form
           className="channelForm add"
-          onSubmit={async (e) => {
+          onSubmit={(e) => {
             e.preventDefault();
-            if (memberName) {
-              dispatch(addMemberOff());
-              await addMember();
-            }
-            setMemberName("");
           }}
         >
           <div className="form1">
@@ -77,16 +69,12 @@ function NewMemberForm() {
                   {searchQuery.length > 0 &&
                     filteredUsers?.map((user) => {
                       return (
-                        <li>
-                          <button
-                            className="namebutton"
+                        <li className="namebutton"
                             id={user.id}
                             key={user.id}
                             onClick={addToOrg}
-                            username={user.username}
-                          >
-                            {user.username}
-                          </button>
+                            username={user.username}>
+                          {user.username}
                         </li>
                       );
                     })}

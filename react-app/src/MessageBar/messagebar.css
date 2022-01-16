@@ -152,4 +152,13 @@ fa-ellipsis-v{
 }
 .ms{
   margin-left:30px;
+  display:flex;
+  justify-content: space-between;
+}
+.ms h3{
+  font-size: 15px;
+}
+
+.ms button{
+  margin-right:7px;
 }
