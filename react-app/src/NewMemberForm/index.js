@@ -30,10 +30,12 @@ function NewMemberForm() {
   const filteredUsers = filterUsers(users, searchQuery);
 
   const addToOrg = async (e) => {
+    e.preventDefault();
     await dispatch(addMembers(id, e.target.id))
   }
 
   const addMember = async (e) => {
+    e.preventDefault();
     await dispatch(addMembers(memberName));
   };
 
@@ -77,11 +79,10 @@ function NewMemberForm() {
                   {searchQuery.length > 0 &&
                     filteredUsers?.map((user) => {
                       return (
-                        <li>
+                        <li key={user.id}>
                           <button
                             className="namebutton"
                             id={user.id}
-                            key={user.id}
                             onClick={addToOrg}
                             username={user.username}
                           >
