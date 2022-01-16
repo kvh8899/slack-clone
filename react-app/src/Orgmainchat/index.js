@@ -7,24 +7,24 @@ import { useNavigate } from "react-router-dom";
 import { logout } from "../store/session";
 import NewChannelForm from "../newChannelForm";
 
-import NewMemberForm from "../NewMemberForm"
-import EditChannelForm from "../EditChannelForm"
-import EditOrgForm from '../EditOrgForm'
-import { getAllMessages } from "../store/messages"
+import NewMemberForm from "../NewMemberForm";
+import EditChannelForm from "../EditChannelForm";
+import EditOrgForm from "../EditOrgForm";
+import { getAllMessages } from "../store/messages";
 import { useParams } from "react-router-dom";
-import Search from "../Search"
+import Search from "../Search";
 import { getSocket } from "../store/socket";
 
 function Orgmainchat() {
-  const [selectedChannel, setSelectedChannel] = useState('')
-  const [selectedChannelId, setSelectedChannelId] = useState('')
+  const [selectedChannel, setSelectedChannel] = useState("");
+  const [selectedChannelId, setSelectedChannelId] = useState("");
   const dispatch = useDispatch();
   const hist = useNavigate();
   const session = useSelector((state) => state.session.user);
   const socket = useSelector((state) => state.socket);
   const [userData, setUserData] = useState({});
   const profDiv = useRef(null);
-  const { id,channelId } = useParams();
+  const { id, channelId } = useParams();
   async function getUserData(id) {
     const res = await fetch(`/api/users/${session.id}`);
     if (res.ok) {
@@ -35,24 +35,26 @@ function Orgmainchat() {
   }
 
   async function loadData() {
-    await dispatch(getAllMessages(channelId))
+    await dispatch(getAllMessages(channelId));
   }
   useEffect(() => {
-    if (session){
+    if (session) {
       getUserData(session.id);
       loadData();
     }
   }, [session]);
   useEffect(() => {
-    if(!socket){
-      dispatch(getSocket())
+    if (!socket) {
+      dispatch(getSocket());
     }
     if(socket){
+      socket.emit("joinroom",{channelId})
+      socket.emit("joinserver",{organization:id})
       return () => {
-        socket.disconnect()
-      }
+        socket.disconnect();
+      };
     }
-  },[])
+  },[socket]);
   function profClick(e) {
     e.stopPropagation();
     profDiv.current.classList.toggle("settings");
@@ -67,8 +69,8 @@ function Orgmainchat() {
 
   const backClick = (e) => {
     e.preventDefault();
-    socket.emit("leaveserver",{organization:id})
-    socket.emit("leaveroom",{channelId})
+    socket.emit("leaveserver", { organization: id });
+    socket.emit("leaveroom", { channelId });
     hist("/organization");
   };
 
@@ -113,8 +115,8 @@ function Orgmainchat() {
             <button
               onClick={async () => {
                 await dispatch(logout());
-                socket.emit("leaveserver",{organization:id})
-                socket.emit("leaveroom",{channelId})
+                socket.emit("leaveserver", { organization: id });
+                socket.emit("leaveroom", { channelId });
                 hist("/");
               }}
             >
@@ -129,7 +131,6 @@ function Orgmainchat() {
             setSelectedChannel={setSelectedChannel}
             setSelectedChannelId={setSelectedChannelId}
           />
-
         </div>
         <Message
           user={userData}

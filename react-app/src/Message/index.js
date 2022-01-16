@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { createOneMessage, addMessage } from "../store/messages";
 import EditChannel from "../EditChannel";
-import { getSocket } from "../store/socket";
 
 function Message({ user }) {
   const [message, setMessage] = useState("");

@@ -24,7 +24,7 @@ function EditChannelForm() {
         dispatch(editChannelThunk(channelName, channelId));
       });
     }
-  }, []);
+  }, [socket]);
 
   const handleDelete = async (e) => {
     e.preventDefault();
