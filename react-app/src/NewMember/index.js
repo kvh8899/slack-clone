@@ -11,7 +11,8 @@ function NewMember() {
           dispatch(addMemberOn());
         }}
       >
-        <i className="fas fa-plus"></i>
+          <div className="is"><i className="fas fa-plus"></i></div>
+
       </button>
     </div>
   );

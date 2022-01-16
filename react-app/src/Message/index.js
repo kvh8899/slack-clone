@@ -11,7 +11,6 @@ import EditChannel from '../EditChannel'
 //"https://<herokuname>.herokuapp.com" for heroku
 let endPoint = "http://localhost:5000";
 let socket;
-
 function Message({ user }) {
   const [message, setMessage] = useState("");
   const [incoming,setIncoming] = useState([])
@@ -85,9 +84,10 @@ function Message({ user }) {
         <div>
           {incoming.map((msg) => {
             return (
+              
               <div className="message" key={msg.id}>
-                {user?.profilePicture ? (
-                  <img src={user.profilePicture} alt="404"></img>
+                {msg?.owner?.profilePicture ? (
+                  <img src={msg.owner?.profilePicture} alt="404"></img>
                 ) : (
                   <img
                     src="https://cdn.discordapp.com/attachments/919391399269515305/930910536193933312/aa_logo.png"
@@ -95,8 +95,8 @@ function Message({ user }) {
                   ></img>
                 )}
                 <div>
-                  <h3>{user.username}</h3>
-                  <p>{msg.content}</p>
+                  <h3>{msg?.owner?.username}</h3>
+                  <p>{msg?.content}</p>
                 </div>
               </div>
             );

@@ -32,7 +32,6 @@ def edit_org(id):
 def get_one_org(id):
     org = Organization.query.get(id)
     users = User.query.all()
-    print(users, 'hiiiiii')
     dictOrg = org.to_dict()
     members = []
     for member in org.members:
@@ -130,3 +129,14 @@ def addMember(orgId, userId):
         return user.to_dict()
 
     return {'error': "Cannot add member"}
+
+# Delete Member
+@ organization_routes.route('/<int:orgId>/<int:userId>', methods=['DELETE'])
+@ login_required
+def deleteMember(orgId, userId):
+    
+    member = Member.query.filter(Member.user_id == userId).filter(Member.org_id == orgId).first()
+
+    db.session.delete(member)
+    db.session.commit()
+    return member.to_dict()

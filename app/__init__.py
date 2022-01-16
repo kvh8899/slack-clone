@@ -83,8 +83,9 @@ def on_join(data):
 
 @socketIo.on('leaveroom')
 def on_leave(data):
-    room = f"{data['channelId']}"
-    leave_room(room)
+    if(data):
+        room = f"{data['channelId']}"
+        leave_room(room)
 
 if __name__ == '__main__':
     socketIo.run(app)

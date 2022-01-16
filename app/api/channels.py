@@ -34,20 +34,18 @@ def edit_channel(channelId):
         return channel.to_dict()
 
 # get messages of a channel
-
-
 @channel_routes.route('/<int:channelId>/messages')
 @ login_required
 def get_messages(channelId):
-    messages = Message.query.filter(channelId == Message.channel_id).all()
+    messages = Message.query.filter_by(channel_id=channelId).join(User).all()
     msgDict = []
     for i in messages:
-        msgDict.append(i.to_dict())
-    return {'messages': msgDict}
+        message = i.to_dict();
+        message['owner'] = i.owners.to_dict()
+        msgDict.append(message)
+    return { 'messages': msgDict }
 
 # send messages in a channel (create route)
-
-
 @channel_routes.route('/<int:channelId>/messages', methods=['POST'])
 @ login_required
 def createMsg(channelId):
