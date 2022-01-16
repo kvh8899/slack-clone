@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router";
 import { postChannel } from "./channels";
 const SET_WORKSPACES = "workspaces/SET_WORKSPACES";
 const ADD_WORKSPACE = "workspaces/ADD_WORKSPACE";
@@ -61,6 +62,7 @@ export const addWorkspaces = (name) => async (dispatch) => {
     body: JSON.stringify(name),
   });
   const data = await response.json();
+  if (data.errors.includes('Unauthorized')) return '404'
   dispatch(addWorkspace(data));
   await dispatch(postChannel(data.id, "General"))
   return data;
