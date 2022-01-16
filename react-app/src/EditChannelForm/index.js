@@ -1,5 +1,6 @@
 import { editChannelOff } from "../store/showEditChannelForm";
 import { editChannelThunk, removeChannel } from "../store/channels";
+import { setName } from "../store/currentChannel";
 import { getAllMessages } from "../store/messages";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
@@ -29,6 +30,7 @@ function EditChannelForm() {
         await dispatch(getAllMessages(channels[0].id))
         socket.emit("leaveroom",{channelId})
         socket.emit("joinroom",{channelId:channels[0].id})
+        dispatch(setName(`# {channels[0]}`))
         hist(`/organizations/${id}/channels/${channels[0].id}`);
       })
     }
