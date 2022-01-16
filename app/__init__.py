@@ -8,7 +8,7 @@ from flask import Flask
 from app.models import db, User
 from app.config import Config
 from flask_migrate import Migrate
-from flask_socketio import SocketIO, send, join_room, leave_room
+from flask_socketio import SocketIO, send, join_room, leave_room, emit
 
 from app.seeds import seed_commands
 
@@ -71,20 +71,43 @@ def react_root(path):
 
 @socketIo.on("message")
 def handleMessage(msg):
-    room = f"{msg['channelId']}"
-    send(msg['allMessages'],to=room)
-    return None
+    print(f"message sent to {msg['channelId']}")
+    room = f"channel {msg['channelId']}"
+    socketIo.emit("message",{'allMessages':msg['allMessages'],'channelId':msg['channelId'],'session':msg['session']},to=room)
+
+@socketIo.on("updateChannel")
+def handleUpdateC(data):
+    if(data):
+        room = f"org {data['organization']}"
+        socketIo.emit("updateChannel",{'channelId':data['channelId'],'channelName':data['channelName']},to=room)
+
+@socketIo.on("joinserver")
+def handleChannels(data):
+    if(data):
+        print(f"joined server {data['organization']}")
+        room = f"org {data['organization']}"
+        join_room(room)
+
+@socketIo.on("leaveserver")
+def leaveServer(data):
+    if(data):
+        print(f"left server {data['organization']}")
+        room = f"org {data['organization']}"
+        leave_room(room)
 
 @socketIo.on('joinroom')
 def on_join(data):
-    username = data['session']['username']
-    room = f"{data['channelId']}"
-    join_room(room)
+    if(data):
+        print(f"joined room {data['channelId']}")
+        room = f"channel {data['channelId']}"
+        join_room(room)
 
 @socketIo.on('leaveroom')
 def on_leave(data):
-    room = f"{data['channelId']}"
-    leave_room(room)
+    if(data):
+        print(f"left room {data['channelId']}")
+        room = f"channel {data['channelId']}"
+        leave_room(room)
 
 if __name__ == '__main__':
     socketIo.run(app)

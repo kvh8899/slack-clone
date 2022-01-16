@@ -30,7 +30,6 @@ def edit_org(id):
 def get_one_org(id):
     org = Organization.query.get(id)
     users = User.query.all()
-    print(users, 'hiiiiii')
     dictOrg = org.to_dict()
     members = []
     for member in org.members:
