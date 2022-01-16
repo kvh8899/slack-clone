@@ -27,6 +27,8 @@ function EditChannelForm() {
         const {id} = data
         const {channels} = await dispatch(readChannels(id))
         await dispatch(getAllMessages(channels[0].id))
+        socket.emit("leaveroom",{channelId})
+        socket.emit("joinroom",{channelId:channels[0].id})
         hist(`/organizations/${id}/channels/${channels[0].id}`);
       })
     }
