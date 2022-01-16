@@ -15,7 +15,6 @@ function App() {
   // organization page:
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
-
   useEffect(() => {
     (async () => {
       await dispatch(authenticate());

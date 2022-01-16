@@ -6,14 +6,13 @@ import { readChannels } from "../store/channels";
 import { getAllMessages } from "../store/messages";
 import { setName } from "../store/currentChannel";
 import { useNavigate } from "react-router-dom";
-
 function ChannelList() {
   const hist = useNavigate();
   const specificChannel = useRef([]);
   const { id, channelId } = useParams();
   const dispatch = useDispatch();
   const channels = useSelector((state) => state.channelReducer);
-
+  const socket = useSelector((state) => state.socket)
   async function loadChannels() {
     await dispatch(readChannels(id));
   }
@@ -40,7 +39,7 @@ function ChannelList() {
   useEffect(() => {
     channels.forEach((e) => {
       if (e.id === parseInt(channelId)) {
-        dispatch(setName({name:`# ${e.name}`,prev:channelId}));
+        dispatch(setName({name:`${e.name}`,prev:channelId}));
         return;
       }
     });
@@ -58,9 +57,11 @@ function ChannelList() {
                 id={channel.id}
                 onClick={async () => {
                   dispatch(
-                    setName({name:specificChannel.current[i].children[0].innerHTML,prev:channelId})
+                    setName({name:specificChannel.current[i].classList[0],prev:channelId})
                   );
                   await dispatch(getAllMessages(channel.id));
+                  socket.emit("leaveroom",{channelId})
+                  socket.emit("joinroom",{channelId:specificChannel.current[i].id})
                   hist(
                     `/organizations/${id}/channels/${specificChannel.current[i].id}`
                   );

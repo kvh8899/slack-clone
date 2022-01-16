@@ -1,61 +1,58 @@
 import "./message.css";
 import { useState, useEffect, useRef } from "react";
-import io from "socket.io-client";
 import { editChannelThunk } from "../store/channels";
 import { useDispatch, useSelector } from "react-redux";
-import {useParams} from "react-router-dom"
 
-import {createOneMessage ,getAllMessages} from "../store/messages";
-import EditChannel from '../EditChannel'
-// must use http here
-//"https://<herokuname>.herokuapp.com" for heroku
-let endPoint = "http://localhost:5000";
-let socket;
+import { useParams } from "react-router-dom";
+import { createOneMessage, addMessage } from "../store/messages";
+import { getSocket } from "../store/socket";
+import EditChannel from "../EditChannel";
 function Message({ user }) {
   const [message, setMessage] = useState("");
-  const [incoming,setIncoming] = useState([])
-  const [channelName, setChannelName] = useState('')
-  const [showForm, setShowForm] = useState(false)
-  const { channelId } = useParams()
-  const currentChannel = useSelector((state) => state.currentChannel)
-  const allMessages = useSelector((state) => state.messages)
-  const session = useSelector((state) => state.session.user)
+  const [channelName, setChannelName] = useState("");
+  const [showForm, setShowForm] = useState(false);
+  const { channelId } = useParams();
+  const currentChannel = useSelector((state) => state.currentChannel);
+  const allMessages = useSelector((state) => state.messages);
+  const session = useSelector((state) => state.session.user);
+  const socket = useSelector((state) => state.socket);
   const dispatch = useDispatch();
-  const handleChannelSubmit = async e => {
-    e.preventDefault()
-    setShowForm(false)
-    setChannelName('')
-    await dispatch(editChannelThunk(channelName, channelId))
-  }
+  const handleChannelSubmit = async (e) => {
+    e.preventDefault();
+    setShowForm(false);
+    setChannelName("");
+    await dispatch(editChannelThunk(channelName, channelId));
+  };
   const dummyDiv = useRef(null);
   useEffect(() => {
-    socket = io(`${endPoint}`);
-    socket.on("message", (msg) => {
-      //create msg
-      setIncoming(msg)
-      dummyDiv.current.scrollIntoView(false);
-    })
-    return () => {
-      socket.disconnect();
-    };
-  },[])
+    dummyDiv?.current?.scrollIntoView(false);
+    if(!socket){
+      dispatch(getSocket())
+    }
+    if (socket) {
+      socket.on("message", (msg) => {
+        //create msg
+        const { allMessages } = msg;
+        dispatch(addMessage(allMessages));
+      });
+      return () => {
+        socket.disconnect()
+      }
+    }
+  }, [socket]);
   useEffect(() => {
-    setIncoming(allMessages)
-    socket.emit('leaveroom',{channelId:currentChannel.prev})
-    socket.emit('joinroom',{channelId,session,message});
-  },[channelId,allMessages])
-  useEffect(() => {
-    dummyDiv.current.scrollIntoView(false);
-  })
+    dummyDiv?.current?.scrollIntoView(false);
+  }, [allMessages]);
+
   const onChange = (e) => {
     setMessage(e.target.value);
   };
 
-  const onClick = async() => {
+  const onClick = async () => {
     if (message !== "") {
-      await dispatch(createOneMessage(channelId,message)) 
-      const msgs = await dispatch(getAllMessages(channelId))
-      socket.emit("message", {channelId,session,allMessages:msgs.messages});
+      const msg = await dispatch(createOneMessage(channelId, message));
+      socket.emit("message", { channelId, session, allMessages: msg });
+      dummyDiv?.current?.scrollIntoView(false);
       setMessage("");
     } else {
       alert("Please add message");
@@ -64,17 +61,20 @@ function Message({ user }) {
   return (
     <div className="messageArea">
       <div className="title">
-        <h2 className="unselect">{currentChannel.name}</h2>
+        <h2 className="unselect"># {currentChannel.name}</h2>
         <EditChannel />
-        { showForm && (
+        {showForm && (
           <div>
-            <form className="editchannelnameform" onSubmit={ handleChannelSubmit }>
+            <form
+              className="editchannelnameform"
+              onSubmit={handleChannelSubmit}
+            >
               <input
-                type='text'
+                type="text"
                 placeholder={"New Channel Name"}
                 required
                 value={channelName}
-                onChange={e => setChannelName(e.target.value)}
+                onChange={(e) => setChannelName(e.target.value)}
               />
             </form>
           </div>
@@ -82,7 +82,7 @@ function Message({ user }) {
       </div>
       <div className="messages">
         <div>
-          {incoming.map((msg) => {
+          {allMessages.map((msg) => {
             return (
               
               <div className="message" key={msg.id}>
@@ -107,12 +107,13 @@ function Message({ user }) {
       </div>
       <div className="inputMessages">
         <form
-          onSubmit={async(e) => {
+          onSubmit={async (e) => {
             e.preventDefault();
             onClick();
           }}
         >
           <input
+            name="message"
             value={message}
             onChange={(e) => onChange(e)}
             placeholder={"Message"}

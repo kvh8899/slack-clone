@@ -25,8 +25,6 @@ def edit_org(id):
     return {}
 
 # get one org route
-
-
 @organization_routes.route('/<int:id>', methods=['GET'])
 @login_required
 def get_one_org(id):
@@ -44,7 +42,6 @@ def get_one_org(id):
     return dictOrg
 # delete organizations
 
-
 @ organization_routes.route('/<int:organizationId>/delete', methods=['DELETE'])
 @login_required
 def deleteWorkspace(organizationId):
@@ -56,7 +53,6 @@ def deleteWorkspace(organizationId):
     return org.to_dict()
 
 # create organization
-
 
 @ organization_routes.route('/', methods=['POST'])
 @login_required
