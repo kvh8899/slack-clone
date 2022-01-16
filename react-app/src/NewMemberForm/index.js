@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addMemberOff } from "../store/showMemberForm";
 import { addMembers } from "../store/orgmainchat";
-import SingleMember from "../SingleMember";
 import { useParams } from "react-router";
+import "./newMemberForm.css";
 
 function NewMemberForm() {
   const { id } = useParams()
@@ -67,23 +67,40 @@ function NewMemberForm() {
               value={searchQuery}
               onInput={(e) => setSearchQuery(e.target.value)}
               name="s"
-              onChange={(e) => { setMemberName(e.target.value) }}
+              onChange={(e) => {
+                setMemberName(e.target.value);
+              }}
             />
             {searchQuery.length > 0 && (
-              <ul>
-                {searchQuery.length > 0 &&
-
-                  filteredUsers?.map((user) => {
-                    return (
-                      <li onClick={addToOrg} id={user.id} key={user.id}>
-                        <SingleMember username={user.username} />
-                      </li>
-                    );
-                  })}
-              </ul>
+              <div className="search-content">
+                <ul>
+                  {searchQuery.length > 0 &&
+                    filteredUsers?.map((user) => {
+                      return (
+                        <li>
+                          <button
+                            className="namebutton"
+                            id={user.id}
+                            key={user.id}
+                            onClick={addToOrg}
+                            username={user.username}
+                          >
+                            {user.username}
+                          </button>
+                        </li>
+                      );
+                    })}
+                  {/* <li>asdasd</li>
+                  <li>asdasd</li>
+                  <li>asdasd</li>
+                  <li>asdasd</li>
+                  <li>asdasd</li>
+                  <li>asdasd</li> */}
+                </ul>
+              </div>
             )}
           </div>
-          <div id="channelButton">
+          <div id="memberButton">
             <p
               className="cancel"
               onClick={(e) => {

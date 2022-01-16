@@ -34,8 +34,6 @@ def edit_channel(channelId):
         return channel.to_dict()
 
 # get messages of a channel
-
-
 @channel_routes.route('/<int:channelId>/messages')
 @ login_required
 def get_messages(channelId):
@@ -48,8 +46,6 @@ def get_messages(channelId):
     return {'messages': msgDict}
 
 # send messages in a channel (create route)
-
-
 @channel_routes.route('/<int:channelId>/messages', methods=['POST'])
 @ login_required
 def createMsg(channelId):

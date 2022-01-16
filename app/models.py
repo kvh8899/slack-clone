@@ -59,7 +59,7 @@ class Organization(db.Model):
         "Channel", back_populates="organizations", cascade='all, delete-orphan')
     members = db.relationship('User', secondary='members',
                               back_populates='organization')
-    
+
     def to_dict(self):
         return {
             'id': self.id,
@@ -125,7 +125,7 @@ class Message(db.Model):
     owners = db.relationship("User", back_populates="messages")
     user_channels = db.relationship(
         "Channel", back_populates="channel_messages")
-    
+
     def to_dict(self):
         return {
             'id':self.id,
@@ -142,6 +142,13 @@ class Member(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     org_id = db.Column(db.Integer, db.ForeignKey(
         'organizations.id'), nullable=False)
+
+    def to_dict(self):
+        return {
+            'id' : self.id,
+            'user_id' : self.user_id,
+            'org_id' : self.org_id
+        }
 
 
 class Group(db.Model):

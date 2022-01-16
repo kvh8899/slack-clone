@@ -2,11 +2,11 @@ import "./message.css";
 import { useState, useEffect, useRef } from "react";
 import { editChannelThunk } from "../store/channels";
 import { useDispatch, useSelector } from "react-redux";
+
 import { useParams } from "react-router-dom";
 import { createOneMessage, addMessage } from "../store/messages";
 import { getSocket } from "../store/socket";
 import EditChannel from "../EditChannel";
-
 function Message({ user }) {
   const [message, setMessage] = useState("");
   const [channelName, setChannelName] = useState("");
@@ -84,8 +84,9 @@ function Message({ user }) {
         <div>
           {allMessages.map((msg) => {
             return (
+              
               <div className="message" key={msg.id}>
-                {msg.owner?.profilePicture ? (
+                {msg?.owner?.profilePicture ? (
                   <img src={msg.owner?.profilePicture} alt="404"></img>
                 ) : (
                   <img
@@ -94,8 +95,8 @@ function Message({ user }) {
                   ></img>
                 )}
                 <div>
-                  <h3>{msg.owner?.username}</h3>
-                  <p>{msg.content}</p>
+                  <h3>{msg?.owner?.username}</h3>
+                  <p>{msg?.content}</p>
                 </div>
               </div>
             );

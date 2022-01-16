@@ -24,7 +24,6 @@ def user(id):
 @user_routes.route('/<int:userId>/organizations')
 @login_required
 def getWorkspace(userId):
-    allWorkspaces = User.query.filter_by(id=userId).join(Organization).first()
     workspaces = Organization.query.join(Member).filter_by(user_id=userId).all()
     orgs = []
     for i in workspaces:

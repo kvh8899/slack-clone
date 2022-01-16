@@ -4,19 +4,34 @@ import { getOrg } from "../store/orgmainchat";
 import { useParams } from "react-router";
 import NewChannel from "../newChannel";
 import ChannelList from "../ChannelList";
+import NewMember from "../NewMember"
 import { editOrgOn } from "../store/showEditOrg";
+import { removeMember } from "../store/orgmainchat";
+
 import "./messagebar.css";
 
 function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
   const [showChannelList, setShowChannelList] = useState(true);
+  const [deleteMember, setDeleteMember] = useState("");
+  const [showMemberList, setshowMemberList] = useState(true);
+
+
   const caret = useRef(null);
   const dCaret = useRef(null);
+  const mCaret = useRef(null);
   const size = useRef(null);
   const size1 = useRef(null);
   const msgBar = useRef(null);
   const dispatch = useDispatch();
   const { id } = useParams();
   const org = useSelector((state) => state.orgmainchatReducer);
+  const members = org.members;
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await dispatch(removeMember(deleteMember, org.id));
+  };
 
   useEffect(() => {
     dispatch(getOrg(id));
@@ -104,6 +119,54 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
                     </button>
                   </div>
                 </div>
+              </div>
+              <div className="channels">
+                <div>
+                  <div
+                    onClick={(e) => {
+                      mCaret.current.classList.toggle("side");
+                      if (!showMemberList) setshowMemberList(true);
+                      if (showMemberList) setshowMemberList(false);
+                    }}
+                    className="cs"
+                  >
+                    <div className="is isc">
+                      <i className="fas fa-caret-down" ref={mCaret}></i>
+                    </div>
+                    <p className="unselect">Members</p>
+                  </div>
+                  <NewMember />
+                </div>
+                {/* <div className="ChannelList"> */}
+                {showMemberList && (
+                  <div className="channelContainer">
+                    {members
+                      ? members?.map((member) => {
+                          return (
+                            <form
+                              className="ms"
+                              key={member.id}
+                              onSubmit={handleSubmit}
+                            >
+                              <h3>- {member.username}</h3>
+                              {members.length > 1 ? (
+                                <button className="btn">
+                                  <i
+                                    className="fas fa-trash-alt channelContainer"
+                                    onClick={() => {
+                                      setDeleteMember(member.id);
+                                    }}
+                                  ></i>
+                                </button>
+                              ) : (
+                                ""
+                              )}
+                            </form>
+                          );
+                        })
+                      : null}
+                  </div>
+                )}
               </div>
               <div className="height"></div>
             </div>
