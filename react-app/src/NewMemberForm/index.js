@@ -36,7 +36,7 @@ function NewMemberForm() {
 
   const addMember = async (e) => {
     e.preventDefault();
-    await dispatch(addMembers(memberName));
+    await dispatch(addMembers(org.id, memberName));
   };
 
   return (
