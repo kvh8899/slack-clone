@@ -30,11 +30,13 @@ function NewMemberForm() {
   const filteredUsers = filterUsers(users, searchQuery);
 
   const addToOrg = async (e) => {
+    e.preventDefault();
     await dispatch(addMembers(id, e.target.id))
   }
 
   const addMember = async (e) => {
-    await dispatch(addMembers(memberName));
+    e.preventDefault()
+    await dispatch(addMembers(org.id, memberName));
   };
 
   return (
