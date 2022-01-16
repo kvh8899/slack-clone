@@ -4,6 +4,7 @@ import { editChannelThunk } from "../store/channels";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { createOneMessage, addMessage } from "../store/messages";
+import { getSocket } from "../store/socket";
 import EditChannel from "../EditChannel";
 
 function Message({ user }) {
@@ -25,12 +26,18 @@ function Message({ user }) {
   const dummyDiv = useRef(null);
   useEffect(() => {
     dummyDiv?.current?.scrollIntoView(false);
+    if(!socket){
+      dispatch(getSocket())
+    }
     if (socket) {
       socket.on("message", (msg) => {
         //create msg
         const { allMessages } = msg;
         dispatch(addMessage(allMessages));
       });
+      return () => {
+        socket.disconnect()
+      }
     }
   }, [socket]);
   useEffect(() => {
@@ -54,7 +61,7 @@ function Message({ user }) {
   return (
     <div className="messageArea">
       <div className="title">
-        <h2 className="unselect">{currentChannel.name}</h2>
+        <h2 className="unselect"># {currentChannel.name}</h2>
         <EditChannel />
         {showForm && (
           <div>
@@ -78,8 +85,8 @@ function Message({ user }) {
           {allMessages.map((msg) => {
             return (
               <div className="message" key={msg.id}>
-                {user?.profilePicture ? (
-                  <img src={user.profilePicture} alt="404"></img>
+                {msg.owner?.profilePicture ? (
+                  <img src={msg.owner?.profilePicture} alt="404"></img>
                 ) : (
                   <img
                     src="https://cdn.discordapp.com/attachments/919391399269515305/930910536193933312/aa_logo.png"
@@ -87,7 +94,7 @@ function Message({ user }) {
                   ></img>
                 )}
                 <div>
-                  <h3>{user.username}</h3>
+                  <h3>{msg.owner?.username}</h3>
                   <p>{msg.content}</p>
                 </div>
               </div>

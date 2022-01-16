@@ -39,7 +39,7 @@ function ChannelList() {
   useEffect(() => {
     channels.forEach((e) => {
       if (e.id === parseInt(channelId)) {
-        dispatch(setName({name:`# ${e.name}`,prev:channelId}));
+        dispatch(setName({name:`${e.name}`,prev:channelId}));
         return;
       }
     });
@@ -57,7 +57,7 @@ function ChannelList() {
                 id={channel.id}
                 onClick={async () => {
                   dispatch(
-                    setName({name:specificChannel.current[i].children[0].innerHTML,prev:channelId})
+                    setName({name:specificChannel.current[i].classList[0],prev:channelId})
                   );
                   await dispatch(getAllMessages(channel.id));
                   socket.emit("leaveroom",{channelId})

@@ -73,6 +73,7 @@ def react_root(path):
 def handleMessage(msg):
     if(msg):
         room = f"channel {msg['channelId']}"
+        msg['allMessages']['owner'] = msg['session']
         socketIo.emit("message",{'allMessages':msg['allMessages'],'channelId':msg['channelId'],'session':msg['session']},to=room)
 
 @socketIo.on("updateChannel")

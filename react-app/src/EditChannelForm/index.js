@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router";
 import { readChannels } from "../store/channels";
+import { getSocket } from "../store/socket";
 import "./editChannelForm.css";
 
 function EditChannelForm() {
@@ -30,7 +31,7 @@ function EditChannelForm() {
         await dispatch(getAllMessages(channels[0].id))
         socket.emit("leaveroom",{channelId})
         socket.emit("joinroom",{channelId:channels[0].id})
-        dispatch(setName(`# {channels[0]}`))
+        dispatch(setName(channels[0]))
         hist(`/organizations/${id}/channels/${channels[0].id}`);
       })
     }
