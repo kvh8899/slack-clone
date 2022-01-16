@@ -4,7 +4,7 @@ import { getAllMessages } from "../store/messages";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router";
-import { getSocket } from "../store/socket";
+import { readChannels } from "../store/channels";
 import "./editChannelForm.css";
 
 function EditChannelForm() {
@@ -23,6 +23,11 @@ function EditChannelForm() {
         const { channelName, channelId } = channel;
         dispatch(editChannelThunk(channelName, channelId));
       });
+      socket.on("deleteChannel",async(data) => {
+        const {id} = data
+        const {channels} = await dispatch(readChannels(id))
+        hist(`/organizations/${id}/channels/${channels[0].id}`);
+      })
     }
   }, [socket]);
 
@@ -31,17 +36,7 @@ function EditChannelForm() {
     e.stopPropagation();
     await dispatch(removeChannel(channelId));
     //update messages when removing channel
-    for (let i = 0; i < channels.length; i++) {
-      if (channels[i].id === parseInt(channelId) && i === 0) {
-        hist(`/organizations/${id}/channels/${channels[i + 1].id}`);
-        await dispatch(getAllMessages(channels[i + 1].id));
-        return;
-      } else if (channels[i].id === parseInt(channelId)) {
-        hist(`/organizations/${id}/channels/${channels[i - 1].id}`);
-        await dispatch(getAllMessages(channels[i - 1].id));
-        return;
-      }
-    }
+    socket.emit("deleteChannel",{organization:id,channelId})
   };
   return (
     <>
