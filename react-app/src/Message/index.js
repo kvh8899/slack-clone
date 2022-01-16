@@ -117,6 +117,7 @@ function Message({ user }) {
             onChange={(e) => onChange(e)}
             placeholder={"Message"}
           ></input>
+          <div className="s"></div>
         </form>
       </div>
     </div>

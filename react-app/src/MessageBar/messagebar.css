@@ -6,6 +6,7 @@
   width: fit-content;
   overflow: hidden;
   height: 100%;
+  z-index:1;
 }
 
 .messageBar .channels > div {
@@ -93,6 +94,7 @@
   overflow: scroll;
   scrollbar-color: white;
   background-color:#24252c;
+  z-index:1;
 }
 .height {
   height: 220px;
@@ -136,7 +138,28 @@ fa-ellipsis-v{
   position: relative;
 }
 .hide{
+  animation: run 0.20s;
   left:-100%;
+}
+@keyframes run {
+  0% {
+    left: -100px;
+  }
+  25%{
+    left:-200px
+  }
+  50% {
+    left: -300px;
+  }
+  60%{
+    left: -400px
+  }
+  75%{
+    left: -500px;
+  }
+  100% {
+    left: -100%;    
+  }
 }
 .abs{
   position:absolute;
@@ -146,9 +169,6 @@ fa-ellipsis-v{
   background: transparent;
   border: none;
   cursor: inherit
-}
-.fa-trash-alt{
-  color:white
 }
 .ms{
   margin-left:30px;
@@ -161,4 +181,7 @@ fa-ellipsis-v{
 
 .ms button{
   margin-right:7px;
+}
+.btn > i{
+  color:red;
 }

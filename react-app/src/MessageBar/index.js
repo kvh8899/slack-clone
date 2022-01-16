@@ -139,8 +139,7 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
                 </div>
                 {showMemberList && (
                   <div className="channelContainer">
-                    {members
-                      ? members?.map((member) => {
+                    {members?.map((member) => {
                           return (
                             <form
                               className="ms"
@@ -163,7 +162,7 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
                             </form>
                           );
                         })
-                      : null}
+                      }
                   </div>
                 )}
               </div>
