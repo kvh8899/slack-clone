@@ -49,7 +49,7 @@ function NewMemberForm() {
       )}
       {showForm && (
         <form
-          className="channelForm"
+          className="channelForm add"
           onSubmit={async (e) => {
             e.preventDefault();
             if (memberName) {
