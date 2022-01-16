@@ -40,12 +40,12 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
   useEffect(() => {
     function onResize(){
       let r = document.querySelector(".r")
-      if(r.clientWidth > document.body.clientWidth * 0.7){
+      if(r.clientWidth > document.body.clientWidth * 0.6){
         size.current.classList.add("hide")
         size1.current.classList.add("hide")
         msgBar.current.classList.add("hide")
         r.classList.add("abs")
-      }else if(r.clientWidth < document.body.clientWidth * 0.7){
+      }else if(r.clientWidth < document.body.clientWidth * 0.6){
         size.current.classList.remove("hide")
         size1.current.classList.remove("hide")
         msgBar.current.classList.remove("hide")
@@ -74,13 +74,12 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
           <div className="od">
             <div className="uc" ref={size1}>
               <div className="channels">
-                <div>
-                  <div
-                    onClick={(e) => {
+                <div onClick={(e) => {
                       caret.current.classList.toggle("side");
                       if (!showChannelList) setShowChannelList(true);
                       if (showChannelList) setShowChannelList(false);
-                    }}
+                    }}>
+                  <div
                     className="cs"
                   >
                     <div className="is isc">
@@ -121,13 +120,12 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
                 </div>
               </div>
               <div className="channels">
-                <div>
-                  <div
-                    onClick={(e) => {
+                <div onClick={(e) => {
                       mCaret.current.classList.toggle("side");
                       if (!showMemberList) setshowMemberList(true);
                       if (showMemberList) setshowMemberList(false);
-                    }}
+                    }}>
+                  <div
                     className="cs"
                   >
                     <div className="is isc">
