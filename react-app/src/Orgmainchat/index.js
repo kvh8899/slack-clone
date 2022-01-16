@@ -49,6 +49,7 @@ function Orgmainchat() {
       loadData();
     }
   }, [session]);
+  
   useEffect(() => {
     if (!socket) {
       dispatch(getSocket());

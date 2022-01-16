@@ -26,6 +26,7 @@ function EditChannelForm() {
       socket.on("deleteChannel",async(data) => {
         const {id} = data
         const {channels} = await dispatch(readChannels(id))
+        await dispatch(getAllMessages(channels[0].id))
         hist(`/organizations/${id}/channels/${channels[0].id}`);
       })
     }

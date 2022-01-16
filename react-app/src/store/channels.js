@@ -48,7 +48,6 @@ export const postChannel = (orgId, name) => async (dispatch) => {
     body: JSON.stringify({ name }),
   });
   const data = await response.json();
-  dispatch(addChannel(data));
   return data;
 };
 

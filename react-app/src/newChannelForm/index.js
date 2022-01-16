@@ -1,17 +1,31 @@
 import { offAction } from "../store/showForm";
 import { postChannel } from "../store/channels";
 import { useSelector, useDispatch } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { addChannel } from "../store/channels";
 import "./newchannelform.css";
 function NewChannelForm() {
   const dispatch = useDispatch();
   const {id} = useParams();
   const showForm = useSelector((state) => state.showFormReducer);
   const [channelName, setChannelName] = useState("");
+  const socket = useSelector((state) => state.socket);
   const createChannel = async (e) => {
-    await dispatch(postChannel(id, channelName));
+    const channel = await dispatch(postChannel(id, channelName));
+    socket.emit("addChannel",{channel,organization:id})
   };
+  useEffect(() => {
+    if(socket){
+      socket.on("addChannel",async(data) => {
+        const {channel} = data
+        dispatch(addChannel(channel));
+      })
+      return () => {
+        socket.disconnect();
+      }
+    }
+  },[socket])
   return (
     <>
       {showForm && (
