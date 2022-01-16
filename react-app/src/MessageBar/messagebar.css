@@ -89,7 +89,7 @@
 }
 .channelContent {
   height: 100%;
-  width: 225px;
+  width: 250px;
   overflow: scroll;
   scrollbar-color: white;
   background-color:#24252c;
@@ -130,7 +130,7 @@ fa-ellipsis-v{
 }
 .uc{
   position:absolute;
-  width:220px;
+  width:100%;
 }
 .od{
   position: relative;
