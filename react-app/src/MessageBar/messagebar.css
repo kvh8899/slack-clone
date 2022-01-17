@@ -3,7 +3,7 @@
   background-color: #1a1b20;
   border-right: 1px solid rgba(54, 55, 59, 1);
   color: lightgrey;
-  width: fit-content;
+  width: 100%;
   overflow: hidden;
   height: 100%;
   z-index:1;
@@ -188,4 +188,8 @@ fa-ellipsis-v{
 }
 .btn > i{
   color:red;
+}
+
+.le{
+  left:0px;
 }

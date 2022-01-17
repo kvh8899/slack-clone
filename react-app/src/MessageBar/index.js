@@ -4,7 +4,7 @@ import { getOrg } from "../store/orgmainchat";
 import { useParams } from "react-router";
 import NewChannel from "../newChannel";
 import ChannelList from "../ChannelList";
-import NewMember from "../NewMember"
+import NewMember from "../NewMember";
 import { editOrgOn } from "../store/showEditOrg";
 import { removeMember } from "../store/orgmainchat";
 
@@ -14,7 +14,6 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
   const [showChannelList, setShowChannelList] = useState(true);
   const [deleteMember, setDeleteMember] = useState("");
   const [showMemberList, setshowMemberList] = useState(true);
-
 
   const caret = useRef(null);
   const dCaret = useRef(null);
@@ -28,7 +27,6 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
   const org = useSelector((state) => state.orgmainchatReducer);
   const members = org.members;
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     await dispatch(removeMember(deleteMember, org.id));
@@ -39,24 +37,25 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
   }, []);
 
   useEffect(() => {
-    function onResize(){
-      let r = document.querySelector(".r")
-      if(r.clientWidth > document.body.clientWidth * 0.6){
-        size.current.classList.add("hide")
-        size1.current.classList.add("hide")
-        msgBar.current.classList.add("hide")
-        d.current.classList.add("hide")
-        r.classList.add("abs")
-      }else if(r.clientWidth < document.body.clientWidth * 0.6){
-        size.current.classList.remove("hide")
-        size1.current.classList.remove("hide")
-        msgBar.current.classList.remove("hide")
-        d.current.classList.remove("hide")
-        r.classList.remove("abs")
+    function onResize() {
+      let r = document.querySelector(".r");
+      if(d.current.classList[1] === "le") return;
+      if (r.clientWidth > document.body.clientWidth * 0.6) {
+        size.current.classList.add("hide");
+        size1.current.classList.add("hide");
+        msgBar.current.classList.add("hide");
+        d.current.classList.add("hide");
+        r.classList.add("abs");
+      } else if (r.clientWidth < document.body.clientWidth * 0.6) {
+        size.current.classList.remove("hide");
+        size1.current.classList.remove("hide");
+        msgBar.current.classList.remove("hide");
+        d.current.classList.remove("hide");
+        r.classList.remove("abs");
       }
     }
     window.onresize = onResize;
-  },[])
+  }, []);
   return (
     <>
       <div className="messageBar" ref={msgBar}>
@@ -77,14 +76,14 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
           <div className="od">
             <div className="uc" ref={size1}>
               <div className="channels">
-                <div onClick={(e) => {
-                      caret.current.classList.toggle("side");
-                      if (!showChannelList) setShowChannelList(true);
-                      if (showChannelList) setShowChannelList(false);
-                    }}>
-                  <div
-                    className="cs"
-                  >
+                <div
+                  onClick={(e) => {
+                    caret.current.classList.toggle("side");
+                    if (!showChannelList) setShowChannelList(true);
+                    if (showChannelList) setShowChannelList(false);
+                  }}
+                >
+                  <div className="cs">
                     <div className="is isc">
                       <i className="fas fa-caret-down" ref={caret}></i>
                     </div>
@@ -123,14 +122,14 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
                 </div>
               </div>
               <div className="channels">
-                <div onClick={(e) => {
-                      mCaret.current.classList.toggle("side");
-                      if (!showMemberList) setshowMemberList(true);
-                      if (showMemberList) setshowMemberList(false);
-                    }}>
-                  <div
-                    className="cs"
-                  >
+                <div
+                  onClick={(e) => {
+                    mCaret.current.classList.toggle("side");
+                    if (!showMemberList) setshowMemberList(true);
+                    if (showMemberList) setshowMemberList(false);
+                  }}
+                >
+                  <div className="cs">
                     <div className="is isc">
                       <i className="fas fa-caret-down" ref={mCaret}></i>
                     </div>
@@ -139,31 +138,30 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
                   <NewMember />
                 </div>
                 {showMemberList && (
-                  <div className="channelContainer">
+                  <div className="channelContainer unselect">
                     {members?.map((member) => {
-                          return (
-                            <form
-                              className="ms"
-                              key={member.id}
-                              onSubmit={handleSubmit}
-                            >
-                              <h3>{member.username}</h3>
-                              {members.length > 1 ? (
-                                <button className="btn">
-                                  <i
-                                    className="fas fa-trash-alt channelContainer"
-                                    onClick={() => {
-                                      setDeleteMember(member.id);
-                                    }}
-                                  ></i>
-                                </button>
-                              ) : (
-                                ""
-                              )}
-                            </form>
-                          );
-                        })
-                      }
+                      return (
+                        <form
+                          className="ms"
+                          key={member.id}
+                          onSubmit={handleSubmit}
+                        >
+                          <h3>{member.username}</h3>
+                          {members.length > 1 ? (
+                            <button className="btn">
+                              <i
+                                className="fas fa-trash-alt channelContainer"
+                                onClick={() => {
+                                  setDeleteMember(member.id);
+                                }}
+                              ></i>
+                            </button>
+                          ) : (
+                            ""
+                          )}
+                        </form>
+                      );
+                    })}
                   </div>
                 )}
               </div>
@@ -183,10 +181,25 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
             x.target.classList.remove("dSelect");
           });
           document.addEventListener("mousemove", (e) => {
-            if (e.clientX > 250 && 
-              e.clientX < document.body.clientWidth * 0.5 && drag) {
-              size.current.style.width = (e.clientX + 2 )+ "px";
-              size1.current.style.width = (e.clientX + 2) + "px";
+            let r = document.querySelector(".r");
+            if (
+              e.clientX > 235 &&
+              e.clientX < document.body.clientWidth * 0.5 &&
+              drag
+            ) {
+              d.current.classList.remove("le");
+              size.current.classList.remove("hide");
+              size1.current.classList.remove("hide");
+              msgBar.current.classList.remove("hide");
+              r.classList.remove("abs");
+              size.current.style.width = e.clientX + 2 + "px";
+              size1.current.style.width = e.clientX + 2 + "px";
+            } else if ((d.current.classList[1] !== "le") && e.clientX < 220 && drag) {
+              size.current.classList.add("hide");
+              size1.current.classList.add("hide");
+              msgBar.current.classList.add("hide");
+              d.current.classList.add("le");
+              r.classList.add("abs");
             }
           });
         }}
@@ -195,4 +208,4 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
   );
 }
 
-export default MessageBar
+export default MessageBar;
