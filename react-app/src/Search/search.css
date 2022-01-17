@@ -13,27 +13,19 @@
     border: 2px solid rgb(91, 134, 151);
 }
 .searchContainer ul {
-    /* position: fixed; */
     list-style: none;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    /* margin-right: %;
-    margin-left: 50%; */
-    margin: 0 auto;
-    /* margin-right: 11%; */
-    text-align: center;
     z-index: 1;
     border: 1px solid rgba(54, 55, 59, 1);
-    border-radius: 10px;
+    border-radius: 5px;
     padding-inline-start: 0px;
-    background-color: #02001b;
+    background-color: rgb(30, 34, 49);
     max-height:200px;
     overflow-y:auto;
     overflow-x:hidden;
     width: 100%;
-    z-index: 99;
-    pointer-events: all;
 }
 .searchContainer ul > li {
     margin: 0 auto;
@@ -47,7 +39,9 @@
     width: 100%;
     pointer-events: all;
 }
-
+.searchContainer li > div{
+    margin-left:20px;
+}
 .searchContainer ul > li:hover {
     cursor: pointer;
     background-color: rgb(41, 36, 87);
