@@ -85,9 +85,7 @@
 .auth ul {
     display: flex;
     flex-direction: column;
-    align-self: center;
     align-items: center;
-    align-content: center;
     padding: 0px;
     max-width: 400px;
 }

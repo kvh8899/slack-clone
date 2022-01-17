@@ -20,6 +20,7 @@ function EditOrgFrom() {
     const editOrg = async e => {
         const data = await dispatch(editOrgThunk(orgName, id))
         await dispatch(getOrg(id))
+        console.log(org)
         if (data) {
             return setErrors(data)
         }
@@ -56,7 +57,6 @@ function EditOrgFrom() {
                 >
                     <div className="form1">
                         <h2>Edit Workspace Name</h2>
-                        <h5>Owned by {session?.username}</h5>
                         <label>Workspace Name</label>
                         <input
                             placeholder={'# New Workspace Name'}

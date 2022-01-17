@@ -112,7 +112,6 @@ def newChannel(orgId):
 @ organization_routes.route('/<int:orgId>/members/<int:userId>', methods=['POST'])
 @ login_required
 def addMember(orgId, userId):
-    print('testbackend')
     user = User.query.get(int(userId))
     org = Organization.query.get(int(orgId))
     if user and user not in org.members:

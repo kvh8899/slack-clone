@@ -60,7 +60,7 @@ function Message({ user }) {
   };
   return (
     <div className="messageArea">
-      <div className="title">
+      <div className="title" draggable={false}>
         <h2 className="unselect"># {currentChannel.name}</h2>
         <EditChannel />
         {showForm && (

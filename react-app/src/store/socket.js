@@ -7,8 +7,8 @@ export const getSocket = () => {
     }
 }
 // must use http here
-//"https://<herokuname>.herokuapp.com" for heroku
-const endPoint = "http://localhost:5000";
+//"https://zing-app.herokuapp.com" for heroku
+const endPoint = "https://zing-app.herokuapp.com";
 
 const socket = (state = null,action) => {
     switch(action.type){
