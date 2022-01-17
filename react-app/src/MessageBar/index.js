@@ -22,6 +22,7 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
   const size = useRef(null);
   const size1 = useRef(null);
   const msgBar = useRef(null);
+  const d = useRef(null);
   const dispatch = useDispatch();
   const { id } = useParams();
   const org = useSelector((state) => state.orgmainchatReducer);
@@ -44,11 +45,13 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
         size.current.classList.add("hide")
         size1.current.classList.add("hide")
         msgBar.current.classList.add("hide")
+        d.current.classList.add("hide")
         r.classList.add("abs")
       }else if(r.clientWidth < document.body.clientWidth * 0.6){
         size.current.classList.remove("hide")
         size1.current.classList.remove("hide")
         msgBar.current.classList.remove("hide")
+        d.current.classList.remove("hide")
         r.classList.remove("abs")
       }
     }
@@ -171,6 +174,7 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
       </div>
       <div
         className="d"
+        ref={d}
         onMouseDown={(x) => {
           let drag = true;
           x.target.classList.add("dSelect");
