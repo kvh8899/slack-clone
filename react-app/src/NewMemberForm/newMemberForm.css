@@ -46,7 +46,7 @@
 ::-webkit-scrollbar-thumb {
   background-color: rgba(70, 67, 67, 0.432);
 }
-ul{
+.search-content ul{
   padding:0px;
   margin:0px;
   overflow-y:scroll;
