@@ -23,10 +23,13 @@ function WorkspaceList() {
     loadOrg(session);
   }, [session]);
   useEffect(() => {
-    dispatch(getSocket());
-    return () =>{
-      socket.disconnect()
-    } 
+    if(!socket){
+      dispatch(getSocket());
+    }else{
+      return () =>{
+        socket.disconnect()
+      } 
+    }
   },[])
   return session ? (
     <div className="workSpace-wrap">

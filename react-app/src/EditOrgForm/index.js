@@ -20,7 +20,6 @@ function EditOrgFrom() {
     const editOrg = async e => {
         const data = await dispatch(editOrgThunk(orgName, id))
         await dispatch(getOrg(id))
-        console.log(org)
         if (data) {
             return setErrors(data)
         }
