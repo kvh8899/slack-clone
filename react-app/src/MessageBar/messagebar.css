@@ -126,6 +126,9 @@ fa-ellipsis-v{
   overflow:hidden;
   white-space:nowrap;
 }
+.singleChannel:hover:not(.selected){
+  background-color:rgba(135, 206, 235,0.5)
+}
 .cs{
   margin-left:10px;
 }
