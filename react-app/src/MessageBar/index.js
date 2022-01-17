@@ -39,7 +39,7 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
   useEffect(() => {
     function onResize() {
       let r = document.querySelector(".r");
-      if(d.current.classList[1] === "le") return;
+      if(d.current?.classList[1] === "le") return;
       if (r.clientWidth > document.body.clientWidth * 0.6) {
         size.current.classList.add("hide");
         size1.current.classList.add("hide");
@@ -194,7 +194,7 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
               r.classList.remove("abs");
               size.current.style.width = e.clientX + 2 + "px";
               size1.current.style.width = e.clientX + 2 + "px";
-            } else if ((d.current.classList[1] !== "le") && e.clientX < 220 && drag) {
+            } else if ((d.current?.classList[1] !== "le") && e.clientX < 220 && drag) {
               size.current.classList.add("hide");
               size1.current.classList.add("hide");
               msgBar.current.classList.add("hide");
