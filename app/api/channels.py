@@ -37,7 +37,7 @@ def edit_channel(channelId):
 @channel_routes.route('/<int:channelId>/messages')
 @ login_required
 def get_messages(channelId):
-    messages = Message.query.join(User).filter(channelId == Message.channel_id).all()
+    messages = Message.query.join(User).filter(channelId == Message.channel_id).order_by(Message.id.asc()).all()
     msgDict = []
     for i in messages:
         msg = i.to_dict()
