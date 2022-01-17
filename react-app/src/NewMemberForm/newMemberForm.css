@@ -42,9 +42,6 @@
   padding-left: 15px;
 }
 
-::-webkit-scrollbar {
-  width: 0.5em;
-}
 
 ::-webkit-scrollbar-thumb {
   background-color: rgba(70, 67, 67, 0.432);
