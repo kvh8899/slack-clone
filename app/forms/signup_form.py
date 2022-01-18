@@ -3,7 +3,6 @@ from wtforms import StringField
 from wtforms.fields.html5 import EmailField
 from wtforms.validators import DataRequired, ValidationError, Length
 from app.models import User
-import re
 
 
 def user_exists(form, field):
@@ -23,39 +22,35 @@ def username_exists(form, field):
 
 
 def username_length(form, field):
-    # Checking if username is already in use
+    # Username must be at least 5 characters
     username = field.data
     if len(username) < 5:
         raise ValidationError('Username must be at least 5 Characters.')
 
 
 def password_length(form, field):
-    # Checking if username is already in use
+    # Password must be at least 7 characters
     password = field.data
     if len(password) < 6:
         raise ValidationError('Password must be at least 7 Characters.')
 
 
 def password_capital(form, field):
-    # Checking if username is already in use
+    # Password must include at least 1 capital
     password = field.data
-    count = 0
     for letter in password:
         if letter.isupper():
-            count += 1
-    if count == 0:
-        raise ValidationError('Password must have at least 1 capital letter.')
+            return
+    raise ValidationError('Password must have at least 1 capital letter.')
 
 
 def password_number(form, field):
-    # Checking if username is already in use
+    # Password must have a number
     password = field.data
-    count = 0
     for char in password:
         if char.isdigit():
-            count += 1
-    if count == 0:
-        raise ValidationError('Password must have at least 1 number.')
+            return
+    raise ValidationError('Password must have at least 1 number.')
 
 
 def is_email(form, field):
@@ -63,7 +58,6 @@ def is_email(form, field):
     email = field.data
     regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
     if not re.fullmatch(regex, email):
-        print('ITS IN')
         raise ValidationError('Must be a valid email.')
 
 

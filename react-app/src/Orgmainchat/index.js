@@ -14,10 +14,12 @@ import { getAllMessages } from "../store/messages";
 import { useParams } from "react-router-dom";
 import Search from "../Search";
 import { getSocket } from "../store/socket";
+import Settings from "../Settings"
 
 function Orgmainchat() {
   const [selectedChannel, setSelectedChannel] = useState("");
   const [selectedChannelId, setSelectedChannelId] = useState("");
+  const [settings,setSettings] = useState(false);
   const dispatch = useDispatch();
   const hist = useNavigate();
   const session = useSelector((state) => state.session.user);
@@ -83,6 +85,7 @@ function Orgmainchat() {
 
   return (
     <div className="content">
+      {settings && <Settings settings={settings} setSettings={setSettings}/>}
       <NewChannelForm />
       <NewMemberForm />
       <EditChannelForm />
@@ -129,6 +132,10 @@ function Orgmainchat() {
             >
               Sign Out
             </button>
+            <button onClick={(e) => {
+              profClick(e)
+              setSettings(!settings)
+            }}>Settings</button>
           </div>
         </div>
       </div>
