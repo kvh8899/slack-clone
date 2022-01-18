@@ -26,6 +26,9 @@ function Message({ user }) {
   const dummyDiv = useRef(null);
   useEffect(() => {
     dummyDiv?.current?.scrollIntoView(false);
+    if (!socket) {
+      dispatch(getSocket())
+    }
     if (socket) {
       socket.on("message", (msg) => {
         //create msg
@@ -78,7 +81,7 @@ function Message({ user }) {
         <div>
           {allMessages.map((msg) => {
             return (
-              
+
               <div className="message" key={msg.id}>
                 {msg?.owner?.profilePicture ? (
                   <img src={msg.owner?.profilePicture} alt="404"></img>
@@ -107,6 +110,7 @@ function Message({ user }) {
           }}
         >
           <input
+            autoComplete="off"
             name="message"
             value={message}
             onChange={(e) => onChange(e)}
