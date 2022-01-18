@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getOrg } from "../store/orgmainchat";
-import { useParams } from "react-router";
+import { useParams, useNavigate } from "react-router";
 import NewChannel from "../newChannel";
 import ChannelList from "../ChannelList";
 import NewMember from "../NewMember";
@@ -25,23 +25,32 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
   const dispatch = useDispatch();
   const { id } = useParams();
   const org = useSelector((state) => state.orgmainchatReducer);
+  const session = useSelector((state) => state.session.user)
   const members = org.members;
   const ownerId = org.owner_id
-
+  const hist = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (deleteMember === ownerId) return alert(`You cannot remove the owner of the Organization`)
     await dispatch(removeMember(deleteMember, org.id));
   };
-
+  async function loadData(){
+    const org = await dispatch(getOrg(id));
+    //can use binary search if its sorted by id
+    for( let i = 0; i < org.members.length ;i++){
+      if(session.id === org.members[i].id) return
+    }
+    hist("/NotFound")
+  }
   useEffect(() => {
-    dispatch(getOrg(id));
+    loadData()
   }, []);
 
   useEffect(() => {
     function onResize() {
       let r = document.querySelector(".r");
-      if (d.current.classList[1] === "le") return;
+      if(d.current?.classList[1] === "le") return;
+      if(!r) return;
       if (r.clientWidth > document.body.clientWidth * 0.6) {
         size.current.classList.add("hide");
         size1.current.classList.add("hide");
@@ -100,28 +109,6 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
                     setSelectedChannelId={setSelectedChannelId}
                   />
                 )}
-              </div>
-              <div className="channels">
-                <div>
-                  <div
-                    onClick={(e) => {
-                      dCaret.current.classList.toggle("side");
-                    }}
-                    className="cs"
-                  >
-                    <div className="is isc">
-                      <i className="fas fa-caret-down" ref={dCaret}></i>
-                    </div>
-                    <p className="unselect">Direct Messages</p>
-                  </div>
-                  <div className="addChannel">
-                    <button>
-                      <div className="is">
-                        <i className="fas fa-plus"></i>
-                      </div>
-                    </button>
-                  </div>
-                </div>
               </div>
               <div className="channels">
                 <div
@@ -196,7 +183,7 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
               r.classList.remove("abs");
               size.current.style.width = e.clientX + 2 + "px";
               size1.current.style.width = e.clientX + 2 + "px";
-            } else if ((d.current.classList[1] !== "le") && e.clientX < 220 && drag) {
+            } else if ((d.current?.classList[1] !== "le") && e.clientX < 220 && drag) {
               size.current.classList.add("hide");
               size1.current.classList.add("hide");
               msgBar.current.classList.add("hide");

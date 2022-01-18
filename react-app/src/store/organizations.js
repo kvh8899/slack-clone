@@ -1,10 +1,8 @@
-
 import { postChannel } from "./channels";
 const SET_WORKSPACES = "workspaces/SET_WORKSPACES";
 const ADD_WORKSPACE = "workspaces/ADD_WORKSPACE";
 const EDIT_ORG = "workspaces/EDIT_ORG";
 const DELETE_WORKSPACES = "workspaces/DELETE_WORKSPACES";
-// const ADD_MEMBER = "workspaces/ADD_MEMBER";
 
 //Organization actions
 export const getworkspaces = (workspaces) => {
@@ -30,12 +28,6 @@ const deleteWorkspaces = (workspace) => {
     payload: workspace,
   };
 };
-
-//Member action
-// export const addMember = (organization) => ({
-//   type: ADD_MEMBER,
-//   payload: organization,
-// });
 
 //Organization Thunks
 
@@ -94,23 +86,6 @@ export const removeWorkspace = (organizationId) => async (dispatch) => {
   }
 };
 
-//Add Member
-// export const addMembers = (orgId, userId) => async (dispatch) => {
-//   console.log(orgId, 'orgId')
-//   console.log(userId, 'userId')
-//   const response = await fetch(`/api/organizations/${orgId}/members/${userId}`, {
-//     method: "POST",
-//     headers: { "Content-Type": "application/json" },
-//     body: JSON.stringify({
-//       userId
-//     })
-//   });
-//   console.log(response, 'hiiiii')
-//   const data = await response.json();
-//   dispatch(addMember(data));
-//   return data;
-// };
-
 export default function orgReducer(state = [], action) {
   switch (action.type) {
     case SET_WORKSPACES:
@@ -119,8 +94,6 @@ export default function orgReducer(state = [], action) {
       return [...state, action.payload];
     case DELETE_WORKSPACES:
       return state.filter((workspace) => workspace.id === action.payload.id);
-    // case ADD_MEMBER:
-    //   return [...state, action.payload];
     default:
       return state;
   }

@@ -31,8 +31,6 @@ export const getOrg = (id) => async dispatch => {
 
 //Add Member
 export const addMembers = (orgId, userId) => async (dispatch) => {
-    console.log(orgId, 'orgId')
-    console.log(userId, 'userId')
     const response = await fetch(`/api/organizations/${orgId}/members/${userId}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -40,7 +38,6 @@ export const addMembers = (orgId, userId) => async (dispatch) => {
             userId
         })
     });
-    console.log(response, 'hiiiii')
     const data = await response.json();
     dispatch(addMember(data));
     return data;

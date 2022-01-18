@@ -80,14 +80,20 @@ input:focus{
     border: 1px solid #43464a;
     z-index:25;
 }
-.profMenu > button{
+.profMenu > div > div{
+    border-bottom:1px solid gray;
+}
+.profMenuContent{
+    margin-top:10px;
+}
+.profMenuContent > div > button{
     border:none;
     background-color:transparent;
     color:white;
     margin:auto;
     width:100%;
 }
-.profMenu > button:hover{
+.profMenuContent > div:hover:not(.userData){
     background-color:rgb(51, 148, 180);
 }
 .settings{
@@ -110,4 +116,18 @@ input:focus{
     flex-direction:row-reverse;
     height:100%;
     
+}
+.userData{
+    display:flex;
+    align-items:flex-start;
+    color:white;
+}
+.userData img{
+   margin-top:7px;
+   margin-right:10px;
+   margin-left:20px;
+   margin-bottom:10px;
+}
+.userData h3{
+    margin:0px;
 }

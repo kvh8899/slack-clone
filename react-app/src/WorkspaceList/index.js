@@ -24,6 +24,11 @@ function WorkspaceList() {
   }, [session]);
   useEffect(() => {
       dispatch(getSocket());
+      if(socket){
+        return () => {
+          console.log("DISCONNECTED WORK")
+        }
+      }
   },[])
   return session ? (
     <div className="workSpace-wrap">
@@ -46,7 +51,7 @@ function WorkspaceList() {
                   //redirect to proper workspace page
                   const channels = await dispatch(readChannels(e?.id));
                   socket.emit("joinserver",{organization:e?.id})
-                  socket.emit("joinroom",{channelId:channels.channels[0].id})
+                  socket.emit("joinroom",{channelId:channels.channels[0]?.id})
                   dispatch(setName(channels.channels[0].name))
                   hist(`/organizations/${e?.id}/channels/${channels.channels[0].id}`);
                 }}

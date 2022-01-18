@@ -53,7 +53,6 @@ export const postChannel = (orgId, name) => async (dispatch) => {
 
 //Edit Channel
 export const editChannelThunk = (name, channelId) => async (dispatch) => {
-  console.log(name,channelId)
   const res = await fetch(`/api/channels/${channelId}/edit`, {
     method: "PUT",
     headers: {

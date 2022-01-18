@@ -14,10 +14,12 @@ import { getAllMessages } from "../store/messages";
 import { useParams } from "react-router-dom";
 import Search from "../Search";
 import { getSocket } from "../store/socket";
+import Settings from "../Settings";
 
 function Orgmainchat() {
   const [selectedChannel, setSelectedChannel] = useState("");
   const [selectedChannelId, setSelectedChannelId] = useState("");
+  const [settings, setSettings] = useState(false);
   const dispatch = useDispatch();
   const hist = useNavigate();
   const session = useSelector((state) => state.session.user);
@@ -25,11 +27,11 @@ function Orgmainchat() {
   const [userData, setUserData] = useState({});
   const profDiv = useRef(null);
 
-  const { id,channelId } = useParams();
+  const { id, channelId } = useParams();
 
   useEffect(() => {
-    if (!session) return hist('/NotFound')
-  }, [])
+    if (!session) return hist("/NotFound");
+  }, []);
 
   async function getUserData(id) {
     const res = await fetch(`/api/users/${session.id}`);
@@ -49,19 +51,19 @@ function Orgmainchat() {
       loadData();
     }
   }, [session]);
-  
+
   useEffect(() => {
     if (!socket) {
       dispatch(getSocket());
     }
-    if(socket){
-      socket.emit("joinroom",{channelId})
-      socket.emit("joinserver",{organization:id})
+    if (socket) {
+      socket.emit("joinroom", { channelId });
+      socket.emit("joinserver", { organization: id });
       return () => {
         socket.disconnect();
       };
     }
-  },[socket]);
+  }, [socket]);
   function profClick(e) {
     e.stopPropagation();
     profDiv.current.classList.toggle("settings");
@@ -83,6 +85,7 @@ function Orgmainchat() {
 
   return (
     <div className="content">
+      {settings && <Settings settings={settings} setSettings={setSettings} />}
       <NewChannelForm />
       <NewMemberForm />
       <EditChannelForm />
@@ -119,16 +122,50 @@ function Orgmainchat() {
               e.stopPropagation();
             }}
           >
-            <button
-              onClick={async () => {
-                await dispatch(logout());
-                socket.emit("leaveserver", { organization: id });
-                socket.emit("leaveroom", { channelId });
-                hist("/");
-              }}
-            >
-              Sign Out
-            </button>
+            <div className="profMenuContent">
+              <div className="userData">
+                {userData?.profilePicture ? (
+                  <img
+                    className="unselect"
+                    src={userData.profilePicture}
+                    alt="404"
+                    onClick={profClick}
+                  ></img>
+                ) : (
+                  <img
+                    className="unselect"
+                    src="https://cdn.discordapp.com/attachments/919391399269515305/930910536193933312/aa_logo.png"
+                    alt="404"
+                    onClick={profClick}
+                  ></img>
+                )}
+                <div>
+                  <h3>{userData.username}</h3>
+                </div>
+              </div>
+              <div>
+                <button
+                  onClick={(e) => {
+                    profClick(e);
+                    setSettings(!settings);
+                  }}
+                >
+                  Profile
+                </button>
+              </div>
+              <div>
+                <button
+                  onClick={async () => {
+                    await dispatch(logout());
+                    socket.emit("leaveserver", { organization: id });
+                    socket.emit("leaveroom", { channelId });
+                    hist("/");
+                  }}
+                >
+                  Sign Out
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

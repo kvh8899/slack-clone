@@ -9,6 +9,7 @@ import { Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import { authenticate } from './store/session';
+import About from './about'
 import NotFound from "./NotFound";
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
       <Route path="/organizations/:id/channels/:channelId" element={<Orgmainchat />}></Route>
       <Route path="/users/:id/organizations" element={<WorkspaceCreate />}></Route>
       <Route path="/NotFound" element={<NotFound />}></Route>
+      <Route path="/About" element={<About />}></Route>
     </Routes>
   );
 }

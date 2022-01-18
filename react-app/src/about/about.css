@@ -1,0 +1,78 @@
+.aboutData > div {
+  min-height: 350px;
+  min-width: 250px;
+  max-width: 250px;
+  background-color: white;
+  margin: 20px;
+}
+.aboutData {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+.cardGrid h2 {
+  margin-left: 55px;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: 0.5s ease;
+  border-radius: 3px;
+}
+.card img {
+  height: 225px;
+  width: 225px;
+  border: none;
+  object-fit: cover;
+}
+.card > div {
+  height: 325px;
+}
+.card > div > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.card i {
+  font-size: 30px;
+  color: rgb(54, 54, 167);
+}
+a {
+  text-decoration: none;
+  color: rgb(54, 54, 167);
+  border-radius:5px;
+  margin-left:25px;
+}
+.card:hover {
+  transform: scale(1.1);
+  transition: 0.5s ease;
+}
+.cardGrid {
+  position: fixed;
+  color:white;
+  background-color: rgb(35, 35, 61);
+  width: 100%;
+  height:100%;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.aboutNav{
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content: flex-start;
+}
+.aboutNav a{
+    border: 1px solid white;
+    color:white;
+    padding:10px;
+    margin-top:25px;
+}
+
+.githubs{
+    color:white;
+    height:40px;
+}

@@ -35,9 +35,6 @@ function Message({ user }) {
         const { allMessages } = msg;
         dispatch(addMessage(allMessages));
       });
-      return () => {
-        socket.disconnect()
-      }
     }
   }, [socket]);
   useEffect(() => {
