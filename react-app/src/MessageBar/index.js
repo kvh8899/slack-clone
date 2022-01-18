@@ -26,9 +26,11 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
   const { id } = useParams();
   const org = useSelector((state) => state.orgmainchatReducer);
   const members = org.members;
+  const ownerId = org.owner_id
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (deleteMember === ownerId) return alert(`You cannot remove the owner of the Organization`)
     await dispatch(removeMember(deleteMember, org.id));
   };
 
@@ -39,7 +41,7 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
   useEffect(() => {
     function onResize() {
       let r = document.querySelector(".r");
-      if(d.current.classList[1] === "le") return;
+      if (d.current.classList[1] === "le") return;
       if (r.clientWidth > document.body.clientWidth * 0.6) {
         size.current.classList.add("hide");
         size1.current.classList.add("hide");
