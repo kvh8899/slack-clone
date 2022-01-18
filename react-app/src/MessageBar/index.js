@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getOrg } from "../store/orgmainchat";
-import { useParams } from "react-router";
+import { useParams, useNavigate } from "react-router";
 import NewChannel from "../newChannel";
 import ChannelList from "../ChannelList";
 import NewMember from "../NewMember";
@@ -25,17 +25,24 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
   const dispatch = useDispatch();
   const { id } = useParams();
   const org = useSelector((state) => state.orgmainchatReducer);
+  const session = useSelector((state) => state.session.user)
   const members = org.members;
   const ownerId = org.owner_id
-
+  const hist = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (deleteMember === ownerId) return alert(`You cannot remove the owner of the Organization`)
     await dispatch(removeMember(deleteMember, org.id));
   };
-
+  async function loadData(){
+    const org = await dispatch(getOrg(id));
+    for( let i = 0; i < org.members.length ;i++){
+      if(session.id === org.members[i].id) return
+    }
+    hist("/NotFound")
+  }
   useEffect(() => {
-    dispatch(getOrg(id));
+    loadData()
   }, []);
 
   useEffect(() => {
