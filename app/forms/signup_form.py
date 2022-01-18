@@ -3,7 +3,7 @@ from wtforms import StringField
 from wtforms.fields.html5 import EmailField
 from wtforms.validators import DataRequired, ValidationError, Length
 from app.models import User
-
+import re
 
 def user_exists(form, field):
     # Checking if user exists
