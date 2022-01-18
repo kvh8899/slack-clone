@@ -31,7 +31,7 @@ def undo():
     undo_users()
     undo_organizations()
     undo_channels()
-    undo_dmChannels
+    undo_dmChannels()
     undo_messages()
     undo_directMessages()
     undo_members()
