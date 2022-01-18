@@ -36,6 +36,7 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
   };
   async function loadData(){
     const org = await dispatch(getOrg(id));
+    //can use binary search if its sorted by id
     for( let i = 0; i < org.members.length ;i++){
       if(session.id === org.members[i].id) return
     }
