@@ -13,7 +13,6 @@ function Splash() {
           <h2>Zing</h2>
         </div>
         <div className="rightNav">
-          <NavLink to="/About"> About </NavLink>
           <button
             id="signin"
             onClick={() => {
@@ -24,6 +23,7 @@ function Splash() {
           </button>
         </div>
       </nav>
+      <div className="midc">
         <div className="titleContent">
           <h1>Join a Community</h1>
           <p>
@@ -38,8 +38,14 @@ function Splash() {
             Try For Free
           </button>
         </div>
-        
+        <div className="aboutC">
+          <NavLink to="/About"> Contributors</NavLink>
+          <a href="https://github.com/kvh8899/slack-clone">
+            <i className="fab fa-github"></i> Repository Link
+          </a>
+        </div>
       </div>
+    </div>
   );
 }
 export default Splash;
