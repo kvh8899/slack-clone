@@ -22,7 +22,6 @@ function Settings({ settings, setSettings }) {
       <form
         onSubmit={async (e) => {
           e.preventDefault();
-          console.log({profile_picture})
           await fetch(`/api/users/${session.id}/edit`,{
               method:"PUT",
               headers:{"Content-Type":"application/json"},
