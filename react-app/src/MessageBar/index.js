@@ -26,9 +26,11 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
   const { id } = useParams();
   const org = useSelector((state) => state.orgmainchatReducer);
   const members = org.members;
+  const ownerId = org.owner_id
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (deleteMember === ownerId) return alert(`You cannot remove the owner of the Organization`)
     await dispatch(removeMember(deleteMember, org.id));
   };
 
