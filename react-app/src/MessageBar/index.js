@@ -40,6 +40,7 @@ function MessageBar({ setSelectedChannel, setSelectedChannelId }) {
     function onResize() {
       let r = document.querySelector(".r");
       if(d.current?.classList[1] === "le") return;
+      if(!r) return;
       if (r.clientWidth > document.body.clientWidth * 0.6) {
         size.current.classList.add("hide");
         size1.current.classList.add("hide");

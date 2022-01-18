@@ -10,8 +10,6 @@ function EditOrgFrom() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const { id } = useParams()
-    const org = useSelector(state => state.orgmainchatReducer)
-    const session = useSelector(state => state.session.user)
     const showForm = useSelector(state => state.editOrgFormReducer)
 
     const [orgName, setOrgName] = useState('')

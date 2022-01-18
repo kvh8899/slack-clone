@@ -56,7 +56,7 @@ function Orgmainchat() {
     }
     if(socket){
       socket.emit("joinroom",{channelId})
-      socket.emit("joinserver",{organization:id})
+      socket.emit("joinserver",{organization:id});
       return () => {
         socket.disconnect();
       };

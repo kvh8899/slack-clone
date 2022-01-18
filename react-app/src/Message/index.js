@@ -26,18 +26,12 @@ function Message({ user }) {
   const dummyDiv = useRef(null);
   useEffect(() => {
     dummyDiv?.current?.scrollIntoView(false);
-    if(!socket){
-      dispatch(getSocket())
-    }
     if (socket) {
       socket.on("message", (msg) => {
         //create msg
         const { allMessages } = msg;
         dispatch(addMessage(allMessages));
       });
-      return () => {
-        socket.disconnect()
-      }
     }
   }, [socket]);
   useEffect(() => {

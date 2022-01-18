@@ -24,6 +24,11 @@ function WorkspaceList() {
   }, [session]);
   useEffect(() => {
       dispatch(getSocket());
+      if(socket){
+        return () => {
+          console.log("DISCONNECTED WORK")
+        }
+      }
   },[])
   return session ? (
     <div className="workSpace-wrap">
