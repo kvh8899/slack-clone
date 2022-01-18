@@ -8,7 +8,7 @@ export const getSocket = () => {
 }
 // Production endpoint: "https://zing-app.herokuapp.com"
 // Local testing endpoint: "http://localhost:5000/"
-const endPoint = "https://app-zing.herokuapp.com";
+const endPoint = "http://localhost:5000/";
 
 const socket = (state = null,action) => {
     switch(action.type){
