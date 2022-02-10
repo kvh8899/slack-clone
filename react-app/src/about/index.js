@@ -16,8 +16,8 @@ function About() {
             ></img>
             <h3>Dylan</h3>
             <div>
-              <a href="https://github.com/DylanWelzel">Dylan's Github</a>
-              <a href="https://github.com/DylanWelzel">
+              <a href="https://github.com/DylanWelzel" target="_blank">Dylan's Github</a>
+              <a href="https://github.com/DylanWelzel" target="_blank">
                 <i className="fas fa-long-arrow-alt-right"></i>
               </a>
             </div>
@@ -31,8 +31,10 @@ function About() {
             ></img>
             <h3>Fady</h3>
             <div>
-              <NavLink to="/">Fady's Github</NavLink>
-              <i className="fas fa-long-arrow-alt-right"></i>
+              <a href="https://github.com/Felmallakh" target="_blank">Fady's Github</a>
+              <a href="https://github.com/Felmallakh" target="_blank">
+                <i className="fas fa-long-arrow-alt-right"></i>
+              </a>
             </div>
           </div>
         </div>
@@ -44,8 +46,8 @@ function About() {
             ></img>
             <h3>Enoch</h3>
             <div>
-              <NavLink to="/">Enoch's Github</NavLink>
-              <i className="fas fa-long-arrow-alt-right"></i>
+              <a href="https://github.com/enochtan17" target="_blank">Enoch's Github</a>
+              <a href="https://github.com/enochtan17" target="_blank"><i className="fas fa-long-arrow-alt-right"></i></a>
             </div>
           </div>
         </div>
@@ -57,12 +59,12 @@ function About() {
             ></img>
             <h3>Kyle</h3>
             <div>
-              <a href="https://github.com/kvh8899">Kyle's Github</a>
-              <a href="https://github.com/kvh8899"><i className="fas fa-long-arrow-alt-right"></i></a>
+              <a href="https://github.com/kvh8899" target="_blank">Kyle's Github</a>
+              <a href="https://github.com/kvh8899" target="_blank"><i className="fas fa-long-arrow-alt-right"></i></a>
             </div>
           </div>
         </div>
-        <a className ="githubs" href="https://github.com/kvh8899/slack-clone"><i className="fab fa-github"></i> Repository Link</a>
+        <a className ="githubs" href="https://github.com/kvh8899/slack-clone" target="_blank"><i className="fab fa-github"></i> Repository Link</a>
       </div>
     </div>
   );
