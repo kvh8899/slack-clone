@@ -1,6 +1,8 @@
 @media not all and (min-resolution:.001dpcm)
 { @supports (-webkit-appearance:none) and (stroke-color:transparent) {
 
+
+
     .searchContainer {
         align-items: center;
         flex-direction: column;
@@ -15,6 +17,15 @@
         display: flex;
     }
 
+    .searchbar {
+        position: absolute !important;
+        bottom: -15px !important;
+        user-select: none !important;
+        -moz-user-select: none !important;
+        -webkit-user-select: none !important;
+
+    }
+
     .searchContainer > input{
         background-color:#38373c;
         color:rgb(212, 212, 212);
@@ -24,6 +35,10 @@
         pointer-events: all;
         position: absolute !important;
         margin-top: 35px !important;
+        user-select: none !important;
+        -moz-user-select: none !important;
+        -webkit-user-select: none !important;
+
     }
 
 }}
