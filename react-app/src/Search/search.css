@@ -41,11 +41,13 @@
         margin-top: 35px !important;
         user-select: none !important;
         -moz-user-select: none !important;
-        -webkit-user-select: none !important;
+        -webkit-user-select: text !important;
 
     }
 
 }}
+
+input { -webkit-user-select:text;}
 
 
 .searchContainer > input{
