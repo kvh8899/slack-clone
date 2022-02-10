@@ -42,16 +42,17 @@ function Search() {
                 name="s"
                 autoComplete="off"
             />
-            {searchQuery.length > 0 && <ul >
-                {searchQuery.length > 0 && (filteredMembers.map(member => {
-                    return (
-                        < li key={member.id} >
-                            <SingleMember username={member.username} />
-                        </li>
-                    )
-                })
-                )}
-            </ul>
+            {searchQuery.length > 0 &&
+                <ul >
+                    {searchQuery.length > 0 && (filteredMembers.map(member => {
+                        return (
+                            < li key={member.id} >
+                                <SingleMember username={member.username} />
+                            </li>
+                        )
+                    })
+                    )}
+                </ul>
             }
         </>
     );
