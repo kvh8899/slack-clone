@@ -47,9 +47,6 @@
 
 }}
 
-input { -webkit-user-select:text;}
-
-
 .searchContainer > input{
     background-color:#38373c;
     color:rgb(212, 212, 212);
