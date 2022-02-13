@@ -91,13 +91,13 @@ function Orgmainchat() {
       <EditChannelForm />
       <EditOrgForm />
       <div className="topBar" onClick={awayClick}>
+        <div className="searchContainer">
+          <Search />
+        </div>
         <div className="backbuttoncontainer">
           <button className="backbutton" onClick={backClick}>
             <i className="fas fa-arrow-left"></i>
           </button>
-        </div>
-        <div className="searchContainer">
-          <Search />
         </div>
         <div className="profile">
           {userData?.profilePicture ? (
