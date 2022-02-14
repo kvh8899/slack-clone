@@ -33,3 +33,9 @@ Zing uses:
 * [Kyle Huang](https://github.com/kvh8899)
 * [Fady El Mallakh](https://github.com/Felmallakh)
 * [Enoch Tan](https://github.com/enochtan17)
+
+
+## Preview
+[Imgur](https://i.imgur.com/39U6kX5.png)
+[Imgur](https://i.imgur.com/btJ6HCP.png)
+[Imgur](https://i.imgur.com/bGsZtPn.png)
