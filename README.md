@@ -14,13 +14,10 @@ Zing allows users to:
 
 ## Overall Structure
 ### Back End
-The back end was built with [Flask](https://flask.palletsprojects.com/en/2.0.x/), and it utilizes a postgreSQL database.
-
-#### Database Diagram
-![Database Diagram](https://github.com/Felmallakh/connect-team/blob/main/Database%20Schema.png)
+The back end was built with [Flask](https://flask.palletsprojects.com/en/2.0.x/), and it utilizes a PostgreSQL database.
 
 ### Front End
-The front end was built with React.
+The front end was built with React and Redux.
 
 ### Technologies
 Zing uses:
