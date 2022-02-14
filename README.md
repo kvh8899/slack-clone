@@ -36,6 +36,6 @@ Zing uses:
 
 
 ## Preview
-[Imgur](https://i.imgur.com/39U6kX5.png)
-[Imgur](https://i.imgur.com/btJ6HCP.png)
-[Imgur](https://i.imgur.com/bGsZtPn.png)
+![Imgur](https://i.imgur.com/39U6kX5.png)
+![Imgur](https://i.imgur.com/btJ6HCP.png)
+![Imgur](https://i.imgur.com/bGsZtPn.png)
