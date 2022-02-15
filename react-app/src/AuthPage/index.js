@@ -1,7 +1,7 @@
 import "./authpage.css";
 import React, { useState } from "react";
-import { login } from '../store/session';
-import { useDispatch } from 'react-redux';
+import { login } from "../store/session";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 function AuthPage() {
@@ -13,9 +13,9 @@ function AuthPage() {
 
   const demoLogin = async (e) => {
     e.preventDefault();
-    await dispatch(login('demo@aa.io', 'password'));
-    navigate('/organization');
-  }
+    await dispatch(login("demo@aa.io", "password"));
+    navigate("/organization");
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,23 +24,32 @@ function AuthPage() {
     if (data) {
       return setErrors(data);
     }
-    navigate('/organization');
+    navigate("/organization");
   };
   return (
     <div className="wrapper authwrapper">
       <div className="auth">
         <div className="namelogo">
-          <img src="https://cdn.discordapp.com/attachments/919391399269515305/930910536839864351/zinglogo.png" alt="logo"></img>
-          <h2>Zing</h2>
+          <Link to="/">
+            <img
+              src="https://cdn.discordapp.com/attachments/919391399269515305/930910536839864351/zinglogo.png"
+              alt="logo"
+            ></img>
+          </Link>
+          <Link to="/">
+            <h2>Zing</h2>
+          </Link>
         </div>
         <p> Sign in to your workspace.</p>
         <Link to="/signup">Don't have an account?</Link>
         <ul className="errors-container">
           {errors.map((error, idx) => (
-            <li className='errors' key={idx}>{error}</li>
+            <li className="errors" key={idx}>
+              {error}
+            </li>
           ))}
         </ul>
-        <form className='loginform' onSubmit={handleSubmit}>
+        <form className="loginform" onSubmit={handleSubmit}>
           <input
             type="text"
             placeholder={"Email"}

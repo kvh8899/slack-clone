@@ -15,17 +15,6 @@
         display: flex;
     }
 
-    .searchContainer > input{
-        background-color:#38373c;
-        color:rgb(212, 212, 212);
-        padding: 5px;
-        border-radius:10px;
-        width: 95%;
-        pointer-events: all;
-        position: absolute !important;
-        margin-top: 35px !important;
-    }
-
 }}
 
 
@@ -33,9 +22,6 @@
     background-color:#38373c;
     color:rgb(212, 212, 212);
     padding: 5px;
-    /* margin: 5px; */
-    /* margin: 0 auto; */
-    /* margin-left: 5px; */
     border-radius:10px;
     width: 95%;
     pointer-events: all;
