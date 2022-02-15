@@ -1,10 +1,27 @@
+@media not all and (min-resolution:.001dpcm)
+{ @supports (-webkit-appearance:none) and (stroke-color:transparent) {
+
+    .searchContainer {
+        align-items: center;
+        flex-direction: column;
+        justify-content: flex-start !important;
+        margin-left: 0px !important;
+        margin-top: 0px !important;
+        min-height: 0px !important;
+        pointer-events: none;
+        position: absolute;
+        width: 40%;
+        z-index: 5;
+        display: flex;
+    }
+
+}}
+
+
 .searchContainer > input{
     background-color:#38373c;
     color:rgb(212, 212, 212);
     padding: 5px;
-    /* margin: 5px; */
-    /* margin: 0 auto; */
-    /* margin-left: 5px; */
     border-radius:10px;
     width: 95%;
     pointer-events: all;

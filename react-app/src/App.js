@@ -1,4 +1,3 @@
-import "./App.css";
 import Orgmainchat from "./Orgmainchat";
 import AuthPage from "./AuthPage";
 import SignUp from "./SignUp";

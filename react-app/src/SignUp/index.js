@@ -43,8 +43,15 @@ function SignUp() {
     <div className="wrapper authwrapper">
       <div className="auth">
         <div className="namelogo">
-          <img src="./zinglogo.png" alt="logo"></img>
-          <h2>Zing</h2>
+        <Link to="/">
+            <img
+              src="https://cdn.discordapp.com/attachments/919391399269515305/930910536839864351/zinglogo.png"
+              alt="logo"
+            ></img>
+          </Link>
+          <Link to="/">
+            <h2>Zing</h2>
+          </Link>
         </div>
         <p>Create an Account</p>
         <Link to="/login">Already have an account?</Link>

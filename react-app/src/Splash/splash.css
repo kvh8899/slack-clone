@@ -1,7 +1,7 @@
 nav {
   display: flex;
   justify-content: space-between;
-  background-color: #f4ede3;
+  background-color: #fff;
   height: 130px;
 }
 h1 {
@@ -29,7 +29,7 @@ nav .rightNav button {
 .rightNav #signin {
   border: none;
   border-radius: 5px;
-  color: #f4ede3;
+  color: #fff;
   background-color: rgb(25, 33, 100);
   transition-property: opacity;
   transition-duration: 0.5s;
@@ -63,7 +63,7 @@ nav img {
   padding: 15px;
   width: 100%;
   font-size: 15px;
-  color: #f4ede3;
+  color: #fff;
   background-color: rgb(25, 33, 100);
   border: none;
   border-radius: 3px;
@@ -75,28 +75,116 @@ nav img {
 }
 .wrapper {
   color: black;
-  position: fixed;
   height: 100%;
   width: 100%;
-  background-color: #f4ede3;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
   overflow: scroll;
 }
 .midc {
   display: flex;
+  justify-content: space-between;
+  margin: auto;
+  width: 100%;
 }
 
 .aboutC {
   display: flex;
   margin-left: 40px;
-  flex-direction:column;
+  flex-direction: column;
   justify-content: flex-end;
-  font-size:40px;
+  font-size: 40px;
 }
-.aboutC a{
-    color:black;
-    transition:0.5s;
+.aboutC a {
+  color: black;
+  transition: 0.5s;
 }
-.aboutC a:hover{
-    opacity:0.5;
-    transition:0.5s;
+.aboutC a:hover {
+  opacity: 0.5;
+  transition: 0.5s;
+}
+
+.features {
+  height: 700px;
+  margin-top: 50px;
+  width: 100%;
+  background-color: rgb(255, 249, 236);
+  display: flex;
+  justify-content: space-between;
+}
+.fTitles {
+  margin-left: 55px;
+  margin-top: 55px;
+  width: 450px;
+}
+.fTitles > h2 {
+  font-size: 35px;
+}
+.fTitles > p {
+  font-size: 16px;
+}
+
+.puzzle {
+  position: relative;
+  top: -45px;
+  right: -20px;
+  height: 200px;
+}
+.featureGrid {
+  display: grid;
+  height: 325px;
+  width: 725px;
+  grid-template-rows: 150px;
+  grid-template-columns: 100px 125px;
+  row-gap: 20px;
+  column-gap: 20px;
+  grid-template-areas:
+    "a a e e d d"
+    "b b c c d d";
+}
+.featureGrid > div {
+  background: white;
+  transition: 0.1s;
+  border: 1px solid lightgray;
+}
+.featureGrid > div > h3 {
+  font-size: 20px;
+  margin: 10px 20px;
+}
+.featureGrid > div > p {
+  font-size: 14px;
+  margin: 10px 20px;
+}
+.featureGrid > div:hover {
+  box-shadow: -5px 6px 0px 0px rgb(3, 14, 112);
+  transition: 0.1s ease-in;
+  transform: translateX(5px) translateY(-5px);
+}
+.featureGrid :nth-child(1) {
+  grid-area: a;
+}
+.featureGrid :nth-child(2) {
+  grid-area: b;
+}
+.featureGrid :nth-child(3) {
+  grid-area: c;
+}
+.featureGrid :nth-child(4) {
+  grid-area: e;
+}
+.featureGrid :nth-child(5) {
+  grid-area: d;
+}
+
+.tech {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.tech > div {
+  margin: 20px 0px;
+}
+.tech > div > img {
+  margin: 0px 20px;
 }
