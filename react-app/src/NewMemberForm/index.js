@@ -11,6 +11,7 @@ function NewMemberForm() {
   const showForm = useSelector((state) => state.addMemberFormReducer);
   const [memberName, setMemberName] = useState("");
   const org = useSelector((state) => state.orgmainchatReducer);
+  const session = useSelector((state) => state.session.user.email);
   const users = org.available_users?.map((user) => user);
   const { search } = window.location;
   const query = new URLSearchParams(search).get("s");
@@ -21,7 +22,9 @@ function NewMemberForm() {
       return users;
     }
 
-    return users.filter((user) => {
+    const noSession = users.filter(user => user.email !== session)
+
+    return noSession.filter((user) => {
       const userName = user.username.toLowerCase();
       return userName.includes(query.toLowerCase());
     });
@@ -29,8 +32,8 @@ function NewMemberForm() {
 
   const filteredUsers = filterUsers(users, searchQuery);
 
-  const addToOrg =  async(e) => {
-    await dispatch(addMembers(id,e.target.id));
+  const addToOrg = async (e) => {
+    await dispatch(addMembers(id, e.target.id));
     setSearchQuery("");
   }
 
@@ -70,10 +73,10 @@ function NewMemberForm() {
                     filteredUsers?.map((user) => {
                       return (
                         <li className="namebutton"
-                            id={user.id}
-                            key={user.id}
-                            onClick={addToOrg}
-                            username={user.username}>
+                          id={user.id}
+                          key={user.id}
+                          onClick={addToOrg}
+                          username={user.username}>
                           {user.username}
                         </li>
                       );
